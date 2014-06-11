@@ -1,0 +1,3 @@
+ofxAssimpModelLoader
+ofxHalfEdgeMesh
+ofxUI
