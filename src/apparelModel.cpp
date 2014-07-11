@@ -52,5 +52,6 @@ void apparelModel::createMeshFaces()
 
 		face.getFaceNormal();
 	}
+	
 }
 

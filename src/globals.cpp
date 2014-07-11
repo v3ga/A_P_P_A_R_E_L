@@ -12,7 +12,8 @@ globals* globals::instance = 0;
 
 globals::globals()
 {
-	pOfApp	= 0;
+	pOfApp			= 0;
+	pOscSender		= 0;
 }
 
 globals* globals::getInstance()

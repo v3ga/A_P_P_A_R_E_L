@@ -18,7 +18,5 @@ apparelMod_debug::apparelMod_debug() : apparelMod("Debug")
 void apparelMod_debug::loadParameters()
 {
 	apparelMod::loadParameters();
-	
 //	vector<ofMeshFace>& modelFaces = mp_model->getMeshFacesRef();
-
 }

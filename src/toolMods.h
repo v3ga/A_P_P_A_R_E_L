@@ -19,6 +19,9 @@ class toolMods : public tool
 		toolMods				(toolManager* parent, apparelModel* model);
 		~toolMods				();
 
+		void					show				(bool is);
+		bool					isHit				(int x, int y);
+
 		void					addMod				(apparelMod*);
 		apparelMod*				getModCurrent		(){return mp_modCurrent;}
 	
@@ -33,5 +36,6 @@ class toolMods : public tool
 		map<string, apparelModUI*>		m_modsUI;
 	
 		apparelMod*						mp_modCurrent;
+		apparelModUI*					mp_modUICurrent;
 		apparelModel*					mp_apparelModel;
 };

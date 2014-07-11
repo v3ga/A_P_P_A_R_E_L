@@ -8,6 +8,7 @@
 
 #pragma once
 class ofApp;
+class oscSenderInterface;
 #define GLOBALS	globals::getInstance()
 
 class globals
@@ -16,11 +17,15 @@ class globals
 				globals			();
 	
 		static 	globals*		getInstance();
+
 				void			setApp(ofApp* p){pOfApp = p;}
 				ofApp*			getApp(){return pOfApp;}
-	
+
+				void				setOscSender(oscSenderInterface* p){pOscSender = p;}
+				oscSenderInterface*	getOscSender(){return pOscSender;}
 	
 	private:
-		static 	globals*		instance;
-				ofApp*			pOfApp;
+		static 	globals*				instance;
+				ofApp*					pOfApp;
+				oscSenderInterface*		pOscSender;
 };

@@ -14,4 +14,4 @@ ICON_FILE_PATH = $(OF_PATH)/libs/openFrameworksCompiled/project/osx/
 //ICON_FILE_PATH = bin/data/
 
 OTHER_LDFLAGS = $(OF_CORE_LIBS) 
-HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS) $(OF_PATH)/addons/ofxRay/src/ ./
+HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS) $(OF_PATH)/addons/ofxRay/src/ ./ $(OF_PATH)/addons/ofxOsc/src $(OF_PATH)/addons/ofxOsc/libs $(OF_PATH)/addons/ofxOsc/libs/oscpack $(OF_PATH)/addons/ofxOsc/libs/oscpack/src $(OF_PATH)/addons/ofxOsc/libs/oscpack/src/ip $(OF_PATH)/addons/ofxOsc/libs/oscpack/src/ip/posix

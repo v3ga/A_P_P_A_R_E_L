@@ -9,6 +9,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
+#include "oscSender.h"
 
 class apparelModel;
 class apparelMod
@@ -17,14 +18,18 @@ class apparelMod
 		apparelMod			(string id);
 		virtual ~apparelMod	(){}
 	
-		virtual	void		loadParameters	();
-		virtual	void		saveParameters	();
+		virtual	void		loadParameters		();
+		virtual	void		loadParametersCustom(){};
+		virtual	void		saveParameters		();
 	
-		ofParameterGroup&	getParamatersGroupRef(){return m_parameters;}
-		string				getPathMod(string filename){return "mods/"+m_id+"/"+filename;}
+		ofParameterGroup&	getParamatersGroupRef	(){return m_parameters;}
+		virtual void		parameterChanged		(ofAbstractParameter & parameter);
+		string				getPathMod				(string filename){return "mods/"+m_id+"/"+filename;}
 	
 		void				addFaceIndex	(int faceIndex);
 		void				removeFaceIndex	(int faceIndex);
+
+		void				setOscSender	(oscSenderInterface* p){mp_oscSender=p;}
 
 		string				m_id;
 		apparelModel*		mp_model;
@@ -33,4 +38,6 @@ class apparelMod
 		ofParameterGroup 	m_parameters;
 
 		ofxXmlSettings		m_settingsModel;
+
+		oscSenderInterface*	mp_oscSender;
 };

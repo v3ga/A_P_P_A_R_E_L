@@ -32,8 +32,8 @@ void apparelModUI::createControls(const ofVec2f& posCanvas)
 	mp_canvas->addSpacer(300,1);
 	
 	ofParameterGroup& parametersGroup = mp_mod->getParamatersGroupRef();
-	int nbParamaters = parametersGroup.size();
-	for (int i=0;i<nbParamaters;i++)
+	int nbParameters = parametersGroup.size();
+	for (int i=0;i<nbParameters;i++)
 	{
 		ofAbstractParameter& parameter = parametersGroup[i];
 		if (parameter.type() == typeid(ofParameter<float>).name())
@@ -58,7 +58,20 @@ void apparelModUI::show(bool is)
 //--------------------------------------------------------------
 void apparelModUI::handleEvents(ofxUIEventArgs& e)
 {
+	if (mp_mod == 0) return;
 
+    string name = e.widget->getName();
+	ofParameterGroup& parametersGroup = mp_mod->getParamatersGroupRef();
+	ofAbstractParameter& parameter = parametersGroup.get(name);
+
+
+	if (parameter.type() == typeid(ofParameter<float>).name())
+	{
+		ofParameter<float>& parameterFloat = (ofParameter<float>&) parameter;
+		parameterFloat.set( ((ofxUISlider *) e.widget)->getScaledValue() );
+	}
+
+	
 }
 
 

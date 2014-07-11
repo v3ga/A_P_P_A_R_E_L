@@ -3,8 +3,8 @@
 #include "ofMain.h"
 #include "globals.h"
 #include "apparelModel.h"
-
 #include "tool.h"
+#include "oscSender.h"
 
 class tool3D;
 class toolMods;
@@ -32,7 +32,7 @@ class ofApp : public ofBaseApp
 		ofxXmlSettings	settings;
 		ofEasyCam 		cam;
 		apparelModel	apparelModel;
-
+		oscSender		oscSender;
 
 	private:
 		toolManager		toolManager;

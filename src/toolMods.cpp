@@ -8,11 +8,13 @@
 
 #include "toolMods.h"
 #include "tool3D.h"
+#include "globals.h"
 
 //--------------------------------------------------------------
 toolMods::toolMods(toolManager* parent, apparelModel* model) : tool("Mods", parent)
 {
 	mp_modCurrent = 0;
+	mp_modUICurrent = 0;
 	mp_apparelModel = model;
 }
 
@@ -27,12 +29,27 @@ toolMods::~toolMods()
 }
 
 //--------------------------------------------------------------
+void toolMods::show(bool is)
+{
+	tool::show(is);
+	if (mp_modUICurrent)
+		mp_modUICurrent->show(is);
+}
+
+//--------------------------------------------------------------
+bool toolMods::isHit(int x, int y)
+{
+	return (tool::isHit(x, y) || ( mp_modUICurrent && mp_modUICurrent->getCanvas() &&  mp_modUICurrent->getCanvas()->isHit(x,y)));
+}
+
+//--------------------------------------------------------------
 void toolMods::addMod(apparelMod* mod)
 {
 	if (mod)
 	{
 		mod->mp_model = mp_apparelModel; // TEMP
 		mod->loadParameters();
+		mod->setOscSender( GLOBALS->getOscSender() );
 		m_mods[mod->m_id] = mod;
 	}
 }
@@ -100,15 +117,20 @@ apparelModUI* toolMods::makeInstanceModUI(apparelMod* mod)
 //--------------------------------------------------------------
 void toolMods::selectMod(string name)
 {
+
 	// Show UI
 	map<string, apparelModUI*>::iterator it;
 	for (it = m_modsUI.begin(); it != m_modsUI.end(); ++it){
 		it->second->hide();
 	}
-	m_modsUI[name]->show();
 
 	// Select mod
 	mp_modCurrent = m_mods[name];
+
+	// Select mod UI
+	mp_modUICurrent = m_modsUI[name];
+	if (mp_modUICurrent)
+		mp_modUICurrent->show();
 	
 	// Inform other tool
 	if (mp_toolManager) {

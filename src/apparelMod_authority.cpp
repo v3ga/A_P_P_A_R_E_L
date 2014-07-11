@@ -10,7 +10,7 @@
 
 apparelMod_authority::apparelMod_authority() : apparelMod("Authority")
 {
-	m_level.set("level", 0.5f, 0.0f, 1.0f);
+//	m_level.set("level", 0.5f, 0.0f, 1.0f);
 	
-	m_parameters.add(m_level);
+//	m_parameters.add(m_level);
 }

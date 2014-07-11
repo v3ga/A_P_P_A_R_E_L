@@ -7,12 +7,14 @@
 //
 
 #include "apparelMod.h"
+#include "globals.h"
 
 //--------------------------------------------------------------
 apparelMod::apparelMod(string id)
 {
-	m_id = id;
-	mp_model = 0;
+	m_id 			= id;
+	mp_model 		= 0;
+	mp_oscSender 	= 0;
 }
 
 //--------------------------------------------------------------
@@ -28,6 +30,14 @@ void apparelMod::removeFaceIndex(int faceIndex)
 }
 
 
+//--------------------------------------------------------------
+void apparelMod::parameterChanged(ofAbstractParameter & parameter)
+{
+	// ofLog() << "apparelMod::parameterChanged() " << parameter.getName();
+	if (mp_oscSender){
+		mp_oscSender->sendParameter( parameter );
+	}
+}
 
 //--------------------------------------------------------------
 void apparelMod::loadParameters()
@@ -36,6 +46,7 @@ void apparelMod::loadParameters()
 	{
 		m_indicesFaces.clear();
 		
+		m_settingsModel.pushTag("mod");
 		m_settingsModel.pushTag("faces");
 		int nbFaces = m_settingsModel.getNumTags("index");
 		for (int i=0; i<nbFaces; i++)
@@ -43,36 +54,50 @@ void apparelMod::loadParameters()
 			m_indicesFaces.push_back( m_settingsModel.getValue("index",0,i) );
 		}
 		m_settingsModel.popTag();
+		m_settingsModel.popTag();
 	}
+	
+	// Custom loading
+	loadParametersCustom();
+
+	// Add listener
+	ofAddListener(m_parameters.parameterChangedE, this, &apparelMod::parameterChanged);
 }
 
 //--------------------------------------------------------------
 void apparelMod::saveParameters()
 {
 	// Faces
-	m_settingsModel.addTag("faces");
-	m_settingsModel.pushTag("faces");
+	ofxXmlSettings settings;
+	
+	settings.addTag("mod");
+	settings.pushTag("mod");
+
+	settings.addTag("faces");
+	settings.pushTag("faces");
 	vector<int>::iterator facesIt;
 	for (facesIt = m_indicesFaces.begin(); facesIt != m_indicesFaces.end(); ++facesIt)
 	{
-		m_settingsModel.addValue("index", *facesIt);
+		settings.addValue("index", *facesIt);
 	}
-	m_settingsModel.popTag();
+	settings.popTag();
 
 	// Vertices
-	m_settingsModel.addTag("vertices");
-	m_settingsModel.pushTag("vertices");
+	settings.addTag("vertices");
+	settings.pushTag("vertices");
 	vector<int>::iterator verticesIt;
 	for (verticesIt = m_indicesVertex.begin(); verticesIt != m_indicesVertex.end(); ++verticesIt)
 	{
-		m_settingsModel.addValue("index", *verticesIt);
+		settings.addValue("index", *verticesIt);
 	}
-	m_settingsModel.popTag();
+	settings.popTag();
+
+	settings.popTag();
 
 
 	// Save
 	ofLog() << "saving " << getPathMod("model.xml");
-	m_settingsModel.save(getPathMod("model.xml"));
+	settings.save(getPathMod("model.xml"));
 }
 
 
