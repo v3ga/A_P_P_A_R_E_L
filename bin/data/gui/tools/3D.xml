@@ -1,17 +1,17 @@
 <Widget>
     <Kind>2</Kind>
     <Name>show vertex normals</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>show face normals</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Vertex</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -21,5 +21,10 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Face</Name>
-    <Value>1</Value>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Distance</Name>
+    <Value>185.333328247</Value>
 </Widget>

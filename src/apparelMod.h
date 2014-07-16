@@ -21,13 +21,19 @@ class apparelMod
 		virtual	void		loadParameters		();
 		virtual	void		loadParametersCustom(){};
 		virtual	void		saveParameters		();
+		void				setConfiguration	(string name);
 	
 		ofParameterGroup&	getParamatersGroupRef	(){return m_parameters;}
 		virtual void		parameterChanged		(ofAbstractParameter & parameter);
 		string				getPathMod				(string filename){return "mods/"+m_id+"/"+filename;}
+		string				getPathToolMods			(string filename){return "tools/mods/"+filename;}
+
 	
 		void				addFaceIndex	(int faceIndex);
 		void				removeFaceIndex	(int faceIndex);
+	
+		void				addVertexIndex		(int vertexIndex);
+		void				removeVertexIndex	(int vertexIndex);
 
 		void				setOscSender	(oscSenderInterface* p){mp_oscSender=p;}
 
@@ -35,9 +41,20 @@ class apparelMod
 		apparelModel*		mp_model;
 	   	vector<int>			m_indicesFaces;
 		vector<int>			m_indicesVertex;
+
+		// PARAMETERS CONFIGURATION
+		static ofxXmlSettings 		sm_settingsConfigurations;
+		static bool					sm_isConfigurationsLoaded;
+		string				m_configurationName;
+	
+		// PARAMETERS
 		ofParameterGroup 	m_parameters;
+		ofParameter<bool>	m_isActive;
+		ofParameter<float>	m_weight;
 
-		ofxXmlSettings		m_settingsModel;
+		// SETTINGS
+		ofxXmlSettings				m_settingsModel;
 
+		// OSC
 		oscSenderInterface*	mp_oscSender;
 };

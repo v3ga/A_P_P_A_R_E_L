@@ -41,6 +41,11 @@ void apparelModUI::createControls(const ofVec2f& posCanvas)
 			ofParameter<float>& parameterFloat = (ofParameter<float>&) parameter;
 			mp_canvas->addSlider(parameterFloat.getName(), parameterFloat.getMin(), parameterFloat.getMax(), parameterFloat);
 		}
+		else if (parameter.type() == typeid(ofParameter<bool>).name())
+		{
+			ofParameter<bool>& parameterBool = (ofParameter<bool>&) parameter;
+			mp_canvas->addToggle(parameterBool.getName(), parameterBool);
+		}
 	}
 	mp_canvas->autoSizeToFitWidgets();
 	
@@ -69,6 +74,12 @@ void apparelModUI::handleEvents(ofxUIEventArgs& e)
 	{
 		ofParameter<float>& parameterFloat = (ofParameter<float>&) parameter;
 		parameterFloat.set( ((ofxUISlider *) e.widget)->getScaledValue() );
+	}
+	else
+	if (parameter.type() == typeid(ofParameter<bool>).name())
+	{
+		ofParameter<bool>& parameterBool = (ofParameter<bool>&) parameter;
+		parameterBool.set( ((ofxUIToggle *) e.widget)->getValue() );
 	}
 
 	

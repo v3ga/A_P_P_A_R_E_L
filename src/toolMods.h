@@ -21,6 +21,7 @@ class toolMods : public tool
 
 		void					show				(bool is);
 		bool					isHit				(int x, int y);
+		void					exit				();
 
 		void					addMod				(apparelMod*);
 		apparelMod*				getModCurrent		(){return mp_modCurrent;}
@@ -30,6 +31,8 @@ class toolMods : public tool
 		void					handleEvents		(ofxUIEventArgs& e);
 		apparelModUI*			makeInstanceModUI	(apparelMod*);
 		void					selectMod			(string name);
+	
+	
 	
 
 		map<string, apparelMod*>		m_mods;

@@ -7,6 +7,8 @@
 //
 
 #pragma once
+#include "ofAppLog.h"
+
 class ofApp;
 class oscSenderInterface;
 #define GLOBALS	globals::getInstance()

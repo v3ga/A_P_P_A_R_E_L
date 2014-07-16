@@ -13,8 +13,20 @@
 class oscSenderInterface
 {
 	public:
+		oscSenderInterface			()
+		{
+			m_isSetup = false;
+		}
+
 		virtual void setup			(string ip, int port){}
 		virtual void sendParameter	(const ofAbstractParameter & parameter){}
+		virtual void setActive		(bool is=true){m_isActive=is;}
+				bool isSetup		(){return m_isSetup;}
+				bool isActive		(){return m_isActive;}
+	protected:
+		bool		m_isSetup;
+		bool		m_isActive;
+
 };
 
 #ifdef TARGET_OSX
@@ -26,6 +38,7 @@ class oscSender : public oscSenderInterface
 		void sendParameter	(const ofAbstractParameter & parameter);
 
 		ofxOscSender		m_sender;
+
 };
 
 #endif

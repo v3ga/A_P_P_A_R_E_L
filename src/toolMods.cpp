@@ -21,11 +21,6 @@ toolMods::toolMods(toolManager* parent, apparelModel* model) : tool("Mods", pare
 //--------------------------------------------------------------
 toolMods::~toolMods()
 {
-	map<string, apparelMod*>::iterator it;
-	for (it = m_mods.begin(); it != m_mods.end(); ++it){
-		it->second->saveParameters();
-		delete it->second;
-	}
 }
 
 //--------------------------------------------------------------
@@ -40,6 +35,16 @@ void toolMods::show(bool is)
 bool toolMods::isHit(int x, int y)
 {
 	return (tool::isHit(x, y) || ( mp_modUICurrent && mp_modUICurrent->getCanvas() &&  mp_modUICurrent->getCanvas()->isHit(x,y)));
+}
+
+//--------------------------------------------------------------
+void toolMods::exit()
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it){
+		it->second->saveParameters();
+		delete it->second;
+	}
 }
 
 //--------------------------------------------------------------

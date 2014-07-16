@@ -35,18 +35,23 @@ class tool3D : public tool
 		meshVertexSelector	m_meshVertexSelector;
 	
 		bool				m_bShowVertexNormals;
+
 		bool				m_bShowFaceNormals;
 		ofMeshFace*			mp_meshFaceOver;
 		int					m_meshFaceIndexOver;
+
 		ofVec3f*			mp_meshVertexOver;
 		ofVec2f				m_meshVertexScreenOver;
+		int					m_meshVertexIndexOver;
 	
-		ofSpherePrimitive	m_sphereVertexOver;
+		ofSpherePrimitive				m_sphereVertexOver;
+		map<int, ofSpherePrimitive*>	m_mapSphereVertexSelected;
 	
 		vector<int>			m_indicesFaceSelected;
 		vector<int>			m_indicesVectorSelected;
 	
 		bool				isFaceSelected		(int index);
+		bool				isVertexSelected	(int index);
 	
 		ofColor				colorFaceOver;
 		ofColor				colorFaceSelected;

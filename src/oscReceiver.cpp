@@ -17,6 +17,7 @@ void oscReceiver::update()
 		{
             int indexArg = 0;
 
+			ofLog() << "oscReceiver::update() - received " << m_oscMessage.getAddress();
         }
     }
 }

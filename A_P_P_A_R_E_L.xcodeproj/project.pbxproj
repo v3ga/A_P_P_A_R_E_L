@@ -95,6 +95,7 @@
 		F932F0BD196D774000C82556 /* oscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F0BB196D774000C82556 /* oscSender.cpp */; };
 		F957698E19388F7C00609E70 /* tool3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F957698C19388F7C00609E70 /* tool3D.cpp */; };
 		F95769921938DC1C00609E70 /* toolModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95769901938DC1C00609E70 /* toolModel.cpp */; };
+		F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */; };
 		F9AB0BDE193DB9860020D78A /* apparelMod_debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */; };
 		F9AB0BE91940FA220020D78A /* tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BE71940FA220020D78A /* tool.cpp */; };
 		F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ED4467DFF0AC3482E9362 /* ofxUIMultiImageToggle.cpp */; };
@@ -355,6 +356,9 @@
 		F957698D19388F7C00609E70 /* tool3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool3D.h; sourceTree = "<group>"; };
 		F95769901938DC1C00609E70 /* toolModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolModel.cpp; sourceTree = "<group>"; };
 		F95769911938DC1C00609E70 /* toolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolModel.h; sourceTree = "<group>"; };
+		F96FBA4E1975406300E58A6F /* configuration.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = configuration.xml; path = bin/data/configuration.xml; sourceTree = "<group>"; };
+		F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofAppLog.cpp; sourceTree = "<group>"; };
+		F96FBA5119755AEA00E58A6F /* ofAppLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofAppLog.h; sourceTree = "<group>"; };
 		F9A4454B00CCFD7265D3CA85 /* ofxUILabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUILabelButton.cpp; path = ../../../addons/ofxUI/src/ofxUILabelButton.cpp; sourceTree = SOURCE_ROOT; };
 		F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_debug.cpp; sourceTree = "<group>"; };
 		F9AB0BDD193DB9860020D78A /* apparelMod_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_debug.h; sourceTree = "<group>"; };
@@ -635,6 +639,7 @@
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
+				F96FBA4D1975404000E58A6F /* data */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
@@ -738,6 +743,8 @@
 				F9267594193A095C00CB2599 /* meshFaceSelector.h */,
 				F9267596193A16C500CB2599 /* meshVertexSelector.cpp */,
 				F9267597193A16C500CB2599 /* meshVertexSelector.h */,
+				F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */,
+				F96FBA5119755AEA00E58A6F /* ofAppLog.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -849,6 +856,14 @@
 				F932F05C196C488900C82556 /* ofxOscSender.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		F96FBA4D1975404000E58A6F /* data */ = {
+			isa = PBXGroup;
+			children = (
+				F96FBA4E1975406300E58A6F /* configuration.xml */,
+			);
+			name = data;
 			sourceTree = "<group>";
 		};
 		F9AB0BE51940FA220020D78A /* ofxToolManager */ = {
@@ -1031,6 +1046,7 @@
 				C381F2B7CFD84C0E540EB4BC /* ofxUIBiLabelSlider.cpp in Sources */,
 				F9D2CC22192A4E4700BF8F14 /* tinyxmlparser.cpp in Sources */,
 				F9131FF21936276500449924 /* Plane.cpp in Sources */,
+				F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */,
 				F932F064196C488900C82556 /* OscReceivedElements.cpp in Sources */,
 				7D393646FB859A930EF58917 /* ofxUIButton.cpp in Sources */,
 				F9D2CC23192A4E4700BF8F14 /* ofxXmlSettings.cpp in Sources */,

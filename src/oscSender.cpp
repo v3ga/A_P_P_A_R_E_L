@@ -17,12 +17,14 @@
 void oscSender::setup(string ip, int port)
 {
 	m_sender.setup(ip, port);
+	m_isSetup = true;
+	m_isActive = true;
 }
 
 //--------------------------------------------------------------
 void oscSender::sendParameter(const ofAbstractParameter & parameter)
 {
-	//m_sender.sendParameter(parameter);
+	if(!isSetup() || !isActive()) return;
 	if(!parameter.isSerializable()) return;
 
 	string address_prefix = OSC_MOD_SET_PARAMETER;
