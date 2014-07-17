@@ -10,19 +10,17 @@
 #include "user.h"
 #include "ofxXmlSettings.h"
 
-class userSocialInterface
+class userSocialInterface : public ofThread
 {
 	public:
-		userSocialInterface(user* p)
-		{
-			mp_user = p;
-		}
+		userSocialInterface							(user* p);
 
-		virtual		bool		setup				(ofxXmlSettings& config, int serviceIndex){return false;}
+		virtual		bool		setup				(ofxXmlSettings* pConfig, int serviceIndex){return false;}
 		virtual		void		update				(){}
-		virtual		void		retrieveData		(){}
-					user*		getUser				(){return mp_user;}
+		virtual 	void 		threadedFunction	(){};
+//		virtual		void		run					(){startThread();}
 
+					user*		getUser				(){return mp_user;}
 
    protected:
 		user*		mp_user;

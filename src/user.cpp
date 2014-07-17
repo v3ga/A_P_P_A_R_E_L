@@ -7,12 +7,15 @@
 //
 
 #include "user.h"
-#include "userTwitter.h"
+#include "userSocialFactory.h"
 #include "ofAppLog.h"
 
 user::~user()
 {
-	// TODO : delete services
+	vector<userSocialInterface*>::iterator it;
+	for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end() ; ++it)
+		delete *it;
+	m_listSocialInterfaces.clear();
 }
 
 
@@ -33,25 +36,19 @@ void user::loadConfiguration()
 	
 		for (int i=0; i<nbServices; i++)
 		{
-			string serviceName = m_configuration.getAttribute("user:service", "name", "", i);
-			if (serviceName != ""){
+			// Info into the xml configuration file
+			userConfigurationInfo* pUserConfigInfo = new userConfigurationInfo(this, "user:service", i);
 
-				// TWITTER
-				if (serviceName == "twitter")
-				{
-					OFAPPLOG->println("- creating service \""+serviceName+"\"");
-					userTwitter* pUserTwitter = new userTwitter(this);
-					if (pUserTwitter->setup(m_configuration, i))
-					{
-						m_listSocialInterfaces.push_back( pUserTwitter );
-					}
-					else
-					{
-						delete pUserTwitter;
-					}
-				}
+			// Create instance with factory
+			userSocialInterface* pSocialInterface = userSocialFactory::makeInstance(pUserConfigInfo);
 
+			// Push in list
+			if (pSocialInterface){
+				m_listSocialInterfaces.push_back(pSocialInterface);
 			}
+		
+			// Delete info
+			delete pUserConfigInfo;
 		}
 
 	}

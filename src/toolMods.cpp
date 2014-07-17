@@ -9,12 +9,13 @@
 #include "toolMods.h"
 #include "tool3D.h"
 #include "globals.h"
+#include "apparelModManager.h"
 
 //--------------------------------------------------------------
-toolMods::toolMods(toolManager* parent, apparelModel* model) : tool("Mods", parent)
+toolMods::toolMods(toolManager* parent, apparelModManager* modManager, apparelModel* model) : tool("Mods", parent)
 {
-	mp_modCurrent = 0;
 	mp_modUICurrent = 0;
+	mp_modsManager 	= modManager;
 	mp_apparelModel = model;
 }
 
@@ -40,32 +41,21 @@ bool toolMods::isHit(int x, int y)
 //--------------------------------------------------------------
 void toolMods::exit()
 {
-	map<string, apparelMod*>::iterator it;
-	for (it = m_mods.begin(); it != m_mods.end(); ++it){
-		it->second->saveParameters();
-		delete it->second;
-	}
+	if (mp_modsManager)
+		mp_modsManager->saveParameters();
 }
 
-//--------------------------------------------------------------
-void toolMods::addMod(apparelMod* mod)
-{
-	if (mod)
-	{
-		mod->mp_model = mp_apparelModel; // TEMP
-		mod->loadParameters();
-		mod->setOscSender( GLOBALS->getOscSender() );
-		m_mods[mod->m_id] = mod;
-	}
-}
 
 //--------------------------------------------------------------
 void toolMods::createControlsCustom()
 {
+	if (mp_modsManager == 0) return;
+
+
 	vector<string> modIds;
 
 	map<string, apparelMod*>::iterator it;
-	for (it = m_mods.begin(); it != m_mods.end(); ++it)
+	for (it = mp_modsManager->m_mods.begin(); it != mp_modsManager->m_mods.end(); ++it)
 	{
 		modIds.push_back(it->second->m_id);
 	}
@@ -79,8 +69,10 @@ void toolMods::createControlsCustom()
 //--------------------------------------------------------------
 void toolMods::createControlsCustomFinalize()
 {
+	if (mp_modsManager == 0) return;
+
 	map<string, apparelMod*>::iterator it;
-	for (it = m_mods.begin(); it != m_mods.end(); ++it)
+	for (it = mp_modsManager->m_mods.begin(); it != mp_modsManager->m_mods.end(); ++it)
 	{
 		apparelModUI* modUI = makeInstanceModUI(it->second);
 		if (modUI)
@@ -130,7 +122,8 @@ void toolMods::selectMod(string name)
 	}
 
 	// Select mod
-	mp_modCurrent = m_mods[name];
+	mp_modsManager->selectMod(name);
+//	mp_modsManager->mp_modCurrent = m_mods[name];
 
 	// Select mod UI
 	mp_modUICurrent = m_modsUI[name];
@@ -141,7 +134,7 @@ void toolMods::selectMod(string name)
 	if (mp_toolManager) {
 		tool3D* pTool3D = (tool3D*) mp_toolManager->getTool("3D");
 		if (pTool3D)
-			pTool3D->onSelectMod(mp_modCurrent);
+			pTool3D->onSelectMod(mp_modsManager->getModCurrent());
 	}
 }
 

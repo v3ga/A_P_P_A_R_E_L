@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "globals.h"
 #include "apparelModel.h"
+#include "apparelModManager.h"
 #include "tool.h"
 #include "oscSender.h"
 #include "user.h"
@@ -30,11 +31,12 @@ class ofApp : public ofBaseApp
 		void gotMessage(ofMessage msg);
 	
 	
-		ofxXmlSettings	settings;
-		ofEasyCam 		cam;
-		apparelModel	apparelModel;
-		oscSender		oscSender;
-		user			user;
+		ofxXmlSettings		settings;
+		ofEasyCam 			cam;
+		apparelModel		apparelModel;
+		oscSender			oscSender;
+		user				user;
+		apparelModManager	apparelModManager;
 
 	private:
 		toolManager		toolManager;

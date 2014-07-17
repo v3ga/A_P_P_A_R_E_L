@@ -56,6 +56,11 @@ void ofApp::setup(){
 	apparelModel.setPosition(0,0,0);
 	apparelModel.setScale(1/1.83328,1/1.83328,1/1.83328); // TODO : why 1.83328 ?
 
+	// MODS
+	apparelModManager.addMod( new apparelMod_debug() );
+	apparelModManager.addMod( new apparelMod_authority() );
+	apparelModManager.setModel(&apparelModel);
+
 	// CAM
 	cam.setDistance(200);
 	cam.setTranslationKey(' ');
@@ -64,9 +69,7 @@ void ofApp::setup(){
 	// TOOLS
 	OFAPPLOG->println("- creating tools");
 	pTool3D = new tool3D(&toolManager, &apparelModel);
-	pToolMods = new toolMods(&toolManager, &apparelModel);
-	pToolMods->addMod( new apparelMod_debug() );
-	pToolMods->addMod( new apparelMod_authority() );
+	pToolMods = new toolMods(&toolManager, &apparelModManager, &apparelModel);
 	
 	toolManager.setLogo("ARicon_150x150.png");
 	toolManager.setFontName("fonts/LetterGothic.ttf");

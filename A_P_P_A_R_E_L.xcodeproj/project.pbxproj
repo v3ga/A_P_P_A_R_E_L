@@ -105,6 +105,8 @@
 		F96FBBE11976D3AC00E58A6F /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBBCA1976D3AC00E58A6F /* json_writer.cpp */; };
 		F96FBBE21976D3AC00E58A6F /* ofxJSONElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBBCE1976D3AC00E58A6F /* ofxJSONElement.cpp */; };
 		F96FBE6C197724CE00E58A6F /* userTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE6A197724CE00E58A6F /* userTwitter.cpp */; };
+		F96FBE721977D9F800E58A6F /* userSocialFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE701977D9F800E58A6F /* userSocialFactory.cpp */; };
+		F96FBE7519781E4600E58A6F /* apparelModManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE7319781E4600E58A6F /* apparelModManager.cpp */; };
 		F9AB0BDE193DB9860020D78A /* apparelMod_debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */; };
 		F9AB0BE91940FA220020D78A /* tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BE71940FA220020D78A /* tool.cpp */; };
 		F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ED4467DFF0AC3482E9362 /* ofxUIMultiImageToggle.cpp */; };
@@ -413,6 +415,10 @@
 		F96FBC041976D49100E58A6F /* oauth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = oauth.h; sourceTree = "<group>"; };
 		F96FBE6A197724CE00E58A6F /* userTwitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = userTwitter.cpp; sourceTree = "<group>"; };
 		F96FBE6B197724CE00E58A6F /* userTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userTwitter.h; sourceTree = "<group>"; };
+		F96FBE701977D9F800E58A6F /* userSocialFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = userSocialFactory.cpp; sourceTree = "<group>"; };
+		F96FBE711977D9F800E58A6F /* userSocialFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userSocialFactory.h; sourceTree = "<group>"; };
+		F96FBE7319781E4600E58A6F /* apparelModManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelModManager.cpp; sourceTree = "<group>"; };
+		F96FBE7419781E4600E58A6F /* apparelModManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelModManager.h; sourceTree = "<group>"; };
 		F9A4454B00CCFD7265D3CA85 /* ofxUILabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUILabelButton.cpp; path = ../../../addons/ofxUI/src/ofxUILabelButton.cpp; sourceTree = SOURCE_ROOT; };
 		F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_debug.cpp; sourceTree = "<group>"; };
 		F9AB0BDD193DB9860020D78A /* apparelMod_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_debug.h; sourceTree = "<group>"; };
@@ -933,6 +939,8 @@
 				F96FBA5A1976D25500E58A6F /* userSocialInterface.h */,
 				F96FBE6A197724CE00E58A6F /* userTwitter.cpp */,
 				F96FBE6B197724CE00E58A6F /* userTwitter.h */,
+				F96FBE701977D9F800E58A6F /* userSocialFactory.cpp */,
+				F96FBE711977D9F800E58A6F /* userSocialFactory.h */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1150,6 +1158,8 @@
 				F9C66618193CAD9A00C8225D /* apparelMod_authority.h */,
 				F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */,
 				F9AB0BDD193DB9860020D78A /* apparelMod_debug.h */,
+				F96FBE7319781E4600E58A6F /* apparelModManager.cpp */,
+				F96FBE7419781E4600E58A6F /* apparelModManager.h */,
 			);
 			name = Mods;
 			sourceTree = "<group>";
@@ -1333,6 +1343,7 @@
 				9A83D1B3FB64456BC907667F /* ofxUIMinimalSlider.cpp in Sources */,
 				F9131FF41936276500449924 /* Ray.cpp in Sources */,
 				F440B307990F8F5CE40B9111 /* ofxUIMovingGraph.cpp in Sources */,
+				F96FBE7519781E4600E58A6F /* apparelModManager.cpp in Sources */,
 				F96FBA5B1976D25500E58A6F /* userSocialInterface.cpp in Sources */,
 				F932F063196C488900C82556 /* OscPrintReceivedElements.cpp in Sources */,
 				F9D2CC27192A4F7900BF8F14 /* apparelModel.cpp in Sources */,
@@ -1359,6 +1370,7 @@
 				C961BE22AB9A8CCF037FC18F /* ofxUITextArea.cpp in Sources */,
 				F8D05F7C7F785CE323983B47 /* ofxUITextInput.cpp in Sources */,
 				F9131FF31936276500449924 /* Projector.cpp in Sources */,
+				F96FBE721977D9F800E58A6F /* userSocialFactory.cpp in Sources */,
 				04C82720B149CE576B8CBB06 /* ofxUIToggle.cpp in Sources */,
 				E3A1109F67D711D6C256031E /* ofxUIToggleMatrix.cpp in Sources */,
 				F96FBBDF1976D3AC00E58A6F /* json_reader.cpp in Sources */,

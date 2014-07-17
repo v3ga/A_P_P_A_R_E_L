@@ -13,18 +13,16 @@
 #include "apparelModUI.h"
 
 class apparelModel;
+class apparelModManager;
 class toolMods : public tool
 {
 	public:
-		toolMods				(toolManager* parent, apparelModel* model);
+		toolMods				(toolManager* parent, apparelModManager* modManager, apparelModel* model);
 		~toolMods				();
 
 		void					show				(bool is);
 		bool					isHit				(int x, int y);
 		void					exit				();
-
-		void					addMod				(apparelMod*);
-		apparelMod*				getModCurrent		(){return mp_modCurrent;}
 	
 		void					createControlsCustom();
 		void					createControlsCustomFinalize();
@@ -33,12 +31,9 @@ class toolMods : public tool
 		void					selectMod			(string name);
 	
 	
-	
-
-		map<string, apparelMod*>		m_mods;
-		map<string, apparelModUI*>		m_modsUI;
-	
-		apparelMod*						mp_modCurrent;
+		apparelModManager*				mp_modsManager;
 		apparelModUI*					mp_modUICurrent;
 		apparelModel*					mp_apparelModel;
+
+		map<string, apparelModUI*>		m_modsUI;
 };

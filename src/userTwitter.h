@@ -16,8 +16,9 @@ class userTwitter : public userSocialInterface
 	public:
 			userTwitter							(user*);
 	
-			bool			setup				(ofxXmlSettings& config, int serviceIndex);
+			bool			setup				(ofxXmlSettings* pConfig, int serviceIndex);
 			void			update				();
+			void			threadedFunction	();
 
 	        ofxTwitter 		m_twitterClient;
 };
