@@ -1,5 +1,6 @@
 <apparel>
-	<!-- Model loaded from data/3d folder -->
+	<!-- Model used -->
+	<!-- Folder : data/3d -->
 	<model>modele_MAI_16.obj</model>
 
 	<!-- IP of the iphone/ipad running Apparel application -->
@@ -7,5 +8,9 @@
 		<ip>192.168.1.93</ip>
 		<port>1235</port>
 	</osc>
+	
+	<!-- User which is used for data retrieval  -->
+	<!-- Folder : data/users/[userID] -->
+	<user>v3ga</user>
 
 </apparel>

@@ -30,19 +30,25 @@ void ofApp::setup(){
 	bool oscActivate 	= settings.getAttribute("apparel:osc", "activated", 1) > 0 ? true : false;
 	string oscIP 		= settings.getValue("apparel:osc:ip","");
 	int oscPort 		= settings.getValue("apparel:osc:port",1235);
-
+	string userId		= settings.getValue("apparel:user", "creativeclaude");
 	
 	// DATA
 	// ofLog() << "  - loading data";
 	
 	DATA->load();
 	OFAPPLOG->println("- loading data");
+
 	// OSC
 	if (oscActivate)
 	{
 		OFAPPLOG->println("- setting OSC sender @ " + oscIP + ":" + ofToString(oscPort));
 		oscSender.setup(oscIP, oscPort);
 	}
+
+	// USER
+	OFAPPLOG->println("- user is @"+userId);
+	user.setId(userId);
+	user.loadConfiguration();
 	
 	// MODEL
    	OFAPPLOG->println("- loading 3d/"+modelObjName);
@@ -79,6 +85,7 @@ void ofApp::setup(){
 void ofApp::update()
 {
 	toolManager.update();
+	user.update();
 }
 
 //--------------------------------------------------------------

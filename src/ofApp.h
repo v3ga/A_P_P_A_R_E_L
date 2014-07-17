@@ -5,6 +5,7 @@
 #include "apparelModel.h"
 #include "tool.h"
 #include "oscSender.h"
+#include "user.h"
 
 class tool3D;
 class toolMods;
@@ -33,6 +34,7 @@ class ofApp : public ofBaseApp
 		ofEasyCam 		cam;
 		apparelModel	apparelModel;
 		oscSender		oscSender;
+		user			user;
 
 	private:
 		toolManager		toolManager;
