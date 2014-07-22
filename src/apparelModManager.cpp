@@ -53,3 +53,13 @@ void apparelModManager::saveParameters()
 	}
 }
 
+//--------------------------------------------------------------
+void apparelModManager::onNewText(string text)
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it){
+		it->second->onNewText(text);
+	}
+}
+
+

@@ -23,6 +23,8 @@ class apparelModManager
 		void						setModel			(apparelModel*);
 		void						saveParameters		();
 	
+		void						onNewText			(string text);
+	
 		map<string, apparelMod*>	m_mods;
 		apparelMod*					mp_modCurrent;
 };

@@ -8,6 +8,7 @@
 
 #include "apparelMod_authority.h"
 
+//--------------------------------------------------------------
 apparelMod_authority::apparelMod_authority() : apparelMod("Authority")
 {
 //	m_level.set("level", 0.5f, 0.0f, 1.0f);

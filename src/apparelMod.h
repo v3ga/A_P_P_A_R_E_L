@@ -28,23 +28,28 @@ class apparelMod
 		string				getPathMod				(string filename){return "mods/"+m_id+"/"+filename;}
 		string				getPathToolMods			(string filename){return "tools/mods/"+filename;}
 
+		void				addFaceIndex			(int faceIndex);
+		void				removeFaceIndex			(int faceIndex);
 	
-		void				addFaceIndex	(int faceIndex);
-		void				removeFaceIndex	(int faceIndex);
+		void				addVertexIndex			(int vertexIndex);
+		void				removeVertexIndex		(int vertexIndex);
+
+		void				setOscSender			(oscSenderInterface* p){mp_oscSender=p;}
+
+		// INTERFACE FOR RECEIVING DATA FROM USER
+		void				onNewText				(string text){}
+
+		// INTERFACE FOR SAVING IN DATABASE
 	
-		void				addVertexIndex		(int vertexIndex);
-		void				removeVertexIndex	(int vertexIndex);
-
-		void				setOscSender	(oscSenderInterface* p){mp_oscSender=p;}
-
+		// ID
 		string				m_id;
+
+		// MODEL w/ DATA
 		apparelModel*		mp_model;
 	   	vector<int>			m_indicesFaces;
 		vector<int>			m_indicesVertex;
 
 		// PARAMETERS CONFIGURATION
-		static ofxXmlSettings 		sm_settingsConfigurations;
-		static bool					sm_isConfigurationsLoaded;
 		string				m_configurationName;
 	
 		// PARAMETERS
@@ -53,7 +58,7 @@ class apparelMod
 		ofParameter<float>	m_weight;
 
 		// SETTINGS
-		ofxXmlSettings				m_settingsModel;
+		ofxXmlSettings		m_settingsModel;
 
 		// OSC
 		oscSenderInterface*	mp_oscSender;

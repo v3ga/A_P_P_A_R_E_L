@@ -10,8 +10,6 @@
 #include "globals.h"
 
 //--------------------------------------------------------------
-bool apparelMod::sm_isConfigurationsLoaded = false;
-ofxXmlSettings apparelMod::sm_settingsConfigurations;
 
 //--------------------------------------------------------------
 apparelMod::apparelMod(string id)

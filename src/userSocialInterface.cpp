@@ -10,8 +10,8 @@
 #include "ofAppLog.h"
 
 
-userSocialInterface::userSocialInterface(user* p) : ofThread()
+userSocialInterface::userSocialInterface(user* p)
 {
 	mp_user = p;
+	m_isRunOnce = false;
 }
-

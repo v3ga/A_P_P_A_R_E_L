@@ -17,8 +17,14 @@ class userTwitter : public userSocialInterface
 			userTwitter							(user*);
 	
 			bool			setup				(ofxXmlSettings* pConfig, int serviceIndex);
-			void			update				();
-			void			threadedFunction	();
+			void			doWork				();
+			void			loadData			();
+			void			saveData			();
 
-	        ofxTwitter 		m_twitterClient;
+	        ofxTwitter 			m_twitterClient;
+			long long int		m_tweetLastId;
+			string				m_tweetLastId_str;
+			ofxTwitterTweet		m_tweet;
+
+			map<string,int>	m_mapTokensCount;
 };

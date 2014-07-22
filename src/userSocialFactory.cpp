@@ -9,6 +9,7 @@
 #include "userSocialFactory.h"
 #include "ofAppLog.h"
 
+//--------------------------------------------------------------
 userSocialInterface* userSocialFactory::makeInstance(userConfigurationInfo* pConfigInfo)
 {
 	if (pConfigInfo == 0) return 0;

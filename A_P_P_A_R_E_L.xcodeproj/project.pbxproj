@@ -93,6 +93,15 @@
 		F932F069196C488900C82556 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F059196C488900C82556 /* ofxOscReceiver.cpp */; };
 		F932F06A196C488900C82556 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F05B196C488900C82556 /* ofxOscSender.cpp */; };
 		F932F0BD196D774000C82556 /* oscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F0BB196D774000C82556 /* oscSender.cpp */; };
+		F9489231197E72C000085C6B /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = F9489218197E72C000085C6B /* sqlite3.c */; };
+		F9489232197E72C000085C6B /* ofxSQLite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948921B197E72C000085C6B /* ofxSQLite.cpp */; };
+		F9489233197E72C000085C6B /* ofxSQLiteAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948921D197E72C000085C6B /* ofxSQLiteAbstract.cpp */; };
+		F9489234197E72C000085C6B /* ofxSQLiteDelete.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948921F197E72C000085C6B /* ofxSQLiteDelete.cpp */; };
+		F9489235197E72C000085C6B /* ofxSQLiteFieldValues.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489221197E72C000085C6B /* ofxSQLiteFieldValues.cpp */; };
+		F9489236197E72C000085C6B /* ofxSQLiteInsert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489224197E72C000085C6B /* ofxSQLiteInsert.cpp */; };
+		F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489226197E72C000085C6B /* ofxSQLiteSelect.cpp */; };
+		F9489239197E72C000085C6B /* ofxSQLiteUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948922C197E72C000085C6B /* ofxSQLiteUpdate.cpp */; };
+		F948923E197E9C8A00085C6B /* ofxTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948923C197E9C8A00085C6B /* ofxTicker.cpp */; };
 		F957698E19388F7C00609E70 /* tool3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F957698C19388F7C00609E70 /* tool3D.cpp */; };
 		F95769921938DC1C00609E70 /* toolModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95769901938DC1C00609E70 /* toolModel.cpp */; };
 		F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */; };
@@ -363,6 +372,30 @@
 		F932F05C196C488900C82556 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
 		F932F0BB196D774000C82556 /* oscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oscSender.cpp; sourceTree = "<group>"; };
 		F932F0BC196D774000C82556 /* oscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oscSender.h; sourceTree = "<group>"; };
+		F9489214197E72C000085C6B /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		F9489218197E72C000085C6B /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
+		F9489219197E72C000085C6B /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		F948921A197E72C000085C6B /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3ext.h; sourceTree = "<group>"; };
+		F948921B197E72C000085C6B /* ofxSQLite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSQLite.cpp; sourceTree = "<group>"; };
+		F948921C197E72C000085C6B /* ofxSQLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLite.h; sourceTree = "<group>"; };
+		F948921D197E72C000085C6B /* ofxSQLiteAbstract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSQLiteAbstract.cpp; sourceTree = "<group>"; };
+		F948921E197E72C000085C6B /* ofxSQLiteAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteAbstract.h; sourceTree = "<group>"; };
+		F948921F197E72C000085C6B /* ofxSQLiteDelete.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSQLiteDelete.cpp; sourceTree = "<group>"; };
+		F9489220197E72C000085C6B /* ofxSQLiteDelete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteDelete.h; sourceTree = "<group>"; };
+		F9489221197E72C000085C6B /* ofxSQLiteFieldValues.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSQLiteFieldValues.cpp; sourceTree = "<group>"; };
+		F9489222197E72C000085C6B /* ofxSQLiteFieldValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteFieldValues.h; sourceTree = "<group>"; };
+		F9489223197E72C000085C6B /* ofxSQLiteHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteHeaders.h; sourceTree = "<group>"; };
+		F9489224197E72C000085C6B /* ofxSQLiteInsert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSQLiteInsert.cpp; sourceTree = "<group>"; };
+		F9489225197E72C000085C6B /* ofxSQLiteInsert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteInsert.h; sourceTree = "<group>"; };
+		F9489226197E72C000085C6B /* ofxSQLiteSelect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSQLiteSelect.cpp; sourceTree = "<group>"; };
+		F9489227197E72C000085C6B /* ofxSQLiteSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteSelect.h; sourceTree = "<group>"; };
+		F948922A197E72C000085C6B /* ofxSQLiteType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteType.h; sourceTree = "<group>"; };
+		F948922B197E72C000085C6B /* ofxSQLiteTypeNow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteTypeNow.h; sourceTree = "<group>"; };
+		F948922C197E72C000085C6B /* ofxSQLiteUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSQLiteUpdate.cpp; sourceTree = "<group>"; };
+		F948922D197E72C000085C6B /* ofxSQLiteUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteUpdate.h; sourceTree = "<group>"; };
+		F948922E197E72C000085C6B /* ofxSQLiteWhere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteWhere.h; sourceTree = "<group>"; };
+		F948923C197E9C8A00085C6B /* ofxTicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTicker.cpp; sourceTree = "<group>"; };
+		F948923D197E9C8A00085C6B /* ofxTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTicker.h; sourceTree = "<group>"; };
 		F957698C19388F7C00609E70 /* tool3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool3D.cpp; sourceTree = "<group>"; };
 		F957698D19388F7C00609E70 /* tool3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool3D.h; sourceTree = "<group>"; };
 		F95769901938DC1C00609E70 /* toolModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolModel.cpp; sourceTree = "<group>"; };
@@ -528,6 +561,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				F948920F197E72C000085C6B /* ofxSQLite */,
 				F96FBB691976D3AC00E58A6F /* ofxJSON */,
 				F96FBAAA1976D39000E58A6F /* ofxOAuth */,
 				F96FBA5C1976D37800E58A6F /* ofxTwitter */,
@@ -809,6 +843,8 @@
 				F9267597193A16C500CB2599 /* meshVertexSelector.h */,
 				F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */,
 				F96FBA5119755AEA00E58A6F /* ofAppLog.h */,
+				F948923C197E9C8A00085C6B /* ofxTicker.cpp */,
+				F948923D197E9C8A00085C6B /* ofxTicker.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -920,6 +956,60 @@
 				F932F05C196C488900C82556 /* ofxOscSender.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		F948920F197E72C000085C6B /* ofxSQLite */ = {
+			isa = PBXGroup;
+			children = (
+				F9489214197E72C000085C6B /* install.xml */,
+				F9489215197E72C000085C6B /* src */,
+			);
+			name = ofxSQLite;
+			path = ../../../addons/ofxSQLite;
+			sourceTree = "<group>";
+		};
+		F9489215197E72C000085C6B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F9489216197E72C000085C6B /* lib */,
+				F948921B197E72C000085C6B /* ofxSQLite.cpp */,
+				F948921C197E72C000085C6B /* ofxSQLite.h */,
+				F948921D197E72C000085C6B /* ofxSQLiteAbstract.cpp */,
+				F948921E197E72C000085C6B /* ofxSQLiteAbstract.h */,
+				F948921F197E72C000085C6B /* ofxSQLiteDelete.cpp */,
+				F9489220197E72C000085C6B /* ofxSQLiteDelete.h */,
+				F9489221197E72C000085C6B /* ofxSQLiteFieldValues.cpp */,
+				F9489222197E72C000085C6B /* ofxSQLiteFieldValues.h */,
+				F9489223197E72C000085C6B /* ofxSQLiteHeaders.h */,
+				F9489224197E72C000085C6B /* ofxSQLiteInsert.cpp */,
+				F9489225197E72C000085C6B /* ofxSQLiteInsert.h */,
+				F9489226197E72C000085C6B /* ofxSQLiteSelect.cpp */,
+				F9489227197E72C000085C6B /* ofxSQLiteSelect.h */,
+				F948922A197E72C000085C6B /* ofxSQLiteType.h */,
+				F948922B197E72C000085C6B /* ofxSQLiteTypeNow.h */,
+				F948922C197E72C000085C6B /* ofxSQLiteUpdate.cpp */,
+				F948922D197E72C000085C6B /* ofxSQLiteUpdate.h */,
+				F948922E197E72C000085C6B /* ofxSQLiteWhere.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		F9489216197E72C000085C6B /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				F9489217197E72C000085C6B /* sqlite */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		F9489217197E72C000085C6B /* sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				F9489218197E72C000085C6B /* sqlite3.c */,
+				F9489219197E72C000085C6B /* sqlite3.h */,
+				F948921A197E72C000085C6B /* sqlite3ext.h */,
+			);
+			path = sqlite;
 			sourceTree = "<group>";
 		};
 		F96FBA4D1975404000E58A6F /* data */ = {
@@ -1299,6 +1389,7 @@
 				F9267595193A095C00CB2599 /* meshFaceSelector.cpp in Sources */,
 				F932F067196C488900C82556 /* ofxOscMessage.cpp in Sources */,
 				F932F05F196C488900C82556 /* UdpSocket.cpp in Sources */,
+				F9489235197E72C000085C6B /* ofxSQLiteFieldValues.cpp in Sources */,
 				F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */,
 				F1E8DE8734BA6F69A5112FA8 /* ofxUIBaseDraws.cpp in Sources */,
 				C381F2B7CFD84C0E540EB4BC /* ofxUIBiLabelSlider.cpp in Sources */,
@@ -1329,8 +1420,11 @@
 				F9131FF01936276500449924 /* Base.cpp in Sources */,
 				FBD0CD0AFE3849C14E829CAF /* ofxUIImageSampler.cpp in Sources */,
 				F932F062196C488900C82556 /* OscOutboundPacketStream.cpp in Sources */,
+				F9489234197E72C000085C6B /* ofxSQLiteDelete.cpp in Sources */,
 				F96FBB591976D39100E58A6F /* ofxOAuth.cpp in Sources */,
+				F9489232197E72C000085C6B /* ofxSQLite.cpp in Sources */,
 				F932F065196C488900C82556 /* OscTypes.cpp in Sources */,
+				F948923E197E9C8A00085C6B /* ofxTicker.cpp in Sources */,
 				26874B150C8535AEA0F24C8C /* ofxUIImageSlider.cpp in Sources */,
 				F9C66615193CABD200C8225D /* data.cpp in Sources */,
 				FB8AA9FA6535767BE31806BC /* ofxUIImageToggle.cpp in Sources */,
@@ -1358,7 +1452,9 @@
 				FE0F1DB69ACCD163E9DA2A15 /* ofxUIRotarySlider.cpp in Sources */,
 				43BADBB2FE0F17D34B57A705 /* ofxUIScrollableCanvas.cpp in Sources */,
 				F9131F6319352D6C00449924 /* globals.cpp in Sources */,
+				F9489231197E72C000085C6B /* sqlite3.c in Sources */,
 				740A58CBFDFE578C83A349AF /* ofxUISlider.cpp in Sources */,
+				F9489239197E72C000085C6B /* ofxSQLiteUpdate.cpp in Sources */,
 				F932F068196C488900C82556 /* ofxOscParameterSync.cpp in Sources */,
 				ADE7C2AFC51E3F7E5E389026 /* ofxUISortableList.cpp in Sources */,
 				BFEFCE32DAFE10A8EB519F6C /* ofxUISpacer.cpp in Sources */,
@@ -1373,9 +1469,12 @@
 				F96FBE721977D9F800E58A6F /* userSocialFactory.cpp in Sources */,
 				04C82720B149CE576B8CBB06 /* ofxUIToggle.cpp in Sources */,
 				E3A1109F67D711D6C256031E /* ofxUIToggleMatrix.cpp in Sources */,
+				F9489236197E72C000085C6B /* ofxSQLiteInsert.cpp in Sources */,
 				F96FBBDF1976D3AC00E58A6F /* json_reader.cpp in Sources */,
+				F9489233197E72C000085C6B /* ofxSQLiteAbstract.cpp in Sources */,
 				60012C723B05938A3D388335 /* ofxUIValuePlotter.cpp in Sources */,
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
+				F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */,
 				F9C66619193CAD9A00C8225D /* apparelMod_authority.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
 				F932F05D196C488900C82556 /* IpEndpointName.cpp in Sources */,

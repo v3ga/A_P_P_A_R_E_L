@@ -8,17 +8,48 @@
 
 #include "user.h"
 #include "userSocialFactory.h"
+#include "apparelModMAnager.h"
 #include "ofAppLog.h"
 
+//--------------------------------------------------------------
 user::~user()
 {
+	lock();
 	vector<userSocialInterface*>::iterator it;
 	for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end() ; ++it)
 		delete *it;
 	m_listSocialInterfaces.clear();
+	unlock();
+
+	ofRemoveListener(m_ticker.newTickEvent, this, &user::onNewTick);
+	stopThread();
 }
 
+//--------------------------------------------------------------
+void user::loadServicesData()
+{
+	OFAPPLOG->begin("user::saveServicesData()");
+	vector<userSocialInterface*>::iterator it;
+	for (it = m_listSocialInterfaces.begin(); it != m_listSocialInterfaces.end(); ++it)
+	{
+		(*it)->loadData();
+	}
+	OFAPPLOG->end();
+}
 
+//--------------------------------------------------------------
+void user::saveServicesData()
+{
+	OFAPPLOG->begin("user::saveServicesData()");
+	vector<userSocialInterface*>::iterator it;
+	for (it = m_listSocialInterfaces.begin(); it != m_listSocialInterfaces.end(); ++it)
+	{
+		(*it)->saveData();
+	}
+	OFAPPLOG->end();
+}
+
+//--------------------------------------------------------------
 void user::loadConfiguration()
 {
 	OFAPPLOG->begin("user::loadConfiguration()");
@@ -51,6 +82,13 @@ void user::loadConfiguration()
 			delete pUserConfigInfo;
 		}
 
+		// Services data
+		loadServicesData();
+
+		// Starting retrieving
+		ofAddListener(m_ticker.newTickEvent, this, &user::onNewTick);
+		m_ticker.setPeriod(2.0f);
+		m_ticker.play();
 	}
 	else
 	{
@@ -60,14 +98,44 @@ void user::loadConfiguration()
 	OFAPPLOG->end();
 }
 
-void user::update()
+//--------------------------------------------------------------
+void user::update(float dt)
 {
-	vector<userSocialInterface*>::iterator it;
+/*	vector<userSocialInterface*>::iterator it;
 	for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
 		(*it)->update();
 	}
-	
+*/
 }
+
+//--------------------------------------------------------------
+void  user::threadedFunction()
+{
+	lock();
+	vector<userSocialInterface*>::iterator it;
+	for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
+		(*it)->doWork();
+	}
+	unlock();
+}
+
+//--------------------------------------------------------------
+void user::onNewTick(ofxTickerEventArgs& args)
+{
+	if (this->isThreadRunning()) return;
+	
+	startThread();
+}
+
+//--------------------------------------------------------------
+void user::onNewText(string text)
+{
+	if (mp_modManager)
+		mp_modManager->onNewText(text);
+}
+
+
+
 
 
 

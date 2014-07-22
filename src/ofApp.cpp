@@ -11,8 +11,8 @@
 
 
 //--------------------------------------------------------------
-void ofApp::setup(){
-	// ofLog() << "ofApp::setup()";
+void ofApp::setup()
+{
 	OFAPPLOG->begin( "ofApp::setup()" );
 	
 	GLOBALS->setApp(this);
@@ -33,8 +33,6 @@ void ofApp::setup(){
 	string userId		= settings.getValue("apparel:user", "creativeclaude");
 	
 	// DATA
-	// ofLog() << "  - loading data";
-	
 	DATA->load();
 	OFAPPLOG->println("- loading data");
 
@@ -48,6 +46,7 @@ void ofApp::setup(){
 	// USER
 	OFAPPLOG->println("- user is @"+userId);
 	user.setId(userId);
+	user.setModManager(&apparelModManager);
 	user.loadConfiguration();
 	
 	// MODEL
@@ -87,14 +86,17 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update()
 {
+	float dt = (float) ofGetLastFrameTime();
+
 	toolManager.update();
-	user.update();
+	user.update(dt);
 }
 
 //--------------------------------------------------------------
 void ofApp::exit()
 {
 	OFAPPLOG->begin( "ofApp::exit()" );
+	user.saveServicesData();
 	toolManager.saveData();
 	toolManager.exit();
 	OFAPPLOG->end();
