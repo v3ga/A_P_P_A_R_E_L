@@ -102,6 +102,10 @@
 		F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489226197E72C000085C6B /* ofxSQLiteSelect.cpp */; };
 		F9489239197E72C000085C6B /* ofxSQLiteUpdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948922C197E72C000085C6B /* ofxSQLiteUpdate.cpp */; };
 		F948923E197E9C8A00085C6B /* ofxTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948923C197E9C8A00085C6B /* ofxTicker.cpp */; };
+		F9489272197FED4900085C6B /* toolNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489270197FED4900085C6B /* toolNetwork.cpp */; };
+		F9489275197FEEE900085C6B /* toolUser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489273197FEEE900085C6B /* toolUser.cpp */; };
+		F9489279197FF98200085C6B /* ofxUILogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489277197FF98200085C6B /* ofxUILogger.cpp */; };
+		F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948927B197FFE5400085C6B /* toolCalibration.cpp */; };
 		F957698E19388F7C00609E70 /* tool3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F957698C19388F7C00609E70 /* tool3D.cpp */; };
 		F95769921938DC1C00609E70 /* toolModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95769901938DC1C00609E70 /* toolModel.cpp */; };
 		F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */; };
@@ -396,6 +400,14 @@
 		F948922E197E72C000085C6B /* ofxSQLiteWhere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSQLiteWhere.h; sourceTree = "<group>"; };
 		F948923C197E9C8A00085C6B /* ofxTicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTicker.cpp; sourceTree = "<group>"; };
 		F948923D197E9C8A00085C6B /* ofxTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTicker.h; sourceTree = "<group>"; };
+		F9489270197FED4900085C6B /* toolNetwork.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolNetwork.cpp; sourceTree = "<group>"; };
+		F9489271197FED4900085C6B /* toolNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolNetwork.h; sourceTree = "<group>"; };
+		F9489273197FEEE900085C6B /* toolUser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolUser.cpp; sourceTree = "<group>"; };
+		F9489274197FEEE900085C6B /* toolUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolUser.h; sourceTree = "<group>"; };
+		F9489277197FF98200085C6B /* ofxUILogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUILogger.cpp; sourceTree = "<group>"; };
+		F9489278197FF98200085C6B /* ofxUILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUILogger.h; sourceTree = "<group>"; };
+		F948927B197FFE5400085C6B /* toolCalibration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolCalibration.cpp; sourceTree = "<group>"; };
+		F948927C197FFE5400085C6B /* toolCalibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolCalibration.h; sourceTree = "<group>"; };
 		F957698C19388F7C00609E70 /* tool3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool3D.cpp; sourceTree = "<group>"; };
 		F957698D19388F7C00609E70 /* tool3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool3D.h; sourceTree = "<group>"; };
 		F95769901938DC1C00609E70 /* toolModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolModel.cpp; sourceTree = "<group>"; };
@@ -752,6 +764,7 @@
 				F9C66616193CAD7700C8225D /* Mods */,
 				F932F02B196C47FF00C82556 /* Network */,
 				F96FBA581976D1C900E58A6F /* User */,
+				F9489276197FF8FA00085C6B /* UI */,
 				F926758D19392F7200CB2599 /* icon.png */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
@@ -1012,6 +1025,15 @@
 			path = sqlite;
 			sourceTree = "<group>";
 		};
+		F9489276197FF8FA00085C6B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F9489277197FF98200085C6B /* ofxUILogger.cpp */,
+				F9489278197FF98200085C6B /* ofxUILogger.h */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		F96FBA4D1975404000E58A6F /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1237,6 +1259,12 @@
 				F95769911938DC1C00609E70 /* toolModel.h */,
 				F9C6660F193CAB4C00C8225D /* toolMods.cpp */,
 				F9C66610193CAB4C00C8225D /* toolMods.h */,
+				F9489270197FED4900085C6B /* toolNetwork.cpp */,
+				F9489271197FED4900085C6B /* toolNetwork.h */,
+				F9489273197FEEE900085C6B /* toolUser.cpp */,
+				F9489274197FEEE900085C6B /* toolUser.h */,
+				F948927B197FFE5400085C6B /* toolCalibration.cpp */,
+				F948927C197FFE5400085C6B /* toolCalibration.h */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1402,6 +1430,7 @@
 				F932F0BD196D774000C82556 /* oscSender.cpp in Sources */,
 				7BE46522B64E24FAEDE1A25D /* ofxUICanvas.cpp in Sources */,
 				F932F05E196C488900C82556 /* NetworkingUtils.cpp in Sources */,
+				F9489272197FED4900085C6B /* toolNetwork.cpp in Sources */,
 				DF0C851B244C4C867CEA8806 /* ofxUICircleSlider.cpp in Sources */,
 				F932F031196C481E00C82556 /* oscReceiver.cpp in Sources */,
 				F96FBBE01976D3AC00E58A6F /* json_value.cpp in Sources */,
@@ -1424,6 +1453,7 @@
 				F96FBB591976D39100E58A6F /* ofxOAuth.cpp in Sources */,
 				F9489232197E72C000085C6B /* ofxSQLite.cpp in Sources */,
 				F932F065196C488900C82556 /* OscTypes.cpp in Sources */,
+				F9489275197FEEE900085C6B /* toolUser.cpp in Sources */,
 				F948923E197E9C8A00085C6B /* ofxTicker.cpp in Sources */,
 				26874B150C8535AEA0F24C8C /* ofxUIImageSlider.cpp in Sources */,
 				F9C66615193CABD200C8225D /* data.cpp in Sources */,
@@ -1448,6 +1478,7 @@
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
 				D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */,
 				1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */,
+				F9489279197FF98200085C6B /* ofxUILogger.cpp in Sources */,
 				59C5F2F5D7254C33C00F97CB /* ofxUIRectangle.cpp in Sources */,
 				FE0F1DB69ACCD163E9DA2A15 /* ofxUIRotarySlider.cpp in Sources */,
 				43BADBB2FE0F17D34B57A705 /* ofxUIScrollableCanvas.cpp in Sources */,
@@ -1474,6 +1505,7 @@
 				F9489233197E72C000085C6B /* ofxSQLiteAbstract.cpp in Sources */,
 				60012C723B05938A3D388335 /* ofxUIValuePlotter.cpp in Sources */,
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
+				F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */,
 				F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */,
 				F9C66619193CAD9A00C8225D /* apparelMod_authority.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,

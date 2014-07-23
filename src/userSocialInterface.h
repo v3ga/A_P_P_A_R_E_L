@@ -13,7 +13,7 @@
 class userSocialInterface
 {
 	public:
-		userSocialInterface							(user* p);
+		userSocialInterface							(string id, user* p);
 
 		virtual		bool		setup				(ofxXmlSettings* pConfig, int serviceIndex){return false;}
 		virtual		void		doWork				(){}
@@ -21,8 +21,11 @@ class userSocialInterface
 		virtual		void		saveData			(){}
 
 					user*		getUser				(){return mp_user;}
+					string		getId				(){return m_id;}
 
    protected:
+		string		m_id;
+
 		user*		mp_user;
 		bool		m_isRunOnce;
 

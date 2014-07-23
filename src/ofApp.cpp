@@ -5,6 +5,9 @@
 #include "tool3D.h"
 #include "toolModel.h"
 #include "toolMods.h"
+#include "toolNetwork.h"
+#include "toolUser.h"
+#include "toolCalibration.h"
 
 #include "apparelMod_authority.h"
 #include "apparelMod_debug.h"
@@ -67,15 +70,23 @@ void ofApp::setup()
 
 	// TOOLS
 	OFAPPLOG->println("- creating tools");
-	pTool3D = new tool3D(&toolManager, &apparelModel);
-	pToolMods = new toolMods(&toolManager, &apparelModManager, &apparelModel);
+	pTool3D 		= new tool3D(&toolManager, &apparelModel);
+	pToolMods 		= new toolMods(&toolManager, &apparelModManager, &apparelModel);
+	pToolNetwork 	= new toolNetwork(&toolManager);
+	pToolUser		= new toolUser(&toolManager, &user);
+	pToolCalibration= new toolCalibration(&toolManager);
 	
 	toolManager.setLogo("ARicon_150x150.png");
 	toolManager.setFontName("fonts/LetterGothic.ttf");
 
 	toolManager.addTool( pTool3D );
 	toolManager.addTool( pToolMods );
-	toolManager.createControls(ofVec2f(150,0), ofVec2f(400,100));
+	toolManager.addTool( pToolNetwork );
+	toolManager.addTool( pToolUser );
+	toolManager.addTool( pToolCalibration );
+	
+
+	toolManager.createControls(ofVec2f(400,100));
 
 	OFAPPLOG->println("- loading tools data");
 	toolManager.loadData();

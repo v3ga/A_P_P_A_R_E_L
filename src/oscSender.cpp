@@ -19,6 +19,8 @@ void oscSender::setup(string ip, int port)
 	m_sender.setup(ip, port);
 	m_isSetup = true;
 	m_isActive = true;
+	m_ip = ip;
+	m_port = port;
 }
 
 //--------------------------------------------------------------

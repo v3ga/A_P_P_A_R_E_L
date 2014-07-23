@@ -10,8 +10,9 @@
 #include "ofAppLog.h"
 
 
-userSocialInterface::userSocialInterface(user* p)
+userSocialInterface::userSocialInterface(string id, user* p)
 {
+	m_id = id;
 	mp_user = p;
 	m_isRunOnce = false;
 }

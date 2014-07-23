@@ -10,7 +10,7 @@
 #include "ofAppLog.h"
 
 //--------------------------------------------------------------
-userTwitter::userTwitter(user* pUser) : userSocialInterface(pUser)
+userTwitter::userTwitter(user* pUser) : userSocialInterface("Twitter", pUser)
 {
 	m_tweetLastId = -1;
 }
@@ -22,8 +22,8 @@ bool userTwitter::setup(ofxXmlSettings* pConfig, int serviceIndex)
 	OFAPPLOG->begin("userTwitter::setup");
 
 	// Extract data from global config
-	string consumer_key 	= pConfig->getValue("user:service:consumer_key", "", serviceIndex);
-	string consumer_secret 	= pConfig->getValue("user:service:consumer_secret", "", serviceIndex);
+	string consumer_key 	= pConfig->getValue("user:services:service:consumer_key", "", serviceIndex);
+	string consumer_secret 	= pConfig->getValue("user:services:service:consumer_secret", "", serviceIndex);
 
 	OFAPPLOG->println("- consumer_key="+consumer_key);
 	OFAPPLOG->println("- consumer_secret="+consumer_secret);

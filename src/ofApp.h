@@ -10,6 +10,9 @@
 
 class tool3D;
 class toolMods;
+class toolNetwork;
+class toolUser;
+class toolCalibration;
 
 class ofApp : public ofBaseApp
 {
@@ -42,4 +45,7 @@ class ofApp : public ofBaseApp
 		toolManager		toolManager;
 		tool3D*			pTool3D;
 		toolMods*		pToolMods;
+		toolNetwork*	pToolNetwork;
+		toolUser*		pToolUser;
+		toolCalibration*pToolCalibration;
 };

@@ -18,7 +18,7 @@ class apparelModManager;
 class user : public ofThread
 {
 	public:
-
+					user									();
 		virtual		~user									();
 
 					void 				setId				(string id_){m_id = id_;}
@@ -29,11 +29,14 @@ class user : public ofThread
 					ofxXmlSettings&		getConfiguration	(){return m_configuration;}
 					void				loadServicesData	();
 					void				saveServicesData	();
-	
+
+					vector<userSocialInterface*>&	getListServices(){return m_listSocialInterfaces;}
+
 
 		virtual		void				loadConfiguration	();
 		virtual		void				update				(float dt);
 		virtual 	void 				threadedFunction	();
+		virtual		float				getPeriodTick		(){return m_periodTick;}
 					void				onNewTick			(ofxTickerEventArgs& args);
 	
 					void				onNewText			(string text);
@@ -43,6 +46,7 @@ class user : public ofThread
 
 		// Ticker to reload data
 		ofxTicker						m_ticker;
+		float							m_periodTick;
 
 		// Configuration settings (configuration.xml contains the list of services for example)
 		ofxXmlSettings					m_configuration;
