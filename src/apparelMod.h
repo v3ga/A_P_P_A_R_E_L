@@ -25,7 +25,7 @@ class apparelMod
 	
 		ofParameterGroup&	getParamatersGroupRef	(){return m_parameters;}
 		virtual void		parameterChanged		(ofAbstractParameter & parameter);
-		string				getPathMod				(string filename){return "mods/"+m_id+"/"+filename;}
+		string				getPathMod				(string filename="");
 		string				getPathToolMods			(string filename){return "tools/mods/"+filename;}
 
 		void				addFaceIndex			(int faceIndex);

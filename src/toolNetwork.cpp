@@ -30,7 +30,7 @@ void toolNetwork::createControlsCustom()
 	if (mp_oscSender)
 	{
 		mp_canvas->addToggle("Activate OSC", true);
-		mp_lblOscSending = mp_canvas->addLabel( "Sending to remote "+mp_oscSender->getIP()+":"+ofToString(mp_oscSender->getPort())+" | ", OFX_UI_FONT_SMALL );
+		mp_lblOscSending = mp_canvas->addLabel( "Sending to remote "+mp_oscSender->getIP()+":"+ofToString(mp_oscSender->getPort()), OFX_UI_FONT_SMALL );
 
 //		ofxUILabelButton* pbtnEdit = new ofxUILabelButton("edit", true, 0, mp_lblOscSending->getRect()->getHeight(),0,0,OFX_UI_FONT_SMALL);
 //		mp_canvas->addWidgetRight( pbtnEdit );

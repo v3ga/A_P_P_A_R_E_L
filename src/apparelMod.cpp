@@ -61,6 +61,17 @@ void apparelMod::parameterChanged(ofAbstractParameter & parameter)
 	}
 }
 
+//--------------------------------------------------------------
+string apparelMod::getPathMod(string filename)
+{
+	string path = "mods/"+m_id+"/";
+	if (!filename.empty())
+	{
+		path += filename;
+	}
+	return path;
+}
+
 
 
 
@@ -143,6 +154,13 @@ void apparelMod::loadParameters()
 //--------------------------------------------------------------
 void apparelMod::saveParameters()
 {
+	// CREATE PATH FIRST
+	ofDirectory dirMod( getPathMod() );
+	if (!dirMod.exists())
+	{
+		dirMod.create();
+	}
+
 	// MODEL DATA
 	ofxXmlSettings settings;
 	

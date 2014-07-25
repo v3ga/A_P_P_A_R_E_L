@@ -93,6 +93,10 @@
 		F932F069196C488900C82556 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F059196C488900C82556 /* ofxOscReceiver.cpp */; };
 		F932F06A196C488900C82556 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F05B196C488900C82556 /* ofxOscSender.cpp */; };
 		F932F0BD196D774000C82556 /* oscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F0BB196D774000C82556 /* oscSender.cpp */; };
+		F93C8B3119824DE5006CC178 /* apparelMod_pretentiousness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */; };
+		F93C8B3419824E01006CC178 /* apparelMod_girliness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */; };
+		F93C8B3719824E1C006CC178 /* apparelMod_narcissism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B3519824E1C006CC178 /* apparelMod_narcissism.cpp */; };
+		F93C8B3A19824E33006CC178 /* apparelMod_vulgaropathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B3819824E33006CC178 /* apparelMod_vulgaropathy.cpp */; };
 		F9489231197E72C000085C6B /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = F9489218197E72C000085C6B /* sqlite3.c */; };
 		F9489232197E72C000085C6B /* ofxSQLite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948921B197E72C000085C6B /* ofxSQLite.cpp */; };
 		F9489233197E72C000085C6B /* ofxSQLiteAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948921D197E72C000085C6B /* ofxSQLiteAbstract.cpp */; };
@@ -376,6 +380,15 @@
 		F932F05C196C488900C82556 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
 		F932F0BB196D774000C82556 /* oscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oscSender.cpp; sourceTree = "<group>"; };
 		F932F0BC196D774000C82556 /* oscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oscSender.h; sourceTree = "<group>"; };
+		F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_pretentiousness.cpp; sourceTree = "<group>"; };
+		F93C8B3019824DE5006CC178 /* apparelMod_pretentiousness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_pretentiousness.h; sourceTree = "<group>"; };
+		F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_girliness.cpp; sourceTree = "<group>"; };
+		F93C8B3319824E01006CC178 /* apparelMod_girliness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_girliness.h; sourceTree = "<group>"; };
+		F93C8B3519824E1C006CC178 /* apparelMod_narcissism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_narcissism.cpp; sourceTree = "<group>"; };
+		F93C8B3619824E1C006CC178 /* apparelMod_narcissism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_narcissism.h; sourceTree = "<group>"; };
+		F93C8B3819824E33006CC178 /* apparelMod_vulgaropathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_vulgaropathy.cpp; sourceTree = "<group>"; };
+		F93C8B3919824E33006CC178 /* apparelMod_vulgaropathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_vulgaropathy.h; sourceTree = "<group>"; };
+		F93C8B3B19824FCC006CC178 /* apparelMod_include.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = apparelMod_include.h; sourceTree = "<group>"; };
 		F9489214197E72C000085C6B /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		F9489218197E72C000085C6B /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
 		F9489219197E72C000085C6B /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
@@ -1278,6 +1291,15 @@
 				F9AB0BDD193DB9860020D78A /* apparelMod_debug.h */,
 				F96FBE7319781E4600E58A6F /* apparelModManager.cpp */,
 				F96FBE7419781E4600E58A6F /* apparelModManager.h */,
+				F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */,
+				F93C8B3019824DE5006CC178 /* apparelMod_pretentiousness.h */,
+				F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */,
+				F93C8B3319824E01006CC178 /* apparelMod_girliness.h */,
+				F93C8B3519824E1C006CC178 /* apparelMod_narcissism.cpp */,
+				F93C8B3619824E1C006CC178 /* apparelMod_narcissism.h */,
+				F93C8B3819824E33006CC178 /* apparelMod_vulgaropathy.cpp */,
+				F93C8B3919824E33006CC178 /* apparelMod_vulgaropathy.h */,
+				F93C8B3B19824FCC006CC178 /* apparelMod_include.h */,
 			);
 			name = Mods;
 			sourceTree = "<group>";
@@ -1421,6 +1443,7 @@
 				F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */,
 				F1E8DE8734BA6F69A5112FA8 /* ofxUIBaseDraws.cpp in Sources */,
 				C381F2B7CFD84C0E540EB4BC /* ofxUIBiLabelSlider.cpp in Sources */,
+				F93C8B3A19824E33006CC178 /* apparelMod_vulgaropathy.cpp in Sources */,
 				F9D2CC22192A4E4700BF8F14 /* tinyxmlparser.cpp in Sources */,
 				F9131FF21936276500449924 /* Plane.cpp in Sources */,
 				F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */,
@@ -1476,6 +1499,7 @@
 				F96FBBE21976D3AC00E58A6F /* ofxJSONElement.cpp in Sources */,
 				F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */,
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
+				F93C8B3719824E1C006CC178 /* apparelMod_narcissism.cpp in Sources */,
 				D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */,
 				1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */,
 				F9489279197FF98200085C6B /* ofxUILogger.cpp in Sources */,
@@ -1507,8 +1531,10 @@
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */,
 				F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */,
+				F93C8B3119824DE5006CC178 /* apparelMod_pretentiousness.cpp in Sources */,
 				F9C66619193CAD9A00C8225D /* apparelMod_authority.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
+				F93C8B3419824E01006CC178 /* apparelMod_girliness.cpp in Sources */,
 				F932F05D196C488900C82556 /* IpEndpointName.cpp in Sources */,
 				CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */,
 			);

@@ -9,8 +9,7 @@
 #include "toolUser.h"
 #include "toolCalibration.h"
 
-#include "apparelMod_authority.h"
-#include "apparelMod_debug.h"
+#include "apparelMod_include.h"
 
 
 //--------------------------------------------------------------
@@ -59,8 +58,13 @@ void ofApp::setup()
 	apparelModel.setScale(1/1.83328,1/1.83328,1/1.83328); // TODO : why 1.83328 ?
 
 	// MODS
-	apparelModManager.addMod( new apparelMod_debug() );
+//	apparelModManager.addMod( new apparelMod_debug() );
 	apparelModManager.addMod( new apparelMod_authority() );
+	apparelModManager.addMod( new apparelMod_girliness() );
+	apparelModManager.addMod( new apparelMod_narcissism() );
+	apparelModManager.addMod( new apparelMod_vulgaropathy() );
+	apparelModManager.addMod( new apparelMod_pretentiousness() );
+
 	apparelModManager.setModel(&apparelModel);
 
 	// CAM

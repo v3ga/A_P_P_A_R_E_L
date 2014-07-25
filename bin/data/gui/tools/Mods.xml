@@ -5,6 +5,21 @@
 </Widget>
 <Widget>
     <Kind>2</Kind>
-    <Name>Debug</Name>
+    <Name>Girliness</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Narcissism</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Pretentiousness</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Vulgaropathy</Name>
     <Value>1</Value>
 </Widget>
