@@ -49,7 +49,7 @@ void tool3D::createControlsCustom()
 		vector<string> selectionIds;
 		selectionIds.push_back("Vertex");
 // TODO : later ? use point selector
-//		selectionIds.push_back("Edge");
+		selectionIds.push_back("Edge");
 		selectionIds.push_back("Face");
 
 		ofxUIRadio* radioSelect = mp_canvas->addRadio(_id("Selection"), selectionIds, OFX_UI_ORIENTATION_HORIZONTAL,OFX_UI_FONT_SMALL);
