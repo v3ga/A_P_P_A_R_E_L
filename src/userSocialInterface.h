@@ -28,5 +28,4 @@ class userSocialInterface
 
 		user*		mp_user;
 		bool		m_isRunOnce;
-
 };

@@ -39,7 +39,9 @@ class user : public ofThread
 		virtual		float				getPeriodTick		(){return m_periodTick;}
 					void				onNewTick			(ofxTickerEventArgs& args);
 	
+					// Called asynchronously in the thread (doWork method of userSocialInterface)
 					void				onNewText			(string text);
+					void				onNewWords			(vector<string>& words);
 	
 	protected:
 		string							m_id;

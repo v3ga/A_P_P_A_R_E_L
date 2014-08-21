@@ -1,7 +1,7 @@
 <apparel>
 	<!-- Model used -->
 	<!-- Folder : data/3d -->
-	<model>modele_MAI_16.obj</model>
+	<model>AR_modele.obj</model>
 
 	<!-- IP of the iphone/ipad running Apparel application -->
 	<osc activated="1">

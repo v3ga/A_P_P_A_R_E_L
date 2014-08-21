@@ -38,6 +38,7 @@ class apparelMod
 
 		// INTERFACE FOR RECEIVING DATA FROM USER
 		void				onNewText				(string text){}
+		void				onNewWords				(vector<string>& text){}
 
 		// INTERFACE FOR SAVING IN DATABASE
 	

@@ -62,6 +62,17 @@ void userTwitter::doWork()
 			// Last Id
 			m_tweetLastId_str = m_tweet.id_str;
 
+			// Relays to user (who will relay to mods in turn)
+			if (mp_user)
+			{
+				// Raw text
+				mp_user->onNewText( m_tweet.text );
+
+				// Words
+				vector<string> words = ofSplitString(m_tweet.text, "");
+				mp_user->onNewWords( words );
+			}
+
 			// Text
 			OFAPPLOG->println("- got tweet id="+m_tweetLastId_str+", text='"+m_tweet.text+"'");
 		}

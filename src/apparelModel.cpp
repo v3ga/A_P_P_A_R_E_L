@@ -13,6 +13,7 @@
 apparelModel::apparelModel()
 {
 	id = "";
+	setScaleNomalization(false);
 }
 
 //--------------------------------------------------------------

@@ -23,7 +23,9 @@ class apparelModManager
 		void						setModel			(apparelModel*);
 		void						saveParameters		();
 	
+		// Called asynchronously
 		void						onNewText			(string text);
+		void						onNewWords			(vector<string>& words);
 	
 		map<string, apparelMod*>	m_mods;
 		apparelMod*					mp_modCurrent;

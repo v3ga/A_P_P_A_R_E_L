@@ -1,15 +1,4 @@
 <mod>
     <faces></faces>
-    <vertices>
-        <index>59</index>
-        <index>52</index>
-        <index>53</index>
-        <index>80</index>
-        <index>48</index>
-        <index>51</index>
-        <index>47</index>
-        <index>42</index>
-        <index>17</index>
-        <index>12</index>
-    </vertices>
+    <vertices></vertices>
 </mod>

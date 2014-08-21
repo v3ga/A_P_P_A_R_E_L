@@ -1285,12 +1285,12 @@
 		F9C66616193CAD7700C8225D /* Mods */ = {
 			isa = PBXGroup;
 			children = (
+				F96FBE7319781E4600E58A6F /* apparelModManager.cpp */,
+				F96FBE7419781E4600E58A6F /* apparelModManager.h */,
 				F9C66617193CAD9A00C8225D /* apparelMod_authority.cpp */,
 				F9C66618193CAD9A00C8225D /* apparelMod_authority.h */,
 				F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */,
 				F9AB0BDD193DB9860020D78A /* apparelMod_debug.h */,
-				F96FBE7319781E4600E58A6F /* apparelModManager.cpp */,
-				F96FBE7419781E4600E58A6F /* apparelModManager.h */,
 				F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */,
 				F93C8B3019824DE5006CC178 /* apparelMod_pretentiousness.h */,
 				F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */,

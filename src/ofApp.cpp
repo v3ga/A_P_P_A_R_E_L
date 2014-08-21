@@ -55,7 +55,6 @@ void ofApp::setup()
    	OFAPPLOG->println("- loading 3d/"+modelObjName);
 	apparelModel.load("3d/"+modelObjName);
 	apparelModel.setPosition(0,0,0);
-	apparelModel.setScale(1/1.83328,1/1.83328,1/1.83328); // TODO : why 1.83328 ?
 
 	// MODS
 //	apparelModManager.addMod( new apparelMod_debug() );
@@ -125,18 +124,19 @@ void ofApp::draw()
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 	ofEnableDepthTest();
 
-
 	cam.begin();
 
-    ofSetColor(0);
-	ofPushMatrix();
-	ofScale(0.999, 0.999,0.999);
-	apparelModel.drawFaces();
-	ofPopMatrix();
 
+	// Wireframe
     ofSetColor(255);
+	glEnable(GL_POLYGON_OFFSET_LINE);
+    glPolygonOffset(-1,-1);
 	apparelModel.drawWireframe();
 
+	// Filled
+    ofSetColor(0);
+	apparelModel.drawFaces();
+	
 	toolManager.draw();
 	
 	cam.end();

@@ -62,4 +62,14 @@ void apparelModManager::onNewText(string text)
 	}
 }
 
+//--------------------------------------------------------------
+void apparelModManager::onNewWords(vector<string>& words)
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it){
+		it->second->onNewWords(words);
+	}
+}
+
+
 

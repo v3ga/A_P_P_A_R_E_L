@@ -149,6 +149,13 @@ void user::onNewText(string text)
 		mp_modManager->onNewText(text);
 }
 
+//--------------------------------------------------------------
+void user::onNewWords(vector<string>& words)
+{
+	if (mp_modManager)
+		mp_modManager->onNewWords(words);
+}
+
 
 
 
