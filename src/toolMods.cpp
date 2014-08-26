@@ -42,7 +42,10 @@ bool toolMods::isHit(int x, int y)
 void toolMods::exit()
 {
 	if (mp_modsManager)
+	{
+		mp_modsManager->saveModel();
 		mp_modsManager->saveParameters();
+	}
 }
 
 

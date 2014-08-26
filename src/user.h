@@ -10,6 +10,7 @@
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "ofxTicker.h"
+#include "ofxSQLite.h"
 
 class userSocialInterface;
 class userConfigurationInfo;
@@ -25,15 +26,22 @@ class user : public ofThread
 					string				getId				(){return m_id;}
 					void				setModManager		(apparelModManager* p){mp_modManager=p;}
 					apparelModManager*	getModManager		(){return mp_modManager;}
-					string				getPath				(string filename){return "users/"+m_id+"/"+filename;}
+					string				getPathRelative		(string filename="");
+					string				getPathDocument		(string filename="");
+					string				getPathResources	(string filename="");
 					ofxXmlSettings&		getConfiguration	(){return m_configuration;}
 					void				loadServicesData	();
 					void				saveServicesData	();
+	
+	
+					void				createDirectory		();
 
 					vector<userSocialInterface*>&	getListServices(){return m_listSocialInterfaces;}
 
 
 		virtual		void				loadConfiguration	();
+					string				getPathSqlData		();
+					void				connectSqlData		();
 		virtual		void				update				(float dt);
 		virtual 	void 				threadedFunction	();
 		virtual		float				getPeriodTick		(){return m_periodTick;}
@@ -58,6 +66,9 @@ class user : public ofThread
 	
 		// Mod Manager to inform that new data is available from services
 		apparelModManager*				mp_modManager;
+	
+		// Temp
+		ofxSQLite*						mp_sqlData;
 	
 
 };

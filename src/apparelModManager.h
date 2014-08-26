@@ -19,8 +19,11 @@ class apparelModManager
 	
 		void						addMod				(apparelMod*);
 		void						selectMod			(string name);
+		apparelMod*					getMod				(string id);
 		apparelMod*					getModCurrent		(){return mp_modCurrent;}
 		void						setModel			(apparelModel*);
+	
+		void						saveModel			();
 		void						saveParameters		();
 	
 		// Called asynchronously

@@ -47,8 +47,8 @@ class oscSenderInterface
 class oscSender : public oscSenderInterface
 {
 	public:
-		void setup			(string ip, int port);
-		void sendParameter	(const ofAbstractParameter & parameter);
+		void setup				(string ip, int port);
+		void sendParameter		(const ofAbstractParameter & parameter);
 
 		ofxOscSender		m_sender;
 

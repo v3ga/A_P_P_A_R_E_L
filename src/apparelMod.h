@@ -18,14 +18,26 @@ class apparelMod
 		apparelMod			(string id);
 		virtual ~apparelMod	(){}
 	
+	
+				void		createDirMod		();
+
 		virtual	void		loadParameters		();
 		virtual	void		loadParametersCustom(){};
 		virtual	void		saveParameters		();
+
+		virtual	void		loadModel			();
+		virtual	void		saveModel			();
+	
 		void				setConfiguration	(string name);
+
+		string				getPathDocument		(string filename="");
+		string				getPathResources	(string filename="");
+
 	
 		ofParameterGroup&	getParamatersGroupRef	(){return m_parameters;}
+		ofAbstractParameter&getParameter			(string name);
 		virtual void		parameterChanged		(ofAbstractParameter & parameter);
-		string				getPathMod				(string filename="");
+		string				getPathRelative			(string filename="");
 		string				getPathToolMods			(string filename){return "tools/mods/"+filename;}
 
 		void				addFaceIndex			(int faceIndex);

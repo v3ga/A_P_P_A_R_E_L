@@ -19,5 +19,6 @@ class oscReceiver  : public ofxOscReceiver
     
 	private:
         ofxOscMessage		m_oscMessage;
+		void				setParameterValue(ofAbstractParameter& param, ofxOscMessage& oscMsg, int oscArgIndex);
 };
 

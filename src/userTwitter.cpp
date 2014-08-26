@@ -28,7 +28,7 @@ bool userTwitter::setup(ofxXmlSettings* pConfig, int serviceIndex)
 	OFAPPLOG->println("- consumer_key="+consumer_key);
 	OFAPPLOG->println("- consumer_secret="+consumer_secret);
 
-	m_twitterClient.setCredentialsPathname( mp_user->getPath("twitter/credentials.xml") );
+	m_twitterClient.setCredentialsPathname( mp_user->getPathResources("twitter/credentials.xml") );
     m_twitterClient.authorize(consumer_key, consumer_secret);
 
 	// Load data (previous grabbing infos saved into data.xml)
@@ -69,8 +69,15 @@ void userTwitter::doWork()
 				mp_user->onNewText( m_tweet.text );
 
 				// Words
-				vector<string> words = ofSplitString(m_tweet.text, "");
+				vector<string> words = ofSplitString(m_tweet.text, " ");
 				mp_user->onNewWords( words );
+				
+				// TEMP
+				vector<string>::iterator it;
+				for (it = words.begin() ; it != words.end(); ++it){
+					printf("- %s / ", (*it).c_str());
+				}
+
 			}
 
 			// Text
@@ -86,14 +93,28 @@ void userTwitter::loadData()
 
 	if (mp_user)
 	{
-		string pathData = mp_user->getPath("twitter/data.xml");
+		// Create user twitter directory if it does not exist
+		#ifdef TARGET_OF_IOS
+			string pathDirUserTwitter = mp_user->getPathDocument("twitter");
+			ofDirectory dirUserTwitter( pathDirUserTwitter );
+			if (!dirUserTwitter.exists()){
+				if (dirUserTwitter.create()){
+					OFAPPLOG->begin("creating '"+pathDirUserTwitter+"'");
+				}
+			}
+		#endif
+
+
+		string pathData = mp_user->getPathDocument("twitter/data.xml");
+		OFAPPLOG->println("-loading "+pathData);
+
 		ofxXmlSettings data;
 		if (data.load(pathData))
 		{
+			OFAPPLOG->println("-loaded");
 			m_tweetLastId_str = data.getValue("tweetLastId", "-1");
-
 			OFAPPLOG->println("m_tweetLastId_str="+m_tweetLastId_str);
-		}
+		}else{ OFAPPLOG->println(OF_LOG_ERROR, "-error loading file"); }
 	}
 
 	OFAPPLOG->end();
@@ -106,11 +127,18 @@ void userTwitter::saveData()
 	
 	if (mp_user)
 	{
-		string pathData = mp_user->getPath("twitter/data.xml");
+		string pathData = mp_user->getPathDocument("twitter/data.xml");
+
+		OFAPPLOG->println("-path="+pathData);
+		
 		ofxXmlSettings data;
 		data.addTag("tweetLastId");
 		data.setValue("tweetLastId", m_tweetLastId_str);
-		data.save(pathData);
+		if ( data.save(pathData) ){
+			OFAPPLOG->println("-saving done");
+		}else{
+			OFAPPLOG->println(OF_LOG_ERROR, "-saving error");
+		}
 	}
 
 	OFAPPLOG->end();

@@ -10,12 +10,16 @@
 #include "userSocialFactory.h"
 #include "apparelModMAnager.h"
 #include "ofAppLog.h"
+#ifdef TARGET_OF_IOS
+#include "ofxIOSExtras.h"
+#endif
 
 
 //--------------------------------------------------------------
 user::user()
 {
 	m_periodTick	=	15.0f;
+	mp_sqlData		= 	0;
 }
 
 //--------------------------------------------------------------
@@ -37,9 +41,64 @@ user::~user()
 }
 
 //--------------------------------------------------------------
+string user::getPathRelative(string filename)
+{
+	return "users/"+m_id+"/"+filename;
+}
+
+//--------------------------------------------------------------
+string user::getPathDocument(string filename)
+{
+	#ifdef TARGET_OF_IOS
+		return ofxiOSGetDocumentsDirectory() + getPathRelative(filename);
+	#else
+		return ofToDataPath(getPathRelative(filename));
+	#endif
+}
+
+
+//--------------------------------------------------------------
+string user::getPathResources(string filename)
+{
+	return ofToDataPath(getPathRelative(filename));
+}
+
+//--------------------------------------------------------------
+void user::createDirectory()
+{
+	OFAPPLOG->begin("user::createDirectory()");
+
+	// Path for user
+	string pathUser = getPathDocument();
+	OFAPPLOG->println("- pathUser="+pathUser);
+	ofDirectory dirUser(pathUser);
+	if (!dirUser.exists())
+	{
+		OFAPPLOG->println("- creating it");
+		dirUser.create(true);
+	}
+
+	// SQL Data
+	string pathSqlResource = getPathResources("data.sql");
+	string pathSqlDocument = getPathDocument("data.sql");
+
+	ofFile fSqlResource(pathSqlResource);
+	if (fSqlResource.exists()){
+		ofFile fSqlDocument(pathSqlDocument);
+		
+		if (ofFile::copyFromTo(pathSqlResource, pathSqlDocument, false, false))
+		{
+			OFAPPLOG->begin("- copied '"+pathSqlResource+ "' to '"+pathSqlDocument+"'");
+		}
+	}
+
+	OFAPPLOG->end();
+}
+
+//--------------------------------------------------------------
 void user::loadServicesData()
 {
-	OFAPPLOG->begin("user::saveServicesData()");
+	OFAPPLOG->begin("user::loadServicesData()");
 	vector<userSocialInterface*>::iterator it;
 	for (it = m_listSocialInterfaces.begin(); it != m_listSocialInterfaces.end(); ++it)
 	{
@@ -65,7 +124,7 @@ void user::loadConfiguration()
 {
 	OFAPPLOG->begin("user::loadConfiguration()");
 
-	string pathFile = getPath("configuration.xml");
+	string pathFile = getPathResources("configuration.xml");
 	OFAPPLOG->println("- loading file " + pathFile);
 
 	if (m_configuration.load(pathFile))
@@ -96,6 +155,9 @@ void user::loadConfiguration()
 
 		// Services data
 		loadServicesData();
+		
+		// Connect to db
+		connectSqlData();
 
 		// Starting retrieving
 		m_periodTick = m_configuration.getValue("user:period", 15.0f);
@@ -112,6 +174,48 @@ void user::loadConfiguration()
 	
 	OFAPPLOG->end();
 }
+
+//--------------------------------------------------------------
+string user::getPathSqlData()
+{
+	return getPathDocument("data.sql");
+}
+
+//--------------------------------------------------------------
+void user::connectSqlData()
+{
+		string pathSqlData = getPathSqlData();
+		OFAPPLOG->begin("user::connectSqlData()");
+		OFAPPLOG->println("- connecting to "+pathSqlData);
+
+		mp_sqlData = new ofxSQLite();
+		if (mp_sqlData->setup(pathSqlData))
+		{
+			int result = mp_sqlData->insert("words").use("name", "test2").use("count", 12345).execute();
+			if (result != SQLITE_OK)
+				OFAPPLOG->println("- error "+ofToString(result)+" while inserting");
+	
+
+			ofxSQLiteSelect sel = mp_sqlData->select("name, count").from("words");
+			sel.execute().begin();
+
+			while(sel.hasNext()) {
+				string word = sel.getString();
+				int count = sel.getInt();
+				OFAPPLOG->println(word+"("+ofToString(count)+")");
+			// cout << id << ", " << name << endl;
+				sel.next();
+			}
+		}
+		else{
+			delete mp_sqlData;
+			mp_sqlData=0;
+		}
+		
+		OFAPPLOG->end();
+}
+
+
 
 //--------------------------------------------------------------
 void user::update(float dt)

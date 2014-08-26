@@ -20,6 +20,7 @@ void apparelModManager::addMod(apparelMod* mod)
 {
 	if (mod)
 	{
+		mod->loadModel();
 		mod->loadParameters();
 		mod->setOscSender( GLOBALS->getOscSender() );
 		m_mods[mod->m_id] = mod;
@@ -42,6 +43,30 @@ void apparelModManager::selectMod(string name)
 	mp_modCurrent = m_mods[name];
 }
 
+
+//--------------------------------------------------------------
+apparelMod* apparelModManager::getMod(string name)
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it){
+		if (it->second->m_id == name)
+			return it->second;
+	}
+
+	return 0;
+}
+
+
+//--------------------------------------------------------------
+void apparelModManager::saveModel()
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it)
+	{
+		it->second->saveModel();
+		delete it->second;
+	}
+}
 
 //--------------------------------------------------------------
 void apparelModManager::saveParameters()

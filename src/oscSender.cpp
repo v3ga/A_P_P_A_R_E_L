@@ -12,6 +12,7 @@
 
 #ifdef TARGET_OSX
 #include "oscDefs.h"
+#include "ofAppLog.h"
 
 //--------------------------------------------------------------
 void oscSender::setup(string ip, int port)
@@ -27,24 +28,44 @@ void oscSender::setup(string ip, int port)
 void oscSender::sendParameter(const ofAbstractParameter & parameter)
 {
 	if(!isSetup() || !isActive()) return;
-	if(!parameter.isSerializable()) return;
+	// if(!parameter.isSerializable()) return;
 
 	string address_prefix = OSC_MOD_SET_PARAMETER;
 	
 	if(parameter.type()==typeid(ofParameterGroup).name())
 	{
-		string address = address_prefix+"/";
-		const vector<string> hierarchy = parameter.getGroupHierarchyNames();
-		for(int i=0;i<(int)hierarchy.size()-1;i++){
-			address+=hierarchy[i] + "/";
-		}
-		ofxOscBundle bundle;
-		m_sender.appendParameter(bundle,parameter,address);
-		m_sender.sendBundle(bundle);
 	}
 	else
 	{
-		string address = address_prefix;
+		const vector<string> hierarchy = parameter.getGroupHierarchyNames();
+
+		ofxOscMessage msg;
+		msg.setAddress(OSC_MOD_SET_PARAMETER);
+		msg.addStringArg(hierarchy[0]); // instance name
+		msg.addStringArg(hierarchy[1]); // parameter name
+
+
+	  if(parameter.type()==typeid(ofParameter<int>).name()){
+		  msg.addIntArg(parameter.cast<int>());
+	  }else if(parameter.type()==typeid(ofParameter<float>).name()){
+		  msg.addFloatArg(parameter.cast<float>());
+	  }else if(parameter.type()==typeid(ofParameter<bool>).name()){
+		  msg.addIntArg(parameter.cast<bool>());
+	  }else{
+		  msg.addStringArg(parameter.toString());
+	  }
+
+		m_sender.sendMessage(msg);
+
+
+//		OFAPPLOG->println(hierarchy[0]+"/"+hierarchy[1]);
+/*
+*/
+
+
+//		m_sender.appendParameter(msg,parameter,address);
+	
+/*		string address = address_prefix;
 		const vector<string> hierarchy = parameter.getGroupHierarchyNames();
 		for(int i=0;i<(int)hierarchy.size()-1;i++){
 			address+= "/" + hierarchy[i];
@@ -53,6 +74,7 @@ void oscSender::sendParameter(const ofAbstractParameter & parameter)
 		ofxOscMessage msg;
 		m_sender.appendParameter(msg,parameter,address);
 		m_sender.sendMessage(msg);
+*/
 	}
 
 

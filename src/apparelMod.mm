@@ -8,6 +8,9 @@
 
 #include "apparelMod.h"
 #include "globals.h"
+#ifdef TARGET_OF_IOS
+#include "ofxIOSExtras.h"
+#endif
 
 //--------------------------------------------------------------
 
@@ -25,6 +28,12 @@ apparelMod::apparelMod(string id)
 	m_parameters.add(m_weight);
 
 	m_parameters.setName(id);
+}
+
+//--------------------------------------------------------------
+ofAbstractParameter& apparelMod::getParameter(string name)
+{
+	return m_parameters.get(name);
 }
 
 //--------------------------------------------------------------
@@ -62,7 +71,7 @@ void apparelMod::parameterChanged(ofAbstractParameter & parameter)
 }
 
 //--------------------------------------------------------------
-string apparelMod::getPathMod(string filename)
+string apparelMod::getPathRelative(string filename)
 {
 	string path = "mods/"+m_id+"/";
 	if (!filename.empty())
@@ -72,16 +81,40 @@ string apparelMod::getPathMod(string filename)
 	return path;
 }
 
-
+//--------------------------------------------------------------
+string apparelMod::getPathDocument(string filename)
+{
+	#ifdef TARGET_OF_IOS
+		return ofxiOSGetDocumentsDirectory() + getPathRelative(filename);
+	#else
+		return ofToDataPath(getPathRelative(filename));
+	#endif
+}
 
 
 //--------------------------------------------------------------
-void apparelMod::loadParameters()
+string apparelMod::getPathResources(string filename)
 {
-	OFAPPLOG->begin("apparelMod::loadParameters() for instance \"" + m_id + "\"");
+	return ofToDataPath(getPathRelative(filename));
+}
 
+//--------------------------------------------------------------
+void apparelMod::createDirMod()
+{
+	ofDirectory dirMod( getPathDocument() );
+
+	if (!dirMod.exists()){
+		dirMod.create(true);
+	}
+}
+
+
+//--------------------------------------------------------------
+void apparelMod::loadModel()
+{
+	OFAPPLOG->begin("apparelMod::loadModel() for instance \"" + m_id + "\"");
 	// MODEL DATA
-	string pathModel = getPathMod("model.xml");
+	string pathModel = getPathResources("model.xml");
 	if ( m_settingsModel.load(pathModel) )
 	{
 		OFAPPLOG->println("- loaded "+pathModel);
@@ -113,53 +146,14 @@ void apparelMod::loadParameters()
 		OFAPPLOG->println(OF_LOG_ERROR, "- error loading "+pathModel);
 	}
 
-	// PARAMETERS CONFIGURATION DATA
-/*	if (sm_isConfigurationsLoaded == false)
-	{
-		string pathConfigurations = getPathToolMods("mods_configurations.xml");
-		if (sm_settingsConfigurations.load(pathConfigurations))
-		{
-			OFAPPLOG->println("- loaded "+pathConfigurations);
-		}
-		else{
-			OFAPPLOG->println(OF_LOG_ERROR, "- error loading "+pathConfigurations);
-		}
-
-		sm_isConfigurationsLoaded = true;
-	}
-*/
-
-
-	// PARAMETERS DATA
-	ofxXmlSettings settingsParameters;
-	string pathParameters = getPathMod("parameters.xml");
-	if (settingsParameters.load(pathParameters))
-	{
-		settingsParameters.deserialize(m_parameters);
-		OFAPPLOG->println("- loaded "+pathParameters);
-	}
-	else{
-		OFAPPLOG->println(OF_LOG_ERROR, "- error loading "+pathParameters);
-	}
-
-	// Custom loading
-	loadParametersCustom();
-
-	// Add listener
-	ofAddListener(m_parameters.parameterChangedE, this, &apparelMod::parameterChanged);
-
 	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
-void apparelMod::saveParameters()
+void apparelMod::saveModel()
 {
-	// CREATE PATH FIRST
-	ofDirectory dirMod( getPathMod() );
-	if (!dirMod.exists())
-	{
-		dirMod.create();
-	}
+	OFAPPLOG->begin("apparelMod::saveModel() for instance \"" + m_id + "\"");
+	createDirMod();
 
 	// MODEL DATA
 	ofxXmlSettings settings;
@@ -188,17 +182,71 @@ void apparelMod::saveParameters()
 
 	settings.popTag();
 
-	// PARAMETERS DATA
-	ofxXmlSettings settings2;
-	settings2.serialize(m_parameters);
+	string pathModel = getPathResources();
 
+	OFAPPLOG->println("- saving " + pathModel );
+	settings.save(pathModel);
 	
-	// Save
-	OFAPPLOG->println("- saving " + getPathMod("model.xml") );
-	settings.save(getPathMod("model.xml"));
+	OFAPPLOG->end();
+}
 
-	OFAPPLOG->println("- saving " + getPathMod("parameters.xml") );
-	settings2.save(getPathMod("parameters.xml"));
+//--------------------------------------------------------------
+void apparelMod::loadParameters()
+{
+	OFAPPLOG->begin("apparelMod::loadParameters() for instance \"" + m_id + "\"");
+	// PARAMETERS CONFIGURATION DATA
+/*	if (sm_isConfigurationsLoaded == false)
+	{
+		string pathConfigurations = getPathToolMods("mods_configurations.xml");
+		if (sm_settingsConfigurations.load(pathConfigurations))
+		{
+			OFAPPLOG->println("- loaded "+pathConfigurations);
+		}
+		else{
+			OFAPPLOG->println(OF_LOG_ERROR, "- error loading "+pathConfigurations);
+		}
+
+		sm_isConfigurationsLoaded = true;
+	}
+*/
+
+
+	// PARAMETERS DATA
+	ofxXmlSettings settingsParameters;
+	string pathParameters = getPathDocument("parameters.xml");
+	if (settingsParameters.load(pathParameters))
+	{
+		settingsParameters.deserialize(m_parameters);
+		OFAPPLOG->println("- loaded "+pathParameters);
+	}
+	else{
+		OFAPPLOG->println(OF_LOG_ERROR, "- error loading "+pathParameters);
+	}
+
+	// Custom loading
+	loadParametersCustom();
+
+	// Add listener
+	ofAddListener(m_parameters.parameterChangedE, this, &apparelMod::parameterChanged);
+
+	OFAPPLOG->end();
+}
+
+//--------------------------------------------------------------
+void apparelMod::saveParameters()
+{
+	OFAPPLOG->begin("apparelMod::saveParameters() for instance \"" + m_id + "\"");
+	createDirMod();
+
+	// PARAMETERS DATA
+	ofxXmlSettings settings;
+	settings.serialize(m_parameters);
+	string pathParameters = getPathDocument("parameters.xml");
+
+	OFAPPLOG->println("- saving " + pathParameters );
+	settings.save(pathParameters);
+
+	OFAPPLOG->end();
 }
 
 

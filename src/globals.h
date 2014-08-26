@@ -11,6 +11,7 @@
 
 class ofApp;
 class oscSenderInterface;
+class apparelModManager;
 #define GLOBALS	globals::getInstance()
 
 class globals
@@ -25,9 +26,14 @@ class globals
 
 				void				setOscSender(oscSenderInterface* p){pOscSender = p;}
 				oscSenderInterface*	getOscSender(){return pOscSender;}
+
+
+				void				setModManager(apparelModManager* p){pApparelModManager = p;}
+				apparelModManager*	getModManager(){return pApparelModManager;}
 	
 	private:
 		static 	globals*				instance;
 				ofApp*					pOfApp;
 				oscSenderInterface*		pOscSender;
+				apparelModManager*		pApparelModManager;
 };
