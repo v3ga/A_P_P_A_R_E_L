@@ -20,6 +20,7 @@ class toolMods : public tool
 		toolMods				(toolManager* parent, apparelModManager* modManager, apparelModel* model);
 		~toolMods				();
 
+		void					draw				();
 		void					show				(bool is);
 		bool					isHit				(int x, int y);
 		void					exit				();

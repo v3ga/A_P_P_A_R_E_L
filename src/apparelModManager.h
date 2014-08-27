@@ -26,6 +26,10 @@ class apparelModManager
 		void						saveModel			();
 		void						saveParameters		();
 	
+		void						deleteMods			();
+	
+		void						draw				();
+	
 		// Called asynchronously
 		void						onNewText			(string text);
 		void						onNewWords			(vector<string>& words);

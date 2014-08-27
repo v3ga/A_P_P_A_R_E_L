@@ -132,6 +132,7 @@ void ofApp::draw()
 	glEnable(GL_POLYGON_OFFSET_LINE);
     glPolygonOffset(-1,-1);
 	apparelModel.drawWireframe();
+	glDisable(GL_POLYGON_OFFSET_LINE);
 
 	// Filled
     ofSetColor(0);

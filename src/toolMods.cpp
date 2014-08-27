@@ -25,6 +25,15 @@ toolMods::~toolMods()
 }
 
 //--------------------------------------------------------------
+void toolMods::draw()
+{
+	if (mp_modsManager)
+	{
+		mp_modsManager->draw();
+	}
+}
+
+//--------------------------------------------------------------
 void toolMods::show(bool is)
 {
 	tool::show(is);
@@ -45,6 +54,7 @@ void toolMods::exit()
 	{
 		mp_modsManager->saveModel();
 		mp_modsManager->saveParameters();
+		mp_modsManager->deleteMods();
 	}
 }
 

@@ -8,7 +8,7 @@
 
 #pragma once
 #include "ofMain.h"
-
+#include "ofxOscSender.h"
 
 class oscSenderInterface
 {
@@ -42,16 +42,12 @@ class oscSenderInterface
 };
 
 
-#ifdef TARGET_OSX
-#include "ofxOscSender.h"
 class oscSender : public oscSenderInterface
 {
 	public:
 		void setup				(string ip, int port);
 		void sendParameter		(const ofAbstractParameter & parameter);
 
-		ofxOscSender		m_sender;
+		ofxOscSender			m_sender;
 
 };
-
-#endif

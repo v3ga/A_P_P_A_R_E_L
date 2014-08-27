@@ -33,6 +33,8 @@ class apparelMod
 		string				getPathDocument		(string filename="");
 		string				getPathResources	(string filename="");
 
+		void				createWordsList		();
+
 	
 		ofParameterGroup&	getParamatersGroupRef	(){return m_parameters;}
 		ofAbstractParameter&getParameter			(string name);
@@ -46,6 +48,11 @@ class apparelMod
 		void				addVertexIndex			(int vertexIndex);
 		void				removeVertexIndex		(int vertexIndex);
 
+
+		// DRAWING
+		virtual void		draw					(){};
+
+		// OSC NETWORK
 		void				setOscSender			(oscSenderInterface* p){mp_oscSender=p;}
 
 		// INTERFACE FOR RECEIVING DATA FROM USER
@@ -72,6 +79,11 @@ class apparelMod
 
 		// SETTINGS
 		ofxXmlSettings		m_settingsModel;
+	
+		// WORDS
+		vector<string>		m_words;
+		//ofBuffer buffer = ofBufferFromFile("someFile.txt");
+
 
 		// OSC
 		oscSenderInterface*	mp_oscSender;

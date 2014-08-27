@@ -64,7 +64,6 @@ void apparelModManager::saveModel()
 	for (it = m_mods.begin(); it != m_mods.end(); ++it)
 	{
 		it->second->saveModel();
-		delete it->second;
 	}
 }
 
@@ -74,7 +73,24 @@ void apparelModManager::saveParameters()
 	map<string, apparelMod*>::iterator it;
 	for (it = m_mods.begin(); it != m_mods.end(); ++it){
 		it->second->saveParameters();
+	}
+}
+
+//--------------------------------------------------------------
+void apparelModManager::deleteMods()
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it){
 		delete it->second;
+	}
+}
+
+//--------------------------------------------------------------
+void apparelModManager::draw()
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it){
+		it->second->draw();
 	}
 }
 

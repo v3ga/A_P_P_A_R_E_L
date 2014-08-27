@@ -11,6 +11,8 @@
 #include "globals.h"
 #include "ofApp.h"
 
+#define TOOL3D_SIZE_NORMALS	4.0
+
 //--------------------------------------------------------------
 tool3D::tool3D(toolManager* parent, apparelModel* model) : tool("3D", parent)
 {
@@ -37,9 +39,9 @@ void tool3D::createControlsCustom()
 {
 	if (mp_canvas)
 	{
-	
-		mp_canvas->addWidgetDown(new ofxUILabel("Debug", OFX_UI_FONT_SMALL));
-    	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
+		mp_canvas->addLabel("Model :" + (mp_apparelModel ? mp_apparelModel->getId() : "???"));
+		mp_canvas->addSpacer(300,1);
+
 	    mp_canvas->addToggle("show vertex normals", m_bShowVertexNormals, OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
 	    mp_canvas->addToggle("show face normals", m_bShowFaceNormals, OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
 
@@ -48,6 +50,7 @@ void tool3D::createControlsCustom()
 
 		vector<string> selectionIds;
 		selectionIds.push_back("Vertex");
+		
 // TODO : later ? use point selector
 		selectionIds.push_back("Edge");
 		selectionIds.push_back("Face");
@@ -58,7 +61,7 @@ void tool3D::createControlsCustom()
 		mp_canvas->addWidgetDown(new ofxUILabel("Camera", OFX_UI_FONT_SMALL));
     	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
 
-		ofxUISlider* pSliderCamDist = new ofxUISlider(_id("Distance"), 100.0, 300.0, 200.0, 300, 20);
+		ofxUISlider* pSliderCamDist = new ofxUISlider(_id("Distance"), 40.0, 150.0, 100.0, 300, 20);
 		mp_canvas->addWidgetDown(pSliderCamDist);
 
 		mp_canvas->setVisible(false);
@@ -111,7 +114,7 @@ void tool3D::draw()
 	 for (int i=0; i<apparelModelVert.size(); i++)
 	 {
 		 v = apparelModelVert[i];
-		 n = 10.0*apparelModelNormals[i];
+		 n = TOOL3D_SIZE_NORMALS*apparelModelNormals[i];
 		 ofLine(v.x,v.y,v.z, v.x+n.x,v.y+n.y,v.z+n.z);
 	 }
 	 ofPopMatrix();
@@ -128,7 +131,7 @@ void tool3D::draw()
 	 for (int i=0; i<meshFacesRef.size();i++)
 	 {
 		 face 		= meshFacesRef[i];
-		 normal 	= 20*meshFacesRef[i].getFaceNormal();
+		 normal 	= TOOL3D_SIZE_NORMALS *meshFacesRef[i].getFaceNormal();
 		 middle 	= (face.getVertex(0) + face.getVertex(1) + face.getVertex(2))/3;
 
 		 ofPushMatrix();
@@ -191,7 +194,11 @@ void tool3D::draw()
 				ofVec3f faceNormal = 0.5*mp_meshFaceOver->getFaceNormal();
 				ofSetColor(colorFaceOver,60);
 				ofFill();
-				ofTriangle(mp_meshFaceOver->getVertex(0)+faceNormal,mp_meshFaceOver->getVertex(1)+faceNormal,mp_meshFaceOver->getVertex(2)+faceNormal);
+//				ofTriangle(mp_meshFaceOver->getVertex(0)+faceNormal,mp_meshFaceOver->getVertex(1)+faceNormal,mp_meshFaceOver->getVertex(2)+faceNormal);
+				glEnable(GL_POLYGON_OFFSET_FILL);
+			    glPolygonOffset(-1,-1);
+				ofTriangle(mp_meshFaceOver->getVertex(0),mp_meshFaceOver->getVertex(1),mp_meshFaceOver->getVertex(2));
+				glDisable(GL_POLYGON_OFFSET_FILL);
 			}
 		}
 		if (mp_apparelModCurrent)

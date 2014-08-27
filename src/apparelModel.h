@@ -18,6 +18,7 @@ class apparelModel : public ofxAssimpModelLoader
         bool 				load			(string modelName, bool optimize=false);
         void 				setRotation		(float angle, float rot_x, float rot_y, float r_z);
 
+		string				getId			(){return id;}
 		ofMesh&				getMeshRef		(){return mesh;}
 		vector<ofMeshFace>&	getMeshFacesRef	(){return meshFaces;}
 		vector<ofVec3f>& 	getVerticesRef	(){return mesh.getVertices();}

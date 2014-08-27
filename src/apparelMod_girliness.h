@@ -13,4 +13,6 @@ class apparelMod_girliness : public apparelMod
 {
 	public:
 		apparelMod_girliness	();
+
+		void					draw					();
 };

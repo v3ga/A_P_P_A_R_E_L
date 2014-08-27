@@ -10,7 +10,6 @@
 
 
 
-#ifdef TARGET_OSX
 #include "oscDefs.h"
 #include "ofAppLog.h"
 
@@ -45,41 +44,19 @@ void oscSender::sendParameter(const ofAbstractParameter & parameter)
 		msg.addStringArg(hierarchy[1]); // parameter name
 
 
-	  if(parameter.type()==typeid(ofParameter<int>).name()){
-		  msg.addIntArg(parameter.cast<int>());
-	  }else if(parameter.type()==typeid(ofParameter<float>).name()){
-		  msg.addFloatArg(parameter.cast<float>());
-	  }else if(parameter.type()==typeid(ofParameter<bool>).name()){
-		  msg.addIntArg(parameter.cast<bool>());
-	  }else{
-		  msg.addStringArg(parameter.toString());
-	  }
-
-		m_sender.sendMessage(msg);
-
-
-//		OFAPPLOG->println(hierarchy[0]+"/"+hierarchy[1]);
-/*
-*/
-
-
-//		m_sender.appendParameter(msg,parameter,address);
-	
-/*		string address = address_prefix;
-		const vector<string> hierarchy = parameter.getGroupHierarchyNames();
-		for(int i=0;i<(int)hierarchy.size()-1;i++){
-			address+= "/" + hierarchy[i];
+		if(parameter.type()==typeid(ofParameter<int>).name()){
+			msg.addIntArg(parameter.cast<int>());
+		}else if(parameter.type()==typeid(ofParameter<float>).name()){
+			msg.addFloatArg(parameter.cast<float>());
+		}else if(parameter.type()==typeid(ofParameter<bool>).name()){
+			msg.addIntArg(parameter.cast<bool>());
+		}else{
+			msg.addStringArg(parameter.toString());
 		}
-		if(address.length()) address += "/";
-		ofxOscMessage msg;
-		m_sender.appendParameter(msg,parameter,address);
+
 		m_sender.sendMessage(msg);
-*/
 	}
-
-
 }
 
 
 
-#endif
