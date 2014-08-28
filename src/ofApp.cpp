@@ -55,6 +55,11 @@ void ofApp::setup()
    	OFAPPLOG->println("- loading 3d/"+modelObjName);
 	apparelModel.load("3d/"+modelObjName);
 	apparelModel.setPosition(0,0,0);
+	
+	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());
+	sceneFxBlur.allocate(ofGetWidth(),ofGetHeight());
+	
+	sceneFxBlur.setTexture( sceneBuffer.getTextureReference() );
 
 	// MODS
 //	apparelModManager.addMod( new apparelMod_debug() );
@@ -88,6 +93,8 @@ void ofApp::setup()
 	toolManager.addTool( pToolUser );
 	toolManager.addTool( pToolCalibration );
 	
+	
+	pTool3D->setSceneFbo(&sceneBuffer);
 
 	toolManager.createControls(ofVec2f(400,100));
 
@@ -104,6 +111,8 @@ void ofApp::update()
 
 	toolManager.update();
 	user.update(dt);
+
+
 }
 
 //--------------------------------------------------------------
@@ -119,32 +128,48 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-	ofBackgroundGradient(ofColor(64), ofColor(0));
-
+	sceneBuffer.begin();
+	ofClear(0, 0, 0, 0);
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 	ofEnableDepthTest();
-
+	
 	cam.begin();
 
+	// Filled
+    ofSetColor(0);
+	apparelModel.drawFaces();
 
-	// Wireframe
     ofSetColor(255);
 	glEnable(GL_POLYGON_OFFSET_LINE);
     glPolygonOffset(-1,-1);
 	apparelModel.drawWireframe();
 	glDisable(GL_POLYGON_OFFSET_LINE);
 
-	// Filled
-    ofSetColor(0);
-	apparelModel.drawFaces();
-	
-	toolManager.draw();
-	
 	cam.end();
-	ofDisableDepthTest();
 
+    ofDisableBlendMode();
+	ofDisableDepthTest();
+	sceneBuffer.end();
+
+	sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
+//	sceneFxBlur.setPasses(10);
+	sceneFxBlur.update();
+
+	ofBackgroundGradient(ofColor(64), ofColor(0));
+    //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+	sceneFxBlur.draw(0,0);
+    ofDisableBlendMode();
+	
+
+	// Draw on top
+	cam.begin();
+//	toolManager.draw();
+	cam.end();
 
 	toolManager.drawUI();
+
+
+	// sceneFxBlur.fboNoise.draw(0,ofGetHeight()-20,sceneFxBlur.fboNoise.getWidth(),20);
 }
 
 //--------------------------------------------------------------

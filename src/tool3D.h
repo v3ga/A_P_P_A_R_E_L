@@ -27,8 +27,12 @@ class tool3D : public tool
 		void				mousePressed		(int x, int y, int button);
 		void				onSelectMod			(apparelMod*);
 	
+		void				setSceneFbo			(ofFbo* p){mp_sceneFbo = p;}
+	
 		toolMods*			mp_toolMods;
 		apparelMod*			mp_apparelModCurrent;
+	
+		ofFbo* 				mp_sceneFbo;
 	
 		apparelModel*		mp_apparelModel;
 		meshFaceSelector	m_meshFaceSelector;

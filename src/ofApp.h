@@ -7,6 +7,11 @@
 #include "tool.h"
 #include "oscSender.h"
 #include "user.h"
+#include "ofxBlur.h"
+#include "ofxChromaGlitch.h"
+#include "ofxGaussianBlur.h"
+#include "ofxGlow.h"
+#include "ofxPostProcess.h"
 
 class tool3D;
 class toolMods;
@@ -34,18 +39,31 @@ class ofApp : public ofBaseApp
 		void gotMessage(ofMessage msg);
 	
 	
+		// SETTINGS
 		ofxXmlSettings		settings;
+
+		// SCENE
 		ofEasyCam 			cam;
 		apparelModel		apparelModel;
-		oscSender			oscSender;
+		ofFbo				sceneBuffer;
+
+		// POST EFFECT
+		ofxPostProcess		   sceneFxBlur;
+
+		// USER
 		user				user;
+
+		// MODS
 		apparelModManager	apparelModManager;
 
+		// NETWORK
+		oscSender			oscSender;
+
 	private:
-		toolManager		toolManager;
-		tool3D*			pTool3D;
-		toolMods*		pToolMods;
-		toolNetwork*	pToolNetwork;
-		toolUser*		pToolUser;
-		toolCalibration*pToolCalibration;
+		toolManager			toolManager;
+		tool3D*				pTool3D;
+		toolMods*			pToolMods;
+		toolNetwork*		pToolNetwork;
+		toolUser*			pToolUser;
+		toolCalibration*	pToolCalibration;
 };

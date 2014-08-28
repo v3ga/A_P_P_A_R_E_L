@@ -18,6 +18,7 @@ tool3D::tool3D(toolManager* parent, apparelModel* model) : tool("3D", parent)
 {
 	mp_toolMods				= 0;
 	mp_apparelModCurrent	= 0;
+	mp_sceneFbo				= 0;
 
 	m_bShowVertexNormals 	= false;
 	m_bShowFaceNormals		= false;
@@ -64,6 +65,17 @@ void tool3D::createControlsCustom()
 		ofxUISlider* pSliderCamDist = new ofxUISlider(_id("Distance"), 40.0, 150.0, 100.0, 300, 20);
 		mp_canvas->addWidgetDown(pSliderCamDist);
 
+
+		mp_canvas->addWidgetDown(new ofxUILabel("Scene", OFX_UI_FONT_SMALL));
+    	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
+
+		if (mp_sceneFbo)
+		{
+			float ratio = mp_sceneFbo->getWidth() / mp_sceneFbo->getHeight();
+			float width = 300.0;
+//		    mp_canvas->addWidgetDown( new ofxUIBaseDraws(width, width/ratio, mp_sceneFbo, "scene") );
+		}
+	
 		mp_canvas->setVisible(false);
 		mp_canvas->autoSizeToFitWidgets();
 		
