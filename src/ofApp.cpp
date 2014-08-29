@@ -59,7 +59,6 @@ void ofApp::setup()
 	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());
 	sceneFxBlur.allocate(ofGetWidth(),ofGetHeight());
 	
-	sceneFxBlur.setTexture( sceneBuffer.getTextureReference() );
 
 	// MODS
 //	apparelModManager.addMod( new apparelMod_debug() );
@@ -169,7 +168,7 @@ void ofApp::draw()
 	toolManager.drawUI();
 
 
-	// sceneFxBlur.fboNoise.draw(0,ofGetHeight()-20,sceneFxBlur.fboNoise.getWidth(),20);
+	 sceneFxBlur.fboNoise.draw(0,ofGetHeight()-20,sceneFxBlur.fboNoise.getWidth(),20);
 }
 
 //--------------------------------------------------------------
