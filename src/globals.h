@@ -10,9 +10,11 @@
 #include "ofAppLog.h"
 
 class ofApp;
-class oscSenderInterface;
+class oscSender;
 class apparelModManager;
-#define GLOBALS	globals::getInstance()
+
+#define GLOBALS			globals::getInstance()
+#define OSC_SENDER		GLOBALS->getOscSender()
 
 class globals
 {
@@ -24,9 +26,8 @@ class globals
 				void			setApp(ofApp* p){pOfApp = p;}
 				ofApp*			getApp(){return pOfApp;}
 
-				void				setOscSender(oscSenderInterface* p){pOscSender = p;}
-				oscSenderInterface*	getOscSender(){return pOscSender;}
-
+				void				setOscSender(oscSender* p){pOscSender = p;}
+				oscSender*			getOscSender(){return pOscSender;}
 
 				void				setModManager(apparelModManager* p){pApparelModManager = p;}
 				apparelModManager*	getModManager(){return pApparelModManager;}
@@ -34,6 +35,6 @@ class globals
 	private:
 		static 	globals*				instance;
 				ofApp*					pOfApp;
-				oscSenderInterface*		pOscSender;
+				oscSender*				pOscSender;
 				apparelModManager*		pApparelModManager;
 };

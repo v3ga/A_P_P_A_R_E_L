@@ -9,7 +9,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
-#include "oscSender.h"
+#include "oscSenderInterface.h"
 
 class apparelModel;
 class apparelMod
@@ -25,8 +25,11 @@ class apparelMod
 		virtual	void		loadParametersCustom(){};
 		virtual	void		saveParameters		();
 
+		virtual	void		readModel			();
 		virtual	void		loadModel			();
+		virtual	void		loadModel			(string& xml);
 		virtual	void		saveModel			();
+		virtual	string		getModelAsXMLString	();
 	
 		void				setConfiguration	(string name);
 
@@ -63,6 +66,7 @@ class apparelMod
 	
 		// ID
 		string				m_id;
+		string				getId					(){return m_id;}
 
 		// MODEL w/ DATA
 		apparelModel*		mp_model;

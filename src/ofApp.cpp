@@ -11,6 +11,7 @@
 
 #include "apparelMod_include.h"
 
+#define USER_LOAD_CONFIGURATION false
 
 //--------------------------------------------------------------
 void ofApp::setup()
@@ -49,7 +50,9 @@ void ofApp::setup()
 	OFAPPLOG->println("- user is @"+userId);
 	user.setId(userId);
 	user.setModManager(&apparelModManager);
-	user.loadConfiguration();
+
+	if (USER_LOAD_CONFIGURATION)
+		user.loadConfiguration();
 	
 	// MODEL
    	OFAPPLOG->println("- loading 3d/"+modelObjName);
@@ -127,48 +130,51 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-	sceneBuffer.begin();
-	ofClear(0, 0, 0, 0);
-    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-	ofEnableDepthTest();
+
+	// render to offscreen
+//	sceneBuffer.begin();
+//		ofClear(0, 0, 0, 0);
+  	ofBackgroundGradient(ofColor(64), ofColor(0));
+
+
+  	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+		ofEnableDepthTest();
 	
-	cam.begin();
+		cam.begin();
 
-	// Filled
-    ofSetColor(0);
-	apparelModel.drawFaces();
+		// Filled
+    	ofSetColor(0);
+		apparelModel.drawFaces();
 
-    ofSetColor(255);
-	glEnable(GL_POLYGON_OFFSET_LINE);
-    glPolygonOffset(-1,-1);
-	apparelModel.drawWireframe();
-	glDisable(GL_POLYGON_OFFSET_LINE);
+	    ofSetColor(255);
+		glEnable(GL_POLYGON_OFFSET_LINE);
+    	glPolygonOffset(-1,-1);
+		apparelModel.drawWireframe();
+		glDisable(GL_POLYGON_OFFSET_LINE);
 
-	cam.end();
+		toolManager.draw();
 
-    ofDisableBlendMode();
-	ofDisableDepthTest();
-	sceneBuffer.end();
+		cam.end();
 
-	sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
-//	sceneFxBlur.setPasses(10);
-	sceneFxBlur.update();
+    	ofDisableBlendMode();
+		ofDisableDepthTest();
+//	sceneBuffer.end();
 
-	ofBackgroundGradient(ofColor(64), ofColor(0));
+
+	// Filters
+	//sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
+	//sceneFxBlur.update();
+
     //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-	sceneFxBlur.draw(0,0);
-    ofDisableBlendMode();
+	//sceneFxBlur.draw(0,0);
+//	 sceneBuffer.draw(0,0);
+	ofDisableBlendMode();
 	
 
-	// Draw on top
-	cam.begin();
-//	toolManager.draw();
-	cam.end();
-
+	// Interface
 	toolManager.drawUI();
 
-
-	 sceneFxBlur.fboNoise.draw(0,ofGetHeight()-20,sceneFxBlur.fboNoise.getWidth(),20);
+//	 sceneFxBlur.fboNoise.draw(0,ofGetHeight()-20,sceneFxBlur.fboNoise.getWidth(),20);
 }
 
 //--------------------------------------------------------------

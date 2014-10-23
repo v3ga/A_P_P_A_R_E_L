@@ -92,6 +92,7 @@
 		F932F069196C488900C82556 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F059196C488900C82556 /* ofxOscReceiver.cpp */; };
 		F932F06A196C488900C82556 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F05B196C488900C82556 /* ofxOscSender.cpp */; };
 		F932F0BD196D774000C82556 /* oscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F0BB196D774000C82556 /* oscSender.cpp */; };
+		F93331B719F9356400583FC6 /* oscSenderInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93331B519F9356400583FC6 /* oscSenderInterface.cpp */; };
 		F93C8B3119824DE5006CC178 /* apparelMod_pretentiousness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */; };
 		F93C8B3419824E01006CC178 /* apparelMod_girliness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */; };
 		F93C8B3719824E1C006CC178 /* apparelMod_narcissism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B3519824E1C006CC178 /* apparelMod_narcissism.cpp */; };
@@ -381,6 +382,8 @@
 		F932F05C196C488900C82556 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
 		F932F0BB196D774000C82556 /* oscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oscSender.cpp; sourceTree = "<group>"; };
 		F932F0BC196D774000C82556 /* oscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oscSender.h; sourceTree = "<group>"; };
+		F93331B519F9356400583FC6 /* oscSenderInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oscSenderInterface.cpp; sourceTree = "<group>"; };
+		F93331B619F9356400583FC6 /* oscSenderInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oscSenderInterface.h; sourceTree = "<group>"; };
 		F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_pretentiousness.cpp; sourceTree = "<group>"; };
 		F93C8B3019824DE5006CC178 /* apparelMod_pretentiousness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_pretentiousness.h; sourceTree = "<group>"; };
 		F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_girliness.cpp; sourceTree = "<group>"; };
@@ -926,6 +929,8 @@
 				F932F02F196C481E00C82556 /* oscReceiver.h */,
 				F932F0BB196D774000C82556 /* oscSender.cpp */,
 				F932F0BC196D774000C82556 /* oscSender.h */,
+				F93331B519F9356400583FC6 /* oscSenderInterface.cpp */,
+				F93331B619F9356400583FC6 /* oscSenderInterface.h */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1665,6 +1670,7 @@
 				F96FBBDF1976D3AC00E58A6F /* json_reader.cpp in Sources */,
 				F9489233197E72C000085C6B /* ofxSQLiteAbstract.cpp in Sources */,
 				60012C723B05938A3D388335 /* ofxUIValuePlotter.cpp in Sources */,
+				F93331B719F9356400583FC6 /* oscSenderInterface.cpp in Sources */,
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */,
 				F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */,

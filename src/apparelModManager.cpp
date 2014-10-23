@@ -22,7 +22,7 @@ void apparelModManager::addMod(apparelMod* mod)
 	{
 		mod->loadModel();
 		mod->loadParameters();
-		mod->setOscSender( GLOBALS->getOscSender() );
+		mod->setOscSender( (oscSenderInterface*) GLOBALS->getOscSender() );
 		m_mods[mod->m_id] = mod;
 	}
 }

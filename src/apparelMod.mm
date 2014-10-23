@@ -141,6 +141,44 @@ void apparelMod::createDirMod()
 }
 
 
+
+//--------------------------------------------------------------
+void apparelMod::readModel()
+{
+   OFAPPLOG->begin("apparelMod::readModel()");
+
+
+   m_indicesFaces.clear();
+   m_indicesVertex.clear();
+   
+   m_settingsModel.pushTag("mod");
+
+	   m_settingsModel.pushTag("faces");
+	   int nbFaces = m_settingsModel.getNumTags("index");
+	   for (int i=0; i<nbFaces; i++)
+	   {
+		   m_indicesFaces.push_back( m_settingsModel.getValue("index",0,i) );
+	   }
+	   m_settingsModel.popTag();
+
+	   m_settingsModel.pushTag("vertices");
+	   int nbVertices = m_settingsModel.getNumTags("index");
+	   for (int i=0; i<nbVertices; i++)
+	   {
+		   m_indicesVertex.push_back( m_settingsModel.getValue("index",0,i) );
+	   }
+	   m_settingsModel.popTag();
+   
+	   
+  m_settingsModel.popTag();
+
+  OFAPPLOG->println("- nb faces="+ofToString( m_indicesFaces.size() ));
+  OFAPPLOG->println("- nb vertices="+ofToString( m_indicesVertex.size() ));
+ 
+ 
+  OFAPPLOG->end();
+}
+
 //--------------------------------------------------------------
 void apparelMod::loadModel()
 {
@@ -150,35 +188,20 @@ void apparelMod::loadModel()
 	if ( m_settingsModel.load(pathModel) )
 	{
 		OFAPPLOG->println("- loaded "+pathModel);
-
-		m_indicesFaces.clear();
-		
-		m_settingsModel.pushTag("mod");
-
-			m_settingsModel.pushTag("faces");
-			int nbFaces = m_settingsModel.getNumTags("index");
-			for (int i=0; i<nbFaces; i++)
-			{
-				m_indicesFaces.push_back( m_settingsModel.getValue("index",0,i) );
-			}
-			m_settingsModel.popTag();
-
-			m_settingsModel.pushTag("vertices");
-			int nbVertices = m_settingsModel.getNumTags("index");
-			for (int i=0; i<nbVertices; i++)
-			{
-				m_indicesVertex.push_back( m_settingsModel.getValue("index",0,i) );
-			}
-			m_settingsModel.popTag();
-		
-			
-	   m_settingsModel.popTag();
+		readModel();
 	}
 	else{
 		OFAPPLOG->println(OF_LOG_ERROR, "- error loading "+pathModel);
 	}
 
 	OFAPPLOG->end();
+}
+
+//--------------------------------------------------------------
+void apparelMod::loadModel(string& xml)
+{
+	m_settingsModel.loadFromBuffer(xml);
+	readModel();
 }
 
 //--------------------------------------------------------------
@@ -221,6 +244,21 @@ void apparelMod::saveModel()
 	
 	OFAPPLOG->end();
 }
+
+//--------------------------------------------------------------
+string apparelMod::getModelAsXMLString()
+{
+	string s="";
+	
+	ofxXmlSettings settings;
+	if (settings.load(getPathResources("model.xml")))
+	{
+		settings.copyXmlToString(s);
+	}
+	
+	return s;
+}
+
 
 //--------------------------------------------------------------
 void apparelMod::loadParameters()

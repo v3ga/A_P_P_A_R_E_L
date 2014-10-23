@@ -1,11 +1,11 @@
 <apparel>
 	<!-- Model used -->
 	<!-- Folder : data/3d -->
-	<model>AR_modele.obj</model>
+	<model>AR_modele.dae</model>
 
 	<!-- IP of the iphone/ipad running Apparel application -->
 	<osc activated="1">
-		<ip>192.168.1.16</ip>
+		<ip>192.168.1.15</ip>
 		<port>1235</port>
 	</osc>
 	

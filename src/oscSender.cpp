@@ -12,6 +12,7 @@
 
 #include "oscDefs.h"
 #include "ofAppLog.h"
+#include "apparelMod.h"
 
 //--------------------------------------------------------------
 void oscSender::setup(string ip, int port)
@@ -57,6 +58,39 @@ void oscSender::sendParameter(const ofAbstractParameter & parameter)
 		m_sender.sendMessage(msg);
 	}
 }
+
+//--------------------------------------------------------------
+void oscSender::sendModData(apparelMod* pMod)
+{
+	if(!isSetup() || !isActive()) return;
+	if (pMod == 0) return;
+
+	// Save XML on disk first
+	pMod->saveModel();
+	
+	ofxOscMessage msg;
+	msg.setAddress(OSC_MOD_SET_MODEL);
+	msg.addStringArg(pMod->getId());
+	msg.addStringArg(pMod->getModelAsXMLString());
+
+
+	m_sender.sendMessage(msg);
+}
+
+//--------------------------------------------------------------
+void oscSender::selectMod(apparelMod* pMod)
+{
+	if(!isSetup() || !isActive()) return;
+	if (pMod == 0) return;
+	
+	ofxOscMessage msg;
+	msg.setAddress(OSC_MOD_SELECT);
+	msg.addStringArg(pMod->getId());
+
+	m_sender.sendMessage(msg);
+}
+
+
 
 
 

@@ -282,6 +282,8 @@ void tool3D::mousePressed(int x, int y, int button)
 {
 	if (mp_apparelModCurrent==0) return;
 
+	bool isModelModified = false;
+
 	// FACE ?
 	if (mp_meshFaceOver && m_meshFaceIndexOver>0)
 	{
@@ -291,10 +293,13 @@ void tool3D::mousePressed(int x, int y, int button)
 			//m_indicesFaceSelected.push_back(m_meshFaceIndexOver);
 			mp_meshFaceOver = 0;
 			m_meshFaceIndexOver = -1;
+			
+			isModelModified = true;
 		}
 		else{
 			mp_apparelModCurrent->removeFaceIndex(m_meshFaceIndexOver);
 			//m_indicesFaceSelected.erase(std::remove(m_indicesFaceSelected.begin(), m_indicesFaceSelected.end(), m_meshFaceIndexOver), m_indicesFaceSelected.end());
+			isModelModified = true;
 		}
 	}
 	
@@ -312,11 +317,18 @@ void tool3D::mousePressed(int x, int y, int button)
 
 			mp_meshVertexOver = 0;
 			m_meshVertexIndexOver = -1;
+			isModelModified = true;
 		}
 		else{
 			mp_apparelModCurrent->removeVertexIndex(m_meshVertexIndexOver);
 			m_mapSphereVertexSelected.erase(m_meshVertexIndexOver);
+			isModelModified = true;
 		}
+	}
+	
+	if (isModelModified)
+	{
+		OSC_SENDER->sendModData(mp_apparelModCurrent);
 	}
 }
 

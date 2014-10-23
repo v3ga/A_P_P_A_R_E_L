@@ -10,6 +10,7 @@
 #include "tool3D.h"
 #include "globals.h"
 #include "apparelModManager.h"
+#include "oscSender.h"
 
 //--------------------------------------------------------------
 toolMods::toolMods(toolManager* parent, apparelModManager* modManager, apparelModel* model) : tool("Mods", parent)
@@ -149,6 +150,8 @@ void toolMods::selectMod(string name)
 		if (pTool3D)
 			pTool3D->onSelectMod(mp_modsManager->getModCurrent());
 	}
+	
+	// Inform on network
+	OSC_SENDER->selectMod( mp_modsManager->getModCurrent() );
 }
-
 
