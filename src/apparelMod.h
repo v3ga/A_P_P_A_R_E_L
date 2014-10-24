@@ -10,7 +10,6 @@
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "oscSenderInterface.h"
-#include "apparelModelModifier.h"
 
 class apparelModel;
 class apparelMod
