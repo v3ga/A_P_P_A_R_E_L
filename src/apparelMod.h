@@ -10,6 +10,7 @@
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "oscSenderInterface.h"
+#include "apparelModelModifier.h"
 
 class apparelModel;
 class apparelMod
@@ -69,9 +70,15 @@ class apparelMod
 		string				getId					(){return m_id;}
 
 		// MODEL w/ DATA
-		apparelModel*		mp_model;
-	   	vector<int>			m_indicesFaces;
-		vector<int>			m_indicesVertex;
+		apparelModel*			mp_model;			// original model
+	   	vector<int>				m_indicesFaces;		// selected faces on original model
+		vector<int>				m_indicesVertex;	// selected vertices on original model
+
+		apparelModel*			mp_modelChain;
+	   	vector<int>				m_indicesFacesChain;
+		vector<int>				m_indicesVertexChain;
+ 
+		void					apply				(apparelMod* pPreviousMod);
 
 		// PARAMETERS CONFIGURATION
 		string				m_configurationName;

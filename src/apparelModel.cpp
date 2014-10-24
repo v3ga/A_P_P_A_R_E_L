@@ -28,11 +28,6 @@ bool apparelModel::load(string modelName, bool optimize)
 	return bLoaded;
 }
 
-//--------------------------------------------------------------
-void apparelModel::setRotation(float angle, float rot_x, float rot_y, float rot_z)
-{
-	ofxAssimpModelLoader::setRotation(0,angle,rot_x,rot_y,rot_z);
-}
 
 
 //--------------------------------------------------------------

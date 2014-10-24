@@ -19,6 +19,7 @@ apparelMod::apparelMod(string id)
 {
 	m_id 			= id;
 	mp_model 		= 0;
+	mp_modelChain	= 0;
 	mp_oscSender 	= 0;
 	
 	m_isActive.setName("Active");
@@ -312,6 +313,36 @@ void apparelMod::setConfiguration(string name)
 {
 	m_configurationName = name;
 }
+
+
+//--------------------------------------------------------------
+void apparelMod::apply(apparelMod* pPreviousMod)
+{
+	apparelModel* pModel = 0;
+	vector<int>* pIndicesFaces = 0;
+	vector<int>* pIndicesVertex = 0;
+
+	if (pPreviousMod==0)
+	{
+		pModel = mp_model;
+		pIndicesFaces = &m_indicesFaces;
+		pIndicesVertex = &m_indicesVertex;
+	}
+	else
+	{
+		pModel = pPreviousMod->mp_modelChain;
+		pIndicesFaces = &pPreviousMod->m_indicesFacesChain;
+		pIndicesVertex = &pPreviousMod->m_indicesVertexChain;
+	}
+
+
+	if (pModel && pIndicesFaces && pIndicesVertex)
+	{
+				
+	}
+}
+
+
 
 
 

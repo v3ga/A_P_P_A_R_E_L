@@ -130,6 +130,7 @@
 		F9C66611193CAB4C00C8225D /* toolMods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C6660F193CAB4C00C8225D /* toolMods.cpp */; };
 		F9C66615193CABD200C8225D /* data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C66614193CABD200C8225D /* data.cpp */; };
 		F9C66619193CAD9A00C8225D /* apparelMod_authority.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C66617193CAD9A00C8225D /* apparelMod_authority.cpp */; };
+		F9CCB8EF19FA966500D08B6C /* apparelModelModifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9CCB8ED19FA966500D08B6C /* apparelModelModifier.cpp */; };
 		F9D2CC20192A4E4700BF8F14 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D2CC19192A4E4700BF8F14 /* tinyxml.cpp */; };
 		F9D2CC21192A4E4700BF8F14 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D2CC1B192A4E4700BF8F14 /* tinyxmlerror.cpp */; };
 		F9D2CC22192A4E4700BF8F14 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D2CC1C192A4E4700BF8F14 /* tinyxmlparser.cpp */; };
@@ -493,6 +494,8 @@
 		F9C66614193CABD200C8225D /* data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = data.cpp; sourceTree = "<group>"; };
 		F9C66617193CAD9A00C8225D /* apparelMod_authority.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_authority.cpp; sourceTree = "<group>"; };
 		F9C66618193CAD9A00C8225D /* apparelMod_authority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_authority.h; sourceTree = "<group>"; };
+		F9CCB8ED19FA966500D08B6C /* apparelModelModifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelModelModifier.cpp; sourceTree = "<group>"; };
+		F9CCB8EE19FA966500D08B6C /* apparelModelModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelModelModifier.h; sourceTree = "<group>"; };
 		F9D2CC19192A4E4700BF8F14 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		F9D2CC1A192A4E4700BF8F14 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		F9D2CC1B192A4E4700BF8F14 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -831,8 +834,12 @@
 				F9C66614193CABD200C8225D /* data.cpp */,
 				F9D2CC25192A4F7900BF8F14 /* apparelModel.cpp */,
 				F9D2CC26192A4F7900BF8F14 /* apparelModel.h */,
+				F9CCB8ED19FA966500D08B6C /* apparelModelModifier.cpp */,
+				F9CCB8EE19FA966500D08B6C /* apparelModelModifier.h */,
 				F9131F571934D3A200449924 /* apparelMod.h */,
 				F9D35E8219ACCBDE00B63E8E /* apparelMod.mm */,
+				F96FBE7319781E4600E58A6F /* apparelModManager.cpp */,
+				F96FBE7419781E4600E58A6F /* apparelModManager.h */,
 				F9C6660B193CA6BF00C8225D /* apparelModUI.cpp */,
 				F9C6660C193CA6BF00C8225D /* apparelModUI.h */,
 				F9131F6119352D6C00449924 /* globals.cpp */,
@@ -1332,8 +1339,6 @@
 		F9C66616193CAD7700C8225D /* Mods */ = {
 			isa = PBXGroup;
 			children = (
-				F96FBE7319781E4600E58A6F /* apparelModManager.cpp */,
-				F96FBE7419781E4600E58A6F /* apparelModManager.h */,
 				F9C66617193CAD9A00C8225D /* apparelMod_authority.cpp */,
 				F9C66618193CAD9A00C8225D /* apparelMod_authority.h */,
 				F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */,
@@ -1647,6 +1652,7 @@
 				F9489279197FF98200085C6B /* ofxUILogger.cpp in Sources */,
 				59C5F2F5D7254C33C00F97CB /* ofxUIRectangle.cpp in Sources */,
 				FE0F1DB69ACCD163E9DA2A15 /* ofxUIRotarySlider.cpp in Sources */,
+				F9CCB8EF19FA966500D08B6C /* apparelModelModifier.cpp in Sources */,
 				43BADBB2FE0F17D34B57A705 /* ofxUIScrollableCanvas.cpp in Sources */,
 				F9131F6319352D6C00449924 /* globals.cpp in Sources */,
 				F9489231197E72C000085C6B /* sqlite3.c in Sources */,

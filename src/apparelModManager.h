@@ -20,7 +20,7 @@ class apparelModManager
 		void						addMod				(apparelMod*);
 		void						selectMod			(string name);
 		apparelMod*					getMod				(string id);
-		apparelMod*					getModCurrent		(){return mp_modCurrent;}
+		apparelMod*					getModCurrent(){return mp_modCurrent;}
 		void						setModel			(apparelModel*);
 	
 		void						saveModel			();
@@ -29,6 +29,13 @@ class apparelModManager
 		void						deleteMods			();
 	
 		void						draw				();
+ 
+ 
+		// Modifiers to apply, order important
+		vector<apparelMod*>			m_modsOrdered;
+		void						addChain			(apparelMod*);
+		void						applyChain			();
+
 	
 		// Called asynchronously
 		void						onNewText			(string text);

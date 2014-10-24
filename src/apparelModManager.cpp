@@ -95,6 +95,29 @@ void apparelModManager::draw()
 }
 
 //--------------------------------------------------------------
+void apparelModManager::addChain(apparelMod* pMod)
+{
+	m_modsOrdered.push_back(pMod);
+}
+
+//--------------------------------------------------------------
+void apparelModManager::applyChain()
+{
+	int nbMods = m_modsOrdered.size();
+	if (nbMods>=1)
+	{
+		apparelMod* pPreviousMod = 0;
+		for (int i=0;i<nbMods;i++)
+		{
+			m_modsOrdered[i]->apply(pPreviousMod);
+			pPreviousMod = m_modsOrdered[i];
+		}
+	}
+}
+
+
+
+//--------------------------------------------------------------
 void apparelModManager::onNewText(string text)
 {
 	map<string, apparelMod*>::iterator it;
