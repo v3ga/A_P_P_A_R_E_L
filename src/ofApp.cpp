@@ -178,12 +178,16 @@ void ofApp::draw()
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-	if (key == OF_KEY_UP)
-		cam.setDistance( cam.getDistance() + 10.0);
-	else if (key == OF_KEY_DOWN)
-		cam.setDistance( cam.getDistance() - 10.0);
-
+void ofApp::keyPressed(int key)
+{
+	bool isToolHandleKey = toolManager.keyPressed(key);
+	if (isToolHandleKey == false)
+	{
+		if (key == OF_KEY_UP)
+			cam.setDistance( cam.getDistance() + 10.0);
+		else if (key == OF_KEY_DOWN)
+			cam.setDistance( cam.getDistance() - 10.0);
+	}
 }
 
 //--------------------------------------------------------------
@@ -199,6 +203,9 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button)
 {
+	if (!toolManager.isHit(x, y)){
+		toolManager.mouseDragged(x, y, button);
+	}
 }
 
 //--------------------------------------------------------------

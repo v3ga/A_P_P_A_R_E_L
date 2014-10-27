@@ -38,6 +38,16 @@ void apparelModManager::setModel(apparelModel* pModel)
 
 
 //--------------------------------------------------------------
+apparelModel* apparelModManager::getModelToDraw()
+{
+	int nbModsOrdered = m_modsOrdered.size();
+	if (nbModsOrdered>=1)
+	{
+		return m_modsOrdered[nbModsOrdered-1]->mp_modelChain;
+	}
+}
+
+//--------------------------------------------------------------
 void apparelModManager::selectMod(string name)
 {
 	mp_modCurrent = m_mods[name];

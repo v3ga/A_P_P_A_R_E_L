@@ -16,6 +16,8 @@ class apparelModel : public ofxAssimpModelLoader
 	
 
         bool 				load			(string modelName, bool optimize=false);
+		bool				loadProperties	();
+		bool				saveProperties	();
 
 		string				getId			(){return id;}
 		ofMesh&				getMeshRef		(){return mesh;}
@@ -28,5 +30,9 @@ class apparelModel : public ofxAssimpModelLoader
 		vector<ofMeshFace>	meshFaces;
 
 	private:
-		void				createMeshFaces	();
+		void				createMeshFaces			();
+ 
+		string				getPathRelative			(string filename);
+		string				getPathDocument			(string filename);
+		string				getPropertiesFilename	();
 };

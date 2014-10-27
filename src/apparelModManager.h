@@ -22,6 +22,8 @@ class apparelModManager
 		apparelMod*					getMod				(string id);
 		apparelMod*					getModCurrent(){return mp_modCurrent;}
 		void						setModel			(apparelModel*);
+ 		apparelModel*				getModelToDraw		();
+ 
 	
 		void						saveModel			();
 		void						saveParameters		();

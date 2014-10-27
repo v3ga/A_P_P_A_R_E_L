@@ -90,6 +90,29 @@ void oscSender::selectMod(apparelMod* pMod)
 	m_sender.sendMessage(msg);
 }
 
+//--------------------------------------------------------------
+void oscSender::sendBeginCalibration()
+{
+	ofxOscMessage msg;
+	msg.setAddress(OSC_MODEL_SET_CALIBRATION_BEGIN);
+	m_sender.sendMessage(msg);
+}
+
+//--------------------------------------------------------------
+void oscSender::sendEndCalibration()
+{
+	ofxOscMessage msg;
+	msg.setAddress(OSC_MODEL_SET_CALIBRATION_END);
+	m_sender.sendMessage(msg);
+}
+
+
+//--------------------------------------------------------------
+void oscSender::send(ofxOscMessage m)
+{
+	m_sender.sendMessage(m);
+}
+
 
 
 
