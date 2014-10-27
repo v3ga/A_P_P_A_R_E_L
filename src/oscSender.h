@@ -15,11 +15,15 @@ class oscSender : public oscSenderInterface
 {
 	public:
 		void setup					(string ip, int port);
+
 		void sendParameter			(const ofAbstractParameter & parameter);
 		void sendModData			(apparelMod* pMod);
 		void selectMod				(apparelMod* pMod);
+
 		void sendBeginCalibration	();
 		void sendEndCalibration		();
+		void saveCalibration		();
+
 		void send					(ofxOscMessage m);
 
 		ofxOscSender			m_sender;

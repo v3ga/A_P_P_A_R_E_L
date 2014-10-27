@@ -10,6 +10,7 @@
 #include "globals.h"
 #include "oscDefs.h"
 #include "oscSender.h"
+#include "ofApp.h"
 
 //--------------------------------------------------------------
 toolCalibration::toolCalibration(toolManager* parent) : tool("Calibration", parent)
@@ -55,8 +56,11 @@ void toolCalibration::createControlsCustom()
 	mp_canvas->addLabel("Precision");
     mp_canvas->addSpacer(300,1);
 
-	mp_canvas->addSlider("positionPrecision", 	0.1f, 0.5f, &m_modelPositionSensitivity);
-	mp_canvas->addSlider("scalePrecision", 		0.1f, 0.5f, &m_modelScaleSensitivity);
+	mp_canvas->addWidgetDown( new ofxUISlider("positionPrecision", 		0.1f, 0.5f, &m_modelPositionSensitivity, 300,16 ));
+	mp_canvas->addWidgetDown( new ofxUISlider("scalePrecision", 		0.1f, 0.5f, &m_modelScaleSensitivity, 300,16));
+
+	mp_canvas->addWidgetDown( new ofxUILabelButton("savePropertiesDevice","save on device", 140, 16,0,0,OFX_UI_FONT_SMALL));
+	mp_canvas->addWidgetRight( new ofxUILabelButton("resetPropertiesDevice","reset", 140, 16,0,0,OFX_UI_FONT_SMALL));
 
 
 	mp_canvas->autoSizeToFitWidgets();
@@ -66,36 +70,51 @@ void toolCalibration::createControlsCustom()
 void toolCalibration::handleEvents(ofxUIEventArgs& e)
 {
 	string name = e.getName();
+	OFAPPLOG->begin("toolCalibration::handleEvents('"+name+"')");
+	OFAPPLOG->println("- kind="+ofToString(e.getKind()));
 	
-	ofxUIToggle* pToggle = e.getToggle();
-	if (pToggle->getValue())
+	if (e.getKind() == OFX_UI_WIDGET_TOGGLE)
 	{
-		OFAPPLOG->begin("toolCalibration::handleEvents('"+name+"')");
 
-		mp_modelData = 0;
-		m_editModelPropertyName = name;
-		if (pToggle->getParent() == mp_radioApparel)
-		{
-			m_editModel = EDIT_APPAREL;
-			mp_modelData = &m_apparelData;
-		}
-		else
-		if (pToggle->getParent() == mp_radioManikin)
-		{
-			m_editModel = EDIT_MANIKIN;
-			mp_modelData = &m_manikinData;
-		}
+	 ofxUIToggle* pToggle = e.getToggle();
+	 if (pToggle->getValue())
+	 {
 
-		if (mp_modelData)
-		{
-			mp_modelData->reset();
-			mp_modelData->m_modelPositionSensitivity = m_modelPositionSensitivity;
-			mp_modelData->m_modelScaleSensitivity = m_modelScaleSensitivity;
-		}
+		 mp_modelData = 0;
+		 m_editModelPropertyName = name;
+		 if (pToggle->getParent() == mp_radioApparel)
+		 {
+			 m_editModel = EDIT_APPAREL;
+			 mp_modelData = &m_apparelData;
+		 }
+		 else
+		 if (pToggle->getParent() == mp_radioManikin)
+		 {
+			 m_editModel = EDIT_MANIKIN;
+			 mp_modelData = &m_manikinData;
+		 }
 
-		OFAPPLOG->end();
+		 if (mp_modelData)
+		 {
+			 mp_modelData->reset();
+			 mp_modelData->m_modelPositionSensitivity = m_modelPositionSensitivity;
+			 mp_modelData->m_modelScaleSensitivity = m_modelScaleSensitivity;
+		 }
+
+	 }
+
+	}
+	else if (e.getKind() == OFX_UI_WIDGET_LABELBUTTON)
+	{
+		if (name == "savePropertiesDevice" && e.getButton()->getValue()==1)
+		{
+			GLOBALS->getApp()->apparelModel.saveProperties();
+
+			OSC_SENDER->saveCalibration();
+		}
 	}
 
+	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------

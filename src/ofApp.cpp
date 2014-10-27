@@ -55,8 +55,7 @@ void ofApp::setup()
 		user.loadConfiguration();
 	
 	// MODEL
-   	OFAPPLOG->println("- loading 3d/"+modelObjName);
-	apparelModel.load("3d/"+modelObjName);
+	apparelModel.load(modelObjName);
 	apparelModel.setPosition(0,0,0);
 	
 	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());

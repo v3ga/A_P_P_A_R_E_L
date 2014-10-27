@@ -6,7 +6,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Position XY</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -27,4 +27,14 @@
     <Kind>2</Kind>
     <Name>Position Z</Name>
     <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>positionPrecision</Name>
+    <Value>0.149333328</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>scalePrecision</Name>
+    <Value>0.217333332</Value>
 </Widget>

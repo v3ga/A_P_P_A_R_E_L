@@ -106,6 +106,14 @@ void oscSender::sendEndCalibration()
 	m_sender.sendMessage(msg);
 }
 
+//--------------------------------------------------------------
+void oscSender::saveCalibration()
+{
+	ofxOscMessage msg;
+	msg.setAddress(OSC_MODEL_SAVE_CALIBRATION);
+	m_sender.sendMessage(msg);
+}
+
 
 //--------------------------------------------------------------
 void oscSender::send(ofxOscMessage m)

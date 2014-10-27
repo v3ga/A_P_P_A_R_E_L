@@ -24,7 +24,10 @@ apparelModel::apparelModel()
 //--------------------------------------------------------------
 bool apparelModel::load(string modelName, bool optimize)
 {
- 	bool bLoaded = loadModel(modelName, optimize);
+ 	bool bLoaded = loadModel(getPathRelative(modelName), optimize);
+
+   	OFAPPLOG->println("- loading "+getPathRelative(modelName));
+
 	if (bLoaded){
 		id = modelName;
 		mesh = getMesh(0);
@@ -52,6 +55,8 @@ bool apparelModel::loadProperties()
 //--------------------------------------------------------------
 bool apparelModel::saveProperties()
 {
+	OFAPPLOG->begin("apparelModel::saveProperties()");
+
 	ofxXmlSettings properties;
 	
 	properties.addTag("properties");
@@ -67,24 +72,39 @@ bool apparelModel::saveProperties()
 
 	properties.popTag();
 
-	return properties.save( getPathRelative(getPropertiesFilename()) );
 
+	// Create 3d directory
+/*	string path3d = getPathDocument();
+	OFAPPLOG->println("- pathUser="+pathUser);
+	ofDirectory dirUser(pathUser);
+	if (!dirUser.exists())
+	{
+		OFAPPLOG->println("- creating it");
+		dirUser.create(true);
+	}
+*/
+
+
+
+	string pathProperties = getPathDocument(getPropertiesFilename());
+	bool saved = properties.save(pathProperties);
+
+	OFAPPLOG->println("saved ok to "+pathProperties+"? "+ofToString(saved));
+	OFAPPLOG->end();
+
+	return saved;
 }
 
 //--------------------------------------------------------------
 string apparelModel::getPathRelative(string filename)
 {
-	string path = "3d/"+filename;
-	if (!filename.empty())
-	{
-		path += filename;
-	}
-	return path;
+	return "3d/"+filename;
 }
 
 //--------------------------------------------------------------
 string apparelModel::getPropertiesFilename()
 {
+ofLog()<<id;
 	vector<string> idWithoutExt = ofSplitString(id, ".");
 	return idWithoutExt[0]+"_properties.xml";
 }
