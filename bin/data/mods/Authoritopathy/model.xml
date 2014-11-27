@@ -2,5 +2,7 @@
     <faces></faces>
     <vertices>
         <index>6</index>
+        <index>2</index>
+        <index>16</index>
     </vertices>
 </mod>
