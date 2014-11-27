@@ -56,21 +56,20 @@ void ofApp::setup()
 	
 	// MODEL
 	apparelModel.load(modelObjName);
-	apparelModel.setPosition(0,0,0);
+//	apparelModel.setPosition(0,0,0);
 	
-	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());
-	sceneFxBlur.allocate(ofGetWidth(),ofGetHeight());
+//	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());
+//	sceneFxBlur.allocate(ofGetWidth(),ofGetHeight());
 	
 
 	// MODS
-//	apparelModManager.addMod( new apparelMod_debug() );
-	apparelModManager.addMod( new apparelMod_authority() );
-	apparelModManager.addMod( new apparelMod_girliness() );
-	apparelModManager.addMod( new apparelMod_narcissism() );
-	apparelModManager.addMod( new apparelMod_vulgaropathy() );
-	apparelModManager.addMod( new apparelMod_pretentiousness() );
+	apparelModManager.addMod( new apparelMod_authoritopathy() );
+	apparelModManager.addMod( new apparelMod_sportopathy() );
+	apparelModManager.addMod( new apparelMood_noisopathy() );
 
-	apparelModManager.setModel(&apparelModel);
+	// **Copy** the model to every mod in the chain
+	apparelModManager.copyModelToMods(apparelModel);
+	apparelModManager.loadModData();
 
 	// CAM
 	cam.setDistance(200);
@@ -79,8 +78,8 @@ void ofApp::setup()
 
 	// TOOLS
 	OFAPPLOG->println("- creating tools");
-	pTool3D 		= new tool3D(&toolManager, &apparelModel);
-	pToolMods 		= new toolMods(&toolManager, &apparelModManager, &apparelModel);
+//	pTool3D 		= new tool3D(&toolManager);
+	pToolMods 		= new toolMods(&toolManager, &apparelModManager);
 	pToolNetwork 	= new toolNetwork(&toolManager);
 	pToolUser		= new toolUser(&toolManager, &user);
 	pToolCalibration= new toolCalibration(&toolManager);
@@ -88,19 +87,22 @@ void ofApp::setup()
 	toolManager.setLogo("ARicon_150x150.png");
 	toolManager.setFontName("fonts/LetterGothic.ttf");
 
-	toolManager.addTool( pTool3D );
+	//toolManager.addTool( pTool3D );
 	toolManager.addTool( pToolMods );
 	toolManager.addTool( pToolNetwork );
 	toolManager.addTool( pToolUser );
 	toolManager.addTool( pToolCalibration );
 	
 	
-	pTool3D->setSceneFbo(&sceneBuffer);
+//	pTool3D->setSceneFbo(&sceneBuffer);
 
 	toolManager.createControls(ofVec2f(400,100));
 
 	OFAPPLOG->println("- loading tools data");
 	toolManager.loadData();
+	
+	
+	apparelModManager.applyModChain();
 
 	OFAPPLOG->end();
 }
@@ -142,7 +144,7 @@ void ofApp::draw()
 		cam.begin();
 
 		// Filled
-    	ofSetColor(0);
+/*    	ofSetColor(0);
 		apparelModel.drawFaces();
 
 	    ofSetColor(255);
@@ -150,6 +152,7 @@ void ofApp::draw()
     	glPolygonOffset(-1,-1);
 		apparelModel.drawWireframe();
 		glDisable(GL_POLYGON_OFFSET_LINE);
+*/
 
 		toolManager.draw();
 

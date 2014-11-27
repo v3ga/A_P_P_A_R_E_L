@@ -28,13 +28,12 @@ class toolCalibrationData
 								}
  
 
- 		void					setPositionXY(float x, float y){m_modelPosition.x = x*m_modelPositionSensitivity;m_modelPosition.y = y*m_modelPositionSensitivity;}
- 
- 		void					setPositionXY(ofVec2f& p){setPositionXY(p.x,p.y);}
-		void					setPositionZ(float z){m_modelPosition.z = z;}
-		void					setScale(float s){m_modelScale = s*m_modelScaleSensitivity;}
+ 		void					setPositionXY	(float x, float y){m_modelPosition.x = x*m_modelPositionSensitivity;m_modelPosition.y = y*m_modelPositionSensitivity;}
+ 		void					setPositionXY	(ofVec2f& p){setPositionXY(p.x,p.y);}
+		void					setPositionZ	(float z){m_modelPosition.z = z;}
+		void					setScale		(float s){m_modelScale = s*m_modelScaleSensitivity;}
 
- 		void					toOSC(ofxOscMessage& oscMessage){
+ 		void					toOSC			(ofxOscMessage& oscMessage){
 									oscMessage.addFloatArg(m_modelPosition.x);
 									oscMessage.addFloatArg(m_modelPosition.y);
 									oscMessage.addFloatArg(m_modelPosition.z);
@@ -47,11 +46,8 @@ class toolCalibrationData
  		float					m_modelPositionSensitivity;
  		float					m_modelScaleSensitivity;
  
- 		string					toString()
-								{
-									string s = "position "+ofToString(m_modelPosition)+"; scale="+ofToString(m_modelScale);
-									return s;
-								}
+ 		string					toString(){return "position "+ofToString(m_modelPosition)+"; scale="+ofToString(m_modelScale);}
+
 };
 
 

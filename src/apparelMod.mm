@@ -19,8 +19,8 @@ apparelMod::apparelMod(string id)
 {
 	m_id 			= id;
 	mp_model 		= 0;
-	mp_modelChain	= 0;
 	mp_oscSender 	= 0;
+	m_isChanged		= false;
 	
 	m_isActive.setName("Active");
 	m_parameters.add(m_isActive);
@@ -41,31 +41,35 @@ ofAbstractParameter& apparelMod::getParameter(string name)
 void apparelMod::addFaceIndex(int faceIndex)
 {
 	m_indicesFaces.push_back(faceIndex);
+	setChanged(true);
 }
 
 //--------------------------------------------------------------
 void apparelMod::removeFaceIndex(int faceIndex)
 {
 	 m_indicesFaces.erase(std::remove(m_indicesFaces.begin(), m_indicesFaces.end(), faceIndex), m_indicesFaces.end());
+	setChanged(true);
 }
 
 //--------------------------------------------------------------
 void apparelMod::addVertexIndex(int vertexIndex)
 {
 	m_indicesVertex.push_back(vertexIndex);
+	setChanged(true);
 }
 
 //--------------------------------------------------------------
 void apparelMod::removeVertexIndex(int vertexIndex)
 {
 	 m_indicesVertex.erase(std::remove(m_indicesVertex.begin(), m_indicesVertex.end(), vertexIndex), m_indicesVertex.end());
+	setChanged(true);
 }
 
 
 //--------------------------------------------------------------
 void apparelMod::parameterChanged(ofAbstractParameter & parameter)
 {
-	// ofLog() << "apparelMod::parameterChanged() " << parameter.getName();
+	onParameterChanged(parameter);
 	if (mp_oscSender){
 		mp_oscSender->sendParameter( parameter );
 	}
@@ -196,6 +200,8 @@ void apparelMod::loadModel()
 	}
 
 	OFAPPLOG->end();
+	
+	setChanged(true);
 }
 
 //--------------------------------------------------------------
@@ -203,6 +209,7 @@ void apparelMod::loadModel(string& xml)
 {
 	m_settingsModel.loadFromBuffer(xml);
 	readModel();
+	setChanged(true);
 }
 
 //--------------------------------------------------------------
@@ -269,6 +276,9 @@ void apparelMod::loadParameters()
 	// WORDS
 	createWordsList();
 
+	// Add listener for PARAMETERS
+	ofAddListener(m_parameters.parameterChangedE, this, &apparelMod::parameterChanged);
+
 	// PARAMETERS DATA
 	ofxXmlSettings settingsParameters;
 	string pathParameters = getPathDocument("parameters.xml");
@@ -284,10 +294,9 @@ void apparelMod::loadParameters()
 	// Custom loading
 	loadParametersCustom();
 
-	// Add listener
-	ofAddListener(m_parameters.parameterChangedE, this, &apparelMod::parameterChanged);
 
 	OFAPPLOG->end();
+	setChanged(true);
 }
 
 //--------------------------------------------------------------
@@ -314,33 +323,23 @@ void apparelMod::setConfiguration(string name)
 	m_configurationName = name;
 }
 
+//--------------------------------------------------------------
+void apparelMod::copyModelFrom(const apparelModel& model)
+{
+	m_model.copyMeshAndTransformation(model);
+	clearSelection();
+	setChanged(true);
+}
 
 //--------------------------------------------------------------
-void apparelMod::apply(apparelMod* pPreviousMod)
+void apparelMod::clearSelection()
 {
-	apparelModel* pModel = 0;
-	vector<int>* pIndicesFaces = 0;
-	vector<int>* pIndicesVertex = 0;
-
-	if (pPreviousMod==0)
-	{
-		pModel = mp_model;
-		pIndicesFaces = &m_indicesFaces;
-		pIndicesVertex = &m_indicesVertex;
-	}
-	else
-	{
-		pModel = pPreviousMod->mp_modelChain;
-		pIndicesFaces = &pPreviousMod->m_indicesFacesChain;
-		pIndicesVertex = &pPreviousMod->m_indicesVertexChain;
-	}
-
-
-	if (pModel && pIndicesFaces && pIndicesVertex)
-	{
-				
-	}
+	m_indicesVertex.clear();
+	m_indicesFaces.clear();
+	setChanged(true);
 }
+
+
 
 
 

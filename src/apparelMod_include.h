@@ -8,11 +8,13 @@
 
 #pragma once
 
-#include "apparelMod_authority.h"
-#include "apparelMod_girliness.h"
-#include "apparelMod_narcissism.h"
+#include "apparelMod_authoritopathy.h"
+#include "apparelMod_sportopathy.h"
+#include "apparelMod_pedopathy.h"
 #include "apparelMod_vulgaropathy.h"
-#include "apparelMod_pretentiousness.h"
+
+#include "apparelMood_noisopathy.h"
+
 
 // Used for debug purposes only
-#include "apparelMod_debug.h"
+// #include "apparelMod_debug.h"

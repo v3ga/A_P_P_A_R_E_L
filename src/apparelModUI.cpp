@@ -81,8 +81,6 @@ void apparelModUI::handleEvents(ofxUIEventArgs& e)
 		ofParameter<bool>& parameterBool = (ofParameter<bool>&) parameter;
 		parameterBool.set( ((ofxUIToggle *) e.widget)->getValue() );
 	}
-
-	
 }
 
 

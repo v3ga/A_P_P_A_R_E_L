@@ -77,6 +77,10 @@
 		F9131FF41936276500449924 /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9131FEE1936276500449924 /* Ray.cpp */; };
 		F9267595193A095C00CB2599 /* meshFaceSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9267593193A095C00CB2599 /* meshFaceSelector.cpp */; };
 		F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9267596193A16C500CB2599 /* meshVertexSelector.cpp */; };
+		F92C49301A24D47E006CE219 /* apparelMod_sportopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F92C492E1A24D47E006CE219 /* apparelMod_sportopathy.cpp */; };
+		F92C49331A24D4E0006CE219 /* apparelMod_authoritopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F92C49311A24D4E0006CE219 /* apparelMod_authoritopathy.cpp */; };
+		F92C49361A24D54B006CE219 /* apparelMod_pedopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F92C49341A24D54B006CE219 /* apparelMod_pedopathy.cpp */; };
+		F92C49391A24D661006CE219 /* apparelMood_noisopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F92C49371A24D661006CE219 /* apparelMood_noisopathy.cpp */; };
 		F932F030196C481E00C82556 /* oscDefs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F02C196C481E00C82556 /* oscDefs.cpp */; };
 		F932F031196C481E00C82556 /* oscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F02E196C481E00C82556 /* oscReceiver.cpp */; };
 		F932F05D196C488900C82556 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F037196C488900C82556 /* IpEndpointName.cpp */; };
@@ -93,10 +97,6 @@
 		F932F06A196C488900C82556 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F05B196C488900C82556 /* ofxOscSender.cpp */; };
 		F932F0BD196D774000C82556 /* oscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F932F0BB196D774000C82556 /* oscSender.cpp */; };
 		F93331B719F9356400583FC6 /* oscSenderInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93331B519F9356400583FC6 /* oscSenderInterface.cpp */; };
-		F93C8B3119824DE5006CC178 /* apparelMod_pretentiousness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */; };
-		F93C8B3419824E01006CC178 /* apparelMod_girliness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */; };
-		F93C8B3719824E1C006CC178 /* apparelMod_narcissism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B3519824E1C006CC178 /* apparelMod_narcissism.cpp */; };
-		F93C8B3A19824E33006CC178 /* apparelMod_vulgaropathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F93C8B3819824E33006CC178 /* apparelMod_vulgaropathy.cpp */; };
 		F9489231197E72C000085C6B /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = F9489218197E72C000085C6B /* sqlite3.c */; };
 		F9489232197E72C000085C6B /* ofxSQLite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948921B197E72C000085C6B /* ofxSQLite.cpp */; };
 		F9489233197E72C000085C6B /* ofxSQLiteAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948921D197E72C000085C6B /* ofxSQLiteAbstract.cpp */; };
@@ -110,8 +110,6 @@
 		F9489275197FEEE900085C6B /* toolUser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489273197FEEE900085C6B /* toolUser.cpp */; };
 		F9489279197FF98200085C6B /* ofxUILogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489277197FF98200085C6B /* ofxUILogger.cpp */; };
 		F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948927B197FFE5400085C6B /* toolCalibration.cpp */; };
-		F957698E19388F7C00609E70 /* tool3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F957698C19388F7C00609E70 /* tool3D.cpp */; };
-		F95769921938DC1C00609E70 /* toolModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95769901938DC1C00609E70 /* toolModel.cpp */; };
 		F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */; };
 		F96FBA5B1976D25500E58A6F /* userSocialInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA591976D25500E58A6F /* userSocialInterface.cpp */; };
 		F96FBAA31976D37900E58A6F /* ofxTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA971976D37900E58A6F /* ofxTwitter.cpp */; };
@@ -123,13 +121,11 @@
 		F96FBE6C197724CE00E58A6F /* userTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE6A197724CE00E58A6F /* userTwitter.cpp */; };
 		F96FBE721977D9F800E58A6F /* userSocialFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE701977D9F800E58A6F /* userSocialFactory.cpp */; };
 		F96FBE7519781E4600E58A6F /* apparelModManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE7319781E4600E58A6F /* apparelModManager.cpp */; };
-		F9AB0BDE193DB9860020D78A /* apparelMod_debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */; };
 		F9AB0BE91940FA220020D78A /* tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BE71940FA220020D78A /* tool.cpp */; };
 		F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ED4467DFF0AC3482E9362 /* ofxUIMultiImageToggle.cpp */; };
 		F9C6660D193CA6BF00C8225D /* apparelModUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C6660B193CA6BF00C8225D /* apparelModUI.cpp */; };
 		F9C66611193CAB4C00C8225D /* toolMods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C6660F193CAB4C00C8225D /* toolMods.cpp */; };
 		F9C66615193CABD200C8225D /* data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C66614193CABD200C8225D /* data.cpp */; };
-		F9C66619193CAD9A00C8225D /* apparelMod_authority.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C66617193CAD9A00C8225D /* apparelMod_authority.cpp */; };
 		F9D2CC20192A4E4700BF8F14 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D2CC19192A4E4700BF8F14 /* tinyxml.cpp */; };
 		F9D2CC21192A4E4700BF8F14 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D2CC1B192A4E4700BF8F14 /* tinyxmlerror.cpp */; };
 		F9D2CC22192A4E4700BF8F14 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9D2CC1C192A4E4700BF8F14 /* tinyxmlparser.cpp */; };
@@ -344,6 +340,14 @@
 		F9267594193A095C00CB2599 /* meshFaceSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meshFaceSelector.h; sourceTree = "<group>"; };
 		F9267596193A16C500CB2599 /* meshVertexSelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = meshVertexSelector.cpp; sourceTree = "<group>"; };
 		F9267597193A16C500CB2599 /* meshVertexSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meshVertexSelector.h; sourceTree = "<group>"; };
+		F92C492E1A24D47E006CE219 /* apparelMod_sportopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_sportopathy.cpp; sourceTree = "<group>"; };
+		F92C492F1A24D47E006CE219 /* apparelMod_sportopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_sportopathy.h; sourceTree = "<group>"; };
+		F92C49311A24D4E0006CE219 /* apparelMod_authoritopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_authoritopathy.cpp; sourceTree = "<group>"; };
+		F92C49321A24D4E0006CE219 /* apparelMod_authoritopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_authoritopathy.h; sourceTree = "<group>"; };
+		F92C49341A24D54B006CE219 /* apparelMod_pedopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_pedopathy.cpp; sourceTree = "<group>"; };
+		F92C49351A24D54B006CE219 /* apparelMod_pedopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_pedopathy.h; sourceTree = "<group>"; };
+		F92C49371A24D661006CE219 /* apparelMood_noisopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMood_noisopathy.cpp; sourceTree = "<group>"; };
+		F92C49381A24D661006CE219 /* apparelMood_noisopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMood_noisopathy.h; sourceTree = "<group>"; };
 		F932F02C196C481E00C82556 /* oscDefs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oscDefs.cpp; sourceTree = "<group>"; };
 		F932F02D196C481E00C82556 /* oscDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oscDefs.h; sourceTree = "<group>"; };
 		F932F02E196C481E00C82556 /* oscReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oscReceiver.cpp; sourceTree = "<group>"; };
@@ -384,14 +388,6 @@
 		F932F0BC196D774000C82556 /* oscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oscSender.h; sourceTree = "<group>"; };
 		F93331B519F9356400583FC6 /* oscSenderInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = oscSenderInterface.cpp; sourceTree = "<group>"; };
 		F93331B619F9356400583FC6 /* oscSenderInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oscSenderInterface.h; sourceTree = "<group>"; };
-		F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_pretentiousness.cpp; sourceTree = "<group>"; };
-		F93C8B3019824DE5006CC178 /* apparelMod_pretentiousness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_pretentiousness.h; sourceTree = "<group>"; };
-		F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_girliness.cpp; sourceTree = "<group>"; };
-		F93C8B3319824E01006CC178 /* apparelMod_girliness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_girliness.h; sourceTree = "<group>"; };
-		F93C8B3519824E1C006CC178 /* apparelMod_narcissism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_narcissism.cpp; sourceTree = "<group>"; };
-		F93C8B3619824E1C006CC178 /* apparelMod_narcissism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_narcissism.h; sourceTree = "<group>"; };
-		F93C8B3819824E33006CC178 /* apparelMod_vulgaropathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_vulgaropathy.cpp; sourceTree = "<group>"; };
-		F93C8B3919824E33006CC178 /* apparelMod_vulgaropathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_vulgaropathy.h; sourceTree = "<group>"; };
 		F93C8B3B19824FCC006CC178 /* apparelMod_include.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = apparelMod_include.h; sourceTree = "<group>"; };
 		F9489214197E72C000085C6B /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		F9489218197E72C000085C6B /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
@@ -425,10 +421,6 @@
 		F9489278197FF98200085C6B /* ofxUILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUILogger.h; sourceTree = "<group>"; };
 		F948927B197FFE5400085C6B /* toolCalibration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolCalibration.cpp; sourceTree = "<group>"; };
 		F948927C197FFE5400085C6B /* toolCalibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolCalibration.h; sourceTree = "<group>"; };
-		F957698C19388F7C00609E70 /* tool3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool3D.cpp; sourceTree = "<group>"; };
-		F957698D19388F7C00609E70 /* tool3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool3D.h; sourceTree = "<group>"; };
-		F95769901938DC1C00609E70 /* toolModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolModel.cpp; sourceTree = "<group>"; };
-		F95769911938DC1C00609E70 /* toolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolModel.h; sourceTree = "<group>"; };
 		F96FBA4E1975406300E58A6F /* configuration.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = configuration.xml; path = bin/data/configuration.xml; sourceTree = "<group>"; };
 		F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofAppLog.cpp; sourceTree = "<group>"; };
 		F96FBA5119755AEA00E58A6F /* ofAppLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofAppLog.h; sourceTree = "<group>"; };
@@ -481,8 +473,6 @@
 		F96FBE7319781E4600E58A6F /* apparelModManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelModManager.cpp; sourceTree = "<group>"; };
 		F96FBE7419781E4600E58A6F /* apparelModManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelModManager.h; sourceTree = "<group>"; };
 		F9A4454B00CCFD7265D3CA85 /* ofxUILabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUILabelButton.cpp; path = ../../../addons/ofxUI/src/ofxUILabelButton.cpp; sourceTree = SOURCE_ROOT; };
-		F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_debug.cpp; sourceTree = "<group>"; };
-		F9AB0BDD193DB9860020D78A /* apparelMod_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_debug.h; sourceTree = "<group>"; };
 		F9AB0BE71940FA220020D78A /* tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool.cpp; sourceTree = "<group>"; };
 		F9AB0BE81940FA220020D78A /* tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool.h; sourceTree = "<group>"; };
 		F9C6660B193CA6BF00C8225D /* apparelModUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelModUI.cpp; sourceTree = "<group>"; };
@@ -491,8 +481,6 @@
 		F9C66610193CAB4C00C8225D /* toolMods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolMods.h; sourceTree = "<group>"; };
 		F9C66613193CABD200C8225D /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
 		F9C66614193CABD200C8225D /* data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = data.cpp; sourceTree = "<group>"; };
-		F9C66617193CAD9A00C8225D /* apparelMod_authority.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_authority.cpp; sourceTree = "<group>"; };
-		F9C66618193CAD9A00C8225D /* apparelMod_authority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_authority.h; sourceTree = "<group>"; };
 		F9D2CC19192A4E4700BF8F14 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		F9D2CC1A192A4E4700BF8F14 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		F9D2CC1B192A4E4700BF8F14 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -1315,10 +1303,6 @@
 		F9C66612193CAB5300C8225D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				F957698C19388F7C00609E70 /* tool3D.cpp */,
-				F957698D19388F7C00609E70 /* tool3D.h */,
-				F95769901938DC1C00609E70 /* toolModel.cpp */,
-				F95769911938DC1C00609E70 /* toolModel.h */,
 				F9C6660F193CAB4C00C8225D /* toolMods.cpp */,
 				F9C66610193CAB4C00C8225D /* toolMods.h */,
 				F9489270197FED4900085C6B /* toolNetwork.cpp */,
@@ -1334,18 +1318,14 @@
 		F9C66616193CAD7700C8225D /* Mods */ = {
 			isa = PBXGroup;
 			children = (
-				F9C66617193CAD9A00C8225D /* apparelMod_authority.cpp */,
-				F9C66618193CAD9A00C8225D /* apparelMod_authority.h */,
-				F9AB0BDC193DB9860020D78A /* apparelMod_debug.cpp */,
-				F9AB0BDD193DB9860020D78A /* apparelMod_debug.h */,
-				F93C8B2F19824DE5006CC178 /* apparelMod_pretentiousness.cpp */,
-				F93C8B3019824DE5006CC178 /* apparelMod_pretentiousness.h */,
-				F93C8B3219824E01006CC178 /* apparelMod_girliness.cpp */,
-				F93C8B3319824E01006CC178 /* apparelMod_girliness.h */,
-				F93C8B3519824E1C006CC178 /* apparelMod_narcissism.cpp */,
-				F93C8B3619824E1C006CC178 /* apparelMod_narcissism.h */,
-				F93C8B3819824E33006CC178 /* apparelMod_vulgaropathy.cpp */,
-				F93C8B3919824E33006CC178 /* apparelMod_vulgaropathy.h */,
+				F92C49311A24D4E0006CE219 /* apparelMod_authoritopathy.cpp */,
+				F92C49321A24D4E0006CE219 /* apparelMod_authoritopathy.h */,
+				F92C492E1A24D47E006CE219 /* apparelMod_sportopathy.cpp */,
+				F92C492F1A24D47E006CE219 /* apparelMod_sportopathy.h */,
+				F92C49341A24D54B006CE219 /* apparelMod_pedopathy.cpp */,
+				F92C49351A24D54B006CE219 /* apparelMod_pedopathy.h */,
+				F92C49371A24D661006CE219 /* apparelMood_noisopathy.cpp */,
+				F92C49381A24D661006CE219 /* apparelMood_noisopathy.h */,
 				F93C8B3B19824FCC006CC178 /* apparelMod_include.h */,
 			);
 			name = Mods;
@@ -1561,15 +1541,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9AB0BDE193DB9860020D78A /* apparelMod_debug.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				F9D35E8319ACCBDE00B63E8E /* apparelMod.mm in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				F957698E19388F7C00609E70 /* tool3D.cpp in Sources */,
 				F932F06A196C488900C82556 /* ofxOscSender.cpp in Sources */,
 				3B8120368B4FCCD80883BAF3 /* ofxAssimpAnimation.cpp in Sources */,
 				F9C6660D193CA6BF00C8225D /* apparelModUI.cpp in Sources */,
+				F92C49331A24D4E0006CE219 /* apparelMod_authoritopathy.cpp in Sources */,
 				483FA4F6D5FA6422C559B1F5 /* ofxAssimpMeshHelper.cpp in Sources */,
+				F92C49361A24D54B006CE219 /* apparelMod_pedopathy.cpp in Sources */,
 				F9131FF11936276500449924 /* Camera.cpp in Sources */,
 				8DED5056525646FA71980866 /* ofxAssimpModelLoader.cpp in Sources */,
 				B8846EF8E504895A4A9EFEC0 /* ofxAssimpTexture.cpp in Sources */,
@@ -1583,7 +1563,6 @@
 				F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */,
 				F1E8DE8734BA6F69A5112FA8 /* ofxUIBaseDraws.cpp in Sources */,
 				C381F2B7CFD84C0E540EB4BC /* ofxUIBiLabelSlider.cpp in Sources */,
-				F93C8B3A19824E33006CC178 /* apparelMod_vulgaropathy.cpp in Sources */,
 				F9D2CC22192A4E4700BF8F14 /* tinyxmlparser.cpp in Sources */,
 				F9131FF21936276500449924 /* Plane.cpp in Sources */,
 				F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */,
@@ -1626,10 +1605,10 @@
 				F9C66615193CABD200C8225D /* data.cpp in Sources */,
 				FB8AA9FA6535767BE31806BC /* ofxUIImageToggle.cpp in Sources */,
 				7C3DC84C9BFCBD2866DB2B6C /* ofxUILabel.cpp in Sources */,
-				F95769921938DC1C00609E70 /* toolModel.cpp in Sources */,
 				FFD1EBFCA24DFB4E4427B4FE /* ofxUILabelButton.cpp in Sources */,
 				F9D2CC21192A4E4700BF8F14 /* tinyxmlerror.cpp in Sources */,
 				C30B3A2A37F8F32EE7318718 /* ofxUILabelToggle.cpp in Sources */,
+				F92C49301A24D47E006CE219 /* apparelMod_sportopathy.cpp in Sources */,
 				9A83D1B3FB64456BC907667F /* ofxUIMinimalSlider.cpp in Sources */,
 				F9131FF41936276500449924 /* Ray.cpp in Sources */,
 				F440B307990F8F5CE40B9111 /* ofxUIMovingGraph.cpp in Sources */,
@@ -1641,7 +1620,6 @@
 				F96FBBE21976D3AC00E58A6F /* ofxJSONElement.cpp in Sources */,
 				F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */,
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
-				F93C8B3719824E1C006CC178 /* apparelMod_narcissism.cpp in Sources */,
 				D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */,
 				1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */,
 				F9489279197FF98200085C6B /* ofxUILogger.cpp in Sources */,
@@ -1650,6 +1628,7 @@
 				43BADBB2FE0F17D34B57A705 /* ofxUIScrollableCanvas.cpp in Sources */,
 				F9131F6319352D6C00449924 /* globals.cpp in Sources */,
 				F9489231197E72C000085C6B /* sqlite3.c in Sources */,
+				F92C49391A24D661006CE219 /* apparelMood_noisopathy.cpp in Sources */,
 				740A58CBFDFE578C83A349AF /* ofxUISlider.cpp in Sources */,
 				F9489239197E72C000085C6B /* ofxSQLiteUpdate.cpp in Sources */,
 				F932F068196C488900C82556 /* ofxOscParameterSync.cpp in Sources */,
@@ -1674,10 +1653,7 @@
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */,
 				F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */,
-				F93C8B3119824DE5006CC178 /* apparelMod_pretentiousness.cpp in Sources */,
-				F9C66619193CAD9A00C8225D /* apparelMod_authority.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
-				F93C8B3419824E01006CC178 /* apparelMod_girliness.cpp in Sources */,
 				F932F05D196C488900C82556 /* IpEndpointName.cpp in Sources */,
 				CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */,
 			);

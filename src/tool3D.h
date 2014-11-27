@@ -17,7 +17,7 @@ class toolMods;
 class tool3D : public tool
 {
 	public:
-		tool3D				(toolManager* parent, apparelModel* model);
+		tool3D				(toolManager* parent);
 
 		void				createControlsCustom();
 		void				update				();
@@ -69,4 +69,7 @@ class tool3D : public tool
 		};
 	
 		enumSelection		m_selection;
+ 
+	private:
+		ofxUILabel*			mp_lblModel;
 };

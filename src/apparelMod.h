@@ -8,10 +8,10 @@
 
 #pragma once
 #include "ofMain.h"
+#include "apparelModel.h"
 #include "ofxXmlSettings.h"
 #include "oscSenderInterface.h"
 
-class apparelModel;
 class apparelMod
 {
 	public:
@@ -42,6 +42,8 @@ class apparelMod
 		ofParameterGroup&	getParamatersGroupRef	(){return m_parameters;}
 		ofAbstractParameter&getParameter			(string name);
 		virtual void		parameterChanged		(ofAbstractParameter & parameter);
+		virtual	void		onParameterChanged		(ofAbstractParameter & parameter){}
+
 		string				getPathRelative			(string filename="");
 		string				getPathToolMods			(string filename){return "tools/mods/"+filename;}
 
@@ -51,6 +53,11 @@ class apparelMod
 		void				addVertexIndex			(int vertexIndex);
 		void				removeVertexIndex		(int vertexIndex);
 
+
+		// STATE
+		void				setChanged				(bool is=true){m_isChanged = is;}
+		bool				isChanged				(){return m_isChanged;}
+ 		bool				m_isChanged;			// tells if mesh itself or selection (vertices, faces) changed
 
 		// DRAWING
 		virtual void		draw					(){};
@@ -69,15 +76,14 @@ class apparelMod
 		string				getId					(){return m_id;}
 
 		// MODEL w/ DATA
-		apparelModel*			mp_model;			// original model
-	   	vector<int>				m_indicesFaces;		// selected faces on original model
-		vector<int>				m_indicesVertex;	// selected vertices on original model
+		apparelModel*		mp_model;			// original model
+		apparelModel		m_model;
+	   	vector<int>			m_indicesFaces;		// selected faces on original model
+		vector<int>			m_indicesVertex;	// selected vertices on original model
 
-		apparelModel*			mp_modelChain;
-	   	vector<int>				m_indicesFacesChain;
-		vector<int>				m_indicesVertexChain;
- 
-		void					apply				(apparelMod* pPreviousMod);
+		virtual void		copyModelFrom		(const apparelModel& model);
+		virtual void		clearSelection		();
+		virtual void		apply				(){};
 
 		// PARAMETERS CONFIGURATION
 		string				m_configurationName;
@@ -86,6 +92,7 @@ class apparelMod
 		ofParameterGroup 	m_parameters;
 		ofParameter<bool>	m_isActive;
 		ofParameter<float>	m_weight;
+
 
 		// SETTINGS
 		ofxXmlSettings		m_settingsModel;

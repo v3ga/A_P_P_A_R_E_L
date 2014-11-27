@@ -14,7 +14,7 @@
 #define TOOL3D_SIZE_NORMALS	4.0
 
 //--------------------------------------------------------------
-tool3D::tool3D(toolManager* parent, apparelModel* model) : tool("3D", parent)
+tool3D::tool3D(toolManager* parent) : tool("3D", parent)
 {
 	mp_toolMods				= 0;
 	mp_apparelModCurrent	= 0;
@@ -26,7 +26,9 @@ tool3D::tool3D(toolManager* parent, apparelModel* model) : tool("3D", parent)
 	m_meshFaceIndexOver		= -1;
 	m_meshVertexIndexOver	= -1;
 	mp_meshVertexOver		= 0;
-	mp_apparelModel			= model;
+	mp_apparelModel			= 0;
+	
+	mp_lblModel				= 0;
 	
 	m_sphereVertexOver.setRadius(3.0f);
 	m_sphereVertexOver.setResolution(2);
@@ -40,7 +42,7 @@ void tool3D::createControlsCustom()
 {
 	if (mp_canvas)
 	{
-		mp_canvas->addLabel("Model :" + (mp_apparelModel ? mp_apparelModel->getId() : "???"));
+		mp_lblModel = mp_canvas->addLabel("Model :" + (mp_apparelModel ? mp_apparelModel->getId() : "???"));
 		mp_canvas->addSpacer(300,1);
 
 	    mp_canvas->addToggle("show vertex normals", m_bShowVertexNormals, OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
@@ -115,6 +117,18 @@ void tool3D::draw()
 
 	 vector<ofVec3f>& apparelModelVert 		= mp_apparelModel->getVerticesRef();
 	 vector<ofVec3f>& apparelModelNormals 	= mp_apparelModel->getNormalsRef();
+
+
+	// MODEL
+	ofSetColor(0);
+	mp_apparelModel->drawFaces();
+
+	ofSetColor(255);
+	glEnable(GL_POLYGON_OFFSET_LINE);
+	glPolygonOffset(-1,-1);
+	mp_apparelModel->drawWireframe();
+	glDisable(GL_POLYGON_OFFSET_LINE);
+
 
 	// VERTEX NORMALS
 	if (m_bShowVertexNormals)
@@ -360,7 +374,13 @@ bool tool3D::isVertexSelected(int index)
 //--------------------------------------------------------------
 void tool3D::onSelectMod(apparelMod* pMod)
 {
+	if (pMod == 0) return;
+	
+	OFAPPLOG->begin("tool3D::onSelectMod(\""+pMod->getId()+"\")");
+	OFAPPLOG->println(" - mp_apparelModel=" + ofToString( (int)mp_apparelModel ) );
+
 	mp_apparelModCurrent = pMod;
+	mp_apparelModel = &pMod->m_model;
 
 	if (mp_apparelModCurrent)
 	{
@@ -375,6 +395,18 @@ void tool3D::onSelectMod(apparelMod* pMod)
 		
 		}
 	}
+
+
+	// TODO : put this in updateControls() method
+	if (mp_lblModel)
+	{
+		string strLblModel = "model "+mp_apparelModel->getId()+" for "+pMod->getId();
+		mp_lblModel->setLabel(strLblModel);
+
+		OFAPPLOG->println(" - strLblModel=" + strLblModel  );
+	}
+
+	OFAPPLOG->end();
 }
 
 

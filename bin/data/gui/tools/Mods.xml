@@ -1,25 +1,40 @@
 <Widget>
     <Kind>2</Kind>
-    <Name>Authority</Name>
+    <Name>show vertex normals</Name>
     <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
-    <Name>Girliness</Name>
+    <Name>show face normals</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Vertex</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Face</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Distance</Name>
+    <Value>71.533332825</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Authoritopathy</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Sportopathy</Name>
     <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
-    <Name>Narcissism</Name>
-    <Value>0</Value>
-</Widget>
-<Widget>
-    <Kind>2</Kind>
-    <Name>Pretentiousness</Name>
-    <Value>0</Value>
-</Widget>
-<Widget>
-    <Kind>2</Kind>
-    <Name>Vulgaropathy</Name>
+    <Name>Noisopathy</Name>
     <Value>0</Value>
 </Widget>

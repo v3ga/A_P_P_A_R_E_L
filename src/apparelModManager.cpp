@@ -20,10 +20,22 @@ void apparelModManager::addMod(apparelMod* mod)
 {
 	if (mod)
 	{
-		mod->loadModel();
-		mod->loadParameters();
 		mod->setOscSender( (oscSenderInterface*) GLOBALS->getOscSender() );
 		m_mods[mod->m_id] = mod;
+		m_modsChain.push_back(mod);
+	}
+	//makeModsChain();
+}
+
+
+//--------------------------------------------------------------
+void apparelModManager::loadModData()
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it)
+	{
+		it->second->loadModel();
+		it->second->loadParameters();
 	}
 }
 
@@ -36,14 +48,13 @@ void apparelModManager::setModel(apparelModel* pModel)
 	}
 }
 
-
 //--------------------------------------------------------------
-apparelModel* apparelModManager::getModelToDraw()
+void apparelModManager::copyModelToMods(const apparelModel& model)
 {
-	int nbModsOrdered = m_modsOrdered.size();
-	if (nbModsOrdered>=1)
-	{
-		return m_modsOrdered[nbModsOrdered-1]->mp_modelChain;
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it){
+		apparelMod* pMod = it->second;
+		pMod->copyModelFrom(model);
 	}
 }
 
@@ -98,34 +109,52 @@ void apparelModManager::deleteMods()
 //--------------------------------------------------------------
 void apparelModManager::draw()
 {
+/*
 	map<string, apparelMod*>::iterator it;
 	for (it = m_mods.begin(); it != m_mods.end(); ++it){
 		it->second->draw();
 	}
+*/
+	int nbMods = m_modsChain.size();
+	if (nbMods>=1)
+	{
+		m_modsChain[nbMods-1]->draw();
+	}
 }
 
 //--------------------------------------------------------------
+/*
 void apparelModManager::addChain(apparelMod* pMod)
 {
 	m_modsOrdered.push_back(pMod);
 }
+*/
 
 //--------------------------------------------------------------
-void apparelModManager::applyChain()
+void apparelModManager::applyModChain()
 {
-	int nbMods = m_modsOrdered.size();
-	if (nbMods>=1)
+	int nbMods = m_modsChain.size();
+	
+	// Copy if something changed at some point
+	for (int i=1; i<nbMods; i++)
 	{
-		apparelMod* pPreviousMod = 0;
-		for (int i=0;i<nbMods;i++)
+		if (m_modsChain[i-1]->isChanged())
 		{
-			m_modsOrdered[i]->apply(pPreviousMod);
-			pPreviousMod = m_modsOrdered[i];
+			m_modsChain[i]->copyModelFrom( m_modsChain[i-1]->m_model );
+		}
+	}
+	
+
+	// Ok now apply mod modifications
+	for (int i=0; i<nbMods; i++)
+	{
+		if (m_modsChain[i]->isChanged())
+		{
+			m_modsChain[i]->apply();
+			m_modsChain[i]->setChanged(false);
 		}
 	}
 }
-
-
 
 //--------------------------------------------------------------
 void apparelModManager::onNewText(string text)
@@ -143,6 +172,15 @@ void apparelModManager::onNewWords(vector<string>& words)
 	for (it = m_mods.begin(); it != m_mods.end(); ++it){
 		it->second->onNewWords(words);
 	}
+}
+
+//--------------------------------------------------------------
+void apparelModManager::makeModsChain()
+{
+/*	m_modsChain.clear();
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it)
+*/
 }
 
 
