@@ -154,6 +154,12 @@ void apparelModManager::applyModChain()
 			m_modsChain[i]->setChanged(false);
 		}
 	}
+
+	// perform update
+	for (int i=0; i<nbMods; i++)
+	{
+	  m_modsChain[i]->update();
+	}
 }
 
 //--------------------------------------------------------------

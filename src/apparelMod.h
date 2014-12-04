@@ -84,6 +84,9 @@ class apparelMod
 		virtual void		copyModelFrom		(const apparelModel& model);
 		virtual void		clearSelection		();
 		virtual void		apply				(){};
+ 
+		// UPDATE
+		virtual	void		update				(){}
 
 		// PARAMETERS CONFIGURATION
 		string				m_configurationName;

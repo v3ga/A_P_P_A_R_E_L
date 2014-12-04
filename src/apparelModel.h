@@ -21,6 +21,7 @@ class apparelModel
 		bool						loadProperties	();
 		bool						saveProperties	();
 
+
 		void						drawFaces		();
 		void						drawWireframe	();
  
