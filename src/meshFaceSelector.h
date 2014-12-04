@@ -10,23 +10,24 @@
 
 #include "ofMain.h"
 #include "ofxRay.h"
+#include "ofMeshFaceApparel.h"
 
 struct meshFaceSelectorResult
 {
-	ofMeshFace* 	face;
-	int				faceIndex;
+	ofMeshFaceApparel* 	face;
+	int					faceIndex;
 
-	ofVec3f*		vertex;
-	ofVec2f			vertexScreen;
-	int 			vertexIndex;
+	ofVec3f*			vertex;
+	ofVec2f				vertexScreen;
+	int 				vertexIndex;
 };
 
 class meshFaceSelector
 {
 	public:
 	
-		virtual meshFaceSelectorResult*		select				(const vector<ofMeshFace>& faces, const ofCamera& cam, const ofVec2f& point);
-		virtual	void						onMeshFaceSelected	(ofMeshFace* face, const ofVec3f pointInFace){}
+		virtual meshFaceSelectorResult*		select				(const vector<ofMeshFaceApparel*>& faces, const ofCamera& cam, const ofVec2f& point);
+		virtual	void						onMeshFaceSelected	(ofMeshFaceApparel* face, const ofVec3f pointInFace){}
 
 	protected:
 		bool						isPointInTriangle	(const ofVec3f& A, const ofVec3f& B, const ofVec3f& C, const ofVec3f& P);

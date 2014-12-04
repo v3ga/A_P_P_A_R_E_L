@@ -14,4 +14,9 @@ class apparelMod_sportopathy : public apparelMod
 {
 	public:
 		apparelMod_sportopathy	();
+
+ 
+ 		void	apply				();
+		void	onParameterChanged	(ofAbstractParameter& parameter);
+
 };

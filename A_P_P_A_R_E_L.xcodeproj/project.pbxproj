@@ -75,6 +75,7 @@
 		F9131FF21936276500449924 /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9131FEA1936276500449924 /* Plane.cpp */; };
 		F9131FF31936276500449924 /* Projector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9131FEC1936276500449924 /* Projector.cpp */; };
 		F9131FF41936276500449924 /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9131FEE1936276500449924 /* Ray.cpp */; };
+		F91ACC3B1A30FBE800B06A0F /* ofMeshFaceApparel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACC391A30FBE800B06A0F /* ofMeshFaceApparel.cpp */; };
 		F9267595193A095C00CB2599 /* meshFaceSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9267593193A095C00CB2599 /* meshFaceSelector.cpp */; };
 		F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9267596193A16C500CB2599 /* meshVertexSelector.cpp */; };
 		F92C49301A24D47E006CE219 /* apparelMod_sportopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F92C492E1A24D47E006CE219 /* apparelMod_sportopathy.cpp */; };
@@ -335,6 +336,8 @@
 		F9131FED1936276500449924 /* Projector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projector.h; sourceTree = "<group>"; };
 		F9131FEE1936276500449924 /* Ray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ray.cpp; sourceTree = "<group>"; };
 		F9131FEF1936276500449924 /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
+		F91ACC391A30FBE800B06A0F /* ofMeshFaceApparel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofMeshFaceApparel.cpp; sourceTree = "<group>"; };
+		F91ACC3A1A30FBE800B06A0F /* ofMeshFaceApparel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofMeshFaceApparel.h; sourceTree = "<group>"; };
 		F926758D19392F7200CB2599 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = SOURCE_ROOT; };
 		F9267593193A095C00CB2599 /* meshFaceSelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = meshFaceSelector.cpp; sourceTree = "<group>"; };
 		F9267594193A095C00CB2599 /* meshFaceSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meshFaceSelector.h; sourceTree = "<group>"; };
@@ -898,6 +901,8 @@
 		F9267592193A093B00CB2599 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F91ACC3A1A30FBE800B06A0F /* ofMeshFaceApparel.h */,
+				F91ACC391A30FBE800B06A0F /* ofMeshFaceApparel.cpp */,
 				F9267593193A095C00CB2599 /* meshFaceSelector.cpp */,
 				F9267594193A095C00CB2599 /* meshFaceSelector.h */,
 				F9267596193A16C500CB2599 /* meshVertexSelector.cpp */,
@@ -1597,6 +1602,7 @@
 				F9489234197E72C000085C6B /* ofxSQLiteDelete.cpp in Sources */,
 				F96FBB591976D39100E58A6F /* ofxOAuth.cpp in Sources */,
 				F9489232197E72C000085C6B /* ofxSQLite.cpp in Sources */,
+				F91ACC3B1A30FBE800B06A0F /* ofMeshFaceApparel.cpp in Sources */,
 				F932F065196C488900C82556 /* OscTypes.cpp in Sources */,
 				F9489275197FEEE900085C6B /* toolUser.cpp in Sources */,
 				F948923E197E9C8A00085C6B /* ofxTicker.cpp in Sources */,

@@ -8,67 +8,60 @@
 
 #pragma once
 #include "ofxAssimpModelLoader.h"
-
-class ofMeshFaceIndices
-{
-	public:
-		ofMeshFaceIndices	(int index0,int index1,int index2){m_index[0]=index0;m_index[1]=index1;m_index[2]=index2;}
-		ofMeshFaceIndices& operator=(const ofMeshFaceIndices& other)
-		{
-			m_index[0] = other.m_index[0];
-			m_index[1] = other.m_index[1];
-			m_index[2] = other.m_index[2];
-			
-			return *this;
-		}
-
-		int					m_index[3];
-};
+#include "ofMeshFaceApparel.h"
 
 class apparelModel
 {
 	public:
-		apparelModel	();
+		apparelModel				();
+		~apparelModel				();
 	
 
-        bool 				load			(string modelName, bool optimize=false);
-		bool				loadProperties	();
-		bool				saveProperties	();
+        bool 						load			(string modelName, bool optimize=false);
+		bool						loadProperties	();
+		bool						saveProperties	();
 
-		void				drawFaces		();
-		void				drawWireframe	();
+		void						drawFaces		();
+		void						drawWireframe	();
  
 
-        void 				setScale		(float x, float y, float z);
-        void 				setPosition		(float x, float y, float z);
-		void				copyMeshAndTransformation(const apparelModel& otherModel);
+        void 						setScale		(float x, float y, float z);
+        void 						setPosition		(float x, float y, float z);
+		void						copyMeshAndTransformation(const apparelModel& otherModel);
 
-		string				getId			(){return id;}
-		ofMesh&				getMeshRef		(){return mesh;}
-		vector<ofMeshFace>&	getMeshFacesRef	(){return meshFaces;}
-		vector<ofVec3f>& 	getVerticesRef	(){return mesh.getVertices();}
-		vector<ofVec3f>& 	getNormalsRef	(){return mesh.getNormals();}
+		string						getId			(){return id;}
+		ofMesh&						getMeshRef		(){return mesh;}
+		vector<ofMeshFaceApparel*>&	getMeshFacesRef	(){return meshFaces;}
+		vector<ofVec3f>& 			getVerticesRef	(){return mesh.getVertices();}
+		vector<ofVec3f>& 			getNormalsRef	(){return mesh.getNormals();}
+		vector<ofIndexType>&		getIndicesRef	(){return mesh.getIndices();}
+
+
+		string						toString		();
+
 
 		string						id;
 		ofMesh						mesh;
-		vector<ofMeshFace>			meshFaces;
-		vector<ofMeshFaceIndices>	meshFacesIndices;
+		vector<ofMeshFaceApparel*>	meshFaces;
  
 
-		void				removeMeshFace			(int index);
-		void				createMeshFaces			();
+		void						createMeshFaces			();
+		void						clearMeshFaces			();
+
+		void						removeMeshFace			(int index);
+		void						removeMeshFaces			(const vector<int>& listFaces);
 
 	private:
-		ofxAssimpModelLoader assimpModel;
+		ofxAssimpModelLoader 		assimpModel;
 
-		void				updateModelMatrix		(); // directly copied from ofxAssimpModelLoader
+		void						updateModelMatrix		(); // directly copied from ofxAssimpModelLoader
  
-		string				getPathRelative			(string filename);
-		string				getPathDocument			(string filename);
-		string				getPropertiesFilename	();
+		string						getPathRelative			(string filename);
+		string						getPathDocument			(string filename);
+		string						getPropertiesFilename	();
 
 
-        ofPoint 			scale;
-        ofPoint 			pos;
-        ofMatrix4x4 		modelMatrix;
+        ofPoint 					scale;
+        ofPoint 					pos;
+        ofMatrix4x4 				modelMatrix;
 };

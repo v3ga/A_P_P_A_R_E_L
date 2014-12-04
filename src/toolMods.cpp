@@ -12,6 +12,7 @@
 #include "apparelModManager.h"
 #include "oscSender.h"
 #include "ofApp.h"
+#include "data.h"
 
 #define TOOLMODS_SIZE_NORMALS	4.0
 
@@ -23,7 +24,9 @@ toolMods::toolMods(toolManager* parent, apparelModManager* modManager) : tool("M
 	mp_modsManager 	= modManager;
 
 	m_bShowVertexNormals 	= false;
+	m_bShowVertexIndices	= false;
 	m_bShowFaceNormals		= false;
+	m_bShowFaceIndices		= false;
 	mp_meshFaceOver			= 0;
 	m_meshFaceIndexOver		= -1;
 	m_meshVertexIndexOver	= -1;
@@ -79,8 +82,10 @@ void toolMods::createControlsCustom()
 	mp_lblModel = mp_canvas->addLabel("Model :" + (mp_apparelModel ? mp_apparelModel->getId() : "???"));
 	mp_canvas->addSpacer(300,1);
 
-	mp_canvas->addToggle("show vertex normals", m_bShowVertexNormals, OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
-	mp_canvas->addToggle("show face normals", m_bShowFaceNormals, OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("show vertex normals", &m_bShowVertexNormals, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("show vertex indices", &m_bShowVertexIndices, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("show face normals", 	&m_bShowFaceNormals, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("show face indices", 	&m_bShowFaceIndices, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
 
 	mp_canvas->addWidgetDown(new ofxUILabel("Selection", OFX_UI_FONT_SMALL));
 	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
@@ -159,7 +164,7 @@ void toolMods::update()
 
 	if (mp_apparelModel == 0) return;
 
-	vector<ofMeshFace>& meshFaces = mp_apparelModel->getMeshFacesRef();
+	vector<ofMeshFaceApparel*>& meshFaces = mp_apparelModel->getMeshFacesRef();
 	ofCamera& cam = GLOBALS->getApp()->cam;
 
 	if (m_selection == E_selection_vertex)
@@ -181,12 +186,7 @@ void toolMods::update()
 //--------------------------------------------------------------
 void toolMods::draw()
 {
-
 	if (mp_apparelModel == 0) return;
-
-	 vector<ofVec3f>& apparelModelVert 		= mp_apparelModel->getVerticesRef();
-	 vector<ofVec3f>& apparelModelNormals 	= mp_apparelModel->getNormalsRef();
-
 
 	// MODEL
 	ofSetColor(0);
@@ -199,48 +199,107 @@ void toolMods::draw()
 	glDisable(GL_POLYGON_OFFSET_LINE);
 
 
-	// VERTEX NORMALS
+	// Draw data from this tool
+	drawVertexNormals();
+	drawFaceNormals();
+	drawSelection();
+}
+
+//--------------------------------------------------------------
+void toolMods::drawVertexNormals()
+{
 	if (m_bShowVertexNormals)
 	{
+		vector<ofVec3f>& apparelModelNormals 		= mp_apparelModel->getNormalsRef();
+	 	vector<ofVec3f>& apparelModelVert 			= mp_apparelModel->getVerticesRef();
+	 	vector<ofIndexType>& apparelModelIndices 	= mp_apparelModel->getIndicesRef();
 
-	 ofPushMatrix();
-	 ofVec3f v, n;
-	 ofSetColor(0,255,0);
-	 for (int i=0; i<apparelModelVert.size(); i++)
-	 {
-		 v = apparelModelVert[i];
-		 n = TOOLMODS_SIZE_NORMALS*apparelModelNormals[i];
-		 ofLine(v.x,v.y,v.z, v.x+n.x,v.y+n.y,v.z+n.z);
-	 }
-	 ofPopMatrix();
+	 	ofPushMatrix();
+	 	ofVec3f v, n;
+		string strVertexIndex;
+		float strFontScale = 0.15;
+	 	for (int i=0; i<apparelModelVert.size(); i++)
+	 	{
+			v = apparelModelVert[i];
+		 	n = TOOLMODS_SIZE_NORMALS*apparelModelNormals[i];
+
+
+		 	ofSetColor(0,255,0);
+		 	ofLine(v.x,v.y,v.z, v.x+n.x,v.y+n.y,v.z+n.z);
+	 	}
+	 	ofPopMatrix();
+
+		if (mp_apparelModel && m_bShowVertexIndices && mp_meshFaceOver)
+		{
+			ofMeshFaceApparel* pFace = mp_apparelModel->meshFaces[m_meshFaceIndexOver];
+
+			for (int i=0;i<3;i++)
+			{
+				ofIndexType indexVertex = pFace->getVertexIndex(i);
+			
+				v = apparelModelVert[indexVertex];
+			 	n = TOOLMODS_SIZE_NORMALS*apparelModelNormals[indexVertex];
+				strVertexIndex = "["+ofToString(pFace->getOffsetIndices())+"] "+ofToString( indexVertex );
+
+
+				ofSetColor(255);
+				ofPushMatrix();
+				ofTranslate(v+0.25*n);
+				ofRotateX(90);
+				ofScale(strFontScale,strFontScale,strFontScale);
+				DATA->m_fontGothic.drawString(strVertexIndex,0,0);
+				ofPopMatrix();
+			}
+		   }
+
 	}
-	
+}
+
+//--------------------------------------------------------------
+void toolMods::drawFaceNormals()
+{
 	// FACE NORMALS
 	if (m_bShowFaceNormals)
 	{
-	 vector<ofMeshFace>& meshFacesRef = mp_apparelModel->getMeshFacesRef();
+		 vector<ofMeshFaceApparel*>& meshFacesRef = mp_apparelModel->getMeshFacesRef();
+	
+		ofMeshFaceApparel* pFace;
+	 	ofVec3f normal, middle;
+	 	ofSetColor(255,0,0);
+		
+		string strFaceIndex = "";
+		float strFontScale = 0.15;
+	 	for (int i=0; i<meshFacesRef.size();i++)
+	 	{
+			pFace 		= meshFacesRef[i];
+		 	normal 	= TOOLMODS_SIZE_NORMALS *pFace->getFaceNormal();
+		 	middle 	= (pFace->getVertex(0) + pFace->getVertex(1) + pFace->getVertex(2))/3.0;
 
-	 ofMeshFace face;
-	 ofVec3f normal, middle;
-	 ofSetColor(255,0,0);
-	 for (int i=0; i<meshFacesRef.size();i++)
-	 {
-		 face 		= meshFacesRef[i];
-		 normal 	= TOOLMODS_SIZE_NORMALS *meshFacesRef[i].getFaceNormal();
-		 middle 	= (face.getVertex(0) + face.getVertex(1) + face.getVertex(2))/3;
+		 	ofPushMatrix();
+		 	ofTranslate(middle.x,middle.y,middle.z);
+		 	ofLine(0,0,0, normal.x,normal.y,normal.z);
+			if (m_bShowFaceIndices)
+			{
+				strFaceIndex = ofToString(i);
 
-		 ofPushMatrix();
-		 ofTranslate(middle.x,middle.y,middle.z);
-		 ofLine(0,0,0, normal.x,normal.y,normal.z);
-		 ofTranslate(normal.x,normal.y,normal.z);
-		 //ofDrawBitmapString(ofToString(i), normal);
- 		//font.drawString(ofToString(i), 0, 0);
+		 		ofTranslate(normal.x,normal.y,normal.z);
+				ofRotateX(90);
+				ofRectangle strRect = DATA->m_fontGothic.getStringBoundingBox(strFaceIndex, 0, 0);
+				ofTranslate(-strRect.getWidth()/2*strFontScale,-strRect.getHeight()/2*strFontScale,0);
+				ofScale(strFontScale,strFontScale,strFontScale);
+				DATA->m_fontGothic.drawString(strFaceIndex,0,0);
+			}
 
-		 ofPopMatrix();
-	 }
+
+		 	ofPopMatrix();
+	 	}
 	}
+	
+}
 
-
+//--------------------------------------------------------------
+void toolMods::drawSelection()
+{
 	if (m_selection == E_selection_vertex)
 	{
 		if (mp_meshVertexOver && !isVertexSelected(m_meshVertexIndexOver))
@@ -301,18 +360,17 @@ void toolMods::draw()
 			vector<int>::iterator it;
 			for (it = mp_apparelModCurrent->m_indicesFaces.begin(); it != mp_apparelModCurrent->m_indicesFaces.end(); ++it)
 			{
-				ofMeshFace face = mp_apparelModel->getMeshFacesRef()[*it];
+				int faceIndex = *it;
+				ofMeshFaceApparel* pFace = mp_apparelModel->getMeshFacesRef()[faceIndex];
 
-				ofVec3f faceNormal = 0.5*face.getFaceNormal();
+				ofVec3f faceNormal = 0.5*pFace->getFaceNormal();
 				ofSetColor(colorFaceSelected,60);
 				ofFill();
-				ofTriangle(face.getVertex(0)+faceNormal,face.getVertex(1)+faceNormal,face.getVertex(2)+faceNormal);
+				ofTriangle(pFace->getVertex(0)+faceNormal,pFace->getVertex(1)+faceNormal,pFace->getVertex(2)+faceNormal);
 			}
 		}
 	}
-
 }
-
 
 //--------------------------------------------------------------
 void toolMods::handleEvents(ofxUIEventArgs& e)
@@ -334,18 +392,6 @@ void toolMods::handleEvents(ofxUIEventArgs& e)
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		if (toggle && toggle->getValue()) selectMod(name);
-	}
-	else if (name == "show vertex normals")
-	{
-        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		m_bShowVertexNormals = toggle->getValue();
-		
-	}
-	else if (name == "show face normals")
-	{
-        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		m_bShowFaceNormals = toggle->getValue();
-		
 	}
 	else if (name == "Selection")
 	{
@@ -411,6 +457,7 @@ void toolMods::mousePressed(int x, int y, int button)
 	
 	if (isModelModified)
 	{
+		mp_apparelModCurrent->setChanged();
 		OSC_SENDER->sendModData(mp_apparelModCurrent);
 	}
 }

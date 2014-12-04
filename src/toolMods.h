@@ -24,6 +24,7 @@ class toolMods : public tool
 
 		void					update				();
 		void					draw				();
+
 		void					show				(bool is);
 		bool					isHit				(int x, int y);
 		void					exit				();
@@ -49,11 +50,12 @@ class toolMods : public tool
 		apparelModel*			mp_apparelModel;
 		meshFaceSelector		m_meshFaceSelector;
 		meshVertexSelector		m_meshVertexSelector;
-	
 		bool					m_bShowVertexNormals;
+		bool					m_bShowVertexIndices;
 
 		bool					m_bShowFaceNormals;
-		ofMeshFace*				mp_meshFaceOver;
+		bool					m_bShowFaceIndices;
+		ofMeshFaceApparel*		mp_meshFaceOver;
 		int						m_meshFaceIndexOver;
 
 		ofVec3f*				mp_meshVertexOver;
@@ -76,8 +78,9 @@ class toolMods : public tool
 		enum enumSelection
 		{
 			E_selection_vertex 	= 0,
-			E_selection_edge 	= 1,
-			E_selection_face 	= 2
+/*			E_selection_edge 	= 1,
+*/
+			E_selection_face 	= 1
 		};
 	
 		enumSelection			m_selection;
@@ -85,5 +88,8 @@ class toolMods : public tool
 	private:
 		ofxUILabel*				mp_lblModel;
 		bool					isNameMod			(string id);
+		void					drawVertexNormals	();
+		void					drawFaceNormals		();
+		void					drawSelection		();
 
 };

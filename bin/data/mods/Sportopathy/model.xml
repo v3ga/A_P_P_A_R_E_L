@@ -1,4 +1,14 @@
 <mod>
-    <faces></faces>
+    <faces>
+        <index>6</index>
+        <index>10</index>
+        <index>3</index>
+        <index>1</index>
+        <index>9</index>
+        <index>5</index>
+        <index>12</index>
+        <index>14</index>
+        <index>174</index>
+    </faces>
     <vertices></vertices>
 </mod>

@@ -7,8 +7,7 @@
 //
 
 #include "apparelMood_noisopathy.h"
-
-
+#include "globals.h"
 
 //--------------------------------------------------------------
 apparelMood_noisopathy::apparelMood_noisopathy() : apparelMod("Noisopathy")
@@ -22,23 +21,41 @@ void apparelMood_noisopathy::copyModelFrom(const apparelModel& model)
 	apparelMod::copyModelFrom(model);
 	m_meshOriginal = model.mesh;// keep a copy of the mesh to perform displacement
 
+
 /*	m_offsets.clear();
 	for (int i=0;i<m_meshOriginal.getNumVertices();i++)
 	{
 		m_offsets.push_back(ofVec3f(ofRandom(0,100000), ofRandom(0,100000), ofRandom(0,100000)));
 	}
 */
-	int nbFacesSelected = m_indicesFaces.size();
-	for (int i=0; i<nbFacesSelected; i++)
-	{
-		m_model.removeMeshFace(m_indicesFaces[i]);
-	}
-
 }
 
 //--------------------------------------------------------------
 void apparelMood_noisopathy::apply()
 {
+	OFAPPLOG->begin("apparelMood_noisopathy::apply()");
+	if (isChanged())
+	{
+
+// TODO : À revoir
+// 
+//		m_model.removeMeshFaces( m_indicesFaces );
+/*		OFAPPLOG->println(" - changed ! ");
+
+		int nbFacesSelected = m_indicesFaces.size();
+		for (int i=0; i<nbFacesSelected; i++)
+		{
+			vector<ofMeshFaceIndices>& faceIndices = m_model.meshFacesIndices;
+		
+			m_model.removeMeshFace(m_indicesFaces[i]);
+		}
+
+		m_indicesFaces.clear();
+		m_model.createMeshFaces();
+*/
+	}
+	OFAPPLOG->end();
+
 /*	float time = ofGetElapsedTimef();
     float timeScale = 5.0;
     float displacementScale = m_weight;

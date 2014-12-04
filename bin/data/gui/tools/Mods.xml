@@ -1,12 +1,22 @@
 <Widget>
     <Kind>2</Kind>
     <Name>show vertex normals</Name>
-    <Value>1</Value>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>show vertex indices</Name>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>show face normals</Name>
     <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>show face indices</Name>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -21,7 +31,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>Distance</Name>
-    <Value>71.533332825</Value>
+    <Value>116.633331299</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -31,10 +41,10 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Sportopathy</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Noisopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>

@@ -22,6 +22,13 @@ apparelModel::apparelModel()
 	scale.set(1.0f);
 }
 
+
+//--------------------------------------------------------------
+apparelModel::~apparelModel()
+{
+	clearMeshFaces();
+}
+
 //--------------------------------------------------------------
 bool apparelModel::load(string modelName, bool optimize)
 {
@@ -29,12 +36,18 @@ bool apparelModel::load(string modelName, bool optimize)
 
    	OFAPPLOG->println("- loading "+getPathRelative(modelName));
 
-	if (bLoaded){
+	if (bLoaded)
+	{
 		id = modelName;
 		mesh = assimpModel.getMesh(0);
+		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+		mesh.enableIndices();
+		mesh.disableColors();
 		mesh.disableTextures();
+
 		createMeshFaces();
-		
+
+		OFAPPLOG->println( toString() );
 	}
 	return bLoaded;
 }
@@ -142,47 +155,52 @@ string apparelModel::getPathDocument(string filename)
 }
 
 
+
+//--------------------------------------------------------------
+string apparelModel::toString()
+{
+	string s = "";
+	s = "\tid = "+id+"\n";
+	s += "\tnb mesh vertices = "+ofToString(mesh.getVertices().size())+"\n";
+	s += "\tnb mesh indices = "+ofToString(mesh.getIndices().size())+"\n";
+	s += "\tnb mesh face = "+ofToString(meshFaces.size())+"\n";
+	return s;
+}
+
 //--------------------------------------------------------------
 void apparelModel::createMeshFaces()
 {
-	meshFaces.clear();
-	meshFacesIndices.clear();
+	OFAPPLOG->begin("apparelModel::createMeshFaces()");
+	clearMeshFaces();
 
 	vector<ofIndexType>& 	indices 	= mesh.getIndices();
 	vector<ofVec3f>&		vertices	= mesh.getVertices();
 
 	for (int i=0; i<indices.size();i+=3)
 	{
-		ofMeshFace face;
-
-		face.setVertex( 0, vertices[indices[i+0]] );
-		face.setVertex( 1, vertices[indices[i+1]] );
-		face.setVertex( 2, vertices[indices[i+2]] );
-
-		meshFaces.push_back(face);
-		meshFacesIndices.push_back( ofMeshFaceIndices( indices[i+0], indices[i+1], indices[i+2] ) );
-
-		face.getFaceNormal();
+		meshFaces.push_back(  new ofMeshFaceApparel(&mesh, i) );
 	}
 	
+	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
 void apparelModel::removeMeshFace(int index)
 {
+/*
 	if (index < meshFaces.size())
 	{
 		ofMeshFace 			faceToRemove = meshFaces[index];
 		ofMeshFaceIndices	faceIndicesToRemove = meshFacesIndices[index];
 	
 		// Remove indices from mesh
-		mesh.removeIndex( faceIndicesToRemove.m_index[0] );
-		mesh.removeIndex( faceIndicesToRemove.m_index[1] );
-		mesh.removeIndex( faceIndicesToRemove.m_index[2] );
+		mesh.removeIndices( faceIndicesToRemove.m_index[0], faceIndicesToRemove.m_index[0]+3);
 
 		// Remove instances from list
 	 	meshFacesIndices.erase(meshFacesIndices.begin()+index);
 	 	meshFaces.erase(meshFaces.begin()+index);
+		
+		createMeshFaces();
 	}
 	else
 	{
@@ -190,7 +208,25 @@ void apparelModel::removeMeshFace(int index)
 		OFAPPLOG->println(ofToString(index)+" is not a valid index (max is "+ofToString(meshFaces.size()-1)+")");
 		OFAPPLOG->end();
 	}
+*/
 	
+}
+
+//--------------------------------------------------------------
+void apparelModel::clearMeshFaces()
+{
+	vector<ofMeshFaceApparel*>::iterator it = meshFaces.begin();
+	for ( ; it != meshFaces.end(); ++it )
+	{
+		delete *it;
+	}
+	meshFaces.clear();
+}
+
+
+//--------------------------------------------------------------
+void apparelModel::removeMeshFaces(const vector<int>& listFaces)
+{
 }
 
 

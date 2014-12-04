@@ -10,15 +10,15 @@
 
 
 //--------------------------------------------------------------
-meshFaceSelectorResult* meshFaceSelector::select(const vector<ofMeshFace>& meshFaces, const ofCamera& cam, const ofVec2f& point)
+meshFaceSelectorResult* meshFaceSelector::select(const vector<ofMeshFaceApparel*>& meshFaces, const ofCamera& cam, const ofVec2f& point)
 {
-	ofVec3f 	pointWorld = cam.screenToWorld(ofVec3f(point.x, point.y, 0.0));
-    ofRay 		ray(cam.getPosition(),pointWorld - cam.getPosition());
-	ofMeshFace 	face;
-	ofPlane		facePlane;
-	ofVec3f		faceNormal, faceNormalCam;
-	ofVec3f 	pointOnPlane;
-	ofMeshFace*	pMeshFace = 0;
+	ofVec3f 			pointWorld = cam.screenToWorld(ofVec3f(point.x, point.y, 0.0));
+    ofRay 				ray(cam.getPosition(),pointWorld - cam.getPosition());
+	ofMeshFaceApparel* 	pFace;
+	ofPlane				facePlane;
+	ofVec3f				faceNormal, faceNormalCam;
+	ofVec3f 			pointOnPlane;
+	ofMeshFace*			pMeshFace = 0;
 	
 	result.face = 0;
 	result.faceIndex = -1;
@@ -26,26 +26,26 @@ meshFaceSelectorResult* meshFaceSelector::select(const vector<ofMeshFace>& meshF
 
 	for (int i=0; i<meshFaces.size(); i++)
 	{
-		face = meshFaces[i];
-		faceNormal = face.getFaceNormal();
+		pFace 		= meshFaces[i];
+		faceNormal 	= pFace->getFaceNormal();
 		
-		facePlane.setCenter(face.getVertex(0));
+		facePlane.setCenter(pFace->getVertex(0));
 		facePlane.setNormal(faceNormal);
 		
 		// Intersection with plane
 	   	if ( facePlane.intersect(ray,pointOnPlane) )
 		{
 			// Point in triangle ?
-			if ( isPointInTriangle(face.getVertex(0),face.getVertex(1),face.getVertex(2), pointOnPlane) )
+			if ( isPointInTriangle(pFace->getVertex(0),pFace->getVertex(1),pFace->getVertex(2), pointOnPlane) )
 			{
 				ofVec3f dir = pointOnPlane - cam.getPosition();
 
-				if (dir.dot(faceNormal)<0.0f){
-					pMeshFace =  (ofMeshFace*) &meshFaces[i];
-					result.face = pMeshFace;
+				if (dir.dot(faceNormal)<0.0f)
+				{
+					result.face = pFace;
 					result.faceIndex = i;
 					
-					onMeshFaceSelected(pMeshFace, pointOnPlane);
+					onMeshFaceSelected(pFace, pointOnPlane);
 					break;
 				}
 			}
