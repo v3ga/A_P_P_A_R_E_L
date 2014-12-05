@@ -136,23 +136,29 @@ void apparelModManager::applyModChain()
 	int nbMods = m_modsChain.size();
 	
 	// Copy if something changed at some point
-	for (int i=1; i<nbMods; i++)
-	{
-		if (m_modsChain[i-1]->isChanged())
-		{
-			m_modsChain[i]->copyModelFrom( m_modsChain[i-1]->m_model );
-		}
-	}
-	
-
-	// Ok now apply mod modifications
 	for (int i=0; i<nbMods; i++)
 	{
+		// Something changed in the model (faces/vertices selection)
 		if (m_modsChain[i]->isChanged())
 		{
+			// Recompute mod's parameters
+			// May be vertices / faces were added, proper flag should be set
 			m_modsChain[i]->apply();
-			m_modsChain[i]->setChanged(false);
+
+			// Copy the «new» model to the next mod in the chain
+			if (i<nbMods-1/* && m_modsChain[i]->isMeshChanged()*/)
+			{
+				m_modsChain[i+1]->copyModelFrom( m_modsChain[i]->m_model );
+			}
 		}
+	}
+
+
+	// Reset flags
+	for (int i=0; i<nbMods; i++)
+	{
+		m_modsChain[i]->setChanged(false);
+		m_modsChain[i]->setMeshChanged(false);
 	}
 
 	// perform update

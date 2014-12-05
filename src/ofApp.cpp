@@ -65,6 +65,7 @@ void ofApp::setup()
 	// MODS
 	apparelModManager.addMod( new apparelMod_authoritopathy() );
 	apparelModManager.addMod( new apparelMod_sportopathy() );
+	apparelModManager.addMod( new apparelMod_pretentiopathy() );
 	apparelModManager.addMod( new apparelMood_noisopathy() );
 
 	// **Copy** the model to every mod in the chain

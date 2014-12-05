@@ -12,7 +12,8 @@
 //--------------------------------------------------------------
 apparelMod_sportopathy::apparelMod_sportopathy() : apparelMod("Sportopathy")
 {
-
+	m_amplitude.set("Amplitude", 30.0f, 0.0f, 50.0f);
+	m_parameters.add(m_amplitude);
 }
 
 
@@ -21,11 +22,12 @@ void apparelMod_sportopathy::apply()
 {
 	if (isChanged())
 	{
-		//m_model.clearMeshFaces();
+		m_model.mesh = m_meshInput;
+		m_model.createMeshFaces();
 	
 		vector<ofVec3f>& 	vertices = m_model.getVerticesRef();
 		ofMesh& modelMesh = m_model.getMeshRef();
-		
+		ofLog() << m_indicesFaces.size();
 		// Extrude selected faces
 		for (int i=0; i<m_indicesFaces.size();i++)
 		{
@@ -43,9 +45,9 @@ void apparelMod_sportopathy::apply()
 			
 				ofVec3f	 faceNormal = pFaceSelected->getFaceNormal();
 
-				ofVec3f	vertex0_extruded = ofVec3f(*pVertex0) + faceNormal*20;
-				ofVec3f	vertex1_extruded = ofVec3f(*pVertex1) + faceNormal*20;
-				ofVec3f	vertex2_extruded = ofVec3f(*pVertex2) + faceNormal*20;
+				ofVec3f	vertex0_extruded = ofVec3f(*pVertex0) + faceNormal*m_weight*m_amplitude;
+				ofVec3f	vertex1_extruded = ofVec3f(*pVertex1) + faceNormal*m_weight*m_amplitude;
+				ofVec3f	vertex2_extruded = ofVec3f(*pVertex2) + faceNormal*m_weight*m_amplitude;
 
 				int index0_extruded = vertices.size();
 				modelMesh.addVertex(vertex0_extruded);
@@ -101,9 +103,10 @@ void apparelMod_sportopathy::apply()
 //--------------------------------------------------------------
 void apparelMod_sportopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
-	if (parameter.getName() == "weight")
+//	if (parameter.getName() == "Weight")
 	{
-		
+		setChanged();
+		//apply();
 	}
 }
 

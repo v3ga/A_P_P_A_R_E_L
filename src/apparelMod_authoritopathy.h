@@ -15,11 +15,12 @@ class apparelMod_authoritopathy : public apparelMod
 		apparelMod_authoritopathy	();
 
 
-		void	apply				();
-		void	copyModelFrom		(const apparelModel& model);
-		void	onParameterChanged	(ofAbstractParameter& parameter);
+		void				apply				();
+		void				copyModelFrom		(const apparelModel& model);
+		void				onParameterChanged	(ofAbstractParameter& parameter);
 
 	private:
-		ofMesh	m_meshOriginal;
+		ofVec3f				m_pointInfluence;
+ 		ofParameter<float>	m_displacement;
 
 };

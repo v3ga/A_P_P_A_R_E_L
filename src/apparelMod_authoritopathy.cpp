@@ -11,8 +11,11 @@
 //--------------------------------------------------------------
 apparelMod_authoritopathy::apparelMod_authoritopathy() : apparelMod("Authoritopathy")
 {
-}
+	m_pointInfluence.set(0.0f);
 
+	m_displacement.set("Displacement", 30.0f, 0.0f, 50.0f);
+	m_parameters.add(m_displacement);
+}
 
 //--------------------------------------------------------------
 void apparelMod_authoritopathy::apply()
@@ -23,13 +26,12 @@ void apparelMod_authoritopathy::apply()
 void apparelMod_authoritopathy::copyModelFrom(const apparelModel& model)
 {
 	apparelMod::copyModelFrom(model);
-	m_meshOriginal = model.mesh;// keep a copy of the mesh to perform displacement
 }
 
 //--------------------------------------------------------------
 void apparelMod_authoritopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
-	OFAPPLOG->begin("apparelMod_authoritopathy::onParameterChanged(\""+parameter.getName()+"\"");
+	//OFAPPLOG->begin("apparelMod_authoritopathy::onParameterChanged(\""+parameter.getName()+"\"");
 	//apparelMod::parameterChanged(parameter);
 
 	int nbVertices = m_indicesVertex.size();
@@ -37,10 +39,10 @@ void apparelMod_authoritopathy::onParameterChanged(ofAbstractParameter& paramete
 	
 	for (int i=0; i<nbVertices ; i++)
 	{
-		vo = m_meshOriginal.getVertex( m_indicesVertex[i] );
+		vo = m_meshInput.getVertex( m_indicesVertex[i] );
 
 		v = vo;
-		v.y = vo.y + m_weight*50.0f;
+		v = vo+(vo-m_pointInfluence).normalized()*m_weight*m_displacement;
 		
 		m_model.mesh.setVertex(m_indicesVertex[i], v);
 	}
@@ -48,6 +50,6 @@ void apparelMod_authoritopathy::onParameterChanged(ofAbstractParameter& paramete
 	m_model.createMeshFaces();
 	
 	setChanged(true);
-	OFAPPLOG->end();
+	//OFAPPLOG->end();
 }
 

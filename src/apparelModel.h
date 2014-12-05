@@ -28,7 +28,9 @@ class apparelModel
 
         void 						setScale		(float x, float y, float z);
         void 						setPosition		(float x, float y, float z);
-		void						copyMeshAndTransformation(const apparelModel& otherModel);
+
+		void						copyMeshAndTransformation	(const apparelModel& otherModel);
+		void						copyVerticesPositions		(const apparelModel& otherModel);
 
 		string						getId			(){return id;}
 		ofMesh&						getMeshRef		(){return mesh;}

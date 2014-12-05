@@ -1,19 +1,20 @@
 //
-//  apparelMood_noisopathy.h
+//  apparelMode_porcupinopathy.h
 //  A_P_P_A_R_E_L
 //
-//  Created by Julien on 25/11/2014.
+//  Created by Julien on 05/12/2014.
 //
 //
 
 #pragma once
 
+
 #include "apparelMod.h"
 
-class apparelMood_noisopathy : public apparelMod
+class apparelMode_porcupinopathy : public apparelMod
 {
 	public:
-		apparelMood_noisopathy	();
+		apparelMode_porcupinopathy	();
 
 
 		void				apply				();
@@ -24,5 +25,4 @@ class apparelMood_noisopathy : public apparelMod
 	private:
 		vector<ofVec3f>		m_offsets;
 		ofParameter<float>	m_amplitude;
-		ofParameter<float>	m_timeScale;
 };

@@ -19,4 +19,7 @@ class apparelMod_sportopathy : public apparelMod
  		void	apply				();
 		void	onParameterChanged	(ofAbstractParameter& parameter);
 
+	private:
+		ofParameter<float>		m_amplitude;
+
 };

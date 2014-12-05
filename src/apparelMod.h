@@ -55,9 +55,26 @@ class apparelMod
 
 
 		// STATE
+		ofMesh				m_meshInput;
+
+
 		void				setChanged				(bool is=true){m_isChanged = is;}
+		void				setMeshChanged			(bool is=true){m_isMeshChanged = is;}
+
 		bool				isChanged				(){return m_isChanged;}
+		bool				isMeshChanged			(){return m_isMeshChanged;}
+
  		bool				m_isChanged;			// tells if mesh itself or selection (vertices, faces) changed
+ 		bool				m_isMeshChanged;		// tells if mesh itself or selection (vertices, faces) changed
+		int					m_flagChanged;
+
+/*		enum{
+			EChanged_selectionVertices	= 0x01,
+			EChanged_selectionFaces		= 0x02,
+			EChanged_numberVertices		= 0x04,
+			EChanged_numberFaces		= 0x08
+		};
+*/
 
 		// DRAWING
 		virtual void		draw					(){};
@@ -81,9 +98,10 @@ class apparelMod
 	   	vector<int>			m_indicesFaces;		// selected faces on original model
 		vector<int>			m_indicesVertex;	// selected vertices on original model
 
-		virtual void		copyModelFrom		(const apparelModel& model);
-		virtual void		clearSelection		();
-		virtual void		apply				(){};
+		virtual void		copyModelFrom				(const apparelModel& model);
+		virtual	void		copyModelVerticesPosition	(const apparelModel& model);
+		virtual void		clearSelection				();
+		virtual void		apply						(){};
  
 		// UPDATE
 		virtual	void		update				(){}
@@ -93,7 +111,7 @@ class apparelMod
 	
 		// PARAMETERS
 		ofParameterGroup 	m_parameters;
-		ofParameter<bool>	m_isActive;
+		ofParameter<bool>	m_isActive; // DEPRECATED
 		ofParameter<float>	m_weight;
 
 

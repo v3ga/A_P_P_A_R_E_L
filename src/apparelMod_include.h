@@ -12,7 +12,9 @@
 #include "apparelMod_sportopathy.h"
 #include "apparelMod_pedopathy.h"
 #include "apparelMod_vulgaropathy.h"
+#include "apparelMod_pretentiopathy.h"
 
+#include "apparelMood_porcupinopathy.h"
 #include "apparelMood_noisopathy.h"
 
 

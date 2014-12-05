@@ -17,10 +17,11 @@
 //--------------------------------------------------------------
 apparelMod::apparelMod(string id)
 {
-	m_id 			= id;
-	mp_model 		= 0;
-	mp_oscSender 	= 0;
-	m_isChanged		= false;
+	m_id 					= id;
+	mp_model 				= 0;
+	mp_oscSender 			= 0;
+	m_isChanged				= false;
+	m_isMeshChanged			= false;
 	
 	m_isActive.setName("Active");
 	m_parameters.add(m_isActive);
@@ -29,6 +30,8 @@ apparelMod::apparelMod(string id)
 	m_parameters.add(m_weight);
 
 	m_parameters.setName(id);
+	
+	m_flagChanged	= 0;
 }
 
 //--------------------------------------------------------------
@@ -327,9 +330,19 @@ void apparelMod::setConfiguration(string name)
 void apparelMod::copyModelFrom(const apparelModel& model)
 {
 	m_model.copyMeshAndTransformation(model);
-	clearSelection();
+	m_meshInput = model.mesh;
+//	clearSelection();
 	setChanged(true);
 }
+
+//--------------------------------------------------------------
+void apparelMod::copyModelVerticesPosition(const apparelModel& model)
+{
+	m_model.copyVerticesPositions(model);
+	
+	setChanged(true);
+}
+
 
 //--------------------------------------------------------------
 void apparelMod::clearSelection()

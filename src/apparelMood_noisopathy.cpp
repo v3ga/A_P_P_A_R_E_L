@@ -12,6 +12,11 @@
 //--------------------------------------------------------------
 apparelMood_noisopathy::apparelMood_noisopathy() : apparelMod("Noisopathy")
 {
+	m_amplitude.set("Amplitude", 30.0f, 0.0f, 50.0f);
+	m_timeScale.set("TimeScale", 10.0f, 5.0f, 50.0f);
+
+	m_parameters.add(m_amplitude);
+	m_parameters.add(m_timeScale);
 }
 
 
@@ -19,10 +24,9 @@ apparelMood_noisopathy::apparelMood_noisopathy() : apparelMod("Noisopathy")
 void apparelMood_noisopathy::copyModelFrom(const apparelModel& model)
 {
 	apparelMod::copyModelFrom(model);
-	m_meshOriginal = model.mesh;// keep a copy of the mesh to perform displacement
 
 	m_offsets.clear();
-	for (int i=0;i<m_meshOriginal.getNumVertices();i++)
+	for (int i=0;i<m_meshInput.getNumVertices();i++)
 	{
 		m_offsets.push_back(ofVec3f(ofRandom(0,100000), ofRandom(0,100000), ofRandom(0,100000)));
 	}
@@ -58,18 +62,18 @@ void apparelMood_noisopathy::apply()
 void apparelMood_noisopathy::update()
 {
 	float time = ofGetElapsedTimef();
-    float timeScale = 10.4;
-    float displacementScale = m_weight;
+    float timeScale = m_timeScale;
+    float displacementScale = m_weight*m_amplitude;
 	
-	int numVerts = m_meshOriginal.getNumVertices();
+	int numVerts = m_meshInput.getNumVertices();
 	for (int i=0; i<numVerts; ++i)
 	{
-    	ofVec3f vert = m_meshOriginal.getVertex(i);
+    	ofVec3f vert = m_meshInput.getVertex(i);
     	ofVec3f timeOffsets = m_offsets[i];
 
 		//vert.x += (ofSignedNoise(time*timeScale+timeOffsets.x)) * displacementScale;
-    	vert.y += (ofSignedNoise(time*timeScale+timeOffsets.y)) * displacementScale;
-    	//vert.z += (ofSignedNoise(time*timeScale+timeOffsets.z)) * displacementScale;
+    	//vert.y += (ofSignedNoise(time*timeScale+timeOffsets.y)) * displacementScale;
+    	vert.z += (ofSignedNoise(time*timeScale+timeOffsets.z)) * displacementScale;
 
     	m_model.mesh.setVertex(i, vert);
 	}

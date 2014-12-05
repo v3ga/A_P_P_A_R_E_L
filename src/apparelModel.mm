@@ -279,4 +279,15 @@ void apparelModel::copyMeshAndTransformation(const apparelModel& otherModel)
 	OFAPPLOG->end();
 }
 
+//--------------------------------------------------------------
+void apparelModel::copyVerticesPositions(const apparelModel& otherModel)
+{
+	// ofMesh& otherMesh = otherModel.getMeshRef();
+	
+	
+}
+
+
+
+
 
