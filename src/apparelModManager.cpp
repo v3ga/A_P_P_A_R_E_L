@@ -59,6 +59,15 @@ void apparelModManager::copyModelToMods(const apparelModel& model)
 }
 
 //--------------------------------------------------------------
+apparelModel* apparelModManager::getModelLastInChain()
+{
+	int nb = m_modsChain.size();
+	if (nb>0)
+		return &m_modsChain[nb-1]->m_model;
+	return 0;
+}
+
+//--------------------------------------------------------------
 void apparelModManager::selectMod(string name)
 {
 	mp_modCurrent = m_mods[name];
@@ -109,12 +118,6 @@ void apparelModManager::deleteMods()
 //--------------------------------------------------------------
 void apparelModManager::draw()
 {
-/*
-	map<string, apparelMod*>::iterator it;
-	for (it = m_mods.begin(); it != m_mods.end(); ++it){
-		it->second->draw();
-	}
-*/
 	int nbMods = m_modsChain.size();
 	if (nbMods>=1)
 	{
@@ -123,12 +126,14 @@ void apparelModManager::draw()
 }
 
 //--------------------------------------------------------------
-/*
-void apparelModManager::addChain(apparelMod* pMod)
+void apparelModManager::drawModsExtra()
 {
-	m_modsOrdered.push_back(pMod);
+	int nbModsChains = m_modsChain.size();
+	for (int i=0;i<nbModsChains;i++)
+	{
+		m_modsChain[nbMods-1]->drawExtra();
+	}
 }
-*/
 
 //--------------------------------------------------------------
 void apparelModManager::applyModChain()

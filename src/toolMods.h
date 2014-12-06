@@ -43,6 +43,9 @@ class toolMods : public tool
 		apparelModUI*			mp_modUICurrent;
 		map<string, apparelModUI*>		m_modsUI;
 
+		// View
+		bool					m_bViewMixed;
+
 
 		// Selection 3D
 		apparelMod*				mp_apparelModCurrent;
@@ -88,8 +91,8 @@ class toolMods : public tool
 	private:
 		ofxUILabel*				mp_lblModel;
 		bool					isNameMod			(string id);
-		void					drawVertexNormals	();
-		void					drawFaceNormals		();
-		void					drawSelection		();
+		void					drawVertexNormals	(apparelModel* pModel);
+		void					drawFaceNormals		(apparelModel* pModel);
+		void					drawSelection		(apparelModel* pModel);
 
 };

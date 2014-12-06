@@ -40,6 +40,8 @@ toolMods::toolMods(toolManager* parent, apparelModManager* modManager) : tool("M
 	
 	colorFaceOver.set(255,0,0);
 	colorFaceSelected.set(255,255,255);
+	
+	m_bViewMixed			= false;
 }
 
 //--------------------------------------------------------------
@@ -86,6 +88,10 @@ void toolMods::createControlsCustom()
 	mp_canvas->addToggle("show vertex indices", &m_bShowVertexIndices, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
 	mp_canvas->addToggle("show face normals", 	&m_bShowFaceNormals, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
 	mp_canvas->addToggle("show face indices", 	&m_bShowFaceIndices, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+
+	mp_canvas->addWidgetDown(new ofxUILabel("View", OFX_UI_FONT_SMALL));
+	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
+	mp_canvas->addToggle("mixed", 	&m_bViewMixed, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
 
 	mp_canvas->addWidgetDown(new ofxUILabel("Selection", OFX_UI_FONT_SMALL));
 	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
@@ -186,33 +192,48 @@ void toolMods::update()
 //--------------------------------------------------------------
 void toolMods::draw()
 {
-	if (mp_apparelModel == 0) return;
+	apparelModel* pModel = m_bViewMixed ? mp_modsManager->getModelLastInChain() : mp_apparelModel;
 
-	// MODEL
-	ofSetColor(0);
-	mp_apparelModel->drawFaces();
+	if (pModel)
+	{
+	   // MODEL
+	   ofSetColor(0);
+	   pModel->drawFaces();
 
-	ofSetColor(255);
-	glEnable(GL_POLYGON_OFFSET_LINE);
-	glPolygonOffset(-1,-1);
-	mp_apparelModel->drawWireframe();
-	glDisable(GL_POLYGON_OFFSET_LINE);
+	   ofSetColor(255);
+	   glEnable(GL_POLYGON_OFFSET_LINE);
+	   glPolygonOffset(-1,-1);
+	   pModel->drawWireframe();
+	   glDisable(GL_POLYGON_OFFSET_LINE);
 
 
-	// Draw data from this tool
-	drawVertexNormals();
-	drawFaceNormals();
-	drawSelection();
+	   // Draw data from this tool
+	   // only in non-mixed view
+	   if (m_bViewMixed == false)
+	   {
+		   if (mp_apparelModCurrent)
+				mp_apparelModCurrent->drawExtra();
+		
+		   drawVertexNormals(pModel);
+		   drawFaceNormals(pModel);
+		   drawSelection(pModel);
+		}
+	}
+	
+	if (m_bViewMixed)
+	{
+		mp_modsManager->drawModsExtra();
+	}
 }
 
 //--------------------------------------------------------------
-void toolMods::drawVertexNormals()
+void toolMods::drawVertexNormals(apparelModel* pModel)
 {
 	if (m_bShowVertexNormals)
 	{
-		vector<ofVec3f>& apparelModelNormals 		= mp_apparelModel->getNormalsRef();
-	 	vector<ofVec3f>& apparelModelVert 			= mp_apparelModel->getVerticesRef();
-	 	vector<ofIndexType>& apparelModelIndices 	= mp_apparelModel->getIndicesRef();
+		vector<ofVec3f>& apparelModelNormals 		= pModel->getNormalsRef();
+	 	vector<ofVec3f>& apparelModelVert 			= pModel->getVerticesRef();
+	 	vector<ofIndexType>& apparelModelIndices 	= pModel->getIndicesRef();
 
 	 	ofPushMatrix();
 	 	ofVec3f v, n;
@@ -229,9 +250,9 @@ void toolMods::drawVertexNormals()
 	 	}
 	 	ofPopMatrix();
 
-		if (mp_apparelModel && m_bShowVertexIndices && mp_meshFaceOver)
+		if (pModel && m_bShowVertexIndices && mp_meshFaceOver)
 		{
-			ofMeshFaceApparel* pFace = mp_apparelModel->meshFaces[m_meshFaceIndexOver];
+			ofMeshFaceApparel* pFace = pModel->meshFaces[m_meshFaceIndexOver];
 
 			for (int i=0;i<3;i++)
 			{
@@ -256,12 +277,12 @@ void toolMods::drawVertexNormals()
 }
 
 //--------------------------------------------------------------
-void toolMods::drawFaceNormals()
+void toolMods::drawFaceNormals(apparelModel* pModel)
 {
 	// FACE NORMALS
 	if (m_bShowFaceNormals)
 	{
-		 vector<ofMeshFaceApparel*>& meshFacesRef = mp_apparelModel->getMeshFacesRef();
+		 vector<ofMeshFaceApparel*>& meshFacesRef = pModel->getMeshFacesRef();
 	
 		ofMeshFaceApparel* pFace;
 	 	ofVec3f normal, middle;
@@ -298,8 +319,9 @@ void toolMods::drawFaceNormals()
 }
 
 //--------------------------------------------------------------
-void toolMods::drawSelection()
+void toolMods::drawSelection(apparelModel* pModel)
 {
+
 	if (m_selection == E_selection_vertex)
 	{
 		if (mp_meshVertexOver && !isVertexSelected(m_meshVertexIndexOver))
@@ -355,7 +377,7 @@ void toolMods::drawSelection()
 				glDisable(GL_POLYGON_OFFSET_FILL);
 			}
 		}
-		if (mp_apparelModCurrent)
+		if (pModel)
 		{
 			vector<int>::iterator it;
 			for (it = mp_apparelModCurrent->m_indicesFaces.begin(); it != mp_apparelModCurrent->m_indicesFaces.end(); ++it)

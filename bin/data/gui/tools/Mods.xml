@@ -11,12 +11,17 @@
 <Widget>
     <Kind>2</Kind>
     <Name>show face normals</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>show face indices</Name>
-    <Value>0</Value>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>mixed</Name>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -46,10 +51,10 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Pretentiopathy</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Noisopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>

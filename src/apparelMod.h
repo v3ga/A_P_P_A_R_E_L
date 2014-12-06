@@ -78,6 +78,7 @@ class apparelMod
 
 		// DRAWING
 		virtual void		draw					(){};
+		virtual void		drawExtra				(){};
 
 		// OSC NETWORK
 		void				setOscSender			(oscSenderInterface* p){mp_oscSender=p;}

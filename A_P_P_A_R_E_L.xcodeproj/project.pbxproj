@@ -78,6 +78,7 @@
 		F91ACC3B1A30FBE800B06A0F /* ofMeshFaceApparel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACC391A30FBE800B06A0F /* ofMeshFaceApparel.cpp */; };
 		F91ACC411A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACC3F1A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp */; };
 		F91ACC441A325F9B00B06A0F /* apparelMod_pretentiopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACC421A325F9B00B06A0F /* apparelMod_pretentiopathy.cpp */; };
+		F91D62B61A333AE00005E9D5 /* apparelMod_meteopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */; };
 		F9267595193A095C00CB2599 /* meshFaceSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9267593193A095C00CB2599 /* meshFaceSelector.cpp */; };
 		F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9267596193A16C500CB2599 /* meshVertexSelector.cpp */; };
 		F92C49301A24D47E006CE219 /* apparelMod_sportopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F92C492E1A24D47E006CE219 /* apparelMod_sportopathy.cpp */; };
@@ -344,6 +345,8 @@
 		F91ACC401A325D2E00B06A0F /* apparelMood_porcupinopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMood_porcupinopathy.h; sourceTree = "<group>"; };
 		F91ACC421A325F9B00B06A0F /* apparelMod_pretentiopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_pretentiopathy.cpp; sourceTree = "<group>"; };
 		F91ACC431A325F9B00B06A0F /* apparelMod_pretentiopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_pretentiopathy.h; sourceTree = "<group>"; };
+		F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_meteopathy.cpp; sourceTree = "<group>"; };
+		F91D62B51A333AE00005E9D5 /* apparelMod_meteopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_meteopathy.h; sourceTree = "<group>"; };
 		F926758D19392F7200CB2599 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = SOURCE_ROOT; };
 		F9267593193A095C00CB2599 /* meshFaceSelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = meshFaceSelector.cpp; sourceTree = "<group>"; };
 		F9267594193A095C00CB2599 /* meshFaceSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meshFaceSelector.h; sourceTree = "<group>"; };
@@ -1342,6 +1345,8 @@
 				F92C49381A24D661006CE219 /* apparelMood_noisopathy.h */,
 				F91ACC401A325D2E00B06A0F /* apparelMood_porcupinopathy.h */,
 				F91ACC3F1A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp */,
+				F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */,
+				F91D62B51A333AE00005E9D5 /* apparelMod_meteopathy.h */,
 			);
 			name = Mods;
 			sourceTree = "<group>";
@@ -1616,6 +1621,7 @@
 				F91ACC3B1A30FBE800B06A0F /* ofMeshFaceApparel.cpp in Sources */,
 				F91ACC411A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp in Sources */,
 				F932F065196C488900C82556 /* OscTypes.cpp in Sources */,
+				F91D62B61A333AE00005E9D5 /* apparelMod_meteopathy.cpp in Sources */,
 				F9489275197FEEE900085C6B /* toolUser.cpp in Sources */,
 				F948923E197E9C8A00085C6B /* ofxTicker.cpp in Sources */,
 				F9D35F7819AF65DE00B63E8E /* ofxPostProcess.cpp in Sources */,

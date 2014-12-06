@@ -24,7 +24,7 @@ class apparelModManager
 		apparelMod*					getModCurrent(){return mp_modCurrent;}
 		void						setModel			(apparelModel*);
 		void						copyModelToMods		(const apparelModel& model);
- 		apparelModel*				getModelToDraw		();
+ 		apparelModel*				getModelLastInChain	();
  
 	
 		void						saveModel			();
@@ -33,11 +33,10 @@ class apparelModManager
 		void						deleteMods			();
 	
 		void						draw				();
+		void						drawModsExtra		();
  
  
 		// Modifiers to apply, order important
-//		vector<apparelMod*>			m_modsOrdered;
-//		void						addChain			(apparelMod*);
 		void						applyModChain		();
 
 	
