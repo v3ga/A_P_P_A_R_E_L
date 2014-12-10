@@ -131,7 +131,7 @@ void apparelModManager::drawModsExtra()
 	int nbModsChains = m_modsChain.size();
 	for (int i=0;i<nbModsChains;i++)
 	{
-		m_modsChain[nbMods-1]->drawExtra();
+		m_modsChain[nbModsChains-1]->drawExtra();
 	}
 }
 

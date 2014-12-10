@@ -285,6 +285,19 @@ void apparelMod::loadParameters()
 	// PARAMETERS DATA
 	ofxXmlSettings settingsParameters;
 	string pathParameters = getPathDocument("parameters.xml");
+
+	#ifdef TARGET_OF_IOS
+	string pathSettingsParametersSource = getPathResources("parameters.xml");
+	ofFile fileSettingsParametersSource( pathSettingsParametersSource );
+	if (fileSettingsParametersSource.exists())
+	{
+		OFAPPLOG->println("- copying from "+pathSettingsParametersSource+" to "+pathParameters);
+		bool result = fileSettingsParametersSource.copyTo(pathParameters);
+		OFAPPLOG->println("- copy OK ? " + ofToString(result));
+ 	}
+
+	#endif
+
 	if (settingsParameters.load(pathParameters))
 	{
 		settingsParameters.deserialize(m_parameters);

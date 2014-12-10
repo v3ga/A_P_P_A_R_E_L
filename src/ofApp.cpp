@@ -58,14 +58,16 @@ void ofApp::setup()
 	apparelModel.load(modelObjName);
 //	apparelModel.setPosition(0,0,0);
 	
-//	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());
-//	sceneFxBlur.allocate(ofGetWidth(),ofGetHeight());
+	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());
+	sceneFxBlur.allocate(ofGetWidth()/10,ofGetHeight()/10);
 	
 
 	// MODS
 	apparelModManager.addMod( new apparelMod_authoritopathy() );
+	apparelModManager.addMod( new apparelMod_pedopathy() );
 	apparelModManager.addMod( new apparelMod_sportopathy() );
 	apparelModManager.addMod( new apparelMod_pretentiopathy() );
+	apparelModManager.addMod( new apparelMood_porcupinopathy() );
 	apparelModManager.addMod( new apparelMood_noisopathy() );
 
 	// **Copy** the model to every mod in the chain
@@ -134,45 +136,43 @@ void ofApp::draw()
 {
 
 	// render to offscreen
-//	sceneBuffer.begin();
-//		ofClear(0, 0, 0, 0);
-  	ofBackgroundGradient(ofColor(64), ofColor(0));
+if (this->pToolMods->isPostProcessEnabled())
+{
+	sceneBuffer.begin();
+ 	ofClear(0,0,0,0);
+}else
+{
+	ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
+}
 
-
-  	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+  		ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 		ofEnableDepthTest();
 	
 		cam.begin();
-
-		// Filled
-/*    	ofSetColor(0);
-		apparelModel.drawFaces();
-
-	    ofSetColor(255);
-		glEnable(GL_POLYGON_OFFSET_LINE);
-    	glPolygonOffset(-1,-1);
-		apparelModel.drawWireframe();
-		glDisable(GL_POLYGON_OFFSET_LINE);
-*/
-
 		toolManager.draw();
-
 		cam.end();
 
-    	ofDisableBlendMode();
 		ofDisableDepthTest();
-//	sceneBuffer.end();
+    	ofDisableBlendMode();
+if (this->pToolMods->isPostProcessEnabled())
+{
+	sceneBuffer.end();
 
 
 	// Filters
-	//sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
-	//sceneFxBlur.update();
+	sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
+	sceneFxBlur.update();
 
     //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-	//sceneFxBlur.draw(0,0);
-//	 sceneBuffer.draw(0,0);
+	ofDisableDepthTest();
+	ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
+	ofSetColor(255);
+ 
+	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    //sceneBuffer.draw(0,0);
+	sceneFxBlur.draw(0,0);
 	ofDisableBlendMode();
-	
+}
 
 	// Interface
 	toolManager.drawUI();

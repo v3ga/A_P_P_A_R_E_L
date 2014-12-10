@@ -21,6 +21,6 @@ class apparelMod_meteopathy : public apparelMod
 
 	private:
 		vector<of3dPrimitive*>	m_primitives;
-
+		void					deletePrimitives	();
 	
 };

@@ -10,19 +10,22 @@
 
 
 #include "apparelMod.h"
+#include "ofxButterfly.h"
 
-class apparelMode_porcupinopathy : public apparelMod
+class apparelMood_porcupinopathy : public apparelMod
 {
 	public:
-		apparelMode_porcupinopathy	();
-
+		apparelMood_porcupinopathy	();
+		~apparelMood_porcupinopathy	();
 
 		void				apply				();
-		void				update				();
-		void				copyModelFrom		(const apparelModel& model);
+		void				update				(){}
+		void				drawExtra			();
 		void				onParameterChanged	(ofAbstractParameter& parameter){}
 
 	private:
-		vector<ofVec3f>		m_offsets;
-		ofParameter<float>	m_amplitude;
+		ofMesh*				mp_meshSubdivided;
+		ofMesh				m_meshFinal;
+		void				deleteMeshSubdivided();
+	    ofxButterfly 		butterfly;
 };

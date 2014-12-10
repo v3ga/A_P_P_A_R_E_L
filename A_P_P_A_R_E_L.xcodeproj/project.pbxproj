@@ -79,6 +79,10 @@
 		F91ACC411A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACC3F1A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp */; };
 		F91ACC441A325F9B00B06A0F /* apparelMod_pretentiopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACC421A325F9B00B06A0F /* apparelMod_pretentiopathy.cpp */; };
 		F91D62B61A333AE00005E9D5 /* apparelMod_meteopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */; };
+		F91D69EB1A3740D80005E9D5 /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91D69CE1A3740D80005E9D5 /* cube.cpp */; };
+		F91D69EC1A3740D80005E9D5 /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91D69D31A3740D80005E9D5 /* mesh.cpp */; };
+		F91D69EE1A3740D80005E9D5 /* cubic_spline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91D69D81A3740D80005E9D5 /* cubic_spline.cpp */; };
+		F91D69EF1A3740D80005E9D5 /* ofxButterfly.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91D69DA1A3740D80005E9D5 /* ofxButterfly.cpp */; };
 		F9267595193A095C00CB2599 /* meshFaceSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9267593193A095C00CB2599 /* meshFaceSelector.cpp */; };
 		F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9267596193A16C500CB2599 /* meshVertexSelector.cpp */; };
 		F92C49301A24D47E006CE219 /* apparelMod_sportopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F92C492E1A24D47E006CE219 /* apparelMod_sportopathy.cpp */; };
@@ -347,6 +351,18 @@
 		F91ACC431A325F9B00B06A0F /* apparelMod_pretentiopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_pretentiopathy.h; sourceTree = "<group>"; };
 		F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_meteopathy.cpp; sourceTree = "<group>"; };
 		F91D62B51A333AE00005E9D5 /* apparelMod_meteopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_meteopathy.h; sourceTree = "<group>"; };
+		F91D69CE1A3740D80005E9D5 /* cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
+		F91D69CF1A3740D80005E9D5 /* cube.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cube.hpp; sourceTree = "<group>"; };
+		F91D69D01A3740D80005E9D5 /* edge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = edge.hpp; sourceTree = "<group>"; };
+		F91D69D11A3740D80005E9D5 /* error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = error.hpp; sourceTree = "<group>"; };
+		F91D69D21A3740D80005E9D5 /* face.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = face.hpp; sourceTree = "<group>"; };
+		F91D69D31A3740D80005E9D5 /* mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
+		F91D69D41A3740D80005E9D5 /* mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
+		F91D69D51A3740D80005E9D5 /* vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vertex.hpp; sourceTree = "<group>"; };
+		F91D69D81A3740D80005E9D5 /* cubic_spline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cubic_spline.cpp; sourceTree = "<group>"; };
+		F91D69D91A3740D80005E9D5 /* cubic_spline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cubic_spline.h; sourceTree = "<group>"; };
+		F91D69DA1A3740D80005E9D5 /* ofxButterfly.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxButterfly.cpp; sourceTree = "<group>"; };
+		F91D69DB1A3740D80005E9D5 /* ofxButterfly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxButterfly.h; sourceTree = "<group>"; };
 		F926758D19392F7200CB2599 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = SOURCE_ROOT; };
 		F9267593193A095C00CB2599 /* meshFaceSelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = meshFaceSelector.cpp; sourceTree = "<group>"; };
 		F9267594193A095C00CB2599 /* meshFaceSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meshFaceSelector.h; sourceTree = "<group>"; };
@@ -629,6 +645,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				F91D69A21A3740D80005E9D5 /* ofxButterfly */,
 				F948920F197E72C000085C6B /* ofxSQLite */,
 				F96FBB691976D3AC00E58A6F /* ofxJSON */,
 				F96FBAAA1976D39000E58A6F /* ofxOAuth */,
@@ -905,6 +922,50 @@
 			);
 			name = ofxRay;
 			path = ../../../addons/ofxRay/src/ofxRay;
+			sourceTree = "<group>";
+		};
+		F91D69A21A3740D80005E9D5 /* ofxButterfly */ = {
+			isa = PBXGroup;
+			children = (
+				F91D69CC1A3740D80005E9D5 /* libs */,
+				F91D69D71A3740D80005E9D5 /* src */,
+			);
+			name = ofxButterfly;
+			path = ../../../addons/ofxButterfly;
+			sourceTree = "<group>";
+		};
+		F91D69CC1A3740D80005E9D5 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				F91D69CD1A3740D80005E9D5 /* butterfly */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		F91D69CD1A3740D80005E9D5 /* butterfly */ = {
+			isa = PBXGroup;
+			children = (
+				F91D69CE1A3740D80005E9D5 /* cube.cpp */,
+				F91D69CF1A3740D80005E9D5 /* cube.hpp */,
+				F91D69D01A3740D80005E9D5 /* edge.hpp */,
+				F91D69D11A3740D80005E9D5 /* error.hpp */,
+				F91D69D21A3740D80005E9D5 /* face.hpp */,
+				F91D69D31A3740D80005E9D5 /* mesh.cpp */,
+				F91D69D41A3740D80005E9D5 /* mesh.hpp */,
+				F91D69D51A3740D80005E9D5 /* vertex.hpp */,
+			);
+			path = butterfly;
+			sourceTree = "<group>";
+		};
+		F91D69D71A3740D80005E9D5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F91D69D81A3740D80005E9D5 /* cubic_spline.cpp */,
+				F91D69D91A3740D80005E9D5 /* cubic_spline.h */,
+				F91D69DA1A3740D80005E9D5 /* ofxButterfly.cpp */,
+				F91D69DB1A3740D80005E9D5 /* ofxButterfly.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		F9267592193A093B00CB2599 /* Utils */ = {
@@ -1339,14 +1400,14 @@
 				F92C49321A24D4E0006CE219 /* apparelMod_authoritopathy.h */,
 				F92C492E1A24D47E006CE219 /* apparelMod_sportopathy.cpp */,
 				F92C492F1A24D47E006CE219 /* apparelMod_sportopathy.h */,
-				F92C49341A24D54B006CE219 /* apparelMod_pedopathy.cpp */,
 				F92C49351A24D54B006CE219 /* apparelMod_pedopathy.h */,
-				F92C49371A24D661006CE219 /* apparelMood_noisopathy.cpp */,
+				F92C49341A24D54B006CE219 /* apparelMod_pedopathy.cpp */,
 				F92C49381A24D661006CE219 /* apparelMood_noisopathy.h */,
+				F92C49371A24D661006CE219 /* apparelMood_noisopathy.cpp */,
 				F91ACC401A325D2E00B06A0F /* apparelMood_porcupinopathy.h */,
 				F91ACC3F1A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp */,
-				F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */,
 				F91D62B51A333AE00005E9D5 /* apparelMod_meteopathy.h */,
+				F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */,
 			);
 			name = Mods;
 			sourceTree = "<group>";
@@ -1598,6 +1659,7 @@
 				F932F031196C481E00C82556 /* oscReceiver.cpp in Sources */,
 				F96FBBE01976D3AC00E58A6F /* json_value.cpp in Sources */,
 				9BE4AE0AA2B8C436BDFE9D4D /* ofxUIDragableLabelButton.cpp in Sources */,
+				F91D69EB1A3740D80005E9D5 /* cube.cpp in Sources */,
 				F96FBAA31976D37900E58A6F /* ofxTwitter.cpp in Sources */,
 				F392A99D83698FC099127880 /* ofxUIDropDownList.cpp in Sources */,
 				084025DA517D8329301FE1B6 /* ofxUIEventArgs.cpp in Sources */,
@@ -1634,6 +1696,7 @@
 				C30B3A2A37F8F32EE7318718 /* ofxUILabelToggle.cpp in Sources */,
 				F92C49301A24D47E006CE219 /* apparelMod_sportopathy.cpp in Sources */,
 				9A83D1B3FB64456BC907667F /* ofxUIMinimalSlider.cpp in Sources */,
+				F91D69EE1A3740D80005E9D5 /* cubic_spline.cpp in Sources */,
 				F9131FF41936276500449924 /* Ray.cpp in Sources */,
 				F440B307990F8F5CE40B9111 /* ofxUIMovingGraph.cpp in Sources */,
 				F96FBE7519781E4600E58A6F /* apparelModManager.cpp in Sources */,
@@ -1643,6 +1706,7 @@
 				F9AB0BE91940FA220020D78A /* tool.cpp in Sources */,
 				F96FBBE21976D3AC00E58A6F /* ofxJSONElement.cpp in Sources */,
 				F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */,
+				F91D69EF1A3740D80005E9D5 /* ofxButterfly.cpp in Sources */,
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
 				D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */,
 				1587708E3CAC72997E43504E /* ofxUIRangeSlider.cpp in Sources */,
@@ -1656,6 +1720,7 @@
 				740A58CBFDFE578C83A349AF /* ofxUISlider.cpp in Sources */,
 				F9489239197E72C000085C6B /* ofxSQLiteUpdate.cpp in Sources */,
 				F932F068196C488900C82556 /* ofxOscParameterSync.cpp in Sources */,
+				F91D69EC1A3740D80005E9D5 /* mesh.cpp in Sources */,
 				ADE7C2AFC51E3F7E5E389026 /* ofxUISortableList.cpp in Sources */,
 				BFEFCE32DAFE10A8EB519F6C /* ofxUISpacer.cpp in Sources */,
 				52AFF80A869790144ACCC9BA /* ofxUISpectrum.cpp in Sources */,

@@ -45,6 +45,10 @@ class toolMods : public tool
 
 		// View
 		bool					m_bViewMixed;
+ 
+		// Post Processing
+		bool					m_bPostProcess;
+		bool					isPostProcessEnabled(){return m_bPostProcess;}
 
 
 		// Selection 3D

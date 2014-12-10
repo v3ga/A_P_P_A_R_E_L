@@ -4,8 +4,8 @@
 	<model>AR_modele_united.3ds</model>
 
 	<!-- IP of the iphone/ipad running Apparel application -->
-	<osc activated="0">
-		<ip>192.168.1.54</ip>
+	<osc activated="1">
+		<ip>192.168.0.49</ip>
 		<port>1235</port>
 	</osc>
 	

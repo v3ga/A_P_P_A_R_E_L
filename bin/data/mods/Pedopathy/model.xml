@@ -1,7 +1,33 @@
 <mod>
-    <faces></faces>
+    <faces>
+        <index>1</index>
+        <index>10</index>
+    </faces>
     <vertices>
         <index>44</index>
-        <index>43</index>
+        <index>11</index>
+        <index>42</index>
+        <index>22</index>
+        <index>58</index>
+        <index>26</index>
+        <index>59</index>
+        <index>62</index>
+        <index>9</index>
+        <index>12</index>
+        <index>24</index>
+        <index>27</index>
+        <index>13</index>
+        <index>41</index>
+        <index>45</index>
+        <index>10</index>
+        <index>56</index>
+        <index>38</index>
+        <index>63</index>
+        <index>14</index>
+        <index>25</index>
+        <index>29</index>
+        <index>23</index>
+        <index>40</index>
+        <index>60</index>
     </vertices>
 </mod>

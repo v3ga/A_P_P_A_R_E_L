@@ -32,6 +32,8 @@ class apparelModel
 		void						copyMeshAndTransformation	(const apparelModel& otherModel);
 		void						copyVerticesPositions		(const apparelModel& otherModel);
 
+		ofMatrix4x4&				getModelMatrix	(){return modelMatrix;}
+
 		string						getId			(){return id;}
 		ofMesh&						getMeshRef		(){return mesh;}
 		vector<ofMeshFaceApparel*>&	getMeshFacesRef	(){return meshFaces;}

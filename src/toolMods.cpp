@@ -42,6 +42,7 @@ toolMods::toolMods(toolManager* parent, apparelModManager* modManager) : tool("M
 	colorFaceSelected.set(255,255,255);
 	
 	m_bViewMixed			= false;
+	m_bPostProcess			= false;
 }
 
 //--------------------------------------------------------------
@@ -129,6 +130,14 @@ void toolMods::createControlsCustom()
 	mp_canvas->addLabel("Mods");
 	mp_canvas->addSpacer(300,1);
 	mp_canvas->addRadio("modIds", modIds);
+
+
+	mp_canvas->addWidgetDown(new ofxUILabel("PostProcess", OFX_UI_FONT_SMALL));
+	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
+
+	mp_canvas->addToggle("enable", 	&m_bPostProcess, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+
+
 	mp_canvas->autoSizeToFitWidgets();
 }
 
@@ -197,10 +206,10 @@ void toolMods::draw()
 	if (pModel)
 	{
 	   // MODEL
-	   ofSetColor(0);
+	   ofSetColor(0,255);
 	   pModel->drawFaces();
 
-	   ofSetColor(255);
+	   ofSetColor(255,255);
 	   glEnable(GL_POLYGON_OFFSET_LINE);
 	   glPolygonOffset(-1,-1);
 	   pModel->drawWireframe();
