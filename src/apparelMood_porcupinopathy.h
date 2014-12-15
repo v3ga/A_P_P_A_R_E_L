@@ -19,13 +19,11 @@ class apparelMood_porcupinopathy : public apparelMod
 		~apparelMood_porcupinopathy	();
 
 		void				apply				();
-		void				update				(){}
-		void				drawExtra			();
-		void				onParameterChanged	(ofAbstractParameter& parameter){}
+		void				onParameterChanged	(ofAbstractParameter& parameter);
 
 	private:
-		ofMesh*				mp_meshSubdivided;
-		ofMesh				m_meshFinal;
-		void				deleteMeshSubdivided();
 	    ofxButterfly 		butterfly;
+ 
+		ofParameter<float>	m_amplitude;
+		ofParameter<float>	m_levelSubdiv;
 };
