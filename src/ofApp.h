@@ -59,6 +59,9 @@ class ofApp : public ofBaseApp
 		// NETWORK
 		oscSender			oscSender;
 
+		// EXPORT TO IMAGE
+		bool 				m_bSaveframe;
+
 	private:
 		toolManager			toolManager;
 		tool3D*				pTool3D;

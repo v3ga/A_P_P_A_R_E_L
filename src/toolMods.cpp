@@ -205,6 +205,8 @@ void toolMods::draw()
 
 	if (pModel)
 	{
+		ofDrawAxis(100);
+
 	   // MODEL
 	   ofSetColor(0,255);
 	   pModel->drawFaces();

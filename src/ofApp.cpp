@@ -108,6 +108,9 @@ void ofApp::setup()
 	apparelModManager.applyModChain();
 
 	OFAPPLOG->end();
+
+
+	m_bSaveframe = false;
 }
 
 //--------------------------------------------------------------
@@ -174,6 +177,13 @@ if (this->pToolMods->isPostProcessEnabled())
 	ofDisableBlendMode();
 }
 
+	// Screenshot
+	if (m_bSaveframe)
+	{
+		m_bSaveframe = false;
+		ofSaveScreen("export.png");
+	}
+
 	// Interface
 	toolManager.drawUI();
 
@@ -186,6 +196,10 @@ void ofApp::keyPressed(int key)
 	bool isToolHandleKey = toolManager.keyPressed(key);
 	if (isToolHandleKey == false)
 	{
+		if (key == 's')
+		{
+			m_bSaveframe = true;
+		}
 		if (key == OF_KEY_UP)
 			cam.setDistance( cam.getDistance() + 10.0);
 		else if (key == OF_KEY_DOWN)
@@ -213,10 +227,12 @@ void ofApp::mouseDragged(int x, int y, int button)
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	toolManager.mousePressed(x, y, button);
 	if (toolManager.isHit(x, y)){
 		cam.disableMouseInput();
 	}
+	else
+		toolManager.mousePressed(x, y, button);
+
 }
 
 //--------------------------------------------------------------

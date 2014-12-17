@@ -645,6 +645,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				F978B2DE1A406E5000A98862 /* ofxUI */,
 				F91D69A21A3740D80005E9D5 /* ofxButterfly */,
 				F948920F197E72C000085C6B /* ofxSQLite */,
 				F96FBB691976D3AC00E58A6F /* ofxJSON */,
@@ -1355,6 +1356,22 @@
 				F96FBC041976D49100E58A6F /* oauth.h */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		F978B2DE1A406E5000A98862 /* ofxUI */ = {
+			isa = PBXGroup;
+			children = (
+				F978B4A21A406E5200A98862 /* src */,
+			);
+			name = ofxUI;
+			path = ../../../../of_v0.8.1_ios_release/addons/ofxUI;
+			sourceTree = "<group>";
+		};
+		F978B4A21A406E5200A98862 /* src */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		F9AB0BE51940FA220020D78A /* ofxToolManager */ = {

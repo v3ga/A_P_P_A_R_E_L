@@ -24,6 +24,8 @@ void apparelMod_pretentiopathy::apply()
 	{
 		m_model.mesh = m_meshInput;
 		m_head = ofMesh::sphere(m_weight*m_headScale,5,OF_PRIMITIVE_TRIANGLES);
+		m_head.enableNormals();
+
 		int nbVerticesHead = m_head.getVertices().size();
 		for (int i=0; i<nbVerticesHead ; i++)
 		{

@@ -249,7 +249,7 @@ void apparelModel::updateModelMatrix()
 {
     modelMatrix.makeIdentityMatrix();
     modelMatrix.glTranslate(pos);
-    //modelMatrix.glRotate(180, 0, 0, 1);
+//    modelMatrix.glRotate(180, 0, 0, 1);
     //if(assimpModel.normalizeScale)
 	{
         //modelMatrix.glScale(assimpModel.getNormalizedScale() , assimpModel.getNormalizedScale(), assimpModel.getNormalizedScale());
