@@ -13,14 +13,21 @@ class apparelMod_meteopathy : public apparelMod
 {
 	public:
 		apparelMod_meteopathy	();
+		~apparelMod_meteopathy	();
 
 
-		void					update				();
-		void					draw				();
+		void					apply				();
 		void					onParameterChanged	(ofAbstractParameter& parameter);
 
 	private:
-		vector<of3dPrimitive*>	m_primitives;
-		void					deletePrimitives	();
-	
+		vector<ofIcoSpherePrimitive*> m_particles;
+
+		ofParameter<float>		m_positionXMin,m_positionXMax;
+		ofParameter<float>		m_positionYMin,m_positionYMax;
+		ofParameter<float>		m_positionZMin,m_positionZMax;
+		ofParameter<float>		m_sizeMin,m_sizeMax;
+ 
+		int						m_nbParticles;
+		void					deleteParticles();
+
 };

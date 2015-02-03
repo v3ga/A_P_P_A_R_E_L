@@ -43,7 +43,8 @@ bool apparelModel::load(string modelName, bool optimize)
 		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
 		mesh.enableIndices();
 		mesh.disableColors();
-		mesh.disableTextures();
+//		mesh.disableTextures();
+		mesh.enableTextures();
 
 		createMeshFaces();
 
@@ -170,18 +171,18 @@ string apparelModel::toString()
 //--------------------------------------------------------------
 void apparelModel::createMeshFaces()
 {
-	OFAPPLOG->begin("apparelModel::createMeshFaces()");
+//	OFAPPLOG->begin("apparelModel::createMeshFaces()");
 	clearMeshFaces();
 
 	vector<ofIndexType>& 	indices 	= mesh.getIndices();
-	vector<ofVec3f>&		vertices	= mesh.getVertices();
+	//vector<ofVec3f>&		vertices	= mesh.getVertices();
 
 	for (int i=0; i<indices.size();i+=3)
 	{
 		meshFaces.push_back(  new ofMeshFaceApparel(&mesh, i) );
 	}
 	
-	OFAPPLOG->end();
+//	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------

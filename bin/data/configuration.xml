@@ -5,7 +5,7 @@
 
 	<!-- IP of the iphone/ipad running Apparel application -->
 	<osc activated="1">
-		<ip>192.168.1.51</ip>
+		<ip>192.168.1.16</ip>
 		<port>1235</port>
 	</osc>
 	

@@ -79,6 +79,8 @@ class apparelMod
 		// DRAWING
 		virtual void		draw					(){};
 		virtual void		drawExtra				(){};
+		virtual	void		drawFaces				();
+		virtual	void		drawWireframe			();
 
 		// OSC NETWORK
 		void				setOscSender			(oscSenderInterface* p){mp_oscSender=p;}
@@ -94,7 +96,6 @@ class apparelMod
 		string				getId					(){return m_id;}
 
 		// MODEL w/ DATA
-		apparelModel*		mp_model;			// original model
 		apparelModel		m_model;
 	   	vector<int>			m_indicesFaces;		// selected faces on original model
 		vector<int>			m_indicesVertex;	// selected vertices on original model

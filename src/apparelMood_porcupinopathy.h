@@ -19,6 +19,7 @@ class apparelMood_porcupinopathy : public apparelMod
 		~apparelMood_porcupinopathy	();
 
 		void				apply				();
+		void				update				();
 		void				onParameterChanged	(ofAbstractParameter& parameter);
 
 	private:
@@ -26,4 +27,8 @@ class apparelMood_porcupinopathy : public apparelMod
  
 		ofParameter<float>	m_amplitude;
 		ofParameter<float>	m_levelSubdiv;
+ 
+		vector<ofIndexType>		m_indexVerticesExtruded;
+		vector<ofVec3f>			m_normalVerticesExtruded;
+		vector<ofVec3f>			m_middleFaceVertices;
 };

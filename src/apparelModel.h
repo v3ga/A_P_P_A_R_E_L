@@ -22,8 +22,8 @@ class apparelModel
 		bool						saveProperties	();
 
 
-		void						drawFaces		();
-		void						drawWireframe	();
+		virtual void				drawFaces		();
+		virtual void				drawWireframe	();
  
 
         void 						setScale		(float x, float y, float z);
@@ -40,7 +40,6 @@ class apparelModel
 		vector<ofVec3f>& 			getVerticesRef	(){return mesh.getVertices();}
 		vector<ofVec3f>& 			getNormalsRef	(){return mesh.getNormals();}
 		vector<ofIndexType>&		getIndicesRef	(){return mesh.getIndices();}
-
 
 		string						toString		();
 

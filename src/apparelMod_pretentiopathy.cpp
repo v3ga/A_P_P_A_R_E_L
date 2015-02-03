@@ -9,6 +9,7 @@
 #include "apparelMod_pretentiopathy.h"
 
 
+//--------------------------------------------------------------
 apparelMod_pretentiopathy::apparelMod_pretentiopathy() : apparelMod("Pretentiopathy")
 {
 	m_headScale.set("scale", 0.0f, 0.0f, 60.0f);
@@ -18,6 +19,7 @@ apparelMod_pretentiopathy::apparelMod_pretentiopathy() : apparelMod("Pretentiopa
 	m_parameters.add(m_headPositionZ);
 }
 
+//--------------------------------------------------------------
 void apparelMod_pretentiopathy::apply()
 {
 	if (isChanged())
@@ -37,11 +39,13 @@ void apparelMod_pretentiopathy::apply()
 	}
 }
 
+//--------------------------------------------------------------
 void apparelMod_pretentiopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
 	setChanged();
 }
 
+//--------------------------------------------------------------
 void apparelMod_pretentiopathy::setHeadPosition(float x, float y, float z)
 {
 	m_headPosition.set(x,y,z);

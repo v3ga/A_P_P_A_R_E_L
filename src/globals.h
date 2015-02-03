@@ -31,10 +31,16 @@ class globals
 
 				void				setModManager(apparelModManager* p){pApparelModManager = p;}
 				apparelModManager*	getModManager(){return pApparelModManager;}
+
+				void				setSoundInputVolume(float v){m_soundInputVolume = v;}
+				float				getSoundInputVolume(){return m_soundInputVolume;}
 	
 	private:
 		static 	globals*				instance;
 				ofApp*					pOfApp;
 				oscSender*				pOscSender;
 				apparelModManager*		pApparelModManager;
+
+				float					m_soundInputVolume;
+
 };

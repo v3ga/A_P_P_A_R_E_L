@@ -18,7 +18,6 @@
 apparelMod::apparelMod(string id)
 {
 	m_id 					= id;
-	mp_model 				= 0;
 	mp_oscSender 			= 0;
 	m_isChanged				= false;
 	m_isMeshChanged			= false;
@@ -365,6 +364,17 @@ void apparelMod::clearSelection()
 	setChanged(true);
 }
 
+//--------------------------------------------------------------
+void apparelMod::drawFaces()
+{
+	m_model.drawFaces();
+}
+
+//--------------------------------------------------------------
+void apparelMod::drawWireframe()
+{
+	m_model.drawWireframe();
+}
 
 
 

@@ -59,6 +59,7 @@ void apparelMood_noisopathy::apply()
 	OFAPPLOG->end();
 }
 
+//--------------------------------------------------------------
 void apparelMood_noisopathy::update()
 {
 	float time = ofGetElapsedTimef();

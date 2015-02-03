@@ -38,6 +38,9 @@ class ofApp : public ofBaseApp
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 	
+		void	audioIn(float * input, int bufferSize, int nChannels);
+	
+
 	
 		// SETTINGS
 		ofxXmlSettings		settings;
@@ -48,7 +51,14 @@ class ofApp : public ofBaseApp
 		ofFbo				sceneBuffer;
 
 		// POST EFFECT
-		ofxPostProcess		   sceneFxBlur;
+		ofxPostProcess		sceneFxBlur;
+ 
+		// SOUND INPUT
+		ofSoundStream		soundStreamInput;
+		int                 m_soundBufferSize;
+		vector<float>		m_soundMono,m_soundLeft,m_soundRight;
+		void				setupAudioBuffers(int nbChannels);
+
 
 		// USER
 		user				user;

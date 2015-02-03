@@ -202,19 +202,23 @@ void toolMods::update()
 void toolMods::draw()
 {
 	apparelModel* pModel = m_bViewMixed ? mp_modsManager->getModelLastInChain() : mp_apparelModel;
+	apparelMod*	  pMod = m_bViewMixed ? mp_modsManager->getModLastInChain() : mp_apparelModCurrent;
 
-	if (pModel)
+//	if (pModel)
+	if (pMod)
 	{
 		ofDrawAxis(100);
 
 	   // MODEL
 	   ofSetColor(0,255);
-	   pModel->drawFaces();
+//	   pModel->drawFaces();
+	   pMod->drawFaces();
 
 	   ofSetColor(255,255);
 	   glEnable(GL_POLYGON_OFFSET_LINE);
 	   glPolygonOffset(-1,-1);
-	   pModel->drawWireframe();
+//	   pModel->drawWireframe();
+	   pMod->drawWireframe();
 	   glDisable(GL_POLYGON_OFFSET_LINE);
 
 

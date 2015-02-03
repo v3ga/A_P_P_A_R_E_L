@@ -67,12 +67,30 @@ void ofApp::setup()
 	apparelModManager.addMod( new apparelMod_pedopathy() );
 	apparelModManager.addMod( new apparelMod_sportopathy() );
 	apparelModManager.addMod( new apparelMod_pretentiopathy() );
+	apparelModManager.addMod( new apparelMod_meteopathy() );
 	apparelModManager.addMod( new apparelMood_porcupinopathy() );
+	apparelModManager.addMod( new apparelMod_selfopathy() );
 	apparelModManager.addMod( new apparelMood_noisopathy() );
+	
 
 	// **Copy** the model to every mod in the chain
 	apparelModManager.copyModelToMods(apparelModel);
 	apparelModManager.loadModData();
+
+	// SOUND
+	soundStreamInput.listDevices();
+//	int deviceSoundInputId = m_settings.getValue("simulator:soundInput:device", -1);
+	int deviceSoundInputId = 0;
+	int nbChannels = 2;
+	if (deviceSoundInputId>=0)
+	{
+		soundStreamInput.setDeviceID(deviceSoundInputId);
+		soundStreamInput.setup(ofGetAppPtr(), 0, nbChannels, 44100, 256, 4);
+		soundStreamInput.start();
+
+		setupAudioBuffers(nbChannels);
+	}
+
 
 	// CAM
 	cam.setDistance(200);
@@ -113,6 +131,23 @@ void ofApp::setup()
 	m_bSaveframe = false;
 }
 
+
+//--------------------------------------------------------------
+void ofApp::setupAudioBuffers(int nbChannels)
+{
+	m_soundBufferSize = 256;
+    if (nbChannels == 1)
+    {
+        m_soundMono.assign(m_soundBufferSize, 0.0f);
+    }
+    else
+    if (nbChannels == 2)
+    {
+        m_soundLeft.assign(m_soundBufferSize, 0.0f);
+        m_soundRight.assign(m_soundBufferSize, 0.0f);
+    }
+}
+
 //--------------------------------------------------------------
 void ofApp::update()
 {
@@ -132,6 +167,7 @@ void ofApp::exit()
 	toolManager.saveData();
 	toolManager.exit();
 	OFAPPLOG->end();
+	soundStreamInput.stop();
 }
 
 //--------------------------------------------------------------
@@ -189,6 +225,57 @@ if (this->pToolMods->isPostProcessEnabled())
 
 //	 sceneFxBlur.fboNoise.draw(0,ofGetHeight()-20,sceneFxBlur.fboNoise.getWidth(),20);
 }
+
+//--------------------------------------------------------------
+void ofApp::audioIn(float * input, int bufferSize, int nChannels)
+{
+	float curVol = 0.0;
+    int numCounted = 0;
+
+    if (nChannels==1)
+    {
+		for (int i = 0; i < bufferSize; i++){
+			m_soundMono[i] = input[i];
+			curVol += m_soundMono[i]*m_soundMono[i];
+			numCounted++;
+		}
+
+        //this is how we get the mean of rms :)
+        curVol /= (float)numCounted;
+        
+        // this is how we get the root of rms :)
+        curVol = sqrt( curVol );
+
+		GLOBALS->setSoundInputVolume( curVol );
+
+    }
+    else
+    if (nChannels==2)
+    {
+        // samples are "interleaved"
+        
+        for (int i = 0; i < bufferSize; i++)
+        {
+            m_soundLeft[i]	= input[i*2]*0.5;
+            m_soundRight[i]	= input[i*2+1]*0.5;
+            
+            curVol += m_soundLeft[i] * m_soundLeft[i];
+            curVol += m_soundRight[i] * m_soundRight[i];
+            numCounted+=2;
+        }
+        
+        //this is how we get the mean of rms :)
+        curVol /= (float)numCounted;
+        
+        // this is how we get the root of rms :)
+        curVol = sqrt( curVol );
+        
+		GLOBALS->setSoundInputVolume( curVol );
+	 
+        //bufferCounter++;
+    }
+}
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)

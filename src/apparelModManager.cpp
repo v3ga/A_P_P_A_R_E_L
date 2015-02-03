@@ -44,7 +44,7 @@ void apparelModManager::setModel(apparelModel* pModel)
 {
 	map<string, apparelMod*>::iterator it;
 	for (it = m_mods.begin(); it != m_mods.end(); ++it){
-		it->second->mp_model = pModel;
+		//it->second->mp_model = pModel;
 	}
 }
 
@@ -56,6 +56,15 @@ void apparelModManager::copyModelToMods(const apparelModel& model)
 		apparelMod* pMod = it->second;
 		pMod->copyModelFrom(model);
 	}
+}
+
+//--------------------------------------------------------------
+apparelMod*	apparelModManager::getModLastInChain()
+{
+	int nb = m_modsChain.size();
+	if (nb>0)
+		return m_modsChain[nb-1];
+	return 0;
 }
 
 //--------------------------------------------------------------

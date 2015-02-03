@@ -1,10 +1,11 @@
 <mod>
     <faces>
-        <index>130</index>
-        <index>113</index>
-        <index>31</index>
-        <index>23</index>
-        <index>16</index>
+        <index>65</index>
+        <index>44</index>
+        <index>51</index>
     </faces>
-    <vertices></vertices>
+    <vertices>
+        <index>117</index>
+        <index>470</index>
+    </vertices>
 </mod>

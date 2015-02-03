@@ -8,7 +8,9 @@
 
 #include "apparelMood_porcupinopathy.h"
 #include "ofAppLog.h"
+#include "globals.h"
 
+//--------------------------------------------------------------
 apparelMood_porcupinopathy::apparelMood_porcupinopathy() : apparelMod("Porcupinopathy")
 {
 	m_amplitude.set("Amplitude", 30.0f, 0.0f, 50.0f);
@@ -18,11 +20,13 @@ apparelMood_porcupinopathy::apparelMood_porcupinopathy() : apparelMod("Porcupino
 	m_parameters.add(m_levelSubdiv);
 }
 
+//--------------------------------------------------------------
 apparelMood_porcupinopathy::~apparelMood_porcupinopathy()
 {
 }
 
 
+//--------------------------------------------------------------
 void apparelMood_porcupinopathy::apply()
 {
 	if (isChanged())
@@ -30,6 +34,9 @@ void apparelMood_porcupinopathy::apply()
 		OFAPPLOG->begin("apparelMood_porcupinopathy::apply()");
 	
 		m_model.mesh = m_meshInput;
+		m_indexVerticesExtruded.clear();
+		m_normalVerticesExtruded.clear();
+		m_middleFaceVertices.clear();
 	
 
 		int nbFacesSelected = m_indicesFaces.size();
@@ -136,13 +143,13 @@ void apparelMood_porcupinopathy::apply()
 					 m_model.mesh.addIndex(indexC);
 					 m_model.mesh.addIndex(indexA);
 					 m_model.mesh.addIndex(indexM);
-
 				 
-
+					 // Save in our list to retrieve in update without updating model
+					 m_indexVerticesExtruded.push_back(indexM);
+					 m_normalVerticesExtruded.push_back(faceNormal);
+					 m_middleFaceVertices.push_back(faceMiddle);
 				}
 			}
-		
-		
 
 			m_model.createMeshFaces();
 		}
@@ -151,9 +158,37 @@ void apparelMood_porcupinopathy::apply()
 	}
 }
 
+//--------------------------------------------------------------
 void apparelMood_porcupinopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
-	setChanged(true);
+	// Only recompute Mesh if subdivision is changed
+	if (parameter.getName() == "Subdivision")
+		setChanged(true);
+}
+
+
+//--------------------------------------------------------------
+void apparelMood_porcupinopathy::update()
+{
+	// Get amplitude of sound
+	m_weight = ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.5f, 0.5f,1.0f);
+	int nbVerticesExtruded = m_indexVerticesExtruded.size();
+
+printf("m_weight=%0.4f", m_weight.get());
+printf("nbVerticesExtruded=%d",nbVerticesExtruded);
+
+
+	// Compute points
+	for (int i=0;i<nbVerticesExtruded;i++)
+	{
+		// Get index of the vertex
+		ofIndexType indexVertex = m_indexVerticesExtruded[i];
+		// Get normal...
+		ofVec3f& normal = m_normalVerticesExtruded[i];
+		// ... and compute new extruded vertex from middl point of face
+		m_model.mesh.setVertex(indexVertex, m_middleFaceVertices[i] + normal*m_weight*m_amplitude);
+	}
+//	m_model.createMeshFaces();
 }
 
 

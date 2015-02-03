@@ -118,6 +118,7 @@
 		F9489275197FEEE900085C6B /* toolUser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489273197FEEE900085C6B /* toolUser.cpp */; };
 		F9489279197FF98200085C6B /* ofxUILogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489277197FF98200085C6B /* ofxUILogger.cpp */; };
 		F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948927B197FFE5400085C6B /* toolCalibration.cpp */; };
+		F94A60CD1A80507700A850FA /* apparelMod_selfopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F94A60CB1A80507700A850FA /* apparelMod_selfopathy.cpp */; };
 		F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */; };
 		F96FBA5B1976D25500E58A6F /* userSocialInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA591976D25500E58A6F /* userSocialInterface.cpp */; };
 		F96FBAA31976D37900E58A6F /* ofxTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA971976D37900E58A6F /* ofxTwitter.cpp */; };
@@ -449,6 +450,8 @@
 		F9489278197FF98200085C6B /* ofxUILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUILogger.h; sourceTree = "<group>"; };
 		F948927B197FFE5400085C6B /* toolCalibration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolCalibration.cpp; sourceTree = "<group>"; };
 		F948927C197FFE5400085C6B /* toolCalibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolCalibration.h; sourceTree = "<group>"; };
+		F94A60CB1A80507700A850FA /* apparelMod_selfopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_selfopathy.cpp; sourceTree = "<group>"; };
+		F94A60CC1A80507700A850FA /* apparelMod_selfopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_selfopathy.h; sourceTree = "<group>"; };
 		F96FBA4E1975406300E58A6F /* configuration.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = configuration.xml; path = bin/data/configuration.xml; sourceTree = "<group>"; };
 		F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofAppLog.cpp; sourceTree = "<group>"; };
 		F96FBA5119755AEA00E58A6F /* ofAppLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofAppLog.h; sourceTree = "<group>"; };
@@ -1411,20 +1414,22 @@
 			isa = PBXGroup;
 			children = (
 				F93C8B3B19824FCC006CC178 /* apparelMod_include.h */,
-				F91ACC431A325F9B00B06A0F /* apparelMod_pretentiopathy.h */,
 				F91ACC421A325F9B00B06A0F /* apparelMod_pretentiopathy.cpp */,
+				F91ACC431A325F9B00B06A0F /* apparelMod_pretentiopathy.h */,
 				F92C49311A24D4E0006CE219 /* apparelMod_authoritopathy.cpp */,
 				F92C49321A24D4E0006CE219 /* apparelMod_authoritopathy.h */,
 				F92C492E1A24D47E006CE219 /* apparelMod_sportopathy.cpp */,
 				F92C492F1A24D47E006CE219 /* apparelMod_sportopathy.h */,
-				F92C49351A24D54B006CE219 /* apparelMod_pedopathy.h */,
 				F92C49341A24D54B006CE219 /* apparelMod_pedopathy.cpp */,
-				F92C49381A24D661006CE219 /* apparelMood_noisopathy.h */,
+				F92C49351A24D54B006CE219 /* apparelMod_pedopathy.h */,
 				F92C49371A24D661006CE219 /* apparelMood_noisopathy.cpp */,
-				F91ACC401A325D2E00B06A0F /* apparelMood_porcupinopathy.h */,
+				F92C49381A24D661006CE219 /* apparelMood_noisopathy.h */,
 				F91ACC3F1A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp */,
-				F91D62B51A333AE00005E9D5 /* apparelMod_meteopathy.h */,
+				F91ACC401A325D2E00B06A0F /* apparelMood_porcupinopathy.h */,
 				F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */,
+				F91D62B51A333AE00005E9D5 /* apparelMod_meteopathy.h */,
+				F94A60CB1A80507700A850FA /* apparelMod_selfopathy.cpp */,
+				F94A60CC1A80507700A850FA /* apparelMod_selfopathy.h */,
 			);
 			name = Mods;
 			sourceTree = "<group>";
@@ -1756,6 +1761,7 @@
 				F9489233197E72C000085C6B /* ofxSQLiteAbstract.cpp in Sources */,
 				60012C723B05938A3D388335 /* ofxUIValuePlotter.cpp in Sources */,
 				F93331B719F9356400583FC6 /* oscSenderInterface.cpp in Sources */,
+				F94A60CD1A80507700A850FA /* apparelMod_selfopathy.cpp in Sources */,
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */,
 				F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */,

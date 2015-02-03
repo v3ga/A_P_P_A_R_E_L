@@ -12,8 +12,9 @@ globals* globals::instance = 0;
 
 globals::globals()
 {
-	pOfApp			= 0;
-	pOscSender		= 0;
+	pOfApp				= 0;
+	pOscSender			= 0;
+	m_soundInputVolume	= 0.0f;
 }
 
 globals* globals::getInstance()

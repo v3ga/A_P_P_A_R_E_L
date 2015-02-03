@@ -25,6 +25,7 @@ class apparelModManager
 		void						setModel			(apparelModel*);
 		void						copyModelToMods		(const apparelModel& model);
  		apparelModel*				getModelLastInChain	();
+ 		apparelMod*					getModLastInChain	();
  
 	
 		void						saveModel			();
