@@ -46,6 +46,11 @@ void apparelModUI::createControls(const ofVec2f& posCanvas)
 			ofParameter<bool>& parameterBool = (ofParameter<bool>&) parameter;
 			mp_canvas->addToggle(parameterBool.getName(), parameterBool);
 		}
+		if (parameter.type() == typeid(ofParameter<int>).name())
+		{
+			ofParameter<int>& parameterInt = (ofParameter<int>&) parameter;
+			mp_canvas->addIntSlider(parameterInt.getName(), parameterInt.getMin(), parameterInt.getMax(), parameterInt);
+		}
 	}
 	mp_canvas->autoSizeToFitWidgets();
 	

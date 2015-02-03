@@ -11,6 +11,7 @@
 #include "apparelModel.h"
 #include "ofxXmlSettings.h"
 #include "oscSenderInterface.h"
+#include "user.h"
 
 class apparelMod
 {
@@ -85,9 +86,9 @@ class apparelMod
 		// OSC NETWORK
 		void				setOscSender			(oscSenderInterface* p){mp_oscSender=p;}
 
-		// INTERFACE FOR RECEIVING DATA FROM USER
-		void				onNewText				(string text){}
-		void				onNewWords				(vector<string>& text){}
+		// INTERFACE FOR RECEIVING DATA FROM USER : !!Asynchronous!!
+		void				onNewText				(user* pUser, string text){}
+		void				onNewWords				(user* pUser, vector<string>& words);
 
 		// INTERFACE FOR SAVING IN DATABASE
 	
@@ -115,6 +116,7 @@ class apparelMod
 		ofParameterGroup 	m_parameters;
 		ofParameter<bool>	m_isActive; // DEPRECATED
 		ofParameter<float>	m_weight;
+		ofParameter<int>	m_nbWordsMax;
 
 
 		// SETTINGS
@@ -122,9 +124,11 @@ class apparelMod
 	
 		// WORDS
 		vector<string>		m_words;
-		//ofBuffer buffer = ofBufferFromFile("someFile.txt");
-
-
+		int					m_countWords; // total words from list retrieved in database
+		bool				isInWordsList			(string word);
+		void				updateUserDatabase		(user* pUser, string word);
+ 		void				countUserWords			(user* pUser);
+ 
 		// OSC
 		oscSenderInterface*	mp_oscSender;
 };

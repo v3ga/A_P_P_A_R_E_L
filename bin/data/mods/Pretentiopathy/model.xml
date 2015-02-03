@@ -6,5 +6,7 @@
         <index>9</index>
         <index>64</index>
     </faces>
-    <vertices></vertices>
+    <vertices>
+        <index>1</index>
+    </vertices>
 </mod>

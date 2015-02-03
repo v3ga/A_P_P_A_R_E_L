@@ -1,6 +1,6 @@
 <Pretentiopathy>
-    <Active>0</Active>
-    <Weight>1</Weight>
+    <NbWordsMax>5</NbWordsMax>
+    <Weight>0</Weight>
     <scale>20.3125</scale>
     <position>30.9896</position>
 </Pretentiopathy>

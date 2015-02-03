@@ -11,7 +11,7 @@
 
 #include "apparelMod_include.h"
 
-#define USER_LOAD_CONFIGURATION false
+#define USER_LOAD_CONFIGURATION true
 
 //--------------------------------------------------------------
 void ofApp::setup()
@@ -76,6 +76,10 @@ void ofApp::setup()
 	// **Copy** the model to every mod in the chain
 	apparelModManager.copyModelToMods(apparelModel);
 	apparelModManager.loadModData();
+
+	// USER WORDS
+	// this will initialize words count for each mod for this user
+	apparelModManager.countUserWords(&user);
 
 	// SOUND
 	soundStreamInput.listDevices();

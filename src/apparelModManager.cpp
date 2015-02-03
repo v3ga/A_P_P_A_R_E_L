@@ -9,6 +9,7 @@
 #include "apparelModManager.h"
 #include "apparelMod.h"
 #include "globals.h"
+#include "user.h"
 
 apparelModManager::apparelModManager()
 {
@@ -183,20 +184,34 @@ void apparelModManager::applyModChain()
 }
 
 //--------------------------------------------------------------
-void apparelModManager::onNewText(string text)
+void apparelModManager::countUserWords(user* pUser)
+{
+	int nbMods = m_modsChain.size();
+	
+	// Copy if something changed at some point
+	for (int i=0; i<nbMods; i++)
+	{
+		m_modsChain[i]->countUserWords(pUser);
+	}
+
+}
+
+
+//--------------------------------------------------------------
+void apparelModManager::onNewText(user* pUser, string text)
 {
 	map<string, apparelMod*>::iterator it;
 	for (it = m_mods.begin(); it != m_mods.end(); ++it){
-		it->second->onNewText(text);
+		it->second->onNewText(pUser, text);
 	}
 }
 
 //--------------------------------------------------------------
-void apparelModManager::onNewWords(vector<string>& words)
+void apparelModManager::onNewWords(user* pUser, vector<string>& words)
 {
 	map<string, apparelMod*>::iterator it;
 	for (it = m_mods.begin(); it != m_mods.end(); ++it){
-		it->second->onNewWords(words);
+		it->second->onNewWords(pUser, words);
 	}
 }
 

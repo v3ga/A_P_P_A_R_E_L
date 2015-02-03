@@ -42,6 +42,7 @@ class user : public ofThread
 		virtual		void				loadConfiguration	();
 					string				getPathSqlData		();
 					void				connectSqlData		();
+					ofxSQLite*			getSqlData			(){return mp_sqlData;}
 		virtual		void				update				(float dt);
 		virtual 	void 				threadedFunction	();
 		virtual		float				getPeriodTick		(){return m_periodTick;}

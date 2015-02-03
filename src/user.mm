@@ -86,9 +86,12 @@ void user::createDirectory()
 	if (fSqlResource.exists()){
 		ofFile fSqlDocument(pathSqlDocument);
 		
-		if (ofFile::copyFromTo(pathSqlResource, pathSqlDocument, false, false))
+		if (!ofFile::doesFileExist(pathSqlDocument,false))
 		{
-			OFAPPLOG->begin("- copied '"+pathSqlResource+ "' to '"+pathSqlDocument+"'");
+			if (ofFile::copyFromTo(pathSqlResource, pathSqlDocument, false, false))
+			{
+				OFAPPLOG->begin("- copied '"+pathSqlResource+ "' to '"+pathSqlDocument+"'");
+			}
 		}
 	}
 
@@ -191,10 +194,12 @@ void user::connectSqlData()
 		mp_sqlData = new ofxSQLite();
 		if (mp_sqlData->setup(pathSqlData))
 		{
-			int result = mp_sqlData->insert("words").use("name", "test2").use("count", 12345).execute();
+			OFAPPLOG->println("- OK connected to "+pathSqlData);
+		
+			// TODO : remove this
+/*			int result = mp_sqlData->insert("words").use("name", "test2").use("count", 12345).execute();
 			if (result != SQLITE_OK)
 				OFAPPLOG->println("- error "+ofToString(result)+" while inserting");
-	
 
 			ofxSQLiteSelect sel = mp_sqlData->select("name, count").from("words");
 			sel.execute().begin();
@@ -206,8 +211,12 @@ void user::connectSqlData()
 			// cout << id << ", " << name << endl;
 				sel.next();
 			}
+*/
 		}
-		else{
+		else
+		{
+			OFAPPLOG->println("- FAILED to connect to "+pathSqlData);
+		
 			delete mp_sqlData;
 			mp_sqlData=0;
 		}
@@ -250,14 +259,14 @@ void user::onNewTick(ofxTickerEventArgs& args)
 void user::onNewText(string text)
 {
 	if (mp_modManager)
-		mp_modManager->onNewText(text);
+		mp_modManager->onNewText(this,text);
 }
 
 //--------------------------------------------------------------
 void user::onNewWords(vector<string>& words)
 {
 	if (mp_modManager)
-		mp_modManager->onNewWords(words);
+		mp_modManager->onNewWords(this,words);
 }
 
 

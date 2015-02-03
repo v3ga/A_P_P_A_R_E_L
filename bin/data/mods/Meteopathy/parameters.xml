@@ -1,6 +1,6 @@
 <Meteopathy>
-    <Active>1</Active>
-    <Weight>0.828125</Weight>
+    <NbWordsMax>5</NbWordsMax>
+    <Weight>0</Weight>
     <xmin>-50</xmin>
     <xmax>50</xmax>
     <ymin>-46.0938</ymin>

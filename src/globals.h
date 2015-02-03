@@ -21,10 +21,10 @@ class globals
 	public:
 				globals			();
 	
-		static 	globals*		getInstance();
+		static 	globals*			getInstance();
 
-				void			setApp(ofApp* p){pOfApp = p;}
-				ofApp*			getApp(){return pOfApp;}
+				void				setApp(ofApp* p){pOfApp = p;}
+				ofApp*				getApp(){return pOfApp;}
 
 				void				setOscSender(oscSender* p){pOscSender = p;}
 				oscSender*			getOscSender(){return pOscSender;}

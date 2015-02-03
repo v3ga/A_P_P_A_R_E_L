@@ -65,23 +65,27 @@ void userTwitter::doWork()
 			// Relays to user (who will relay to mods in turn)
 			if (mp_user)
 			{
+				// Text
+				OFAPPLOG->println("- got tweet id="+m_tweetLastId_str+", text='"+m_tweet.text+"'");
+
 				// Raw text
 				mp_user->onNewText( m_tweet.text );
 
 				// Words
-				vector<string> words = ofSplitString(m_tweet.text, " ");
+				vector<string> words = ofSplitString(m_tweet.text, " ",true,true); // source, delimiter,ignoreEmpty,trim
+		
+				// Lower strings
 				mp_user->onNewWords( words );
 				
 				// TEMP
-				vector<string>::iterator it;
+/*				vector<string>::iterator it;
 				for (it = words.begin() ; it != words.end(); ++it){
-					printf("- %s / ", (*it).c_str());
+					printf("%s/", (*it).c_str());
 				}
+*/
 
 			}
 
-			// Text
-			OFAPPLOG->println("- got tweet id="+m_tweetLastId_str+", text='"+m_tweet.text+"'");
 		}
 	}
 }
@@ -114,7 +118,7 @@ void userTwitter::loadData()
 			OFAPPLOG->println("-loaded");
 			m_tweetLastId_str = data.getValue("tweetLastId", "-1");
 			OFAPPLOG->println("m_tweetLastId_str="+m_tweetLastId_str);
-		}else{ OFAPPLOG->println(OF_LOG_ERROR, "-error loading file"); }
+		}else{ OFAPPLOG->println("-error loading file"); }
 	}
 
 	OFAPPLOG->end();
