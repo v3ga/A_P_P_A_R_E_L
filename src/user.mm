@@ -195,23 +195,6 @@ void user::connectSqlData()
 		if (mp_sqlData->setup(pathSqlData))
 		{
 			OFAPPLOG->println("- OK connected to "+pathSqlData);
-		
-			// TODO : remove this
-/*			int result = mp_sqlData->insert("words").use("name", "test2").use("count", 12345).execute();
-			if (result != SQLITE_OK)
-				OFAPPLOG->println("- error "+ofToString(result)+" while inserting");
-
-			ofxSQLiteSelect sel = mp_sqlData->select("name, count").from("words");
-			sel.execute().begin();
-
-			while(sel.hasNext()) {
-				string word = sel.getString();
-				int count = sel.getInt();
-				OFAPPLOG->println(word+"("+ofToString(count)+")");
-			// cout << id << ", " << name << endl;
-				sel.next();
-			}
-*/
 		}
 		else
 		{
