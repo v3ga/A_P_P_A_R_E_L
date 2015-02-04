@@ -466,10 +466,27 @@ void apparelMod::copyModelVerticesPosition(const apparelModel& model)
 //--------------------------------------------------------------
 void apparelMod::clearSelection()
 {
-	m_indicesVertex.clear();
-	m_indicesFaces.clear();
+	clearSelectionVertices();
+	clearSelectionFaces();
 	setChanged(true);
 }
+
+//--------------------------------------------------------------
+void apparelMod::clearSelectionVertices()
+{
+	m_indicesVertex.clear();
+	m_model.mesh = m_meshInput;
+	setChanged(true);
+}
+
+//--------------------------------------------------------------
+void apparelMod::clearSelectionFaces()
+{
+	m_indicesFaces.clear();
+	m_model.mesh = m_meshInput;
+	setChanged(true);
+}
+
 
 //--------------------------------------------------------------
 void apparelMod::drawFaces()

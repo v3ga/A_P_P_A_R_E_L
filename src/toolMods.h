@@ -72,8 +72,6 @@ class toolMods : public tool
 		ofSpherePrimitive				m_sphereVertexOver;
 		map<int, ofSpherePrimitive*>	m_mapSphereVertexSelected;
 	
-		vector<int>				m_indicesFaceSelected;
-		vector<int>				m_indicesVectorSelected;
 	
 		bool					isFaceSelected		(int index);
 		bool					isVertexSelected	(int index);
@@ -85,12 +83,11 @@ class toolMods : public tool
 		enum enumSelection
 		{
 			E_selection_vertex 	= 0,
-/*			E_selection_edge 	= 1,
-*/
 			E_selection_face 	= 1
 		};
 	
 		enumSelection			m_selection;
+		void					unselectSelection	();
  
 	private:
 		ofxUILabel*				mp_lblModel;

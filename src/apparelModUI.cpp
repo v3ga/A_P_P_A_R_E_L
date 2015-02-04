@@ -7,6 +7,7 @@
 //
 
 #include "apparelModUI.h"
+#include "parameterGroupLowHigh.h"
 
 //--------------------------------------------------------------
 apparelModUI::apparelModUI(apparelMod* mod)
@@ -51,6 +52,18 @@ void apparelModUI::createControls(const ofVec2f& posCanvas)
 			ofParameter<int>& parameterInt = (ofParameter<int>&) parameter;
 			mp_canvas->addIntSlider(parameterInt.getName(), parameterInt.getMin(), parameterInt.getMax(), parameterInt);
 		}
+		else
+		if (parameter.type() == typeid(ofParameterGroup).name())
+		{
+			ofParameterGroup& parameterGroup = (ofParameterGroup&) parameter;
+
+			ofParameter<float>& parameterFloatMin 		= (ofParameter<float>&) parameterGroup.get("min");
+			ofParameter<float>& parameterFloatMax 		= (ofParameter<float>&) parameterGroup.get("max");
+			ofParameter<float>& parameterFloatLow 		= (ofParameter<float>&) parameterGroup.get("low");
+			ofParameter<float>& parameterFloatHigh 		= (ofParameter<float>&) parameterGroup.get("high");
+
+			mp_canvas->addRangeSlider(parameterGroup.getName(), parameterFloatMin.get(),parameterFloatMax.get(), parameterFloatLow.get(), parameterFloatHigh.get());
+		}
 	}
 	mp_canvas->autoSizeToFitWidgets();
 	
@@ -85,6 +98,24 @@ void apparelModUI::handleEvents(ofxUIEventArgs& e)
 	{
 		ofParameter<bool>& parameterBool = (ofParameter<bool>&) parameter;
 		parameterBool.set( ((ofxUIToggle *) e.widget)->getValue() );
+	}
+	else
+	if (parameter.type() == typeid(ofParameter<int>).name())
+	{
+		ofParameter<int>& parameterInt = (ofParameter<int>&) parameter;
+		parameterInt.set( ((ofxUIIntSlider *) e.widget)->getValue() );
+	}
+	else
+	if (parameter.type() == typeid(ofParameterGroup).name())
+	{
+		ofParameterGroup& parameterGroup = (ofParameterGroup&) parameter;
+		
+		ofParameter<float>& parameterFloatLow 		= (ofParameter<float>&) parameterGroup.get("low");
+		ofParameter<float>& parameterFloatHigh 		= (ofParameter<float>&) parameterGroup.get("high");
+
+		ofxUIRangeSlider* pRangeSlider = (ofxUIRangeSlider*) e.widget;
+		parameterFloatLow.set( pRangeSlider->getValueLow() );
+		parameterFloatHigh.set( pRangeSlider->getValueHigh() );
 	}
 }
 

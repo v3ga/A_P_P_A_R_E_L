@@ -8,6 +8,7 @@
 
 #pragma once
 #include "apparelMod.h"
+#include "parameterGroupLowHigh.h"
 
 class apparelMod_meteopathy : public apparelMod
 {
@@ -22,12 +23,15 @@ class apparelMod_meteopathy : public apparelMod
 	private:
 		vector<ofIcoSpherePrimitive*> m_particles;
 
-		ofParameter<float>		m_positionXMin,m_positionXMax;
-		ofParameter<float>		m_positionYMin,m_positionYMax;
-		ofParameter<float>		m_positionZMin,m_positionZMax;
-		ofParameter<float>		m_sizeMin,m_sizeMax;
+		ofParameter<int>		m_nbParticles;
  
-		int						m_nbParticles;
+		ofParameterGroup	m_x;
+		ofParameterGroup	m_y;
+		ofParameterGroup	m_z;
+ 
+
+ 		ofParameterGroup	m_size;
+
 		void					deleteParticles();
 
 };

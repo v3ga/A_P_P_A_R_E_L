@@ -130,6 +130,7 @@
 		F96FBE6C197724CE00E58A6F /* userTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE6A197724CE00E58A6F /* userTwitter.cpp */; };
 		F96FBE721977D9F800E58A6F /* userSocialFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE701977D9F800E58A6F /* userSocialFactory.cpp */; };
 		F96FBE7519781E4600E58A6F /* apparelModManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE7319781E4600E58A6F /* apparelModManager.cpp */; };
+		F974AB871A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F974AB851A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp */; };
 		F9AB0BE91940FA220020D78A /* tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BE71940FA220020D78A /* tool.cpp */; };
 		F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ED4467DFF0AC3482E9362 /* ofxUIMultiImageToggle.cpp */; };
 		F9C6660D193CA6BF00C8225D /* apparelModUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C6660B193CA6BF00C8225D /* apparelModUI.cpp */; };
@@ -503,6 +504,8 @@
 		F96FBE711977D9F800E58A6F /* userSocialFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userSocialFactory.h; sourceTree = "<group>"; };
 		F96FBE7319781E4600E58A6F /* apparelModManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelModManager.cpp; sourceTree = "<group>"; };
 		F96FBE7419781E4600E58A6F /* apparelModManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelModManager.h; sourceTree = "<group>"; };
+		F974AB851A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parameterGroupLowHigh.cpp; sourceTree = "<group>"; };
+		F974AB861A82DA9D00CA6FC8 /* parameterGroupLowHigh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parameterGroupLowHigh.h; sourceTree = "<group>"; };
 		F9A4454B00CCFD7265D3CA85 /* ofxUILabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUILabelButton.cpp; path = ../../../addons/ofxUI/src/ofxUILabelButton.cpp; sourceTree = SOURCE_ROOT; };
 		F9AB0BE71940FA220020D78A /* tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool.cpp; sourceTree = "<group>"; };
 		F9AB0BE81940FA220020D78A /* tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool.h; sourceTree = "<group>"; };
@@ -856,8 +859,6 @@
 				F9D35E8219ACCBDE00B63E8E /* apparelMod.mm */,
 				F96FBE7319781E4600E58A6F /* apparelModManager.cpp */,
 				F96FBE7419781E4600E58A6F /* apparelModManager.h */,
-				F9C6660B193CA6BF00C8225D /* apparelModUI.cpp */,
-				F9C6660C193CA6BF00C8225D /* apparelModUI.h */,
 				F9131F6119352D6C00449924 /* globals.cpp */,
 				F9131F6219352D6C00449924 /* globals.h */,
 			);
@@ -985,6 +986,8 @@
 				F96FBA5119755AEA00E58A6F /* ofAppLog.h */,
 				F948923C197E9C8A00085C6B /* ofxTicker.cpp */,
 				F948923D197E9C8A00085C6B /* ofxTicker.h */,
+				F974AB851A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp */,
+				F974AB861A82DA9D00CA6FC8 /* parameterGroupLowHigh.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1157,6 +1160,8 @@
 		F9489276197FF8FA00085C6B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F9C6660B193CA6BF00C8225D /* apparelModUI.cpp */,
+				F9C6660C193CA6BF00C8225D /* apparelModUI.h */,
 				F9489277197FF98200085C6B /* ofxUILogger.cpp */,
 				F9489278197FF98200085C6B /* ofxUILogger.h */,
 			);
@@ -1767,6 +1772,7 @@
 				F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
 				F932F05D196C488900C82556 /* IpEndpointName.cpp in Sources */,
+				F974AB871A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp in Sources */,
 				CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,32 +12,19 @@
 //--------------------------------------------------------------
 apparelMod_meteopathy::apparelMod_meteopathy() : apparelMod("Meteopathy")
 {
-	m_positionXMin.set	("xmin", 		0.0f, -50.0f, 	0.0f);
-	m_positionXMax.set	("xmax", 		20.0f, 0.0f, 	50.0f);
 
-	m_positionYMin.set	("ymin", 		0.0f, -50.0f, 0.0f);
-	m_positionYMax.set	("ymax", 		20.0f, 0.0f, 50.0f);
 
-	m_positionZMin.set	("zmin", 		0.0f, 10.0f, 20.0f);
-	m_positionZMax.set	("zmax", 		20.0f, 20.0f, 100.0f);
+	m_nbParticles.set	("nbParticles",	10, 2,20);
+	parameterGroupLowHigh::create(m_size, "size",1.0,10.0,15.0,20.0);
+	parameterGroupLowHigh::create(m_x, "x",-50.0,-25.0,25.0,50.0);
+	parameterGroupLowHigh::create(m_y, "y",-50.0,-25.0,25.0,50.0);
+	parameterGroupLowHigh::create(m_z, "z",-50.0,-25.0,25.0,50.0);
 
-	m_sizeMin.set		("sizemin", 	5.0f, 1.0f, 10.0f);
-	m_sizeMax.set		("sizemax", 	12.0f, 10.0f, 30.0f);
-
-	m_parameters.add(m_positionXMin);
-	m_parameters.add(m_positionXMax);
-
-	m_parameters.add(m_positionYMin);
-	m_parameters.add(m_positionYMax);
-
-	m_parameters.add(m_positionZMin);
-	m_parameters.add(m_positionZMax);
-
-	m_parameters.add(m_sizeMin);
-	m_parameters.add(m_sizeMax);
-	
-	m_nbParticles = 10;
-
+	m_parameters.add(m_nbParticles);
+	m_parameters.add(m_size);
+	m_parameters.add(m_x);
+	m_parameters.add(m_y);
+	m_parameters.add(m_z);
 }
 
 //--------------------------------------------------------------
@@ -66,15 +53,14 @@ void apparelMod_meteopathy::apply()
 
 		for (int i=0;i<m_nbParticles;i++)
 		{
-			ofIcoSpherePrimitive* pPrimitive = new ofIcoSpherePrimitive( ofRandom(m_sizeMin,m_sizeMax), 0 );
-			// pPrimitive->setPosition(ofRandom(-30,30), ofRandom(-30,30), ofRandom(m_positionZMin,m_positionZMax));
+			ofIcoSpherePrimitive* pPrimitive = new ofIcoSpherePrimitive( ofRandom(m_size.getFloat("low"),m_size.getFloat("high")), 0 );
 			m_particles.push_back( pPrimitive );
 	 
 
 			int nbVertices = pPrimitive->getMesh().getVertices().size();
-			float dx = ofRandom(m_positionXMin,m_positionXMax);
-			float dy = ofRandom(m_positionYMin,m_positionYMax);
-			float dz = ofRandom(m_positionZMin,m_positionZMax);
+			float dx = ofRandom(m_x.getFloat("low"),m_x.getFloat("high"));
+			float dy = ofRandom(m_y.getFloat("low"),m_y.getFloat("high"));
+			float dz = ofRandom(m_z.getFloat("low"),m_z.getFloat("high"));
 			for (int k=0; k<nbVertices ; k++)
 			{
 				ofVec3f& v = pPrimitive->getMesh().getVertices()[k];

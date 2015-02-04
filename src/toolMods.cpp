@@ -103,6 +103,8 @@ void toolMods::createControlsCustom()
 
 	ofxUIRadio* radioSelect = mp_canvas->addRadio("Selection", selectionIds, OFX_UI_ORIENTATION_HORIZONTAL,OFX_UI_FONT_SMALL);
 
+	mp_canvas->addWidgetDown(new ofxUILabelButton("Clear",false,300,OFX_UI_GLOBAL_BUTTON_DIMENSION,0,0,OFX_UI_FONT_SMALL));
+
 
 	mp_canvas->addWidgetDown(new ofxUILabel("Camera", OFX_UI_FONT_SMALL));
 	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
@@ -414,17 +416,6 @@ void toolMods::handleEvents(ofxUIEventArgs& e)
 {
     string name = e.widget->getName();
 
-//	ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-//	if (toggle && toggle->getValue()) setTool(name);
-
-	// NEVER CALLED
-/*
-	if (name == "modIds")
-	{
-        ofxUIRadio *radio = (ofxUIRadio *) e.widget;
-		selectMod( radio->getActiveName() );
-	}
-*/
 	if (isNameMod(name))
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
@@ -435,6 +426,12 @@ void toolMods::handleEvents(ofxUIEventArgs& e)
         ofxUIRadio *radio = (ofxUIRadio *) e.widget;
 		m_selection = (enumSelection)radio->getValue();
 		ofLog() << "tool3D::handleEvents() - selection=" << ofToString((int)m_selection);
+	}
+	else if (name == "Clear")
+	{
+		if (e.getButton()->getValue()>0)
+			unselectSelection();
+
 	}
 	else if (name == "Distance")
 	{
@@ -456,7 +453,6 @@ void toolMods::mousePressed(int x, int y, int button)
 		if (!isFaceSelected(m_meshFaceIndexOver))
 		{
 			mp_apparelModCurrent->addFaceIndex(m_meshFaceIndexOver);
-			//m_indicesFaceSelected.push_back(m_meshFaceIndexOver);
 			mp_meshFaceOver = 0;
 			m_meshFaceIndexOver = -1;
 			
@@ -464,7 +460,6 @@ void toolMods::mousePressed(int x, int y, int button)
 		}
 		else{
 			mp_apparelModCurrent->removeFaceIndex(m_meshFaceIndexOver);
-			//m_indicesFaceSelected.erase(std::remove(m_indicesFaceSelected.begin(), m_indicesFaceSelected.end(), m_meshFaceIndexOver), m_indicesFaceSelected.end());
 			isModelModified = true;
 		}
 	}
@@ -581,5 +576,21 @@ bool toolMods::isNameMod(string id)
 		return true;
 	return false;
 }
+
+//--------------------------------------------------------------
+void toolMods::unselectSelection()
+{
+	if (mp_apparelModCurrent)
+	{
+		if (m_selection == E_selection_vertex)
+		{
+			mp_apparelModCurrent->clearSelectionVertices();
+			m_mapSphereVertexSelected.clear();
+		}
+		else if (m_selection == E_selection_face)
+			mp_apparelModCurrent->clearSelectionFaces();
+	}
+}
+
 
 

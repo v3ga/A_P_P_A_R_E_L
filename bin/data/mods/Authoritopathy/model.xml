@@ -1,35 +1,4 @@
 <mod>
-    <faces>
-        <index>11</index>
-    </faces>
-    <vertices>
-        <index>2</index>
-        <index>34</index>
-        <index>4</index>
-        <index>50</index>
-        <index>49</index>
-        <index>20</index>
-        <index>61</index>
-        <index>6</index>
-        <index>7</index>
-        <index>19</index>
-        <index>32</index>
-        <index>36</index>
-        <index>52</index>
-        <index>53</index>
-        <index>33</index>
-        <index>35</index>
-        <index>43</index>
-        <index>46</index>
-        <index>8</index>
-        <index>54</index>
-        <index>66</index>
-        <index>18</index>
-        <index>21</index>
-        <index>57</index>
-        <index>64</index>
-        <index>37</index>
-        <index>48</index>
-        <index>56</index>
-    </vertices>
+    <faces></faces>
+    <vertices></vertices>
 </mod>

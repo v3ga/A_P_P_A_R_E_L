@@ -1,12 +1,29 @@
 <Meteopathy>
     <NbWordsMax>5</NbWordsMax>
     <Weight>0</Weight>
-    <xmin>-50</xmin>
-    <xmax>50</xmax>
-    <ymin>-46.0938</ymin>
-    <ymax>23.9583</ymax>
-    <zmin>18.8021</zmin>
-    <zmax>62.0833</zmax>
-    <sizemin>1</sizemin>
-    <sizemax>12.3958</sizemax>
+    <nbParticles>5</nbParticles>
+    <size>
+        <min>1</min>
+        <low>1.29688</low>
+        <high>4.36458</high>
+        <max>20</max>
+    </size>
+    <x>
+        <min>-50</min>
+        <low>-50</low>
+        <high>50</high>
+        <max>50</max>
+    </x>
+    <y>
+        <min>-50</min>
+        <low>-25</low>
+        <high>25</high>
+        <max>50</max>
+    </y>
+    <z>
+        <min>-50</min>
+        <low>18.2292</low>
+        <high>50</high>
+        <max>50</max>
+    </z>
 </Meteopathy>

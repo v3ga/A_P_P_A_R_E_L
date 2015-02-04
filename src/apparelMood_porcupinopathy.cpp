@@ -171,10 +171,10 @@ void apparelMood_porcupinopathy::onParameterChanged(ofAbstractParameter& paramet
 void apparelMood_porcupinopathy::update()
 {
 	// TODO : check this
-	return;
+//	return;
 
 	// Get amplitude of sound
-	m_weight = ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.5f, 0.5f,1.0f);
+//	m_weight = ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.5f, 0.5f,1.0f);
 	int nbVerticesExtruded = m_indexVerticesExtruded.size();
 
 //printf("m_weight=%0.4f", m_weight.get());

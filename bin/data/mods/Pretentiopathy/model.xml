@@ -1,12 +1,7 @@
 <mod>
     <faces>
-        <index>62</index>
-        <index>17</index>
-        <index>24</index>
-        <index>9</index>
-        <index>64</index>
+        <index>10</index>
+        <index>6</index>
     </faces>
-    <vertices>
-        <index>1</index>
-    </vertices>
+    <vertices></vertices>
 </mod>

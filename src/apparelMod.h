@@ -104,6 +104,8 @@ class apparelMod
 		virtual void		copyModelFrom				(const apparelModel& model);
 		virtual	void		copyModelVerticesPosition	(const apparelModel& model);
 		virtual void		clearSelection				();
+		virtual	void		clearSelectionVertices		();
+		virtual	void		clearSelectionFaces			();
 		virtual void		apply						(){};
  
 		// UPDATE
