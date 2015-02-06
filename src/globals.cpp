@@ -15,6 +15,7 @@ globals::globals()
 	pOfApp				= 0;
 	pOscSender			= 0;
 	m_soundInputVolume	= 0.0f;
+	pUser				= 0;
 }
 
 globals* globals::getInstance()

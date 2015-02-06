@@ -9,6 +9,7 @@
 #include "apparelMood_porcupinopathy.h"
 #include "ofAppLog.h"
 #include "globals.h"
+#include "parameterGroupLowHigh.h"
 
 //--------------------------------------------------------------
 apparelMood_porcupinopathy::apparelMood_porcupinopathy() : apparelMod("Porcupinopathy")
@@ -18,11 +19,15 @@ apparelMood_porcupinopathy::apparelMood_porcupinopathy() : apparelMod("Porcupino
 
 	m_parameters.add(m_amplitude);
 	m_parameters.add(m_levelSubdiv);
+
+	parameterGroupLowHigh::create(m_amplitudeRndFactor, "AmplitudeRndFactor", 0.0,0.7,1.0,1.0);
+	m_parameters.add(m_amplitudeRndFactor);
 }
 
 //--------------------------------------------------------------
 apparelMood_porcupinopathy::~apparelMood_porcupinopathy()
 {
+	deleteExtrusionData();
 }
 
 
@@ -34,11 +39,8 @@ void apparelMood_porcupinopathy::apply()
 		OFAPPLOG->begin("apparelMood_porcupinopathy::apply()");
 	
 		m_model.mesh = m_meshInput;
-		m_indexVerticesExtruded.clear();
-		m_normalVerticesExtruded.clear();
-		m_middleFaceVertices.clear();
+		deleteExtrusionData();
 	
-
 		int nbFacesSelected = m_indicesFaces.size();
 		if (nbFacesSelected>0)
 		{
@@ -145,9 +147,7 @@ void apparelMood_porcupinopathy::apply()
 					 m_model.mesh.addIndex(indexM);
 				 
 					 // Save in our list to retrieve in update without updating model
-					 m_indexVerticesExtruded.push_back(indexM);
-					 m_normalVerticesExtruded.push_back(faceNormal);
-					 m_middleFaceVertices.push_back(faceMiddle);
+					 m_extrusionData.push_back( new porcuVertexData(indexM,faceNormal,faceMiddle, m_amplitudeRndFactor.getFloat("low"), m_amplitudeRndFactor.getFloat("high") ));
 				}
 			}
 
@@ -170,28 +170,38 @@ void apparelMood_porcupinopathy::onParameterChanged(ofAbstractParameter& paramet
 //--------------------------------------------------------------
 void apparelMood_porcupinopathy::update()
 {
-	// TODO : check this
-//	return;
-
 	// Get amplitude of sound
-//	m_weight = ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.5f, 0.5f,1.0f);
-	int nbVerticesExtruded = m_indexVerticesExtruded.size();
-
-//printf("m_weight=%0.4f", m_weight.get());
-//printf("nbVerticesExtruded=%d",nbVerticesExtruded);
-
+	m_weight = ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.2f, 0.1f,1.0f);
+	
+	int nbVerticesExtruded = m_extrusionData.size();
 
 	// Compute points
+	float amplitude = m_weight*m_amplitude;
 	for (int i=0;i<nbVerticesExtruded;i++)
 	{
+		porcuVertexData* pData = m_extrusionData[i];
+
+		// Update
+		// pData->m_amplitude = m_weight * pData->m_amplitudeMax;
+		pData->m_amplitude += (pData->m_amplitudeFactor*amplitude-pData->m_amplitude)*pData->m_amplitudeSpeed;
+
 		// Get index of the vertex
-		ofIndexType indexVertex = m_indexVerticesExtruded[i];
-		// Get normal...
-		ofVec3f& normal = m_normalVerticesExtruded[i];
+		ofIndexType indexVertex = pData->m_index;
+
 		// ... and compute new extruded vertex from middl point of face
-		m_model.mesh.setVertex(indexVertex, m_middleFaceVertices[i] + normal*m_weight*m_amplitude);
+		m_model.mesh.setVertex(indexVertex, pData->m_middleFace+pData->m_normal*pData->m_amplitude);
 	}
-//	m_model.createMeshFaces();
+}
+
+//--------------------------------------------------------------
+void apparelMood_porcupinopathy::deleteExtrusionData()
+{
+	vector<porcuVertexData*>::iterator it = m_extrusionData.begin();
+	for ( ; it!=m_extrusionData.end() ; ++it)
+	{
+		delete *it;
+	}
+	m_extrusionData.clear();
 }
 
 

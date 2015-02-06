@@ -1,6 +1,6 @@
 <Noisopathy>
+    <WeightManual>0</WeightManual>
     <NbWordsMax>5</NbWordsMax>
-    <Weight>0</Weight>
     <Amplitude>8.85417</Amplitude>
     <TimeScale>12.5</TimeScale>
 </Noisopathy>

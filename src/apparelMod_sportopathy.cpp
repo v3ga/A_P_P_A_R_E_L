@@ -103,10 +103,6 @@ void apparelMod_sportopathy::apply()
 //--------------------------------------------------------------
 void apparelMod_sportopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
-//	if (parameter.getName() == "Weight")
-	{
-		setChanged();
-		//apply();
-	}
+	setChanged();
 }
 

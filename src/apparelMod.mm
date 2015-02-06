@@ -9,7 +9,9 @@
 #include "apparelMod.h"
 #include "globals.h"
 #ifdef TARGET_OF_IOS
-#include "ofxIOSExtras.h"
+	#include "ofxIOSExtras.h"
+#else
+	#include "oscSender.h"
 #endif
 
 //--------------------------------------------------------------
@@ -21,16 +23,15 @@ apparelMod::apparelMod(string id)
 	mp_oscSender 			= 0;
 	m_isChanged				= false;
 	m_isMeshChanged			= false;
-	
-//	m_isActive.setName("Active");
-//	m_parameters.add(m_isActive);
+
+
+//	m_weight.set("Weight", 0.5f, 0.0f, 1.0f);
+//	m_parameters.add(m_weight);
+	m_isWeightManual.set("WeightManual",false);
+	m_parameters.add(m_isWeightManual);
 
 	m_nbWordsMax.set("NbWordsMax", 5, 1, 20);
 	m_parameters.add(m_nbWordsMax);
-
-	m_weight.set("Weight", 0.5f, 0.0f, 1.0f);
-	m_parameters.add(m_weight);
-
 
 	m_parameters.setName(id);
 	
@@ -104,6 +105,35 @@ void apparelMod::updateUserDatabase(user* pUser, string word)
 }
 
 //--------------------------------------------------------------
+void apparelMod::resetWordsCountUserDatabase(user* pUser)
+{
+	int nbWords = m_words.size();
+	for (int i=0;i<nbWords;i++)
+	{
+		ofxSQLiteSelect sel = pUser->getSqlData()->select("count").from("words").where("name", m_words[i]).limit(1).execute().begin();
+		// Found it !
+		if (sel.hasNext())
+		{
+			  int result = pUser->getSqlData()->update("words").where("name",m_words[i]).use("count", 0).execute();
+			  if (result == 0)
+			  {
+		  		OFAPPLOG->println("- OK updated word "+m_words[i]+" with count=0");
+			  }
+		}
+	}
+	
+	countUserWords(pUser);
+
+	if (mp_oscSender)
+	{
+#ifndef TARGET_OF_IOS
+	   ((oscSender*)mp_oscSender)->sendModEmptyUserDataSQL(this);
+#endif
+	}
+
+}
+
+//--------------------------------------------------------------
 void apparelMod::countUserWords(user* pUser)
 {
   OFAPPLOG->begin("apparelMod["+m_id+"]::countUserWords()");
@@ -125,17 +155,14 @@ void apparelMod::countUserWords(user* pUser)
   else
 	  OFAPPLOG->println("- WARNING pUser->getSqlData() is NULL");
 
-  OFAPPLOG->println("- countWords="+ofToString(m_countWords));
 
-  // Update weight now and crop
-  m_weight = (float) m_countWords / (float) m_nbWordsMax;
-  if (m_weight>1.0f)
-		m_weight = 1.0f;
+  // Update weight if we are not manual
+  if (m_isWeightManual == false)
+	  setWeight( (float) m_countWords / (float) m_nbWordsMax );
 
-  // Mod changed, update it
-  setChanged();
+  OFAPPLOG->println("- countWords="+ofToString(m_countWords)+"/m_nbWordsMax="+ofToString(m_nbWordsMax));
+  OFAPPLOG->println("- weight="+ofToString(m_weight));
 
-  OFAPPLOG->println("- weight="+ofToString(m_weight.get()));
   OFAPPLOG->end();
 }
 
@@ -178,10 +205,39 @@ void apparelMod::removeVertexIndex(int vertexIndex)
 //--------------------------------------------------------------
 void apparelMod::parameterChanged(ofAbstractParameter & parameter)
 {
-	onParameterChanged(parameter);
+	// Particular treatment for weightManual
+	if (parameter.getName() == "WeightManual")
+	{
+		if (m_isWeightManual)
+		{
+			setWeight(m_weight); // manually
+		}
+		else
+		{
+			countUserWords( GLOBALS->getUser() ); // from sql database
+		}
+		setChanged();
+	}
+	else
+	if (parameter.getName() == "NbWordsMax")
+	{
+		countUserWords( GLOBALS->getUser() ); // from sql database
+	}
+	else
+		onParameterChanged(parameter);
+
+	// Send to OSC if instance is setup
 	if (mp_oscSender){
 		mp_oscSender->sendParameter( parameter );
 	}
+}
+
+//--------------------------------------------------------------
+void apparelMod::setWeight(float v)
+{
+	m_weight = v;
+    if (m_weight>1.0f) m_weight = 1.0f;
+	setChanged();
 }
 
 //--------------------------------------------------------------

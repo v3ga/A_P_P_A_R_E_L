@@ -1,6 +1,6 @@
 <Meteopathy>
+    <WeightManual>0</WeightManual>
     <NbWordsMax>5</NbWordsMax>
-    <Weight>0</Weight>
     <nbParticles>5</nbParticles>
     <size>
         <min>1</min>

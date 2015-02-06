@@ -9,6 +9,7 @@
 #pragma once
 
 #include "apparelMod.h"
+#include "parameterGroupLowHigh.h"
 
 class apparelMood_noisopathy : public apparelMod
 {
@@ -22,7 +23,7 @@ class apparelMood_noisopathy : public apparelMod
 		void				onParameterChanged	(ofAbstractParameter& parameter){}
 
 	private:
-		vector<ofVec3f>		m_offsets;
-		ofParameter<float>	m_amplitude;
-		ofParameter<float>	m_timeScale;
+		vector<ofVec3f>			m_offsets;
+		ofParameter<float>		m_amplitude;
+		ofParameter<float>		m_timeScale;
 };

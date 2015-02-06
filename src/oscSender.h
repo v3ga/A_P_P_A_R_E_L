@@ -19,10 +19,12 @@ class oscSender : public oscSenderInterface
 		void sendParameter			(const ofAbstractParameter & parameter);
 		void sendModData			(apparelMod* pMod);
 		void selectMod				(apparelMod* pMod);
+		void sendModEmptyUserDataSQL(apparelMod* pMod);
 
 		void sendBeginCalibration	();
 		void sendEndCalibration		();
 		void saveCalibration		();
+ 
 
 		void send					(ofxOscMessage m);
 

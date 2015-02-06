@@ -69,13 +69,6 @@ class apparelMod
  		bool				m_isMeshChanged;		// tells if mesh itself or selection (vertices, faces) changed
 		int					m_flagChanged;
 
-/*		enum{
-			EChanged_selectionVertices	= 0x01,
-			EChanged_selectionFaces		= 0x02,
-			EChanged_numberVertices		= 0x04,
-			EChanged_numberFaces		= 0x08
-		};
-*/
 
 		// DRAWING
 		virtual void		draw					(){};
@@ -109,16 +102,21 @@ class apparelMod
 		virtual void		apply						(){};
  
 		// UPDATE
-		virtual	void		update				(){}
+		virtual	void		update						(){}
 
 		// PARAMETERS CONFIGURATION
 		string				m_configurationName;
 	
 		// PARAMETERS
 		ofParameterGroup 	m_parameters;
-		ofParameter<bool>	m_isActive; // DEPRECATED
-		ofParameter<float>	m_weight;
+		ofParameter<bool>	m_isWeightManual;
 		ofParameter<int>	m_nbWordsMax;
+
+		float				m_weight;
+		void				setWeight					(float v);
+
+
+//		bool				m_isWeightManual;	// if true, user can modify manually the value otherwise it is computed by
 
 
 		// SETTINGS
@@ -127,9 +125,11 @@ class apparelMod
 		// WORDS
 		vector<string>		m_words;
 		int					m_countWords; // total words from list retrieved in database
-		bool				isInWordsList			(string word);
-		void				updateUserDatabase		(user* pUser, string word);
- 		void				countUserWords			(user* pUser);
+		bool				isInWordsList				(string word);
+		void				countUserWords				(user* pUser);
+		void				updateUserDatabase			(user* pUser, string word);
+		void				emptyUserDatabase			(user* pUser);
+ 		void				resetWordsCountUserDatabase	(user* pUser);
  
 		// OSC
 		oscSenderInterface*	mp_oscSender;

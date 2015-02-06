@@ -12,6 +12,27 @@
 #include "apparelMod.h"
 #include "ofxButterfly.h"
 
+class porcuVertexData
+{
+	public:
+		porcuVertexData		(ofIndexType index, ofVec3f n, ofVec3f middle, float ampMin, float ampMax)
+		{
+			m_index 			= index;
+			m_normal 			= n;
+			m_middleFace 		= middle;
+			m_amplitude			= 0.0f;
+			m_amplitudeFactor	= ofRandom(ampMin,ampMax);
+			m_amplitudeSpeed	= ofRandom(ampMin,ampMax)*0.1f+0.1f;
+		}
+ 
+ 
+		ofIndexType			m_index;
+		ofVec3f				m_normal;
+		ofVec3f				m_middleFace;
+		float				m_amplitude, m_amplitudeFactor;
+		float				m_amplitudeSpeed;
+};
+
 class apparelMood_porcupinopathy : public apparelMod
 {
 	public:
@@ -23,12 +44,14 @@ class apparelMood_porcupinopathy : public apparelMod
 		void				onParameterChanged	(ofAbstractParameter& parameter);
 
 	private:
-	    ofxButterfly 		butterfly;
+	    ofxButterfly 				butterfly;
  
-		ofParameter<float>	m_amplitude;
-		ofParameter<float>	m_levelSubdiv;
+		ofParameter<float>			m_amplitude;
+		ofParameter<float>			m_levelSubdiv;
+		vector<porcuVertexData*>	m_extrusionData;
+ 		ofParameterGroup			m_amplitudeRndFactor;
+
  
-		vector<ofIndexType>		m_indexVerticesExtruded;
-		vector<ofVec3f>			m_normalVerticesExtruded;
-		vector<ofVec3f>			m_middleFaceVertices;
+ 		void						deleteExtrusionData();
+ 
 };

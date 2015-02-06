@@ -17,6 +17,7 @@ apparelMood_noisopathy::apparelMood_noisopathy() : apparelMod("Noisopathy")
 
 	m_parameters.add(m_amplitude);
 	m_parameters.add(m_timeScale);
+
 }
 
 

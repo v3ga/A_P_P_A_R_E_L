@@ -20,6 +20,7 @@ void ofApp::setup()
 	
 	GLOBALS->setApp(this);
 	GLOBALS->setOscSender(&oscSender);
+	GLOBALS->setUser(&user);
 
 	// SETTINGS
 	ofLog() << "  - loading configuration.xml";
@@ -84,8 +85,8 @@ void ofApp::setup()
 	// SOUND
 	soundStreamInput.listDevices();
 //	int deviceSoundInputId = m_settings.getValue("simulator:soundInput:device", -1);
-	int deviceSoundInputId = 0;
-	int nbChannels = 2;
+	int deviceSoundInputId = 1;
+	int nbChannels = 1;
 	if (deviceSoundInputId>=0)
 	{
 		soundStreamInput.setDeviceID(deviceSoundInputId);

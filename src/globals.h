@@ -12,6 +12,7 @@
 class ofApp;
 class oscSender;
 class apparelModManager;
+class user;
 
 #define GLOBALS			globals::getInstance()
 #define OSC_SENDER		GLOBALS->getOscSender()
@@ -34,13 +35,17 @@ class globals
 
 				void				setSoundInputVolume(float v){m_soundInputVolume = v;}
 				float				getSoundInputVolume(){return m_soundInputVolume;}
+ 
+				void				setUser(user* p){pUser = p;}
+				user*				getUser(){return pUser;}
 	
 	private:
 		static 	globals*				instance;
 				ofApp*					pOfApp;
 				oscSender*				pOscSender;
 				apparelModManager*		pApparelModManager;
-
+				user*					pUser;
+	
 				float					m_soundInputVolume;
 
 };

@@ -1,4 +1,7 @@
 <mod>
     <faces></faces>
-    <vertices></vertices>
+    <vertices>
+        <index>6</index>
+        <index>20</index>
+    </vertices>
 </mod>

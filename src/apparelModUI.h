@@ -20,11 +20,13 @@ class apparelModUI
 
 		void					createControls	(const ofVec2f& posCanvas);
 		void					handleEvents	(ofxUIEventArgs& e);
+		void					parameterChanged(ofAbstractParameter & parameter);
 		ofxUICanvas*			getCanvas		(){return mp_canvas;}
 		void					show			(bool is=true);
 		void					hide			(){show(false);}
 
 		apparelMod*				mp_mod;
 		ofxUICanvas*			mp_canvas;
+		ofxUISlider*			mp_sliderWeight;
 };
 

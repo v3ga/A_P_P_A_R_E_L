@@ -45,13 +45,19 @@ void oscSender::sendParameter(const ofAbstractParameter & parameter)
 		msg.addStringArg(hierarchy[1]); // parameter name
 
 
-		if(parameter.type()==typeid(ofParameter<int>).name()){
+		if(parameter.type()==typeid(ofParameter<int>).name())
+		{
 			msg.addIntArg(parameter.cast<int>());
-		}else if(parameter.type()==typeid(ofParameter<float>).name()){
+		}
+		else if(parameter.type()==typeid(ofParameter<float>).name())
+		{
 			msg.addFloatArg(parameter.cast<float>());
-		}else if(parameter.type()==typeid(ofParameter<bool>).name()){
+		}
+		else if(parameter.type()==typeid(ofParameter<bool>).name())
+		{
 			msg.addIntArg(parameter.cast<bool>());
-		}else{
+		}else
+		{
 			msg.addStringArg(parameter.toString());
 		}
 
@@ -89,6 +95,20 @@ void oscSender::selectMod(apparelMod* pMod)
 
 	m_sender.sendMessage(msg);
 }
+
+//--------------------------------------------------------------
+void oscSender::sendModEmptyUserDataSQL(apparelMod* pMod)
+{
+	if(!isSetup() || !isActive()) return;
+	if (pMod == 0) return;
+	
+	ofxOscMessage msg;
+	msg.setAddress(OSC_MOD_EMPTY_USER_DATA_SQL);
+	msg.addStringArg(pMod->getId());
+
+	m_sender.sendMessage(msg);
+}
+
 
 //--------------------------------------------------------------
 void oscSender::sendBeginCalibration()
