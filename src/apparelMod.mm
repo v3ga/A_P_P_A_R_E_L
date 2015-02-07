@@ -158,8 +158,12 @@ void apparelMod::countUserWords(user* pUser)
 
   // Update weight if we are not manual
   if (m_isWeightManual == false)
-	  setWeight( (float) m_countWords / (float) m_nbWordsMax );
-
+  {
+	 if (m_nbWordsMax>0)
+	   setWeight( (float) m_countWords / (float) m_nbWordsMax );
+  	else
+	   setWeight( 0.0 );
+  }
   OFAPPLOG->println("- countWords="+ofToString(m_countWords)+"/m_nbWordsMax="+ofToString(m_nbWordsMax));
   OFAPPLOG->println("- weight="+ofToString(m_weight));
 

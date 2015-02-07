@@ -285,8 +285,18 @@ void apparelModel::copyVerticesPositions(const apparelModel& otherModel)
 {
 	// ofMesh& otherMesh = otherModel.getMeshRef();
 	
-	
 }
+
+//--------------------------------------------------------------
+void apparelModel::computeFacesNormals()
+{
+	vector<ofMeshFaceApparel*>::iterator it = meshFaces.begin();
+	for ( ; it != meshFaces.end(); ++it )
+	{
+//		(*it)->
+	}
+}
+
 
 
 

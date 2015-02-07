@@ -198,6 +198,7 @@ if (this->pToolMods->isPostProcessEnabled())
 
 		ofDisableDepthTest();
     	ofDisableBlendMode();
+		
 if (this->pToolMods->isPostProcessEnabled())
 {
 	sceneBuffer.end();

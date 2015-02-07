@@ -27,7 +27,7 @@ void apparelMod_sportopathy::apply()
 	
 		vector<ofVec3f>& 	vertices = m_model.getVerticesRef();
 		ofMesh& modelMesh = m_model.getMeshRef();
-		ofLog() << m_indicesFaces.size();
+		//ofLog() << m_indicesFaces.size();
 		// Extrude selected faces
 		for (int i=0; i<m_indicesFaces.size();i++)
 		{

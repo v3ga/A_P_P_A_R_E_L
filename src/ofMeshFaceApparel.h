@@ -20,6 +20,8 @@ class ofMeshFaceApparel : public ofMeshFace
  		ofVec3f*		getVertexPointer	(int index);
  		int				getOffsetIndices	(){return m_offsetIndices;}
  
+//		void			computeFaceNormal	(){update}
+ 
  
 		ofMesh*			mp_mesh;
 		int				m_offsetIndices;	// index (position) in the indices of ofMesh instance

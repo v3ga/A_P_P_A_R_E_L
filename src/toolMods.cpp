@@ -27,6 +27,8 @@ toolMods::toolMods(toolManager* parent, apparelModManager* modManager) : tool("M
 	m_bShowVertexIndices	= false;
 	m_bShowFaceNormals		= false;
 	m_bShowFaceIndices		= false;
+	m_bEnableBackFaceCulling= false;
+	m_bDrawWireFrameOnly	= false;
 	mp_meshFaceOver			= 0;
 	m_meshFaceIndexOver		= -1;
 	m_meshVertexIndexOver	= -1;
@@ -85,10 +87,12 @@ void toolMods::createControlsCustom()
 	mp_lblModel = mp_canvas->addLabel("Model :" + (mp_apparelModel ? mp_apparelModel->getId() : "???"));
 	mp_canvas->addSpacer(300,1);
 
-	mp_canvas->addToggle("show vertex normals", &m_bShowVertexNormals, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
-	mp_canvas->addToggle("show vertex indices", &m_bShowVertexIndices, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
-	mp_canvas->addToggle("show face normals", 	&m_bShowFaceNormals, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
-	mp_canvas->addToggle("show face indices", 	&m_bShowFaceIndices, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("show vertex normals", 	&m_bShowVertexNormals, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("show vertex indices", 	&m_bShowVertexIndices, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("show face normals", 		&m_bShowFaceNormals, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("show face indices", 		&m_bShowFaceIndices, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("enable backface culling",	&m_bEnableBackFaceCulling, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
+	mp_canvas->addToggle("draw wireframe only", 	&m_bDrawWireFrameOnly, 	OFX_UI_GLOBAL_BUTTON_DIMENSION, OFX_UI_GLOBAL_BUTTON_DIMENSION);
 
 	mp_canvas->addWidgetDown(new ofxUILabel("View", OFX_UI_FONT_SMALL));
 	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
@@ -206,22 +210,34 @@ void toolMods::draw()
 	apparelModel* pModel = m_bViewMixed ? mp_modsManager->getModelLastInChain() : mp_apparelModel;
 	apparelMod*	  pMod = m_bViewMixed ? mp_modsManager->getModLastInChain() : mp_apparelModCurrent;
 
-//	if (pModel)
 	if (pMod)
 	{
 		ofDrawAxis(100);
 
 	   // MODEL
-	   ofSetColor(0,255);
-//	   pModel->drawFaces();
-	   pMod->drawFaces();
+		if (m_bEnableBackFaceCulling)
+		{
+		   glEnable(GL_CULL_FACE);
+		}
+		if (m_bDrawWireFrameOnly == false)
+		{
+		   ofSetColor(0,255);
+		   pMod->drawFaces();
+		}
 
 	   ofSetColor(255,255);
-	   glEnable(GL_POLYGON_OFFSET_LINE);
-	   glPolygonOffset(-1,-1);
-//	   pModel->drawWireframe();
+	   if (m_bDrawWireFrameOnly == false)
+	   {
+	   	glEnable(GL_POLYGON_OFFSET_LINE);
+	   	glPolygonOffset(-1,-1);
+	   }
 	   pMod->drawWireframe();
-	   glDisable(GL_POLYGON_OFFSET_LINE);
+	   if (m_bDrawWireFrameOnly == false)
+	   {
+	   	glDisable(GL_POLYGON_OFFSET_LINE);
+	   }
+		if (m_bEnableBackFaceCulling)
+		   glDisable(GL_CULL_FACE);
 
 
 	   // Draw data from this tool

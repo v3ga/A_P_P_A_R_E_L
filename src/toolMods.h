@@ -59,6 +59,8 @@ class toolMods : public tool
 		meshVertexSelector		m_meshVertexSelector;
 		bool					m_bShowVertexNormals;
 		bool					m_bShowVertexIndices;
+		bool					m_bEnableBackFaceCulling;
+		bool					m_bDrawWireFrameOnly;
 
 		bool					m_bShowFaceNormals;
 		bool					m_bShowFaceIndices;

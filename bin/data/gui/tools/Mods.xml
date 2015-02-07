@@ -11,12 +11,22 @@
 <Widget>
     <Kind>2</Kind>
     <Name>show face normals</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>show face indices</Name>
-    <Value>1</Value>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>enable backface culling</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>draw wireframe only</Name>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -26,12 +36,12 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Vertex</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Face</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
@@ -51,7 +61,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Sportopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -66,7 +76,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Porcupinopathy</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>

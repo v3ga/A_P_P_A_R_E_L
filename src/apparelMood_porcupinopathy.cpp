@@ -122,7 +122,6 @@ void apparelMood_porcupinopathy::apply()
 
 					// Compute "middle" point of triangle
 					ofVec3f faceMiddleOpposite = faceAdd.getVertex(1) + ofRandom(0.1,0.9)*(faceAdd.getVertex(2)-faceAdd.getVertex(1));
-//					ofVec3f faceMiddle = (faceAdd.getVertex(0)+faceAdd.getVertex(1)+faceAdd.getVertex(2))/3;
 					ofVec3f faceMiddle = faceAdd.getVertex(0) + ofRandom(0.1,0.9)*(faceMiddleOpposite-faceAdd.getVertex(0));
 
 
@@ -191,6 +190,10 @@ void apparelMood_porcupinopathy::update()
 		// ... and compute new extruded vertex from middl point of face
 		m_model.mesh.setVertex(indexVertex, pData->m_middleFace+pData->m_normal*pData->m_amplitude);
 	}
+	
+	// compute normals (as vertices moved)
+	//m_model.
+	
 }
 
 //--------------------------------------------------------------
