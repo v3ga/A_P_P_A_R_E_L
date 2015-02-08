@@ -21,17 +21,13 @@ class apparelMod_meteopathy : public apparelMod
 		void					onParameterChanged	(ofAbstractParameter& parameter);
 
 	private:
-		vector<ofIcoSpherePrimitive*> m_particles;
+		vector<ofIcoSpherePrimitive*> 	m_particles;
+		ofParameter<int>				m_nbParticles;
+		ofParameterGroup				m_x;
+		ofParameterGroup				m_y;
+		ofParameterGroup				m_z;
+ 		ofParameterGroup				m_size;
+		int								m_nbParticlesWeight;
 
-		ofParameter<int>		m_nbParticles;
- 
-		ofParameterGroup	m_x;
-		ofParameterGroup	m_y;
-		ofParameterGroup	m_z;
- 
-
- 		ofParameterGroup	m_size;
-
-		void					deleteParticles();
-
+		void							deleteParticles();
 };

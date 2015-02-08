@@ -209,6 +209,8 @@ void apparelMod::removeVertexIndex(int vertexIndex)
 //--------------------------------------------------------------
 void apparelMod::parameterChanged(ofAbstractParameter & parameter)
 {
+	// ofLog() << "parameterChanged / name=" << parameter.getName() << " type= "<< typeid(parameter).name();
+
 	// Particular treatment for weightManual
 	if (parameter.getName() == "WeightManual")
 	{

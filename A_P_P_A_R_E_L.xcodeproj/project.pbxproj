@@ -131,6 +131,7 @@
 		F96FBE721977D9F800E58A6F /* userSocialFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE701977D9F800E58A6F /* userSocialFactory.cpp */; };
 		F96FBE7519781E4600E58A6F /* apparelModManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE7319781E4600E58A6F /* apparelModManager.cpp */; };
 		F974AB871A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F974AB851A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp */; };
+		F980D0C01A87BAD600D360F7 /* soundInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F980D0BE1A87BAD600D360F7 /* soundInput.cpp */; };
 		F9AB0BE91940FA220020D78A /* tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BE71940FA220020D78A /* tool.cpp */; };
 		F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ED4467DFF0AC3482E9362 /* ofxUIMultiImageToggle.cpp */; };
 		F9C6660D193CA6BF00C8225D /* apparelModUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C6660B193CA6BF00C8225D /* apparelModUI.cpp */; };
@@ -506,6 +507,8 @@
 		F96FBE7419781E4600E58A6F /* apparelModManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelModManager.h; sourceTree = "<group>"; };
 		F974AB851A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parameterGroupLowHigh.cpp; sourceTree = "<group>"; };
 		F974AB861A82DA9D00CA6FC8 /* parameterGroupLowHigh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parameterGroupLowHigh.h; sourceTree = "<group>"; };
+		F980D0BE1A87BAD600D360F7 /* soundInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = soundInput.cpp; sourceTree = "<group>"; };
+		F980D0BF1A87BAD600D360F7 /* soundInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = soundInput.h; sourceTree = "<group>"; };
 		F9A4454B00CCFD7265D3CA85 /* ofxUILabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUILabelButton.cpp; path = ../../../addons/ofxUI/src/ofxUILabelButton.cpp; sourceTree = SOURCE_ROOT; };
 		F9AB0BE71940FA220020D78A /* tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool.cpp; sourceTree = "<group>"; };
 		F9AB0BE81940FA220020D78A /* tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool.h; sourceTree = "<group>"; };
@@ -846,6 +849,7 @@
 				F932F02B196C47FF00C82556 /* Network */,
 				F96FBA581976D1C900E58A6F /* User */,
 				F9489276197FF8FA00085C6B /* UI */,
+				F980D0BD1A87BABE00D360F7 /* Sound */,
 				F9D35F7519AF65B100B63E8E /* PostProcess */,
 				F926758D19392F7200CB2599 /* icon.png */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -1382,6 +1386,15 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		F980D0BD1A87BABE00D360F7 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				F980D0BE1A87BAD600D360F7 /* soundInput.cpp */,
+				F980D0BF1A87BAD600D360F7 /* soundInput.h */,
+			);
+			name = Sound;
+			sourceTree = "<group>";
+		};
 		F9AB0BE51940FA220020D78A /* ofxToolManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1671,6 +1684,7 @@
 				F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */,
 				F1E8DE8734BA6F69A5112FA8 /* ofxUIBaseDraws.cpp in Sources */,
 				C381F2B7CFD84C0E540EB4BC /* ofxUIBiLabelSlider.cpp in Sources */,
+				F980D0C01A87BAD600D360F7 /* soundInput.cpp in Sources */,
 				F9D2CC22192A4E4700BF8F14 /* tinyxmlparser.cpp in Sources */,
 				F9131FF21936276500449924 /* Plane.cpp in Sources */,
 				F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */,

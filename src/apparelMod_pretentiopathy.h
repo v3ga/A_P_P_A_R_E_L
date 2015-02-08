@@ -23,7 +23,8 @@ class apparelMod_pretentiopathy : public apparelMod
  		ofMesh				m_head;
 		ofVec3f				m_headPosition;
 		ofParameter<float>	m_headScale;
-		ofParameter<float>	m_headPositionZ;
+//		ofParameter<float>	m_headPositionZ;
+		ofParameterGroup	m_headPositionZ;
 
 		void				setHeadPosition(float x, float y, float z);
 };

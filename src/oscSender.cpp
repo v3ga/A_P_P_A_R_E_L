@@ -32,6 +32,8 @@ void oscSender::sendParameter(const ofAbstractParameter & parameter)
 
 	string address_prefix = OSC_MOD_SET_PARAMETER;
 	
+	// ofLog() << "typeid(ofParameterGroup)=" << typeid(ofParameterGroup).name() << " / parameter.type()="<<parameter.type();
+ 
 	if(parameter.type()==typeid(ofParameterGroup).name())
 	{
 	}
@@ -43,7 +45,8 @@ void oscSender::sendParameter(const ofAbstractParameter & parameter)
 		msg.setAddress(OSC_MOD_SET_PARAMETER);
 		msg.addStringArg(hierarchy[0]); // instance name
 		msg.addStringArg(hierarchy[1]); // parameter name
-
+		if (hierarchy.size()==3)
+			msg.addStringArg(hierarchy[2]); // parameter name
 
 		if(parameter.type()==typeid(ofParameter<int>).name())
 		{

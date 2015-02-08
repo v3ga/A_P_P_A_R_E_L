@@ -155,7 +155,7 @@ void apparelModUI::handleEvents(ofxUIEventArgs& e)
 	   if (parameter.type() == typeid(ofParameterGroup).name())
 	   {
 		   ofParameterGroup& parameterGroup = (ofParameterGroup&) parameter;
-		   
+				
 		   ofParameter<float>& parameterFloatLow 		= (ofParameter<float>&) parameterGroup.get("low");
 		   ofParameter<float>& parameterFloatHigh 		= (ofParameter<float>&) parameterGroup.get("high");
 

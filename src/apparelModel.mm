@@ -266,7 +266,7 @@ void apparelModel::updateModelMatrix()
 //--------------------------------------------------------------
 void apparelModel::copyMeshAndTransformation(const apparelModel& otherModel)
 {
-	OFAPPLOG->begin("apparelModel::copyMeshAndTransformation()");
+	// OFAPPLOG->begin("apparelModel::copyMeshAndTransformation()");
 
 	id 		= otherModel.id;
 	mesh 	= otherModel.mesh;
@@ -276,8 +276,8 @@ void apparelModel::copyMeshAndTransformation(const apparelModel& otherModel)
 	createMeshFaces();
 	updateModelMatrix();
 
-	OFAPPLOG->println(" - mesh (copy) has "+ofToString(mesh.getNumVertices())+" vertices & "+ofToString(mesh.getNumIndices())+" indices");
-	OFAPPLOG->end();
+	// OFAPPLOG->println(" - mesh (copy) has "+ofToString(mesh.getNumVertices())+" vertices & "+ofToString(mesh.getNumIndices())+" indices");
+	//OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------

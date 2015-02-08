@@ -12,6 +12,7 @@
 #include "ofxGaussianBlur.h"
 #include "ofxGlow.h"
 #include "ofxPostProcess.h"
+#include "soundInput.h"
 
 class tool3D;
 class toolMods;
@@ -54,10 +55,7 @@ class ofApp : public ofBaseApp
 		ofxPostProcess		sceneFxBlur;
  
 		// SOUND INPUT
-		ofSoundStream		soundStreamInput;
-		int                 m_soundBufferSize;
-		vector<float>		m_soundMono,m_soundLeft,m_soundRight;
-		void				setupAudioBuffers(int nbChannels);
+ 		SoundInput			m_soundInput;
 
 
 		// USER

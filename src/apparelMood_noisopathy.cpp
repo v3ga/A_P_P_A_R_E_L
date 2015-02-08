@@ -36,7 +36,7 @@ void apparelMood_noisopathy::copyModelFrom(const apparelModel& model)
 //--------------------------------------------------------------
 void apparelMood_noisopathy::apply()
 {
-	OFAPPLOG->begin("apparelMood_noisopathy::apply()");
+	// OFAPPLOG->begin("apparelMood_noisopathy::apply()");
 	if (isChanged())
 	{
 
@@ -57,7 +57,7 @@ void apparelMood_noisopathy::apply()
 		m_model.createMeshFaces();
 */
 	}
-	OFAPPLOG->end();
+//	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------

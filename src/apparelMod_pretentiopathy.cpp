@@ -7,16 +7,18 @@
 //
 
 #include "apparelMod_pretentiopathy.h"
-
+#include "parameterGroupLowHigh.h"
 
 //--------------------------------------------------------------
 apparelMod_pretentiopathy::apparelMod_pretentiopathy() : apparelMod("Pretentiopathy")
 {
 	m_headScale.set("scale", 0.0f, 0.0f, 60.0f);
-	m_headPositionZ.set("position", 0.0f, 0.0f, 50.0f);
+	//m_headPositionZ.set("position", 0.0f, 0.0f, 50.0f);
 
+	parameterGroupLowHigh::create(m_headPositionZ, "position", 0.0f, 0.0f, 60.0f, 100.0f);
 	m_parameters.add(m_headScale);
 	m_parameters.add(m_headPositionZ);
+
 }
 
 //--------------------------------------------------------------
@@ -33,7 +35,7 @@ void apparelMod_pretentiopathy::apply()
 		{
 			ofVec3f& vHead = m_head.getVertices()[i];
 			vHead.y += 10;
-			vHead.z += m_headPositionZ;
+			vHead.z += ofMap(m_weight, 0.0f, 1.0f, m_headPositionZ.getFloat("low"),m_headPositionZ.getFloat("high"));
 		}
 		m_model.mesh.append(m_head);
 	}

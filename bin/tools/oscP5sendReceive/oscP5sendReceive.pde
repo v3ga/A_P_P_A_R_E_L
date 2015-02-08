@@ -14,7 +14,7 @@ void setup() {
   size(400,400);
   frameRate(25);
   /* start oscP5, listening for incoming messages at port 12000 */
-  oscP5 = new OscP5(this,12000);
+  oscP5 = new OscP5(this,1235);
   
   /* myRemoteLocation is a NetAddress. a NetAddress takes 2 parameters,
    * an ip address and a port number. myRemoteLocation is used as parameter in
@@ -45,7 +45,21 @@ void mousePressed() {
 /* incoming osc message are forwarded to the oscEvent method. */
 void oscEvent(OscMessage theOscMessage) {
   /* print the address pattern and the typetag of the received OscMessage */
-  print("### received an osc message.");
-  print(" addrpattern: "+theOscMessage.addrPattern());
-  println(" typetag: "+theOscMessage.typetag());
+  println("### received an osc message.");
+  print("    addrpattern: "+theOscMessage.addrPattern());
+  println("    typetag: "+theOscMessage.typetag());
+  if (theOscMessage.typetag().equals("ssf"))
+  {
+    println("    [0]="+theOscMessage.get(0).stringValue());
+    println("    [1]="+theOscMessage.get(1).stringValue());
+    println("    [2]="+theOscMessage.get(2).floatValue());
+  }
+  else
+  if (theOscMessage.typetag().equals("sssf"))
+  {
+    println("    [0]="+theOscMessage.get(0).stringValue());
+    println("    [1]="+theOscMessage.get(1).stringValue());
+    println("    [2]="+theOscMessage.get(2).stringValue());
+    println("    [3]="+theOscMessage.get(3).floatValue());
+  }
 }

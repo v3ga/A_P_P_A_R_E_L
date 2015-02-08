@@ -36,7 +36,7 @@ void apparelMood_porcupinopathy::apply()
 {
 	if (isChanged())
 	{
-		OFAPPLOG->begin("apparelMood_porcupinopathy::apply()");
+		// OFAPPLOG->begin("apparelMood_porcupinopathy::apply()");
 	
 		m_model.mesh = m_meshInput;
 		deleteExtrusionData();
@@ -153,7 +153,7 @@ void apparelMood_porcupinopathy::apply()
 			m_model.createMeshFaces();
 		}
 
-		OFAPPLOG->end();
+//		OFAPPLOG->end();
 	}
 }
 

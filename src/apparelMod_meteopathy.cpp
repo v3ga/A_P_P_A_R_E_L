@@ -18,13 +18,15 @@ apparelMod_meteopathy::apparelMod_meteopathy() : apparelMod("Meteopathy")
 	parameterGroupLowHigh::create(m_size, "size",1.0,10.0,15.0,20.0);
 	parameterGroupLowHigh::create(m_x, "x",-50.0,-25.0,25.0,50.0);
 	parameterGroupLowHigh::create(m_y, "y",-50.0,-25.0,25.0,50.0);
-	parameterGroupLowHigh::create(m_z, "z",-50.0,-25.0,25.0,50.0);
+	parameterGroupLowHigh::create(m_z, "z",0.0,0.0,100.0,150.0);
 
 	m_parameters.add(m_nbParticles);
 	m_parameters.add(m_size);
 	m_parameters.add(m_x);
 	m_parameters.add(m_y);
 	m_parameters.add(m_z);
+
+	// ofLog() << typeid(m_parameters["x"]).name();
 }
 
 //--------------------------------------------------------------
@@ -48,19 +50,21 @@ void apparelMod_meteopathy::apply()
 {
 	if (isChanged())
 	{
+
 		m_model.mesh = m_meshInput;
 		deleteParticles();
+		
+		m_nbParticlesWeight = (int)(m_weight*(float)m_nbParticles);
 
-		for (int i=0;i<m_nbParticles;i++)
+		for (int i=0;i<m_nbParticlesWeight;i++)
 		{
-			ofIcoSpherePrimitive* pPrimitive = new ofIcoSpherePrimitive( ofRandom(m_size.getFloat("low"),m_size.getFloat("high")), 0 );
+			ofIcoSpherePrimitive* pPrimitive = new ofIcoSpherePrimitive( m_weight * ofRandom(m_size.getFloat("low"),m_size.getFloat("high")), 0 );
 			m_particles.push_back( pPrimitive );
 	 
-
 			int nbVertices = pPrimitive->getMesh().getVertices().size();
-			float dx = ofRandom(m_x.getFloat("low"),m_x.getFloat("high"));
-			float dy = ofRandom(m_y.getFloat("low"),m_y.getFloat("high"));
-			float dz = ofRandom(m_z.getFloat("low"),m_z.getFloat("high"));
+			float dx = ofRandom(m_weight*m_x.getFloat("low"),m_weight*m_x.getFloat("high"));
+			float dy = ofRandom(m_weight*m_y.getFloat("low"),m_weight*m_y.getFloat("high"));
+			float dz = ofRandom(m_weight*m_z.getFloat("low"),m_weight*m_z.getFloat("high"));
 			for (int k=0; k<nbVertices ; k++)
 			{
 				ofVec3f& v = pPrimitive->getMesh().getVertices()[k];

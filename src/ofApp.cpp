@@ -35,6 +35,8 @@ void ofApp::setup()
 	string oscIP 		= settings.getValue("apparel:osc:ip","");
 	int oscPort 		= settings.getValue("apparel:osc:port",1235);
 	string userId		= settings.getValue("apparel:user", "creativeclaude");
+	int soundDeviceId	= settings.getValue("apparel:soundInput:id", 0);
+	int soundChannels	= settings.getValue("apparel:soundInput:channels", 1);
 	
 	// DATA
 	DATA->load();
@@ -70,7 +72,7 @@ void ofApp::setup()
 	apparelModManager.addMod( new apparelMod_pretentiopathy() );
 	apparelModManager.addMod( new apparelMod_meteopathy() );
 	apparelModManager.addMod( new apparelMood_porcupinopathy() );
-	apparelModManager.addMod( new apparelMod_selfopathy() );
+	// apparelModManager.addMod( new apparelMod_selfopathy() );
 	apparelModManager.addMod( new apparelMood_noisopathy() );
 	
 
@@ -83,19 +85,8 @@ void ofApp::setup()
 	apparelModManager.countUserWords(&user);
 
 	// SOUND
-	soundStreamInput.listDevices();
-//	int deviceSoundInputId = m_settings.getValue("simulator:soundInput:device", -1);
-	int deviceSoundInputId = 1;
-	int nbChannels = 1;
-	if (deviceSoundInputId>=0)
-	{
-		soundStreamInput.setDeviceID(deviceSoundInputId);
-		soundStreamInput.setup(ofGetAppPtr(), 0, nbChannels, 44100, 256, 4);
-		soundStreamInput.start();
 
-		setupAudioBuffers(nbChannels);
-	}
-
+	m_soundInput.setup(soundDeviceId, soundChannels);
 
 	// CAM
 	cam.setDistance(200);
@@ -137,21 +128,6 @@ void ofApp::setup()
 }
 
 
-//--------------------------------------------------------------
-void ofApp::setupAudioBuffers(int nbChannels)
-{
-	m_soundBufferSize = 256;
-    if (nbChannels == 1)
-    {
-        m_soundMono.assign(m_soundBufferSize, 0.0f);
-    }
-    else
-    if (nbChannels == 2)
-    {
-        m_soundLeft.assign(m_soundBufferSize, 0.0f);
-        m_soundRight.assign(m_soundBufferSize, 0.0f);
-    }
-}
 
 //--------------------------------------------------------------
 void ofApp::update()
@@ -172,7 +148,7 @@ void ofApp::exit()
 	toolManager.saveData();
 	toolManager.exit();
 	OFAPPLOG->end();
-	soundStreamInput.stop();
+	m_soundInput.stop();
 }
 
 //--------------------------------------------------------------
@@ -235,53 +211,8 @@ if (this->pToolMods->isPostProcessEnabled())
 //--------------------------------------------------------------
 void ofApp::audioIn(float * input, int bufferSize, int nChannels)
 {
-	float curVol = 0.0;
-    int numCounted = 0;
-
-    if (nChannels==1)
-    {
-		for (int i = 0; i < bufferSize; i++){
-			m_soundMono[i] = input[i];
-			curVol += m_soundMono[i]*m_soundMono[i];
-			numCounted++;
-		}
-
-        //this is how we get the mean of rms :)
-        curVol /= (float)numCounted;
-        
-        // this is how we get the root of rms :)
-        curVol = sqrt( curVol );
-
-		GLOBALS->setSoundInputVolume( curVol );
-
-    }
-    else
-    if (nChannels==2)
-    {
-        // samples are "interleaved"
-        
-        for (int i = 0; i < bufferSize; i++)
-        {
-            m_soundLeft[i]	= input[i*2]*0.5;
-            m_soundRight[i]	= input[i*2+1]*0.5;
-            
-            curVol += m_soundLeft[i] * m_soundLeft[i];
-            curVol += m_soundRight[i] * m_soundRight[i];
-            numCounted+=2;
-        }
-        
-        //this is how we get the mean of rms :)
-        curVol /= (float)numCounted;
-        
-        // this is how we get the root of rms :)
-        curVol = sqrt( curVol );
-        
-		GLOBALS->setSoundInputVolume( curVol );
-	 
-        //bufferCounter++;
-    }
+	m_soundInput.audioIn(input,bufferSize,nChannels);
 }
-
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
