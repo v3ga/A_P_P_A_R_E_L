@@ -2,11 +2,11 @@
     <WeightManual>1</WeightManual>
     <NbWordsMax>13</NbWordsMax>
     <Amplitude>36.7188</Amplitude>
-    <Subdivision>1.375</Subdivision>
+    <Subdivision>3.25</Subdivision>
     <AmplitudeRndFactor>
         <min>0</min>
-        <low>0.432292</low>
-        <high>1</high>
+        <low>0.34375</low>
+        <high>0.791667</high>
         <max>1</max>
     </AmplitudeRndFactor>
 </Porcupinopathy>

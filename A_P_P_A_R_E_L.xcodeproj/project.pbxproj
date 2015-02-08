@@ -132,6 +132,7 @@
 		F96FBE7519781E4600E58A6F /* apparelModManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBE7319781E4600E58A6F /* apparelModManager.cpp */; };
 		F974AB871A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F974AB851A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp */; };
 		F980D0C01A87BAD600D360F7 /* soundInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F980D0BE1A87BAD600D360F7 /* soundInput.cpp */; };
+		F980D0CB1A8811BE00D360F7 /* toolSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F980D0C91A8811BE00D360F7 /* toolSound.cpp */; };
 		F9AB0BE91940FA220020D78A /* tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0BE71940FA220020D78A /* tool.cpp */; };
 		F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ED4467DFF0AC3482E9362 /* ofxUIMultiImageToggle.cpp */; };
 		F9C6660D193CA6BF00C8225D /* apparelModUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C6660B193CA6BF00C8225D /* apparelModUI.cpp */; };
@@ -509,6 +510,8 @@
 		F974AB861A82DA9D00CA6FC8 /* parameterGroupLowHigh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parameterGroupLowHigh.h; sourceTree = "<group>"; };
 		F980D0BE1A87BAD600D360F7 /* soundInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = soundInput.cpp; sourceTree = "<group>"; };
 		F980D0BF1A87BAD600D360F7 /* soundInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = soundInput.h; sourceTree = "<group>"; };
+		F980D0C91A8811BE00D360F7 /* toolSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolSound.cpp; sourceTree = "<group>"; };
+		F980D0CA1A8811BE00D360F7 /* toolSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolSound.h; sourceTree = "<group>"; };
 		F9A4454B00CCFD7265D3CA85 /* ofxUILabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUILabelButton.cpp; path = ../../../addons/ofxUI/src/ofxUILabelButton.cpp; sourceTree = SOURCE_ROOT; };
 		F9AB0BE71940FA220020D78A /* tool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tool.cpp; sourceTree = "<group>"; };
 		F9AB0BE81940FA220020D78A /* tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tool.h; sourceTree = "<group>"; };
@@ -1424,6 +1427,8 @@
 				F9489274197FEEE900085C6B /* toolUser.h */,
 				F948927B197FFE5400085C6B /* toolCalibration.cpp */,
 				F948927C197FFE5400085C6B /* toolCalibration.h */,
+				F980D0C91A8811BE00D360F7 /* toolSound.cpp */,
+				F980D0CA1A8811BE00D360F7 /* toolSound.h */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1691,6 +1696,7 @@
 				F932F064196C488900C82556 /* OscReceivedElements.cpp in Sources */,
 				F9D35E7D19AB894E00B63E8E /* user.mm in Sources */,
 				7D393646FB859A930EF58917 /* ofxUIButton.cpp in Sources */,
+				F980D0CB1A8811BE00D360F7 /* toolSound.cpp in Sources */,
 				F9D2CC23192A4E4700BF8F14 /* ofxXmlSettings.cpp in Sources */,
 				F932F0BD196D774000C82556 /* oscSender.cpp in Sources */,
 				7BE46522B64E24FAEDE1A25D /* ofxUICanvas.cpp in Sources */,

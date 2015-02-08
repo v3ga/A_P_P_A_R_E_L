@@ -8,6 +8,7 @@
 #include "toolNetwork.h"
 #include "toolUser.h"
 #include "toolCalibration.h"
+#include "toolSound.h"
 
 #include "apparelMod_include.h"
 
@@ -100,6 +101,9 @@ void ofApp::setup()
 	pToolNetwork 	= new toolNetwork(&toolManager);
 	pToolUser		= new toolUser(&toolManager, &user);
 	pToolCalibration= new toolCalibration(&toolManager);
+	pToolSound		= new toolSound(&toolManager);
+
+	pToolSound->setSoundInput(&m_soundInput);
 	
 	toolManager.setLogo("ARicon_150x150.png");
 	toolManager.setFontName("fonts/LetterGothic.ttf");
@@ -109,6 +113,9 @@ void ofApp::setup()
 	toolManager.addTool( pToolNetwork );
 	toolManager.addTool( pToolUser );
 	toolManager.addTool( pToolCalibration );
+
+
+	toolManager.addTool( pToolSound );
 	
 	
 //	pTool3D->setSceneFbo(&sceneBuffer);

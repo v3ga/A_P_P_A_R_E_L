@@ -13,6 +13,7 @@
 SoundInput::SoundInput()
 {
 	m_soundBufferSize = 0;
+	m_volMaxInput = 0;
 }
 
 //--------------------------------------------------------------
@@ -28,11 +29,12 @@ void SoundInput::setup(int deviceId, int nChannels)
 	{
 		m_soundBufferSize = 256;
 
+		setupAudioBuffers(nChannels);
+
 		m_soundStreamInput.setDeviceID(deviceId);
 		m_soundStreamInput.setup(ofGetAppPtr(), 0, nChannels, 44100, m_soundBufferSize, 4);
 		m_soundStreamInput.start();
 
-		setupAudioBuffers(nChannels);
 	}
 }
 
@@ -59,6 +61,18 @@ void SoundInput::setupAudioBuffers(int nbChannels)
 }
 
 //--------------------------------------------------------------
+void SoundInput::saveParameters()
+{
+	
+}
+
+//--------------------------------------------------------------
+void SoundInput::loadParameters()
+{
+
+}
+
+//--------------------------------------------------------------
 void SoundInput::audioIn(float * input, int bufferSize, int nChannels)
 {
 	float curVol = 0.0;
@@ -74,12 +88,13 @@ void SoundInput::audioIn(float * input, int bufferSize, int nChannels)
 
         //this is how we get the mean of rms :)
         curVol /= (float)numCounted;
-        
+	 
         // this is how we get the root of rms :)
         curVol = sqrt( curVol );
 
-		GLOBALS->setSoundInputVolume( curVol );
+		curVol = ofMap(curVol, 0.0f,m_volMaxInput, 0.0f,1.0f);
 
+		GLOBALS->setSoundInputVolume( curVol );
     }
     else
     if (nChannels==2)

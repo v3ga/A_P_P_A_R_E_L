@@ -21,8 +21,13 @@ class SoundInput
 		virtual void 		stop			();
 				void		setupAudioBuffers(int nChannels);
 
+				void		saveParameters	();
+				void		loadParameters	();
+
 		ofSoundStream		m_soundStreamInput;
 		int                 m_soundBufferSize;
 		vector<float>		m_soundMono,m_soundLeft,m_soundRight;
+ 
+ 		float				m_volMaxInput;
 };
 

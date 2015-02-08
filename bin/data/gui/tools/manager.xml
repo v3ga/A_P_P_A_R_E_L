@@ -15,6 +15,11 @@
 </Widget>
 <Widget>
     <Kind>2</Kind>
+    <Name>Sound</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
     <Name>User</Name>
     <Value>0</Value>
 </Widget>

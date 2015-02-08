@@ -19,6 +19,7 @@ class toolMods;
 class toolNetwork;
 class toolUser;
 class toolCalibration;
+class toolSound;
 
 class ofApp : public ofBaseApp
 {
@@ -77,4 +78,5 @@ class ofApp : public ofBaseApp
 		toolNetwork*		pToolNetwork;
 		toolUser*			pToolUser;
 		toolCalibration*	pToolCalibration;
+		toolSound*			pToolSound;
 };
