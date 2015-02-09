@@ -31,6 +31,18 @@ void apparelMod_authoritopathy::copyModelFrom(const apparelModel& model)
 //--------------------------------------------------------------
 void apparelMod_authoritopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
+	displaceVertices();
+}
+
+//--------------------------------------------------------------
+void apparelMod_authoritopathy::onWeightChanged()
+{
+	displaceVertices();
+}
+
+//--------------------------------------------------------------
+void apparelMod_authoritopathy::displaceVertices()
+{
 	//OFAPPLOG->begin("apparelMod_authoritopathy::onParameterChanged(\""+parameter.getName()+"\"");
 	//apparelMod::parameterChanged(parameter);
 
@@ -52,4 +64,6 @@ void apparelMod_authoritopathy::onParameterChanged(ofAbstractParameter& paramete
 	setChanged(true);
 	//OFAPPLOG->end();
 }
+
+
 

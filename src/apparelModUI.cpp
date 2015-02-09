@@ -124,8 +124,9 @@ void apparelModUI::handleEvents(ofxUIEventArgs& e)
 		if (mp_mod)
 		{
 			if (mp_mod->m_isWeightManual)
+			{
 				mp_mod->setWeight( e.getSlider()->getValue() );
-			
+			}
 		}
 	}
 	else

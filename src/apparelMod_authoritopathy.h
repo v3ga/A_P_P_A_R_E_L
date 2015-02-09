@@ -18,9 +18,12 @@ class apparelMod_authoritopathy : public apparelMod
 		void				apply				();
 		void				copyModelFrom		(const apparelModel& model);
 		void				onParameterChanged	(ofAbstractParameter& parameter);
+		void				onWeightChanged		();
+
 
 	private:
 		ofVec3f				m_pointInfluence;
  		ofParameter<float>	m_displacement;
-
+ 
+		void				displaceVertices	();
 };

@@ -243,6 +243,7 @@ void apparelMod::setWeight(float v)
 {
 	m_weight = v;
     if (m_weight>1.0f) m_weight = 1.0f;
+	onWeightChanged();
 	setChanged();
 }
 

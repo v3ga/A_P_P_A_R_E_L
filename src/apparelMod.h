@@ -44,6 +44,7 @@ class apparelMod
 		ofAbstractParameter&getParameter			(string name);
 		virtual void		parameterChanged		(ofAbstractParameter & parameter);
 		virtual	void		onParameterChanged		(ofAbstractParameter & parameter){}
+		virtual	void		onWeightChanged			(){}
 
 		string				getPathRelative			(string filename="");
 		string				getPathToolMods			(string filename){return "tools/mods/"+filename;}
