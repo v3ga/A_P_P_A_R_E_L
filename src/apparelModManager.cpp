@@ -184,14 +184,14 @@ void apparelModManager::applyModChain()
 }
 
 //--------------------------------------------------------------
-void apparelModManager::countUserWords(user* pUser)
+void apparelModManager::countUserWords(user* pUser, bool lock)
 {
 	int nbMods = m_modsChain.size();
 	
 	// Copy if something changed at some point
 	for (int i=0; i<nbMods; i++)
 	{
-		m_modsChain[i]->countUserWords(pUser);
+		m_modsChain[i]->countUserWords(pUser, lock);
 	}
 
 }

@@ -17,6 +17,7 @@ class oscSender : public oscSenderInterface
 		void setup					(string ip, int port);
 
 		void sendParameter			(const ofAbstractParameter & parameter);
+		void sendModWeight			(apparelMod* pMod);
 		void sendModData			(apparelMod* pMod);
 		void selectMod				(apparelMod* pMod);
 		void sendModEmptyUserDataSQL(apparelMod* pMod);

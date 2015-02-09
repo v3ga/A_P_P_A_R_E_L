@@ -113,7 +113,7 @@ void toolMods::createControlsCustom()
 	mp_canvas->addWidgetDown(new ofxUILabel("Camera", OFX_UI_FONT_SMALL));
 	mp_canvas->addWidgetDown(new ofxUISpacer(300, 1));
 
-	ofxUISlider* pSliderCamDist = new ofxUISlider("Distance", 40.0, 150.0, 100.0, 300, 20);
+	ofxUISlider* pSliderCamDist = new ofxUISlider("Distance", 40.0, 250.0, 100.0, 300, 20);
 	mp_canvas->addWidgetDown(pSliderCamDist);
 
 /*

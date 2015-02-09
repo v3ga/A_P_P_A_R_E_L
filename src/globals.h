@@ -11,6 +11,7 @@
 
 class ofApp;
 class oscSender;
+class apparelModel;
 class apparelModManager;
 class user;
 
@@ -38,6 +39,9 @@ class globals
  
 				void				setUser(user* p){pUser = p;}
 				user*				getUser(){return pUser;}
+
+				void				setModel(apparelModel* p){pModel = p;}
+				apparelModel*		getModel(){return pModel;}
 	
 	private:
 		static 	globals*				instance;
@@ -45,6 +49,7 @@ class globals
 				oscSender*				pOscSender;
 				apparelModManager*		pApparelModManager;
 				user*					pUser;
+				apparelModel*			pModel;
 	
 				float					m_soundInputVolume;
 

@@ -69,6 +69,22 @@ void oscSender::sendParameter(const ofAbstractParameter & parameter)
 }
 
 //--------------------------------------------------------------
+void oscSender::sendModWeight(apparelMod* pMod)
+{
+	if(!isSetup() || !isActive()) return;
+	if (pMod == 0) return;
+
+	ofxOscMessage msg;
+	msg.setAddress(OSC_MOD_SET_WEIGHT);
+	msg.addStringArg(pMod->getId());
+	msg.addFloatArg(pMod->m_weight);
+
+
+	m_sender.sendMessage(msg);
+
+}
+
+//--------------------------------------------------------------
 void oscSender::sendModData(apparelMod* pMod)
 {
 	if(!isSetup() || !isActive()) return;

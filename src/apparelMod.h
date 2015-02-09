@@ -127,10 +127,10 @@ class apparelMod
 		vector<string>		m_words;
 		int					m_countWords; // total words from list retrieved in database
 		bool				isInWordsList				(string word);
-		void				countUserWords				(user* pUser);
-		void				updateUserDatabase			(user* pUser, string word);
-		void				emptyUserDatabase			(user* pUser);
- 		void				resetWordsCountUserDatabase	(user* pUser);
+		void				countUserWords				(user* pUser, bool lock=false);
+		void				updateUserDatabase			(user* pUser, string word, bool lock=false);
+		void				emptyUserDatabase			(user* pUser, bool lock=false);
+ 		void				resetWordsCountUserDatabase	(user* pUser, bool lock=false);
  
 		// OSC
 		oscSenderInterface*	mp_oscSender;

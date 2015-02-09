@@ -187,24 +187,24 @@ string user::getPathSqlData()
 //--------------------------------------------------------------
 void user::connectSqlData()
 {
-		string pathSqlData = getPathSqlData();
-		OFAPPLOG->begin("user::connectSqlData()");
-		OFAPPLOG->println("- connecting to "+pathSqlData);
+   string pathSqlData = getPathSqlData();
+   OFAPPLOG->begin("user::connectSqlData()");
+   OFAPPLOG->println("- connecting to "+pathSqlData);
 
-		mp_sqlData = new ofxSQLite();
-		if (mp_sqlData->setup(pathSqlData))
-		{
-			OFAPPLOG->println("- OK connected to "+pathSqlData);
-		}
-		else
-		{
-			OFAPPLOG->println("- FAILED to connect to "+pathSqlData);
-		
-			delete mp_sqlData;
-			mp_sqlData=0;
-		}
-		
-		OFAPPLOG->end();
+   mp_sqlData = new ofxSQLite();
+   if (mp_sqlData->setup(pathSqlData))
+   {
+	   OFAPPLOG->println("- OK connected to "+pathSqlData);
+   }
+   else
+   {
+	   OFAPPLOG->println("- FAILED to connect to "+pathSqlData);
+   
+	   delete mp_sqlData;
+	   mp_sqlData=0;
+   }
+   
+   OFAPPLOG->end();
 }
 
 
@@ -235,7 +235,7 @@ void user::onNewTick(ofxTickerEventArgs& args)
 {
 	if (this->isThreadRunning()) return;
 	
-	startThread();
+	startThread(true, true);
 }
 
 //--------------------------------------------------------------

@@ -83,7 +83,7 @@ void ofApp::setup()
 
 	// USER WORDS
 	// this will initialize words count for each mod for this user
-	apparelModManager.countUserWords(&user);
+	apparelModManager.countUserWords(&user,true);
 
 	// SOUND
 

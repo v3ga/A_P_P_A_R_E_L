@@ -43,7 +43,7 @@ class apparelModManager
 		void						applyModChain		();
 
 		// Count words for a user by looking into database => call in setup when user is created
-		void						countUserWords		(user* pUser);
+		void						countUserWords		(user* pUser, bool lock=false);
 	
 		// Called asynchronously
 		void						onNewText			(user* pUser, string text);

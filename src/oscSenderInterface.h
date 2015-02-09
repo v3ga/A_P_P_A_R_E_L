@@ -10,6 +10,7 @@
 #include "ofMain.h"
 #include "ofxOscSender.h"
 
+class apparelMod;
 class oscSenderInterface
 {
 	public:
@@ -23,7 +24,8 @@ class oscSenderInterface
 		virtual	void	sendValue		(string address, int value){}
 		virtual	void	sendValue		(string address, bool value){}
 		virtual void 	sendParameter	(const ofAbstractParameter & parameter){}
-		
+		virtual void 	sendModWeight	(apparelMod* pMod){}
+ 
 		virtual void 	setActive		(bool is=true){m_isActive=is;}
 				bool 	isSetup			(){return m_isSetup;}
 				bool 	isActive		(){return m_isActive;}

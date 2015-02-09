@@ -22,7 +22,25 @@ void oscReceiver::update()
 			ofLog() << "oscReceiver::update() - received " << m_oscMessage.getAddress();
 
 
-			if (m_oscMessage.getAddress() == OSC_MOD_SET_PARAMETER)
+			if (m_oscMessage.getAddress() == OSC_MOD_SET_WEIGHT)
+			{
+				apparelModManager* pModManager = GLOBALS->getModManager();
+				if (pModManager)
+				{
+					// Name of the mod
+					string instanceName = m_oscMessage.getArgAsString(0);
+
+					// Get Mod instance
+					apparelMod* pMod = pModManager->getMod(instanceName);
+
+					// Exists ??
+					if (pMod && pMod->m_isWeightManual)
+					{
+						pMod->setWeight( m_oscMessage.getArgAsFloat(1) );
+					}
+				}
+			}
+			else if (m_oscMessage.getAddress() == OSC_MOD_SET_PARAMETER)
 			{
 				apparelModManager* pModManager = GLOBALS->getModManager();
 				if (pModManager)

@@ -13,7 +13,7 @@
 SoundInput::SoundInput()
 {
 	m_soundBufferSize = 0;
-	m_volMaxInput = 0;
+	m_volMaxInput = 0.1f; // not zero otherwise ofMap causes warnings
 }
 
 //--------------------------------------------------------------
@@ -91,7 +91,6 @@ void SoundInput::audioIn(float * input, int bufferSize, int nChannels)
 	 
         // this is how we get the root of rms :)
         curVol = sqrt( curVol );
-
 		curVol = ofMap(curVol, 0.0f,m_volMaxInput, 0.0f,1.0f);
 
 		GLOBALS->setSoundInputVolume( curVol );
@@ -116,6 +115,8 @@ void SoundInput::audioIn(float * input, int bufferSize, int nChannels)
         
         // this is how we get the root of rms :)
         curVol = sqrt( curVol );
+		curVol = ofMap(curVol, 0.0f,m_volMaxInput, 0.0f,1.0f);
+
         
 		GLOBALS->setSoundInputVolume( curVol );
 	 

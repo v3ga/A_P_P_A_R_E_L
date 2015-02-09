@@ -80,7 +80,7 @@ void apparelMood_porcupinopathy::apply()
 				ofIndexType indexVertModel = m_model.mesh.getNumVertices();
 				
 				// References to vertices of subdivided mesh
-				vector<ofVec3f>& verticesAdd = meshSubdivided1.getVertices();
+				//vector<ofVec3f>& verticesAdd = meshSubdivided1.getVertices();
 				int nbVerticesAdd = meshSubdivided1.getNumVertices();
 				
 				// Go
@@ -170,7 +170,7 @@ void apparelMood_porcupinopathy::onParameterChanged(ofAbstractParameter& paramet
 void apparelMood_porcupinopathy::update()
 {
 	// Get amplitude of sound
-	//m_weight = GLOBALS->getSoundInputVolume(); // ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.2f, 0.1f,1.0f);
+	m_weight = GLOBALS->getSoundInputVolume(); // ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.2f, 0.1f,1.0f);
 	
 	int nbVerticesExtruded = m_extrusionData.size();
 
