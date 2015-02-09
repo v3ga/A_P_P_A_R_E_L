@@ -18,7 +18,6 @@ class apparelMod_pretentiopathy : public apparelMod
 
 		void				apply				();
 		void				onParameterChanged	(ofAbstractParameter& parameter);
-		void				onWeightChanged		();
 
 	private:
  		ofMesh				m_head;
