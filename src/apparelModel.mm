@@ -117,6 +117,9 @@ void apparelModel::drawFaces()
 {
 	ofPushMatrix();
 	ofMultMatrix(modelMatrix);
+#ifdef TARGET_OF_IOS
+	ofTranslate(10,0,0);
+#endif
 	mesh.drawFaces();
 	ofPopMatrix();
 }

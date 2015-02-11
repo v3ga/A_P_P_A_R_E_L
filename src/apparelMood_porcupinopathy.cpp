@@ -170,7 +170,7 @@ void apparelMood_porcupinopathy::onParameterChanged(ofAbstractParameter& paramet
 void apparelMood_porcupinopathy::update()
 {
 	// Get amplitude of sound
-	m_weight = GLOBALS->getSoundInputVolume(); // ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.2f, 0.1f,1.0f);
+	//m_weight = GLOBALS->getSoundInputVolume(); // ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.2f, 0.1f,1.0f);
 	
 	int nbVerticesExtruded = m_extrusionData.size();
 

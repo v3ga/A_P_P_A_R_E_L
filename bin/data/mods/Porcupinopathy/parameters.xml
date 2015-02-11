@@ -1,8 +1,8 @@
 <Porcupinopathy>
-    <WeightManual>0</WeightManual>
+    <WeightManual>1</WeightManual>
     <NbWordsMax>9</NbWordsMax>
     <Amplitude>34.1146</Amplitude>
-    <Subdivision>1.67188</Subdivision>
+    <Subdivision>1.42188</Subdivision>
     <AmplitudeRndFactor>
         <min>0</min>
         <low>0.34375</low>
