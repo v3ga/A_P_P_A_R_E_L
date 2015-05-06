@@ -9,6 +9,9 @@
 #pragma once
 #include "userSocialInterface.h"
 #include "userTwitter.h"
+#ifdef TARGET_OF_IOS
+#include "userTwitterGuestIOS.h"
+#endif
 
 class user;
 class userSocialFactory

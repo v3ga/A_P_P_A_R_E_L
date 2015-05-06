@@ -32,6 +32,7 @@ class user : public ofThread
 					ofxXmlSettings&		getConfiguration	(){return m_configuration;}
 					void				loadServicesData	();
 					void				saveServicesData	();
+					void				useThread			(bool is=true){m_bUseThread=is;}
 	
 	
 					void				createDirectory		();
@@ -55,9 +56,14 @@ class user : public ofThread
 	protected:
 		string							m_id;
 
+		// Thread params
+		bool							m_bUseThread;		// some services may use their own thread (ex : Fabric / Twitter)
+ 
+
 		// Ticker to reload data
 		ofxTicker						m_ticker;
 		float							m_periodTick;
+		bool							m_newTick;			// used in update method
 
 		// Configuration settings (configuration.xml contains the list of services for example)
 		ofxXmlSettings					m_configuration;

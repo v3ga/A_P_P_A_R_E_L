@@ -28,7 +28,7 @@ bool userTwitter::setup(ofxXmlSettings* pConfig, int serviceIndex)
 	OFAPPLOG->println("- consumer_key="+consumer_key);
 	OFAPPLOG->println("- consumer_secret="+consumer_secret);
 
-	m_twitterClient.setCredentialsPathname( mp_user->getPathResources("twitter/credentials.xml") );
+//	m_twitterClient.setCredentialsPathname( mp_user->getPathResources("twitter/credentials.xml") );
     m_twitterClient.authorize(consumer_key, consumer_secret);
 
 	// Load data (previous grabbing infos saved into data.xml)

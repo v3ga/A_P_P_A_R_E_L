@@ -5,8 +5,8 @@
 	<services>
 		<service name="twitter">
 			<!-- for API requests -->
-			<consumer_key>mYBckw1f2KvmPbg0bJiFpA</consumer_key>
-			<consumer_secret>4ygsFNerHOvn3VtM1Rq2DHuKqujbBxFSutQyHhQkbw</consumer_secret>
+			<consumer_key>mNT1q087hDYo0AEXrTLg66zxN</consumer_key>
+			<consumer_secret>aDOHcZm95Rb8fwZtRKnW4PnYmMMBnFW6TVYYP8DS1KwDxvoqK9</consumer_secret>
 		</service>
 	</services>
 </user>

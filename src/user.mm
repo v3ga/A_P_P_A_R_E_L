@@ -20,6 +20,8 @@ user::user()
 {
 	m_periodTick	=	15.0f;
 	mp_sqlData		= 	0;
+	m_newTick		= false;
+	m_bUseThread	= true;
 }
 
 //--------------------------------------------------------------
@@ -212,11 +214,15 @@ void user::connectSqlData()
 //--------------------------------------------------------------
 void user::update(float dt)
 {
-/*	vector<userSocialInterface*>::iterator it;
-	for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
-		(*it)->update();
-	}
-*/
+	if (m_newTick && !m_bUseThread)
+	{
+		m_newTick = false;
+
+		vector<userSocialInterface*>::iterator it;
+		for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
+			(*it)->doWork();
+		}
+   }
 }
 
 //--------------------------------------------------------------
@@ -233,9 +239,12 @@ void  user::threadedFunction()
 //--------------------------------------------------------------
 void user::onNewTick(ofxTickerEventArgs& args)
 {
-	if (this->isThreadRunning()) return;
-	
-	startThread(true, true);
+	m_newTick = true;
+	if (m_bUseThread)
+	{
+		if (this->isThreadRunning()) return;
+		startThread(true, true);
+	}
 }
 
 //--------------------------------------------------------------
