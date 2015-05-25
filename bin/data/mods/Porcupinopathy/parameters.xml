@@ -1,12 +1,12 @@
 <Porcupinopathy>
     <WeightManual>1</WeightManual>
-    <NbWordsMax>9</NbWordsMax>
+    <NbWordsMax>10</NbWordsMax>
     <Amplitude>34.1146</Amplitude>
-    <Subdivision>1.42188</Subdivision>
+    <Subdivision>1.73438</Subdivision>
     <AmplitudeRndFactor>
         <min>0</min>
-        <low>0.34375</low>
-        <high>0.791667</high>
+        <low>0.255208</low>
+        <high>0.703125</high>
         <max>1</max>
     </AmplitudeRndFactor>
 </Porcupinopathy>

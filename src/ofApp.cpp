@@ -60,33 +60,19 @@ void ofApp::setup()
 	
 	// MODEL
 	apparelModel.load(modelObjName);
-//	apparelModel.setPosition(0,0,0);
 	
 	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());
 	sceneFxBlur.allocate(ofGetWidth()/10,ofGetHeight()/10);
-	
+
 
 	// MODS
-	apparelModManager.addMod( new apparelMod_authoritopathy() );
-	apparelModManager.addMod( new apparelMod_pedopathy() );
-	apparelModManager.addMod( new apparelMod_sportopathy() );
-	apparelModManager.addMod( new apparelMod_pretentiopathy() );
-	apparelModManager.addMod( new apparelMod_meteopathy() );
-	apparelModManager.addMod( new apparelMood_porcupinopathy() );
-	// apparelModManager.addMod( new apparelMod_selfopathy() );
-	apparelModManager.addMod( new apparelMood_noisopathy() );
-	
-
-	// **Copy** the model to every mod in the chain
-	apparelModManager.copyModelToMods(apparelModel);
-	apparelModManager.loadModData();
+	apparelModManager.constructMods(&apparelModel);
 
 	// USER WORDS
 	// this will initialize words count for each mod for this user
 	apparelModManager.countUserWords(&user,true);
 
 	// SOUND
-
 	m_soundInput.setup(soundDeviceId, soundChannels);
 
 	// CAM
@@ -143,8 +129,8 @@ void ofApp::update()
 
 	toolManager.update();
 	user.update(dt);
-
-
+	
+//	ofLog() << ">>>>" << apparelModel.getMeshRef().getNumVertices();
 }
 
 //--------------------------------------------------------------
@@ -161,16 +147,15 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-
-	// render to offscreen
-if (this->pToolMods->isPostProcessEnabled())
-{
-	sceneBuffer.begin();
- 	ofClear(0,0,0,0);
-}else
-{
-	ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
-}
+		// render to offscreen
+		if (this->pToolMods->isPostProcessEnabled())
+		{
+		sceneBuffer.begin();
+ 		ofClear(0,0,0,0);
+		}	else
+		{
+			ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
+		}
 
   		ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 		ofEnableDepthTest();
@@ -182,25 +167,24 @@ if (this->pToolMods->isPostProcessEnabled())
 		ofDisableDepthTest();
     	ofDisableBlendMode();
 		
-if (this->pToolMods->isPostProcessEnabled())
-{
-	sceneBuffer.end();
+		if (this->pToolMods->isPostProcessEnabled())
+		{
+		sceneBuffer.end();
 
 
-	// Filters
-	sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
-	sceneFxBlur.update();
+		// Filters
+		sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
+		sceneFxBlur.update();
 
-    //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-	ofDisableDepthTest();
-	ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
-	ofSetColor(255);
+	    //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+		ofDisableDepthTest();
+		ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
+		ofSetColor(255);
  
-	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    //sceneBuffer.draw(0,0);
-	sceneFxBlur.draw(0,0);
-	ofDisableBlendMode();
-}
+		ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+		sceneFxBlur.draw(0,0);
+		ofDisableBlendMode();
+	}
 
 	// Screenshot
 	if (m_bSaveframe)

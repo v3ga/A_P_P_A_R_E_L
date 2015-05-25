@@ -9,6 +9,7 @@
 #include "ofMeshFaceApparel.h"
 
 
+//--------------------------------------------------------------
 ofMeshFaceApparel::ofMeshFaceApparel(ofMesh* pMesh, int offsetIndices)
 {
 	mp_mesh 		= pMesh;
@@ -22,6 +23,7 @@ ofMeshFaceApparel::ofMeshFaceApparel(ofMesh* pMesh, int offsetIndices)
 }
 
 
+//--------------------------------------------------------------
 ofIndexType ofMeshFaceApparel::getVertexIndex(int index)
 {
 	int offset = m_offsetIndices + index;
@@ -31,12 +33,13 @@ ofIndexType ofMeshFaceApparel::getVertexIndex(int index)
 	}
 	else
 	{
-		ofLog(OF_LOG_WARNING) << "ofMeshFaceApparel::getVertexIndex("<<ofToString(offset)<<") offet out of range";
+		ofLog(OF_LOG_WARNING) << "ofMeshFaceApparel::getVertexIndex("<<ofToString(offset)<<") offset out of range";
 	}
 
 	return 0;
 }
 
+//--------------------------------------------------------------
 ofVec3f* ofMeshFaceApparel::getVertexPointer(int index)
 {
 	return mp_mesh->getVerticesPointer()+getVertexIndex(index);

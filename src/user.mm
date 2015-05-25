@@ -22,6 +22,7 @@ user::user()
 	mp_sqlData		= 	0;
 	m_newTick		= false;
 	m_bUseThread	= true;
+	m_bUseTick		= true;
 }
 
 //--------------------------------------------------------------
@@ -165,12 +166,15 @@ void user::loadConfiguration()
 		connectSqlData();
 
 		// Starting retrieving
-		m_periodTick = m_configuration.getValue("user:period", 15.0f);
-		OFAPPLOG->println("- period tick="+ofToString(m_periodTick)+" seconds");
+		if (m_bUseTick)
+		{
+			m_periodTick = m_configuration.getValue("user:period", 15.0f);
+			OFAPPLOG->println("- period tick="+ofToString(m_periodTick)+" seconds");
 
-		ofAddListener(m_ticker.newTickEvent, this, &user::onNewTick);
-		m_ticker.setPeriod( getPeriodTick() );
-		m_ticker.play();
+			ofAddListener(m_ticker.newTickEvent, this, &user::onNewTick);
+			m_ticker.setPeriod( getPeriodTick() );
+			m_ticker.play();
+		}
 	}
 	else
 	{

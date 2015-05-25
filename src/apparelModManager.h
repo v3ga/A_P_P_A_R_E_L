@@ -19,11 +19,12 @@ class apparelModManager
 		apparelModManager			();
 	
 	
+		void						constructMods		(apparelModel* pModel);
 		void						addMod				(apparelMod*);
 		void						loadModData			();
 		void						selectMod			(string name);
 		apparelMod*					getMod				(string id);
-		apparelMod*					getModCurrent(){return mp_modCurrent;}
+		apparelMod*					getModCurrent		(){return mp_modCurrent;}
 		void						setModel			(apparelModel*);
 		void						copyModelToMods		(const apparelModel& model);
  		apparelModel*				getModelLastInChain	();
@@ -52,9 +53,10 @@ class apparelModManager
 		// Chain of mods
 		map<string, apparelMod*>	m_mods;
  		vector<apparelMod*>			m_modsChain;
+ 		apparelMod*					mp_modCurrent;
  
-		apparelMod*					mp_modCurrent;
- 
+ 		// User associated with this manager
+		user*						mp_user;
  
    private:
    		void						makeModsChain		();

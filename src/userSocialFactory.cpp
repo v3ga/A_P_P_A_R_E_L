@@ -17,6 +17,7 @@ userSocialInterface* userSocialFactory::makeInstance(userConfigurationInfo* pCon
 	OFAPPLOG->begin("userSocialFactory::makeInstance()");
 
 	// TWITTER
+	#ifdef TARGET_OF_OSX
 	if (pConfigInfo->m_name == "twitter")
 	{
    		OFAPPLOG->println("- creating service \""+pConfigInfo->m_name+"\"");
@@ -30,6 +31,8 @@ userSocialInterface* userSocialFactory::makeInstance(userConfigurationInfo* pCon
 	   		delete pUserTwitter;
    		}
 	}
+	#endif
+	
 	// TWITTER IOS
 	#ifdef TARGET_OF_IOS
 	if (pConfigInfo->m_name == "twitterGuestIOS")

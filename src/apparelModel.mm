@@ -18,7 +18,13 @@
 apparelModel::apparelModel()
 {
 	id = "";
+	#ifdef OF_TARGET_OSX
 	assimpModel.setScaleNomalization(false);
+	#endif
+
+	#ifdef OF_TARGET_IOS
+	assimpModel.setScaleNormalization(false);
+	#endif
 	scale.set(1.0f);
 }
 
@@ -40,6 +46,8 @@ bool apparelModel::load(string modelName, bool optimize)
 	{
 		id = modelName;
 		mesh = assimpModel.getMesh(0);
+		mesh.mergeDuplicateVertices();
+		
 		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
 		mesh.enableIndices();
 		mesh.disableColors();
@@ -117,9 +125,28 @@ void apparelModel::drawFaces()
 {
 	ofPushMatrix();
 	ofMultMatrix(modelMatrix);
-#ifdef TARGET_OF_IOS
-	ofTranslate(10,0,0);
-#endif
+
+	// TEMP
+	mesh.enableColors();
+
+    if(!mesh.hasColors()) {
+        mesh.getColors().resize( mesh.getNumVertices() );
+    }
+
+	vector<ofMeshFaceApparel*>::iterator it = meshFaces.begin();
+	
+	for ( ; it != meshFaces.end(); ++it )
+	{
+		ofMeshFaceApparel* pFace = *it;
+
+		for (int i=0;i<3;i++)
+		{
+			float z = pFace->getVertexPointer(i)->z;
+			mesh.setColor(pFace->getVertexIndex(i), ofColor( ofMap(z,-40,24, 20,180) ));
+		}
+	}
+
+
 	mesh.drawFaces();
 	ofPopMatrix();
 }
@@ -253,15 +280,6 @@ void apparelModel::updateModelMatrix()
 {
     modelMatrix.makeIdentityMatrix();
     modelMatrix.glTranslate(pos);
-//    modelMatrix.glRotate(180, 0, 0, 1);
-    //if(assimpModel.normalizeScale)
-	{
-        //modelMatrix.glScale(assimpModel.getNormalizedScale() , assimpModel.getNormalizedScale(), assimpModel.getNormalizedScale());
-    }
-/*    for(int i = 0; i < (int)rotAngle.size(); i++){ // @julapy - not sure why rotAngle isn't a ofVec4f.
-        modelMatrix.glRotate(rotAngle[i], rotAxis[i].x, rotAxis[i].y, rotAxis[i].z);
-    }
-*/
     modelMatrix.glScale(scale.x, scale.y, scale.z);
 }
 

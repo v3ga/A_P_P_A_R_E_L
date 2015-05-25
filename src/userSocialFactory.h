@@ -8,7 +8,11 @@
 
 #pragma once
 #include "userSocialInterface.h"
+
+#ifdef TARGET_OF_OSX
 #include "userTwitter.h"
+#endif
+
 #ifdef TARGET_OF_IOS
 #include "userTwitterGuestIOS.h"
 #endif

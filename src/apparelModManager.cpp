@@ -8,12 +8,32 @@
 
 #include "apparelModManager.h"
 #include "apparelMod.h"
+#include "apparelMod_include.h"
 #include "globals.h"
 #include "user.h"
 
 apparelModManager::apparelModManager()
 {
-	mp_modCurrent = 0;
+	mp_modCurrent 	= 0;
+}
+
+
+//--------------------------------------------------------------
+void apparelModManager::constructMods(apparelModel* pModel)
+{
+	deleteMods();
+
+	addMod( new apparelMod_authoritopathy() );
+	addMod( new apparelMod_pedopathy() );
+	addMod( new apparelMod_sportopathy() );
+	addMod( new apparelMod_pretentiopathy() );
+	addMod( new apparelMod_meteopathy() );
+	addMod( new apparelMood_porcupinopathy() );
+	addMod( new apparelMood_noisopathy() );
+
+	copyModelToMods(*pModel);
+	loadModData();
+	applyModChain();
 }
 
 //--------------------------------------------------------------

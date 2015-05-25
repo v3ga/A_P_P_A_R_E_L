@@ -33,6 +33,7 @@ class user : public ofThread
 					void				loadServicesData	();
 					void				saveServicesData	();
 					void				useThread			(bool is=true){m_bUseThread=is;}
+ 					void				useTick				(bool is=true){m_bUseTick = is;}		// should be called before loadconfiguration
 	
 	
 					void				createDirectory		();
@@ -64,6 +65,7 @@ class user : public ofThread
 		ofxTicker						m_ticker;
 		float							m_periodTick;
 		bool							m_newTick;			// used in update method
+		bool							m_bUseTick;			// user cannot do ticking (example for template)
 
 		// Configuration settings (configuration.xml contains the list of services for example)
 		ofxXmlSettings					m_configuration;

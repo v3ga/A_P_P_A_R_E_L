@@ -182,8 +182,8 @@ void toolMods::update()
 		mp_modsManager->applyModChain();
 	}
 
-
 	if (mp_apparelModel == 0) return;
+	
 
 	vector<ofMeshFaceApparel*>& meshFaces = mp_apparelModel->getMeshFacesRef();
 	ofCamera& cam = GLOBALS->getApp()->cam;

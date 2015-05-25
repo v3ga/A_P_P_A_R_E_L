@@ -1,22 +1,22 @@
 <Widget>
     <Kind>2</Kind>
     <Name>show vertex normals</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>show vertex indices</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>show face normals</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>show face indices</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -46,7 +46,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>Distance</Name>
-    <Value>243.000000000</Value>
+    <Value>105.800003052</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -86,5 +86,5 @@
 <Widget>
     <Kind>2</Kind>
     <Name>enable</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
