@@ -9,6 +9,7 @@
 #include "apparelMod_selfopathy.h"
 #include "ofAppLog.h"
 
+//--------------------------------------------------------------
 apparelMod_selfopathy::apparelMod_selfopathy() : apparelMod("Selfopathy")
 {
 	OFAPPLOG->begin("apparelMod_selfopathy::apparelMod_selfopathy()");
@@ -17,11 +18,13 @@ apparelMod_selfopathy::apparelMod_selfopathy() : apparelMod("Selfopathy")
 	OFAPPLOG->end();
 }
 
+//--------------------------------------------------------------
 apparelMod_selfopathy::~apparelMod_selfopathy()
 {
 
 }
 
+//--------------------------------------------------------------
 void apparelMod_selfopathy::drawFaces()
 {
 //	m_model.mesh.enableTextures();
@@ -43,3 +46,13 @@ void apparelMod_selfopathy::drawFaces()
 	ofPopMatrix();
 	
 }
+
+/*
+
+[TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession *session, NSError *error) {
+  [[[Twitter sharedInstance] APIClient] loadUserWithID:session.userID completion:^(TWTRUser *user, NSError *error) {
+       NSLog(@"User image %@", user.profileImageURL);
+  }];
+}];
+
+*/

@@ -127,7 +127,7 @@ void apparelModel::drawFaces()
 	ofMultMatrix(modelMatrix);
 
 	// TEMP
-	mesh.enableColors();
+/*	mesh.enableColors();
 
     if(!mesh.hasColors()) {
         mesh.getColors().resize( mesh.getNumVertices() );
@@ -145,7 +145,7 @@ void apparelModel::drawFaces()
 			mesh.setColor(pFace->getVertexIndex(i), ofColor( ofMap(z,-40,24, 20,180) ));
 		}
 	}
-
+*/
 
 	mesh.drawFaces();
 	ofPopMatrix();

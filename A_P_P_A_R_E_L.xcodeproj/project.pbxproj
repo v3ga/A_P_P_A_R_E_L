@@ -119,6 +119,10 @@
 		F9489279197FF98200085C6B /* ofxUILogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9489277197FF98200085C6B /* ofxUILogger.cpp */; };
 		F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F948927B197FFE5400085C6B /* toolCalibration.cpp */; };
 		F94A60CD1A80507700A850FA /* apparelMod_selfopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F94A60CB1A80507700A850FA /* apparelMod_selfopathy.cpp */; };
+		F95101EF1B13B25400568415 /* apparelMod_kawaiopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95101ED1B13B25400568415 /* apparelMod_kawaiopathy.cpp */; };
+		F95101F31B13B42800568415 /* apparelMood_sad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95101F11B13B42800568415 /* apparelMood_sad.cpp */; };
+		F95101F61B13B46500568415 /* apparelMod_zoopathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95101F41B13B46500568415 /* apparelMod_zoopathy.cpp */; };
+		F95101F91B13B51F00568415 /* apparelMod_intropathy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95101F71B13B51F00568415 /* apparelMod_intropathy.cpp */; };
 		F96FBA5219755AEA00E58A6F /* ofAppLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */; };
 		F96FBA5B1976D25500E58A6F /* userSocialInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA591976D25500E58A6F /* userSocialInterface.cpp */; };
 		F96FBAA31976D37900E58A6F /* ofxTwitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F96FBA971976D37900E58A6F /* ofxTwitter.cpp */; };
@@ -455,6 +459,14 @@
 		F948927C197FFE5400085C6B /* toolCalibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolCalibration.h; sourceTree = "<group>"; };
 		F94A60CB1A80507700A850FA /* apparelMod_selfopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_selfopathy.cpp; sourceTree = "<group>"; };
 		F94A60CC1A80507700A850FA /* apparelMod_selfopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_selfopathy.h; sourceTree = "<group>"; };
+		F95101ED1B13B25400568415 /* apparelMod_kawaiopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_kawaiopathy.cpp; sourceTree = "<group>"; };
+		F95101EE1B13B25400568415 /* apparelMod_kawaiopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_kawaiopathy.h; sourceTree = "<group>"; };
+		F95101F11B13B42800568415 /* apparelMood_sad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMood_sad.cpp; sourceTree = "<group>"; };
+		F95101F21B13B42800568415 /* apparelMood_sad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMood_sad.h; sourceTree = "<group>"; };
+		F95101F41B13B46500568415 /* apparelMod_zoopathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_zoopathy.cpp; sourceTree = "<group>"; };
+		F95101F51B13B46500568415 /* apparelMod_zoopathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_zoopathy.h; sourceTree = "<group>"; };
+		F95101F71B13B51F00568415 /* apparelMod_intropathy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apparelMod_intropathy.cpp; sourceTree = "<group>"; };
+		F95101F81B13B51F00568415 /* apparelMod_intropathy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apparelMod_intropathy.h; sourceTree = "<group>"; };
 		F96FBA4E1975406300E58A6F /* configuration.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = configuration.xml; path = bin/data/configuration.xml; sourceTree = "<group>"; };
 		F96FBA5019755AEA00E58A6F /* ofAppLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofAppLog.cpp; sourceTree = "<group>"; };
 		F96FBA5119755AEA00E58A6F /* ofAppLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofAppLog.h; sourceTree = "<group>"; };
@@ -849,6 +861,7 @@
 				F9C66612193CAB5300C8225D /* Tools */,
 				F9267592193A093B00CB2599 /* Utils */,
 				F9C66616193CAD7700C8225D /* Mods */,
+				F95101F01B13B3D100568415 /* Moods */,
 				F932F02B196C47FF00C82556 /* Network */,
 				F96FBA581976D1C900E58A6F /* User */,
 				F9489276197FF8FA00085C6B /* UI */,
@@ -1175,6 +1188,19 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		F95101F01B13B3D100568415 /* Moods */ = {
+			isa = PBXGroup;
+			children = (
+				F92C49371A24D661006CE219 /* apparelMood_noisopathy.cpp */,
+				F92C49381A24D661006CE219 /* apparelMood_noisopathy.h */,
+				F95101F11B13B42800568415 /* apparelMood_sad.cpp */,
+				F95101F21B13B42800568415 /* apparelMood_sad.h */,
+				F91ACC3F1A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp */,
+				F91ACC401A325D2E00B06A0F /* apparelMood_porcupinopathy.h */,
+			);
+			name = Moods;
+			sourceTree = "<group>";
+		};
 		F96FBA4D1975404000E58A6F /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1445,14 +1471,16 @@
 				F92C492F1A24D47E006CE219 /* apparelMod_sportopathy.h */,
 				F92C49341A24D54B006CE219 /* apparelMod_pedopathy.cpp */,
 				F92C49351A24D54B006CE219 /* apparelMod_pedopathy.h */,
-				F92C49371A24D661006CE219 /* apparelMood_noisopathy.cpp */,
-				F92C49381A24D661006CE219 /* apparelMood_noisopathy.h */,
-				F91ACC3F1A325D2E00B06A0F /* apparelMood_porcupinopathy.cpp */,
-				F91ACC401A325D2E00B06A0F /* apparelMood_porcupinopathy.h */,
 				F91D62B41A333AE00005E9D5 /* apparelMod_meteopathy.cpp */,
 				F91D62B51A333AE00005E9D5 /* apparelMod_meteopathy.h */,
 				F94A60CB1A80507700A850FA /* apparelMod_selfopathy.cpp */,
 				F94A60CC1A80507700A850FA /* apparelMod_selfopathy.h */,
+				F95101ED1B13B25400568415 /* apparelMod_kawaiopathy.cpp */,
+				F95101EE1B13B25400568415 /* apparelMod_kawaiopathy.h */,
+				F95101F41B13B46500568415 /* apparelMod_zoopathy.cpp */,
+				F95101F51B13B46500568415 /* apparelMod_zoopathy.h */,
+				F95101F71B13B51F00568415 /* apparelMod_intropathy.cpp */,
+				F95101F81B13B51F00568415 /* apparelMod_intropathy.h */,
 			);
 			name = Mods;
 			sourceTree = "<group>";
@@ -1684,6 +1712,7 @@
 				F96FBE6C197724CE00E58A6F /* userTwitter.cpp in Sources */,
 				F9267595193A095C00CB2599 /* meshFaceSelector.cpp in Sources */,
 				F932F067196C488900C82556 /* ofxOscMessage.cpp in Sources */,
+				F95101EF1B13B25400568415 /* apparelMod_kawaiopathy.cpp in Sources */,
 				F932F05F196C488900C82556 /* UdpSocket.cpp in Sources */,
 				F9489235197E72C000085C6B /* ofxSQLiteFieldValues.cpp in Sources */,
 				F9267598193A16C500CB2599 /* meshVertexSelector.cpp in Sources */,
@@ -1752,6 +1781,7 @@
 				222C3AB10FA3158602718602 /* ofxUIMultiImageButton.cpp in Sources */,
 				F9AB0BE91940FA220020D78A /* tool.cpp in Sources */,
 				F96FBBE21976D3AC00E58A6F /* ofxJSONElement.cpp in Sources */,
+				F95101F61B13B46500568415 /* apparelMod_zoopathy.cpp in Sources */,
 				F9C20834354ACC8337320B8C /* ofxUIMultiImageToggle.cpp in Sources */,
 				F91D69EF1A3740D80005E9D5 /* ofxButterfly.cpp in Sources */,
 				E3D59A6B55F05669B3FBF8BD /* ofxUINumberDialer.cpp in Sources */,
@@ -1772,6 +1802,7 @@
 				BFEFCE32DAFE10A8EB519F6C /* ofxUISpacer.cpp in Sources */,
 				52AFF80A869790144ACCC9BA /* ofxUISpectrum.cpp in Sources */,
 				F932F069196C488900C82556 /* ofxOscReceiver.cpp in Sources */,
+				F95101F91B13B51F00568415 /* apparelMod_intropathy.cpp in Sources */,
 				1DAAC3FB4B98B08AE63F4687 /* ofxUISuperCanvas.cpp in Sources */,
 				F932F066196C488900C82556 /* ofxOscBundle.cpp in Sources */,
 				5AE95ADB5549701423B6DA48 /* ofxUITabBar.cpp in Sources */,
@@ -1790,6 +1821,7 @@
 				AE281BEBF3A00F1FC37F3DA0 /* ofxUIWaveform.cpp in Sources */,
 				F948927D197FFE5400085C6B /* toolCalibration.cpp in Sources */,
 				F9489237197E72C000085C6B /* ofxSQLiteSelect.cpp in Sources */,
+				F95101F31B13B42800568415 /* apparelMood_sad.cpp in Sources */,
 				82845E1F8C90E1F5A99D9868 /* ofxUIWidget.cpp in Sources */,
 				F932F05D196C488900C82556 /* IpEndpointName.cpp in Sources */,
 				F974AB871A82DA9D00CA6FC8 /* parameterGroupLowHigh.cpp in Sources */,

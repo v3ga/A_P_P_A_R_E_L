@@ -28,3 +28,15 @@ class apparelMod_pretentiopathy : public apparelMod
 
 		void				setHeadPosition(float x, float y, float z);
 };
+
+/*
+
+Followers
+https://dev.twitter.com/rest/reference/get/followers/ids
+
+Following
+https://dev.twitter.com/rest/reference/get/friends/ids
+
+
+
+*/

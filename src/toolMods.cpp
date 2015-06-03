@@ -221,8 +221,21 @@ void toolMods::draw()
 		}
 		if (m_bDrawWireFrameOnly == false)
 		{
-		   ofSetColor(0,255);
+ 		    ofSetColor(0,255);
+			ofLight light;
+			ofColor color;
+		    color.setBrightness(150);
+    		light.setDiffuseColor(color);
+    		light.enable();
+			pModel->getMeshRef().enableNormals();
+		 // enableNormals();
+
+			
+			ofEnableLighting();
+			glShadeModel(GL_FLAT);
 		   pMod->drawFaces();
+
+			ofDisableLighting();
 		}
 
 	   ofSetColor(255,255);
