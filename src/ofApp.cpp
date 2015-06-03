@@ -150,9 +150,10 @@ void ofApp::draw()
 		// render to offscreen
 		if (this->pToolMods->isPostProcessEnabled())
 		{
-		sceneBuffer.begin();
- 		ofClear(0,0,0,0);
-		}	else
+			sceneBuffer.begin();
+ 			ofClear(0,0,0,0);
+		}
+		else
 		{
 			ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
 		}
@@ -169,22 +170,21 @@ void ofApp::draw()
 		
 		if (this->pToolMods->isPostProcessEnabled())
 		{
-		sceneBuffer.end();
+			sceneBuffer.end();
 
+			// Filters
+			sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
+			sceneFxBlur.update();
 
-		// Filters
-		sceneFxBlur.setTexture(sceneBuffer.getTextureReference());
-		sceneFxBlur.update();
-
-	    //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-		ofDisableDepthTest();
-		ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
-		ofSetColor(255);
+		    //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+			ofDisableDepthTest();
+			ofBackgroundGradient(ofColor(64,255), ofColor(0,255));
+			ofSetColor(255);
  
-		ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-		sceneFxBlur.draw(0,0);
-		ofDisableBlendMode();
-	}
+			ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+			sceneFxBlur.draw(0,0);
+			ofDisableBlendMode();
+		}
 
 	// Screenshot
 	if (m_bSaveframe)

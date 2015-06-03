@@ -219,9 +219,10 @@ void toolMods::draw()
 		{
 		   glEnable(GL_CULL_FACE);
 		}
+		
 		if (m_bDrawWireFrameOnly == false)
 		{
- 		    ofSetColor(0,255);
+/* 		    ofSetColor(0,255);
 			ofLight light;
 			ofColor color;
 		    color.setBrightness(150);
@@ -233,33 +234,41 @@ void toolMods::draw()
 			
 			ofEnableLighting();
 			glShadeModel(GL_FLAT);
+*/
+		   ofSetColor(0,255);
 		   pMod->drawFaces();
 
-			ofDisableLighting();
+//			ofDisableLighting();
 		}
 
-	   ofSetColor(255,255);
 	   if (m_bDrawWireFrameOnly == false)
 	   {
 	   	glEnable(GL_POLYGON_OFFSET_LINE);
 	   	glPolygonOffset(-1,-1);
 	   }
+	 
+	   ofSetColor(255,255);
 	   pMod->drawWireframe();
+
 	   if (m_bDrawWireFrameOnly == false)
 	   {
 	   	glDisable(GL_POLYGON_OFFSET_LINE);
 	   }
-		if (m_bEnableBackFaceCulling)
+	 
+	   if (m_bEnableBackFaceCulling)
+	   {
 		   glDisable(GL_CULL_FACE);
-
+	   }
 
 	   // Draw data from this tool
 	   // only in non-mixed view
 	   if (m_bViewMixed == false)
 	   {
 		   if (mp_apparelModCurrent)
+		   {
 				mp_apparelModCurrent->drawExtra();
-		
+		   }
+		   
 		   drawVertexNormals(pModel);
 		   drawFaceNormals(pModel);
 		   drawSelection(pModel);

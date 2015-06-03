@@ -14,12 +14,8 @@ class apparelMod_zoopathy : public apparelMod
 {
 	public:
 		apparelMod_zoopathy	();
-		~apparelMod_zoopathy	();
 
-
-/*		void					apply				();
-		void					onParameterChanged	(ofAbstractParameter& parameter);
-*/		void					drawFaces			();
+		void					drawExtra			();
 
 	private:
 

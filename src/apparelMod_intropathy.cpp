@@ -10,17 +10,20 @@
 
 #include "ofAppLog.h"
 
+//--------------------------------------------------------------
 apparelMod_intropathy::apparelMod_intropathy() : apparelMod("intropathy")
 {
 	OFAPPLOG->begin("apparelMod_intropathy::apparelMod_intropathy()");
 	OFAPPLOG->end();
 }
 
+//--------------------------------------------------------------
 apparelMod_intropathy::~apparelMod_intropathy()
 {
 
 }
 
+//--------------------------------------------------------------
 void apparelMod_intropathy::drawFaces()
 {
 }

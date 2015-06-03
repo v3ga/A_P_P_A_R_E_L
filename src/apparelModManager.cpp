@@ -28,6 +28,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	addMod( new apparelMod_sportopathy() );
 	addMod( new apparelMod_pretentiopathy() );
 	addMod( new apparelMod_meteopathy() );
+	addMod( new apparelMod_zoopathy() );
 	addMod( new apparelMood_porcupinopathy() );
 	addMod( new apparelMood_noisopathy() );
 
