@@ -76,7 +76,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>zoopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -87,6 +87,11 @@
     <Kind>2</Kind>
     <Name>Noisopathy</Name>
     <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Kawaiopathy</Name>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>

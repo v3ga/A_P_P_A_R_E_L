@@ -19,8 +19,12 @@ class apparelMod_kawaiopathy : public apparelMod
 
 /*		void					apply				();
 		void					onParameterChanged	(ofAbstractParameter& parameter);
-*/		void					drawFaces			();
+*/
+		void					readModel			();
+//		void					drawFaces			();
+		void					drawExtra			();
 
 	private:
+		ofxAssimpModelLoader 	models[4];
 
 };

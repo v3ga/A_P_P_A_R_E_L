@@ -16,6 +16,7 @@
 #include "apparelMod_meteopathy.h"
 #include "apparelMod_selfopathy.h"
 #include "apparelMod_zoopathy.h"
+#include "apparelMod_kawaiopathy.h"
 
 #include "apparelMood_porcupinopathy.h"
 #include "apparelMood_noisopathy.h"

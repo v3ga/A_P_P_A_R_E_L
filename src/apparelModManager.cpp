@@ -31,6 +31,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	addMod( new apparelMod_zoopathy() );
 	addMod( new apparelMood_porcupinopathy() );
 	addMod( new apparelMood_noisopathy() );
+	addMod( new apparelMod_kawaiopathy() );
 
 	copyModelToMods(*pModel);
 	loadModData();
@@ -162,7 +163,8 @@ void apparelModManager::drawModsExtra()
 	int nbModsChains = m_modsChain.size();
 	for (int i=0;i<nbModsChains;i++)
 	{
-		m_modsChain[nbModsChains-1]->drawExtra();
+//		m_modsChain[nbModsChains-1]->drawExtra();
+		m_modsChain[i]->drawExtra();
 	}
 }
 

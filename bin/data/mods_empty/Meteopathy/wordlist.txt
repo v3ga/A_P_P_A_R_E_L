@@ -1,0 +1,1 @@
+weather, cloudy, sunny, clouds, rain, snow, nice out, warm day, hot day, snowy, hail, windy, chilly, nippy, scorching, storm, stormy, thunder, lightning
