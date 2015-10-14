@@ -7,3 +7,9 @@
 //
 
 #include "apparelMood_sad.h"
+
+
+apparelMood_sad::apparelMood_sad() : apparelMod("Sad")
+{
+	m_isMood = true;
+}

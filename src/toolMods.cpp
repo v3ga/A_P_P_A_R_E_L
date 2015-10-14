@@ -21,6 +21,7 @@
 toolMods::toolMods(toolManager* parent, apparelModManager* modManager) : tool("Mods", parent)
 {
 	mp_modUICurrent = 0;
+	mp_moodUICurrent= 0;
 	mp_modsManager 	= modManager;
 
 	m_bShowVertexNormals 	= false;
@@ -58,6 +59,8 @@ void toolMods::show(bool is)
 	tool::show(is);
 	if (mp_modUICurrent)
 		mp_modUICurrent->show(is);
+	if (mp_moodUICurrent)
+		mp_moodUICurrent->show(is);
 }
 
 //--------------------------------------------------------------
@@ -130,12 +133,26 @@ void toolMods::createControlsCustom()
 	vector<apparelMod*>::iterator it;
 	for (it = mp_modsManager->m_modsChain.begin(); it != mp_modsManager->m_modsChain.end(); ++it)
 	{
-		modIds.push_back( (*it)->getId() );
+		if ((*it)->isMood() == false)
+			modIds.push_back( (*it)->getId() );
 	}
 	
 	mp_canvas->addLabel("Mods");
 	mp_canvas->addSpacer(300,1);
 	mp_canvas->addRadio("modIds", modIds);
+
+
+	mp_canvas->addLabel("Moods");
+	mp_canvas->addSpacer(300,1);
+	vector<string> moodIds;
+
+	map<string, apparelMod*>::iterator it2;
+
+	for (it2 = mp_modsManager->m_moods.begin(); it2 != mp_modsManager->m_moods.end(); ++it2)
+	{
+			moodIds.push_back( it2->second->getId() );
+	}
+	mp_canvas->addRadio("moodIds", moodIds);
 
 
 	mp_canvas->addWidgetDown(new ofxUILabel("PostProcess", OFX_UI_FONT_SMALL));
@@ -172,6 +189,27 @@ void toolMods::createControlsCustomFinalize()
 			
 		}
 	}
+
+
+	for (it = mp_modsManager->m_moods.begin(); it != mp_modsManager->m_moods.end(); ++it)
+	{
+		apparelModUI* modUI = makeInstanceModUI(it->second);
+		if (modUI)
+		{
+			// Canavs position
+			ofVec2f pos(
+				getCanvas()->getRect()->getX() + 2*(getCanvas()->getRect()->getWidth()+10),
+				getCanvas()->getRect()->getY()
+			);
+			
+			// Create controls
+			modUI->createControls( pos );
+			
+			// Save in map
+			m_moodsUI[it->first] = modUI;
+		}
+	}
+
 }
 
 //--------------------------------------------------------------
@@ -418,7 +456,7 @@ void toolMods::drawSelection(apparelModel* pModel)
 	}
 	else if (m_selection == E_selection_face)
 	{
-		if (mp_meshFaceOver && m_meshFaceIndexOver>0)
+		if (mp_meshFaceOver && m_meshFaceIndexOver>=0)
 		{
 			if (!isFaceSelected(m_meshFaceIndexOver))
 			{
@@ -459,6 +497,11 @@ void toolMods::handleEvents(ofxUIEventArgs& e)
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 		if (toggle && toggle->getValue()) selectMod(name);
 	}
+	if (isNameMood(name))
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+		if (toggle && toggle->getValue()) selectMood(name);
+	}
 	else if (name == "Selection")
 	{
         ofxUIRadio *radio = (ofxUIRadio *) e.widget;
@@ -486,7 +529,7 @@ void toolMods::mousePressed(int x, int y, int button)
 	bool isModelModified = false;
 
 	// FACE ?
-	if (mp_meshFaceOver && m_meshFaceIndexOver>0)
+	if (mp_meshFaceOver && m_meshFaceIndexOver>=0)
 	{
 		if (!isFaceSelected(m_meshFaceIndexOver))
 		{
@@ -503,7 +546,7 @@ void toolMods::mousePressed(int x, int y, int button)
 	}
 	
 	// VERTEX ?
-	if (mp_meshVertexOver && m_meshVertexIndexOver>0)
+	if (mp_meshVertexOver && m_meshVertexIndexOver>=0)
 	{
 		if (!isVertexSelected(m_meshVertexIndexOver))
 		{
@@ -584,6 +627,26 @@ void toolMods::selectMod(string name)
 }
 
 //--------------------------------------------------------------
+void toolMods::selectMood(string name)
+{
+	// Show UI
+	map<string, apparelModUI*>::iterator it;
+	for (it = m_moodsUI.begin(); it != m_moodsUI.end(); ++it){
+		it->second->hide();
+	}
+
+	// Select mood
+	mp_modsManager->selectMood(name);
+
+	// Select mood UI
+	mp_moodUICurrent = m_moodsUI[name];
+	if (mp_moodUICurrent)
+		mp_moodUICurrent->show();
+
+}
+
+
+//--------------------------------------------------------------
 bool toolMods::isFaceSelected(int index)
 {
 	if (mp_apparelModCurrent==0) return false;
@@ -614,6 +677,15 @@ bool toolMods::isNameMod(string id)
 		return true;
 	return false;
 }
+
+//--------------------------------------------------------------
+bool toolMods::isNameMood(string id)
+{
+	if (mp_toolManager && mp_modsManager->getMood(id))
+		return true;
+	return false;
+}
+
 
 //--------------------------------------------------------------
 void toolMods::unselectSelection()

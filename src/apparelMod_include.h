@@ -20,6 +20,7 @@
 
 #include "apparelMood_porcupinopathy.h"
 #include "apparelMood_noisopathy.h"
+#include "apparelMood_sad.h"
 
 
 // Used for debug purposes only

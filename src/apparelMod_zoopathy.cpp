@@ -10,7 +10,7 @@
 #include "ofAppLog.h"
 
 //--------------------------------------------------------------
-apparelMod_zoopathy::apparelMod_zoopathy() : apparelMod("zoopathy")
+apparelMod_zoopathy::apparelMod_zoopathy() : apparelMod("Zoopathy")
 {
 	OFAPPLOG->begin("apparelMode_zoopathy::apparelMode_zoopathy()");
 	OFAPPLOG->end();

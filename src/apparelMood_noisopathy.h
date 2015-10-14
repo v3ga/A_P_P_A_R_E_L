@@ -17,6 +17,7 @@ class apparelMood_noisopathy : public apparelMod
 		apparelMood_noisopathy	();
 
 
+		void				createParameters	();
 		void				apply				();
 		void				update				();
 		void				copyModelFrom		(const apparelModel& model);

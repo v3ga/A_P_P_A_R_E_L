@@ -1,4 +1,9 @@
 <mod>
     <faces></faces>
-    <vertices></vertices>
+    <vertices>
+        <index>101</index>
+        <index>159</index>
+        <index>931</index>
+        <index>309</index>
+    </vertices>
 </mod>

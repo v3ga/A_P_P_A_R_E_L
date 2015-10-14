@@ -7,3 +7,19 @@
 //
 
 #pragma once
+
+#include "apparelMod.h"
+
+class apparelMood_sad : public apparelMod
+{
+	public:
+		apparelMood_sad	();
+
+/*
+		void				apply				();
+		void				update				();
+		void				copyModelFrom		(const apparelModel& model);
+		void				onParameterChanged	(ofAbstractParameter& parameter){}
+*/
+	private:
+};

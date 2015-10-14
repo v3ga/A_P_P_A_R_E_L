@@ -9,6 +9,8 @@
 #pragma once
 
 #include "apparelMod.h"
+#include "ofxButterfly.h"
+#include "BoundingBox.h"
 
 class apparelMod_selfopathy : public apparelMod
 {
@@ -17,11 +19,28 @@ class apparelMod_selfopathy : public apparelMod
 		~apparelMod_selfopathy	();
 
 
-/*		void					apply				();
-		void					onParameterChanged	(ofAbstractParameter& parameter);
-*/		void					drawFaces			();
+/*		void					drawFaces			();
+*/
+		void				apply				();
+		void				update				();
+		void				drawExtra			();
+		void				onParameterChanged	(ofAbstractParameter& parameter);
+		void				onWeightChanged		();
+		
+
 
 	private:
-		ofImage					m_image;
+		ofImage						m_image;
 
+	    ofxButterfly 				butterfly;
+		ofMesh 						newMesh;
+
+ 
+		ofParameter<float>			m_amplitude;
+		ofParameter<float>			m_levelSubdiv;
+ 		ofParameterGroup			m_amplitudeRndFactor;
+
+		BoundingBox					m_meshInputBoundingBox;
+ 
+		void						displaceVertices();
 };

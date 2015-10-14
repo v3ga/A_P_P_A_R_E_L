@@ -21,22 +21,31 @@ apparelMod::apparelMod(string id)
 {
 	m_id 					= id;
 	mp_oscSender 			= 0;
-	m_isChanged				= false;
+	m_isChanged				= true;
 	m_isMeshChanged			= false;
+	m_isMood				= false;
+	m_weight				= 0.25f;
 
 
 //	m_weight.set("Weight", 0.5f, 0.0f, 1.0f);
 //	m_parameters.add(m_weight);
-	m_isWeightManual.set("WeightManual",false);
-	m_parameters.add(m_isWeightManual);
-
-	m_nbWordsMax.set("NbWordsMax", 5, 1, 20);
-	m_parameters.add(m_nbWordsMax);
-
+//	createParameters();
+	
 	m_parameters.setName(id);
 	
 	m_flagChanged	= 0;
 }
+
+//--------------------------------------------------------------
+void apparelMod::createParameters()
+{
+   m_isWeightManual.set("WeightManual",false);
+   m_parameters.add(m_isWeightManual);
+
+   m_nbWordsMax.set("NbWordsMax", 5, 1, 20);
+   m_parameters.add(m_nbWordsMax);
+}
+
 
 //--------------------------------------------------------------
 void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)

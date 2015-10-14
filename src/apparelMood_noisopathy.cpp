@@ -12,12 +12,17 @@
 //--------------------------------------------------------------
 apparelMood_noisopathy::apparelMood_noisopathy() : apparelMod("Noisopathy")
 {
+	m_isMood = true;
+}
+
+//--------------------------------------------------------------
+void apparelMood_noisopathy::createParameters()
+{
 	m_amplitude.set("Amplitude", 30.0f, 0.0f, 50.0f);
 	m_timeScale.set("TimeScale", 10.0f, 5.0f, 50.0f);
 
 	m_parameters.add(m_amplitude);
 	m_parameters.add(m_timeScale);
-
 }
 
 

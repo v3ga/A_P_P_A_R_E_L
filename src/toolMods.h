@@ -35,13 +35,17 @@ class toolMods : public tool
 		void					mousePressed		(int x, int y, int button);
 		apparelModUI*			makeInstanceModUI	(apparelMod*);
 		void					selectMod			(string name);
+		void					selectMood			(string name);
 	
 		// Manager
 		apparelModManager*		mp_modsManager;
 
 		// UI
-		apparelModUI*			mp_modUICurrent;
-		map<string, apparelModUI*>		m_modsUI;
+		apparelModUI*				mp_modUICurrent;
+		map<string, apparelModUI*>	m_modsUI;
+
+		apparelModUI*				mp_moodUICurrent;
+		map<string, apparelModUI*>	m_moodsUI;
 
 		// View
 		bool					m_bViewMixed;
@@ -94,6 +98,7 @@ class toolMods : public tool
 	private:
 		ofxUILabel*				mp_lblModel;
 		bool					isNameMod			(string id);
+		bool					isNameMood			(string id);
 		void					drawVertexNormals	(apparelModel* pModel);
 		void					drawFaceNormals		(apparelModel* pModel);
 		void					drawSelection		(apparelModel* pModel);

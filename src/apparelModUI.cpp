@@ -34,10 +34,8 @@ void apparelModUI::createControls(const ofVec2f& posCanvas)
 	mp_canvas->addLabel(mp_mod->m_id);
 	mp_canvas->addSpacer(300,1);
 
-	//mp_canvas->addWidgetDown( new ofxUILabel("words","Words",OFX_UI_FONT_SMALL) );
-    //mp_canvas->addSpacer(300,1);
-
-	mp_canvas->addWidgetDown( new ofxUILabelButton("reset sql", false, 100,16,0,0,OFX_UI_FONT_SMALL) );
+	if (mp_mod->isMood() == false)
+		mp_canvas->addWidgetDown( new ofxUILabelButton("reset sql", false, 100,16,0,0,OFX_UI_FONT_SMALL) );
 	mp_canvas->addWidgetDown( new ofxUILabel("params","Parameters",OFX_UI_FONT_SMALL) );
     mp_canvas->addSpacer(300,1);
 
@@ -125,7 +123,7 @@ void apparelModUI::handleEvents(ofxUIEventArgs& e)
 		{
 			if (mp_mod->m_isWeightManual)
 			{
-				mp_mod->setWeight( e.getSlider()->getValue() );
+				mp_mod->setWeight( e.getSlider()->getScaledValue() );
 			}
 		}
 	}

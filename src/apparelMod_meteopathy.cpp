@@ -50,6 +50,7 @@ void apparelMod_meteopathy::apply()
 {
 	if (isChanged())
 	{
+	
 
 		m_model.mesh = m_meshInput;
 		deleteParticles();
@@ -58,6 +59,9 @@ void apparelMod_meteopathy::apply()
 
 		for (int i=0;i<m_nbParticlesWeight;i++)
 		{
+			ofMatrix4x4	mRot;
+			mRot.rotate(ofRandom(360.0f), ofRandom(1.0f), ofRandom(1.0f), ofRandom(1.0f));
+
 			ofIcoSpherePrimitive* pPrimitive = new ofIcoSpherePrimitive( m_weight * ofRandom(m_size.getFloat("low"),m_size.getFloat("high")), 0 );
 			m_particles.push_back( pPrimitive );
 	 
@@ -68,9 +72,13 @@ void apparelMod_meteopathy::apply()
 			for (int k=0; k<nbVertices ; k++)
 			{
 				ofVec3f& v = pPrimitive->getMesh().getVertices()[k];
+
+				v = mRot*v;
+
 				v.x += dx;
 				v.y += dy;
 				v.z += dz;
+				
 			}
 			m_model.mesh.append( m_particles[i]->getMesh() );
 		}

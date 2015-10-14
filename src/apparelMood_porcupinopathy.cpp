@@ -22,6 +22,8 @@ apparelMood_porcupinopathy::apparelMood_porcupinopathy() : apparelMod("Porcupino
 
 	parameterGroupLowHigh::create(m_amplitudeRndFactor, "AmplitudeRndFactor", 0.0,0.7,1.0,1.0);
 	m_parameters.add(m_amplitudeRndFactor);
+	
+	m_isMood = true;
 }
 
 //--------------------------------------------------------------
@@ -39,7 +41,7 @@ void apparelMood_porcupinopathy::apply()
 		// OFAPPLOG->begin("apparelMood_porcupinopathy::apply()");
 	
 		m_model.mesh = m_meshInput;
-		deleteExtrusionData();
+/*		deleteExtrusionData();
 	
 		int nbFacesSelected = m_indicesFaces.size();
 		if (nbFacesSelected>0)
@@ -65,7 +67,7 @@ void apparelMood_porcupinopathy::apply()
 
 				meshSubdivided0.addNormal( pFace->getNormal(0) );
 				meshSubdivided0.addNormal( pFace->getNormal(1) );
-				meshSubdivided0.addVertex( pFace->getNormal(2) );
+				meshSubdivided0.addNormal( pFace->getNormal(2) );
 
 
 				meshSubdivided0.addIndex(0);
@@ -87,11 +89,14 @@ void apparelMood_porcupinopathy::apply()
 				for (int v=0; v<nbVerticesAdd; v++)
 				{
 					m_model.mesh.addVertex( meshSubdivided1.getVertex(v) );
+					m_model.mesh.addNormal( faceNormal );
+
 				}
 				
 				// Add indices (faces) to current model
-				vector<ofIndexType>& indicesAdd = meshSubdivided1.getIndices();
-				const vector<ofMeshFace>& facesAdd = meshSubdivided1.getUniqueFaces();
+				vector<ofIndexType>& 		indicesAdd 	= meshSubdivided1.getIndices();
+				const vector<ofMeshFace>& 	facesAdd 	= meshSubdivided1.getUniqueFaces();
+
 				int nbFacesAdd = facesAdd.size();
 				for (int f=0;f<nbFacesAdd;f++)
 				{
@@ -121,8 +126,9 @@ void apparelMood_porcupinopathy::apply()
 					m_model.mesh.addIndex(indexC);
 
 					// Compute "middle" point of triangle
-					ofVec3f faceMiddleOpposite = faceAdd.getVertex(1) + ofRandom(0.1,0.9)*(faceAdd.getVertex(2)-faceAdd.getVertex(1));
-					ofVec3f faceMiddle = faceAdd.getVertex(0) + ofRandom(0.1,0.9)*(faceMiddleOpposite-faceAdd.getVertex(0));
+					//ofVec3f faceMiddleOpposite = faceAdd.getVertex(1) + ofRandom(0.1,0.9)*(faceAdd.getVertex(2)-faceAdd.getVertex(1));
+					//ofVec3f faceMiddle = faceAdd.getVertex(0) + ofRandom(0.1,0.9)*(faceMiddleOpposite-faceAdd.getVertex(0));
+					ofVec3f faceMiddle = (faceAdd.getVertex(0) + faceAdd.getVertex(1) + faceAdd.getVertex(2))/3.0f;
 
 
 					// Extrude
@@ -131,6 +137,7 @@ void apparelMood_porcupinopathy::apply()
 					// Add to model
 					ofIndexType indexM = m_model.mesh.getNumVertices();
 					m_model.mesh.addVertex( M );
+					m_model.mesh.addNormal( faceNormal );
 
 					// Add indices of extruded faces now
 					 m_model.mesh.addIndex(indexA);
@@ -146,13 +153,14 @@ void apparelMood_porcupinopathy::apply()
 					 m_model.mesh.addIndex(indexM);
 				 
 					 // Save in our list to retrieve in update without updating model
-					 m_extrusionData.push_back( new porcuVertexData(indexM,faceNormal,faceMiddle, m_amplitudeRndFactor.getFloat("low"), m_amplitudeRndFactor.getFloat("high") ));
+					 //m_extrusionData.push_back( new porcuVertexData(indexM,faceNormal,faceMiddle, m_amplitudeRndFactor.getFloat("low"), m_amplitudeRndFactor.getFloat("high") ));
 				}
 			}
 
 			m_model.createMeshFaces();
+			m_model.mesh.mergeDuplicateVertices();
 		}
-
+*/
 //		OFAPPLOG->end();
 	}
 }
@@ -188,7 +196,7 @@ void apparelMood_porcupinopathy::update()
 		ofIndexType indexVertex = pData->m_index;
 
 		// ... and compute new extruded vertex from middl point of face
-		m_model.mesh.setVertex(indexVertex, pData->m_middleFace+pData->m_normal*pData->m_amplitude);
+		//m_model.mesh.setVertex(indexVertex, pData->m_middleFace+pData->m_normal*pData->m_amplitude);
 	}
 	
 	// compute normals (as vertices moved)

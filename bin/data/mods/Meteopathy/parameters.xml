@@ -1,11 +1,9 @@
 <Meteopathy>
-    <WeightManual>1</WeightManual>
-    <NbWordsMax>6</NbWordsMax>
-    <nbParticles>13</nbParticles>
+    <nbParticles>20</nbParticles>
     <size>
         <min>1</min>
-        <low>3.77083</low>
-        <high>17.0312</high>
+        <low>1</low>
+        <high>10.0052</high>
         <max>20</max>
     </size>
     <x>
@@ -22,8 +20,10 @@
     </y>
     <z>
         <min>0</min>
-        <low>43.75</low>
-        <high>115.625</high>
+        <low>42.9688</low>
+        <high>108.594</high>
         <max>150</max>
     </z>
+    <WeightManual>1</WeightManual>
+    <NbWordsMax>6</NbWordsMax>
 </Meteopathy>

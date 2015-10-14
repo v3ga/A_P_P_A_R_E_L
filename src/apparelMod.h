@@ -22,6 +22,7 @@ class apparelMod
 	
 				void		createDirMod		();
 
+		virtual	void		createParameters	();
 		virtual	void		loadParameters		();
 		virtual	void		loadParametersCustom(){};
 		virtual	void		saveParameters		();
@@ -70,6 +71,10 @@ class apparelMod
  		bool				m_isMeshChanged;		// tells if mesh itself or selection (vertices, faces) changed
 		int					m_flagChanged;
 
+
+		// MOOD
+		bool				m_isMood;
+		bool				isMood					(){return m_isMood;}
 
 		// DRAWING
 		virtual void		draw					(){};
