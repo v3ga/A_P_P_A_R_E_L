@@ -84,6 +84,8 @@ void apparelMood_noisopathy::update()
 
     	m_model.mesh.setVertex(i, vert);
 	}
+
+	
 	setChanged();
 }
 

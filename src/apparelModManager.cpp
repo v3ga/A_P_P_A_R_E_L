@@ -32,9 +32,9 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	addMod( new apparelMod_pedopathy() );
 	addMod( new apparelMod_sportopathy() );
 	addMod( new apparelMod_selfopathy() );
+	addMod( new apparelMod_zoopathy() );
 	addMod( new apparelMod_pretentiopathy() );
 	addMod( new apparelMod_meteopathy() );
-//	addMod( new apparelMod_zoopathy() );
 	addMod( new apparelMod_kawaiopathy() );
 	
 	// ——————————————————————————————————————————————————————

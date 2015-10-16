@@ -46,7 +46,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>Distance</Name>
-    <Value>119.799995422</Value>
+    <Value>106.500000000</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -70,13 +70,18 @@
 </Widget>
 <Widget>
     <Kind>2</Kind>
+    <Name>Zoopathy</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
     <Name>Pretentiopathy</Name>
     <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Meteopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>

@@ -19,6 +19,15 @@ apparelMod_zoopathy::apparelMod_zoopathy() : apparelMod("Zoopathy")
 //--------------------------------------------------------------
 void apparelMod_zoopathy::drawExtra()
 {
+	vector<ofVec3f>& vertices = m_model.getVerticesRef();
+	vector<ofVec3f>& normals = m_model.getNormalsRef();
+	int nbVertices = vertices.size();
+	for (int i=0; i<nbVertices; i++)
+	{
+		//ofLine(vertices[i], vertices[i]+5*normals[i]);
+	}
+
+/*
 	vector<ofMeshFaceApparel*>& faces = m_model.getMeshFacesRef();
 	int nbFaces = faces.size();
 	ofVec3f centroid;
@@ -35,10 +44,9 @@ void apparelMod_zoopathy::drawExtra()
 		centroid.y = (pVertex0->y + pVertex1->y + pVertex2->y)/3.0;
 		centroid.z = (pVertex0->z + pVertex1->z + pVertex2->z)/3.0;
 	 
-		ofLine(centroid, centroid+50*pFace->getFaceNormal());
-
-//		pFace->get
-//		ofLine(  );
+		ofLine(centroid, centroid+5*pFace->getFaceNormal());
 	}
+*/
+
 }
 
