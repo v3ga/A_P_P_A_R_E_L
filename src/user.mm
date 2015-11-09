@@ -18,35 +18,63 @@
 //--------------------------------------------------------------
 user::user()
 {
-	m_periodTick	=	15.0f;
-	mp_sqlData		= 	0;
-	m_newTick		= false;
-	m_bUseThread	= true;
-	m_bUseTick		= true;
+	zeroAll();
 }
 
 //--------------------------------------------------------------
 user::~user()
 {
-	// Delete services
-	lock();
-	vector<userSocialInterface*>::iterator it;
-	for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end() ; ++it)
-		delete *it;
-	m_listSocialInterfaces.clear();
-	unlock();
-
-	// Stop ticking
-	ofRemoveListener(m_ticker.newTickEvent, this, &user::onNewTick);
-
-	// stop thread
-	stopThread();
+	deconnect();
 }
+
+//--------------------------------------------------------------
+void user::zeroAll()
+{
+	m_periodTick	=	15.0f;
+	mp_sqlData		= 	0;
+	m_newTick		= false;
+	m_bUseThread	= true;
+	m_bUseTick		= true;
+	m_bConnected	= false;
+}
+
+//--------------------------------------------------------------
+void user::deconnect()
+{
+	if (isConnected())
+	{
+		// Delete services
+		lock();
+		vector<userSocialInterface*>::iterator it;
+		for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end() ; ++it)
+			delete *it;
+		m_listSocialInterfaces.clear();
+		unlock();
+
+		// Stop ticking
+		ofRemoveListener(m_ticker.newTickEvent, this, &user::onNewTick);
+
+		// stop thread
+		stopThread();
+		
+		m_bConnected = false;
+	}
+	
+	// Zero
+	zeroAll();
+}
+
 
 //--------------------------------------------------------------
 string user::getPathRelative(string filename)
 {
-	return "users/"+m_id+"/"+filename;
+	return getPathRelativeForUserId(m_id, filename);
+}
+
+//--------------------------------------------------------------
+string user::getPathRelativeForUserId(string userId, string filename)
+{
+	return "users/"+userId+"/"+filename;
 }
 
 //--------------------------------------------------------------
@@ -59,6 +87,16 @@ string user::getPathDocument(string filename)
 	#endif
 }
 
+//--------------------------------------------------------------
+string user::getPathDocumentForUserId(string userId, string filename)
+{
+	#ifdef TARGET_OF_IOS
+		return ofxiOSGetDocumentsDirectory() + getPathRelativeForUserId(userId, filename);
+	#else
+		return ofToDataPath(getPathRelativeForUserId(userId, filename));
+	#endif
+}
+
 
 //--------------------------------------------------------------
 string user::getPathResources(string filename)
@@ -66,12 +104,16 @@ string user::getPathResources(string filename)
 	return ofToDataPath(getPathRelative(filename));
 }
 
-//--------------------------------------------------------------
-void user::createDirectory()
-{
-	OFAPPLOG->begin("user::createDirectory()");
 
-	// Path for user
+//--------------------------------------------------------------
+string user::getPathResourcesForUserId(string userId, string filename)
+{
+	return ofToDataPath(getPathRelativeForUserId(userId, filename));
+}
+
+//--------------------------------------------------------------
+void user::createDocumentDirectory()
+{
 	string pathUser = getPathDocument();
 	OFAPPLOG->println("- pathUser="+pathUser);
 	ofDirectory dirUser(pathUser);
@@ -80,13 +122,46 @@ void user::createDirectory()
 		OFAPPLOG->println("- creating it");
 		dirUser.create(true);
 	}
+}
 
-	// SQL Data
-	string pathSqlResource = getPathResources("data.sql");
+//--------------------------------------------------------------
+void user::createFileDataSql()
+{
+	// Copy empty SQL Data (if new user, file does not exist in documents)
 	string pathSqlDocument = getPathDocument("data.sql");
+	OFAPPLOG->println("- pathSqlDocument="+pathSqlDocument);
+	if (ofFile::doesFileExist(pathSqlDocument,false) == false)
+	{
+		OFAPPLOG->println("- file does not exist, copying it");
+		string pathSqlRessource_empty = getPathResourcesForUserId("__empty__", "data.sql");
+		OFAPPLOG->println("- pathSqlRessource_empty="+pathSqlRessource_empty);
+		if (ofFile::doesFileExist(pathSqlRessource_empty,false))
+		{
+			if (ofFile::copyFromTo(pathSqlRessource_empty, pathSqlDocument, false, false))
+			{
+				OFAPPLOG->println("- OK copy done");
+			}
+		}
 
+	}
+}
+
+//--------------------------------------------------------------
+void user::createDirectory()
+{
+	OFAPPLOG->begin("user::createDirectory()");
+
+	// Path for user
+	createDocumentDirectory();
+	createFileDataSql();
+	
+//	OFAPPLOG->println("- pathSqlResource="+pathSqlResource);
+//	OFAPPLOG->println("- pathSqlDocument="+pathSqlDocument);
+
+/*
 	ofFile fSqlResource(pathSqlResource);
-	if (fSqlResource.exists()){
+	if (fSqlResource.exists())
+	{
 		ofFile fSqlDocument(pathSqlDocument);
 		
 		if (!ofFile::doesFileExist(pathSqlDocument,false))
@@ -97,6 +172,7 @@ void user::createDirectory()
 			}
 		}
 	}
+*/
 
 	OFAPPLOG->end();
 }
@@ -126,10 +202,40 @@ void user::saveServicesData()
 }
 
 //--------------------------------------------------------------
+void user::connect()
+{
+   // Connect to db
+   connectSqlData();
+
+   // Starting retrieving
+   if (m_bUseTick)
+   {
+	   m_periodTick = m_configuration.getValue("user:period", 15.0f);
+	   OFAPPLOG->println("- period tick="+ofToString(m_periodTick)+" seconds");
+
+	   ofAddListener(m_ticker.newTickEvent, this, &user::onNewTick);
+	   m_ticker.setPeriod( getPeriodTick() );
+	   m_ticker.play();
+   }
+   
+   m_bConnected = true;
+}
+
+//--------------------------------------------------------------
 void user::loadConfiguration()
 {
 	OFAPPLOG->begin("user::loadConfiguration()");
 
+	// Only twitter for now
+	userSocialInterface* pSocialInterface = userSocialFactory::makeInstance(this, "twitter");
+	if (pSocialInterface)
+	{
+	   m_listSocialInterfaces.push_back(pSocialInterface);
+	   pSocialInterface->loadData();
+ 	}
+ 
+
+/*
 	string pathFile = getPathResources("configuration.xml");
 	OFAPPLOG->println("- loading file " + pathFile);
 
@@ -161,25 +267,12 @@ void user::loadConfiguration()
 
 		// Services data
 		loadServicesData();
-		
-		// Connect to db
-		connectSqlData();
-
-		// Starting retrieving
-		if (m_bUseTick)
-		{
-			m_periodTick = m_configuration.getValue("user:period", 15.0f);
-			OFAPPLOG->println("- period tick="+ofToString(m_periodTick)+" seconds");
-
-			ofAddListener(m_ticker.newTickEvent, this, &user::onNewTick);
-			m_ticker.setPeriod( getPeriodTick() );
-			m_ticker.play();
-		}
 	}
 	else
 	{
 		OFAPPLOG->println(OF_LOG_ERROR, "-error loading file");
 	}
+*/
 	
 	OFAPPLOG->end();
 }

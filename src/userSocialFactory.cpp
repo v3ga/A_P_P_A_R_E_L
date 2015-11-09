@@ -10,6 +10,25 @@
 #include "ofAppLog.h"
 
 //--------------------------------------------------------------
+userSocialInterface* userSocialFactory::makeInstance( user* pUser, string name )
+{
+	if (name == "twitter")
+	{
+		#ifdef TARGET_OF_OSX
+   		userTwitter* pUserTwitter = new userTwitter(pUser);
+		return (userSocialInterface*) pUserTwitter;
+		#endif
+
+		#ifdef TARGET_OF_IOS
+   		userTwitterGuestIOS* pUserTwitter = new userTwitterGuestIOS(pUser);
+		return (userSocialInterface*) pUserTwitter;
+		#endif
+	}
+
+	return 0;
+}
+
+//--------------------------------------------------------------
 userSocialInterface* userSocialFactory::makeInstance(userConfigurationInfo* pConfigInfo)
 {
 	if (pConfigInfo == 0) return 0;

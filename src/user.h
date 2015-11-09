@@ -21,22 +21,31 @@ class user : public ofThread
 	public:
 					user									();
 		virtual		~user									();
-
+ 
 					void 				setId				(string id_){m_id = id_;}
 					string				getId				(){return m_id;}
 					void				setModManager		(apparelModManager* p){mp_modManager=p;}
 					apparelModManager*	getModManager		(){return mp_modManager;}
 					string				getPathRelative		(string filename="");
+					string				getPathRelativeForUserId(string userId,string filename="");
 					string				getPathDocument		(string filename="");
+					string				getPathDocumentForUserId(string userId,string filename="");
 					string				getPathResources	(string filename="");
+					string				getPathResourcesForUserId	(string userId, string filename="");
+ 
 					ofxXmlSettings&		getConfiguration	(){return m_configuration;}
 					void				loadServicesData	();
 					void				saveServicesData	();
 					void				useThread			(bool is=true){m_bUseThread=is;}
  					void				useTick				(bool is=true){m_bUseTick = is;}		// should be called before loadconfiguration
 	
-	
+					void				deconnect			();
+					void				connect				();
+					bool				isConnected			(){return m_bConnected;}
+ 
 					void				createDirectory		();
+					void				createDocumentDirectory();
+					void				createFileDataSql	();
 
 					vector<userSocialInterface*>&	getListServices(){return m_listSocialInterfaces;}
 
@@ -55,12 +64,18 @@ class user : public ofThread
 					void				onNewWords			(vector<string>& words);
 	
 	protected:
+		// zeroAll
+		void							zeroAll				();
+
+		// Id
 		string							m_id;
+
+		// Connected
+		bool							m_bConnected;
 
 		// Thread params
 		bool							m_bUseThread;		// some services may use their own thread (ex : Fabric / Twitter)
  
-
 		// Ticker to reload data
 		ofxTicker						m_ticker;
 		float							m_periodTick;

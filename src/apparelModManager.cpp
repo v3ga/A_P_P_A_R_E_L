@@ -45,6 +45,8 @@ void apparelModManager::constructMods(apparelModel* pModel)
 
 //	selectMood( "noisopathy" );
 
+	GLOBALS->mp_modSelfopathy = (apparelMod_selfopathy*)getMod("Selfopathy");
+
 	copyModelToMods(*pModel);
 	loadModData();
 	loadMoodData();
@@ -143,11 +145,7 @@ void apparelModManager::selectMod(string name)
 //--------------------------------------------------------------
 void apparelModManager::selectMood(string name)
 {
-	if (mp_moodCurrent)
-	{
-		m_modsChain.pop_back();
-		mp_moodCurrent = 0;
-	}
+	unselectMood();
 
 	if (name !="")
 	{
@@ -166,7 +164,15 @@ void apparelModManager::selectMood(string name)
 	}
 }
 
-
+//--------------------------------------------------------------
+void apparelModManager::unselectMood()
+{
+	if (mp_moodCurrent)
+	{
+		m_modsChain.pop_back();
+		mp_moodCurrent = 0;
+	}
+}
 
 //--------------------------------------------------------------
 apparelMod* apparelModManager::getMod(string name)
@@ -191,6 +197,7 @@ apparelMod* apparelModManager::getMood(string name)
 
 	return 0;
 }
+
 
 
 //--------------------------------------------------------------
@@ -259,11 +266,13 @@ void apparelModManager::drawModsExtra()
 //--------------------------------------------------------------
 void apparelModManager::applyModChain()
 {
+//	OFAPPLOG->begin("apparelModManager::applyModChain");
 	int nbMods = m_modsChain.size();
 	
 	// Copy if something changed at some point
 	for (int i=0; i<nbMods; i++)
 	{
+//		OFAPPLOG->println("["+ofToString(i)+"] "+m_modsChain[i]->getId());
 		// Something changed in the model (faces/vertices selection)
 		if (m_modsChain[i]->isChanged())
 		{
@@ -292,6 +301,8 @@ void apparelModManager::applyModChain()
 	{
 	  m_modsChain[i]->update();
 	}
+	
+//	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------

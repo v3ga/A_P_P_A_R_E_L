@@ -13,6 +13,7 @@ class ofApp;
 class oscSender;
 class apparelModel;
 class apparelModManager;
+class apparelMod_selfopathy;
 class user;
 
 #define GLOBALS			globals::getInstance()
@@ -42,6 +43,8 @@ class globals
 
 				void				setModel(apparelModel* p){pModel = p;}
 				apparelModel*		getModel(){return pModel;}
+ 
+				apparelMod_selfopathy*	mp_modSelfopathy;
 	
 	private:
 		static 	globals*				instance;

@@ -22,4 +22,5 @@ class userSocialFactory
 {
 	public:
 		static userSocialInterface* 	makeInstance( userConfigurationInfo* );
+		static userSocialInterface* 	makeInstance( user*, string name );
 };

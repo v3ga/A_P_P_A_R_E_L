@@ -17,6 +17,8 @@ globals::globals()
 	m_soundInputVolume	= 0.0f;
 	pUser				= 0;
 	pModel				= 0;
+	
+	mp_modSelfopathy = 0;
 }
 
 globals* globals::getInstance()

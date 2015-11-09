@@ -12,6 +12,7 @@
 //--------------------------------------------------------------
 ofMeshFaceApparel::ofMeshFaceApparel(ofMesh* pMesh, int offsetIndices)
 {
+	mp_parent		= 0;
 	mp_mesh 		= pMesh;
 	m_offsetIndices = offsetIndices;
 	

@@ -43,8 +43,6 @@ void apparelMod_selfopathy::apply()
 		// OFAPPLOG->begin("apparelMood_porcupinopathy::apply()");
 	
 		newMesh.clear();
-//		m_model.mesh
-//		m_meshInput;
 		
 		m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
 	
@@ -55,12 +53,14 @@ void apparelMod_selfopathy::apply()
 		{
 		
 			int nbFaces = m_model.getMeshFacesRef().size();
+			
+			// Go through all faces
 			for (int i=0; i<nbFaces/*nbFacesSelected*/; i++)
 			{
 			
 				// Select face to subdivide
 			 	//ofMeshFaceApparel* pFace = m_model.getMeshFacesRef()[ m_indicesFaces[i] ];
-			 	ofMeshFaceApparel* pFace = m_model.getMeshFacesRef()[ i/*m_indicesFaces[i]*/ ];
+			 	ofMeshFaceApparel* pFace = m_model.getMeshFacesRef()[ i ];
 				ofVec3f faceNormal = pFace->getFaceNormal();
 
 				float d = faceNormal.dot( ofVec3f(0,1,0) );
@@ -141,7 +141,7 @@ void apparelMod_selfopathy::apply()
 					 newMesh.addIndex(indexC);
 
 					 // Compute "middle" point of triangle
-					 ofVec3f faceMiddle = (faceAdd.getVertex(0) + faceAdd.getVertex(1) + faceAdd.getVertex(2))/3.0f;
+/*					 ofVec3f faceMiddle = (faceAdd.getVertex(0) + faceAdd.getVertex(1) + faceAdd.getVertex(2))/3.0f;
 
 
 					 // Extrude
@@ -166,7 +166,7 @@ void apparelMod_selfopathy::apply()
 					  newMesh.addIndex(indexC);
 					  newMesh.addIndex(indexA);
 					  newMesh.addIndex(indexM);
-				  
+*/
 					  // Save in our list to retrieve in update without updating model
 					  //m_extrusionData.push_back( new porcuVertexData(indexM,faceNormal,faceMiddle, m_amplitudeRndFactor.getFloat("low"), m_amplitudeRndFactor.getFloat("high") ));
 				 }
@@ -177,19 +177,13 @@ void apparelMod_selfopathy::apply()
 
 			m_model.mesh.clear();
 			m_model.mesh.append(newMesh);
-			//m_model.createMeshFaces();
-			//m_model.mesh.mergeDuplicateVertices();
-			//m_model.createMeshFaces();
 		}
 		
 		displaceVertices();
+		m_model.createMeshFaces(); // useful for selection
 
 //		OFAPPLOG->end();
 	}
-
-		//vector<ofVec3f>& vertices = m_model.getMeshRef().getVertices();
-		//vector<ofVec3f>& normals = m_model.getMeshRef().getNormals();
-
 }
 
 //--------------------------------------------------------------

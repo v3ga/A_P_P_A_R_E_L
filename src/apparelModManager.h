@@ -26,9 +26,12 @@ class apparelModManager
 		void						loadMoodData		();
 		void						selectMod			(string name);
 		void						selectMood			(string name);
+		void						unselectMood		();
 		apparelMod*					getMod				(string id);
 		apparelMod*					getMood				(string id);
+		apparelMod*					getMoodByIndex		(int index);
 		apparelMod*					getModCurrent		(){return mp_modCurrent;}
+		apparelMod*					getMoodCurrent		(){return mp_moodCurrent;}
 		void						setModel			(apparelModel*);
 		void						copyModelToMods		(const apparelModel& model);
  		apparelModel*				getModelLastInChain	();

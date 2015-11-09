@@ -23,6 +23,7 @@ class ofMeshFaceApparel : public ofMeshFace
 //		void			computeFaceNormal	(){update}
  
  
-		ofMesh*			mp_mesh;
-		int				m_offsetIndices;	// index (position) in the indices of ofMesh instance
+		ofMesh*				mp_mesh;
+		ofMeshFaceApparel*	mp_parent;			// for subdivision
+		int					m_offsetIndices;	// index (position) in the indices of ofMesh instance
 };

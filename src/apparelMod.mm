@@ -105,14 +105,14 @@ void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 	  if (sel.hasNext())
 	  {
 		int count = sel.getInt();
-		OFAPPLOG->println("- found word "+word+" with count="+ofToString(count));
+		OFAPPLOG->println("- found word '"+word+"' with count="+ofToString(count));
 
 		// update count
 		count = count+1;
 		int result = pUser->getSqlData()->update("words").where("name",word).use("count", count).execute();
 		if (result == 0)
 		{
-			OFAPPLOG->println("- OK updated word "+word+" with count="+ofToString(count));
+			OFAPPLOG->println("- OK updated word '"+word+"' with count="+ofToString(count));
 		}
 	  }
 	  // No ? Insert it with a count of one
@@ -121,7 +121,7 @@ void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 		int result = pUser->getSqlData()->insert("words").use("name", word).use("count", 1).execute();
 		if (result == 0)
 		{
-			OFAPPLOG->println("- OK inserted word "+word);
+			OFAPPLOG->println("- OK inserted word '"+word+"'");
 		}
 	  }
 	 
@@ -182,6 +182,8 @@ void apparelMod::resetWordsCountUserDatabase(user* pUser, bool lock)
 //--------------------------------------------------------------
 void apparelMod::countUserWords(user* pUser, bool lock)
 {
+  if (isMood()) return;
+
   OFAPPLOG->begin("apparelMod["+m_id+"]::countUserWords()");
   if (pUser)
   {
@@ -350,11 +352,11 @@ void apparelMod::createWordsList()
 
 		string strWords="";
 		string delimiter="";
-		for (int i=0; i<m_words.size(); i++){
+/*		for (int i=0; i<m_words.size(); i++){
 			strWords+=delimiter + m_words[i];
 			delimiter=" / ";
 		}
-
+*/
 		OFAPPLOG->println("- found "+ofToString(m_words.size())+" words : " + strWords);
 		
 	}

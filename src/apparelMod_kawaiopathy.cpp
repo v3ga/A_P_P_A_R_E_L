@@ -69,11 +69,16 @@ bool kawai::readXml(ofxXmlSettings& settings, int which)
 //--------------------------------------------------------------
 void kawai::loadData()
 {
+	OFAPPLOG->begin("kawai::loadData()");
+	
 	
 	if (mp_parent)
 	{
-		if ( m_model.loadModel( mp_parent->getPathResources(m_meshName) ))
+		string pathModel = mp_parent->getPathResources(m_meshName);
+		if ( m_model.loadModel( pathModel ) )
 		{
+			OFAPPLOG->println("- OK loaded '"+pathModel+"'");
+
 			if (m_model.getMeshCount()>0)
 			{
 				m_mesh = m_model.getMesh(0);
@@ -89,7 +94,12 @@ void kawai::loadData()
 				}
 			}
 		}
+		else
+		{
+			OFAPPLOG->println("- ERROR loading '"+pathModel+"'");
+		}
 	}
+	OFAPPLOG->end();
 }
 
 
