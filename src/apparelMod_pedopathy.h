@@ -14,9 +14,18 @@ class apparelMod_pedopathy : public apparelMod
 {
 	public:
 		apparelMod_pedopathy	();
+		void				loadModel				();
+		void				saveModel				();
 		void				onParameterChanged		(ofAbstractParameter& parameter);
 
 	private:
-		ofVec3f				m_pointInfluence;
  		ofParameter<float>	m_displacement;
+ 
+ 		ofParameter<float>	m_dispAxisX;
+ 		ofParameter<float>	m_dispAxisY;
+ 		ofParameter<float>	m_dispAxisZ;
+ 
+ 
+		map<int, ofVec3f>	m_dispVertex;
+ 
 };

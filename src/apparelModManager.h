@@ -52,6 +52,12 @@ class apparelModManager
 
 		// Count words for a user by looking into database => call in setup when user is created
 		void						countUserWords		(user* pUser, bool lock=false);
+ 
+		// Force weight as automatic (ex : for ios release version for example)
+		// to be called before loadModData, otherwise no effect
+		bool						m_bModForceWeightAutomatic;
+		void						forceModWeightAutomatic			(bool is=true){m_bModForceWeightAutomatic=is;}
+		void						applyModForceWeightAutomatic	();
 	
 		// Called asynchronously
 		void						onNewText			(user* pUser, string text);

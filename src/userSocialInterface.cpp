@@ -15,4 +15,5 @@ userSocialInterface::userSocialInterface(string id, user* p)
 	m_id = id;
 	mp_user = p;
 	m_isRunOnce = false;
+	m_bSetup = false;
 }

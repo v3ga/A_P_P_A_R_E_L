@@ -30,12 +30,14 @@ user::~user()
 //--------------------------------------------------------------
 void user::zeroAll()
 {
-	m_periodTick	=	15.0f;
-	mp_sqlData		= 	0;
+	m_periodTick	= 15.0f;
+	mp_sqlData		= 0;
 	m_newTick		= false;
-	m_bUseThread	= true;
+	m_bUseThread	= false;
 	m_bUseTick		= true;
 	m_bConnected	= false;
+	m_bTemplate		= false;
+
 }
 
 //--------------------------------------------------------------
@@ -55,7 +57,8 @@ void user::deconnect()
 		ofRemoveListener(m_ticker.newTickEvent, this, &user::onNewTick);
 
 		// stop thread
-		stopThread();
+		if (m_bUseThread)
+			stopThread();
 		
 		m_bConnected = false;
 	}
@@ -112,6 +115,18 @@ string user::getPathResourcesForUserId(string userId, string filename)
 }
 
 //--------------------------------------------------------------
+userSocialInterface* user::getService(string id)
+{
+	int nbServices = m_listSocialInterfaces.size();
+	for (int i=0;i<nbServices;i++)
+	{
+		if (m_listSocialInterfaces[i]->getId() == id)
+			return m_listSocialInterfaces[i];
+	}
+	return 0;
+}
+
+//--------------------------------------------------------------
 void user::createDocumentDirectory()
 {
 	string pathUser = getPathDocument();
@@ -146,6 +161,8 @@ void user::createFileDataSql()
 	}
 }
 
+
+
 //--------------------------------------------------------------
 void user::createDirectory()
 {
@@ -157,22 +174,6 @@ void user::createDirectory()
 	
 //	OFAPPLOG->println("- pathSqlResource="+pathSqlResource);
 //	OFAPPLOG->println("- pathSqlDocument="+pathSqlDocument);
-
-/*
-	ofFile fSqlResource(pathSqlResource);
-	if (fSqlResource.exists())
-	{
-		ofFile fSqlDocument(pathSqlDocument);
-		
-		if (!ofFile::doesFileExist(pathSqlDocument,false))
-		{
-			if (ofFile::copyFromTo(pathSqlResource, pathSqlDocument, false, false))
-			{
-				OFAPPLOG->begin("- copied '"+pathSqlResource+ "' to '"+pathSqlDocument+"'");
-			}
-		}
-	}
-*/
 
 	OFAPPLOG->end();
 }
@@ -202,13 +203,27 @@ void user::saveServicesData()
 }
 
 //--------------------------------------------------------------
+bool user::areServicesSetup()
+{
+	vector<userSocialInterface*>::iterator it;
+	for (it = m_listSocialInterfaces.begin(); it != m_listSocialInterfaces.end(); ++it)
+	{
+		if ((*it)->m_bSetup == false)
+			return false;
+	}
+	return true;
+}
+
+
+//--------------------------------------------------------------
 void user::connect()
 {
    // Connect to db
    connectSqlData();
 
-   // Starting retrieving
-   if (m_bUseTick)
+
+   // Starting retrieving (if not a template)
+   if (m_bUseTick && !m_bTemplate)
    {
 	   m_periodTick = m_configuration.getValue("user:period", 15.0f);
 	   OFAPPLOG->println("- period tick="+ofToString(m_periodTick)+" seconds");
@@ -230,10 +245,17 @@ void user::loadConfiguration()
 	userSocialInterface* pSocialInterface = userSocialFactory::makeInstance(this, "twitter");
 	if (pSocialInterface)
 	{
-	   m_listSocialInterfaces.push_back(pSocialInterface);
-	   pSocialInterface->loadData();
- 	}
- 
+		m_listSocialInterfaces.push_back(pSocialInterface);
+		pSocialInterface->loadData();
+	}
+
+	if (m_bTemplate == false)
+	{
+	}
+	else
+	{
+		
+	}
 
 /*
 	string pathFile = getPathResources("configuration.xml");
@@ -311,26 +333,36 @@ void user::connectSqlData()
 //--------------------------------------------------------------
 void user::update(float dt)
 {
-	if (m_newTick && !m_bUseThread)
+	vector<userSocialInterface*>::iterator it;
+	for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
+		(*it)->update(dt);
+	}
+
+	if (m_newTick)
 	{
 		m_newTick = false;
 
-		vector<userSocialInterface*>::iterator it;
-		for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
-			(*it)->doWork();
-		}
-   }
+		if (!m_bUseThread && areServicesSetup())
+		{
+			vector<userSocialInterface*>::iterator it;
+			for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
+				(*it)->doWork();
+			}
+   		}
+	}
 }
 
 //--------------------------------------------------------------
 void  user::threadedFunction()
 {
-	lock();
-	vector<userSocialInterface*>::iterator it;
-	for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
-		(*it)->doWork();
-	}
-	unlock();
+   if (areServicesSetup()==false) return;
+   
+   lock();
+   vector<userSocialInterface*>::iterator it;
+   for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){
+	   (*it)->doWork();
+   }
+   unlock();
 }
 
 //--------------------------------------------------------------
@@ -339,7 +371,7 @@ void user::onNewTick(ofxTickerEventArgs& args)
 	m_newTick = true;
 	if (m_bUseThread)
 	{
-		if (this->isThreadRunning()) return;
+		if (isThreadRunning()) return;
 		startThread(true, true);
 	}
 }

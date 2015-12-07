@@ -16,9 +16,19 @@ apparelModManager::apparelModManager()
 {
 	mp_modCurrent 	= 0;
 	mp_moodCurrent	= 0;
+
+	m_bModForceWeightAutomatic = false;
 }
 
-
+//--------------------------------------------------------------
+void apparelModManager::applyModForceWeightAutomatic()
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it)
+	{
+		it->second->setForceWeightAutomatic( m_bModForceWeightAutomatic );
+	}
+}
 
 
 //--------------------------------------------------------------
@@ -37,6 +47,16 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	addMod( new apparelMod_meteopathy() );
 	addMod( new apparelMod_kawaiopathy() );
 	
+	// used for requests in sql database : DO NOT CHANGE
+	getMod("Authoritopathy")	->setId(0);
+	getMod("Pedopathy")			->setId(1);
+	getMod("Sportopathy")		->setId(2);
+	getMod("Selfopathy")		->setId(3);
+	getMod("Zoopathy")			->setId(4);
+	getMod("Pretentiopathy")	->setId(5);
+	getMod("Meteopathy")		->setId(6);
+	getMod("Kawaiopathy")		->setId(7);
+	
 	// ——————————————————————————————————————————————————————
 	// MOODS
 	addMood	( new apparelMood_porcupinopathy() );
@@ -48,6 +68,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	GLOBALS->mp_modSelfopathy = (apparelMod_selfopathy*)getMod("Selfopathy");
 
 	copyModelToMods(*pModel);
+	applyModForceWeightAutomatic();
 	loadModData();
 	loadMoodData();
 	applyModChain();

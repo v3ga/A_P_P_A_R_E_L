@@ -18,5 +18,8 @@ class apparelMod_zoopathy : public apparelMod
 		void					drawExtra			();
 
 	private:
+	
+		map<int, ofPolyline*>	m_mapPolylines;
+		int						m_nbPoints;
 
 };

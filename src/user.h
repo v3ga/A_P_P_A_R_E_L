@@ -24,6 +24,8 @@ class user : public ofThread
  
 					void 				setId				(string id_){m_id = id_;}
 					string				getId				(){return m_id;}
+					void				setTemplate			(bool is=true){m_bTemplate = is;}
+					bool				getTemplate			(){return m_bTemplate;}
 					void				setModManager		(apparelModManager* p){mp_modManager=p;}
 					apparelModManager*	getModManager		(){return mp_modManager;}
 					string				getPathRelative		(string filename="");
@@ -36,6 +38,8 @@ class user : public ofThread
 					ofxXmlSettings&		getConfiguration	(){return m_configuration;}
 					void				loadServicesData	();
 					void				saveServicesData	();
+					bool				areServicesSetup	();
+
 					void				useThread			(bool is=true){m_bUseThread=is;}
  					void				useTick				(bool is=true){m_bUseTick = is;}		// should be called before loadconfiguration
 	
@@ -47,7 +51,9 @@ class user : public ofThread
 					void				createDocumentDirectory();
 					void				createFileDataSql	();
 
-					vector<userSocialInterface*>&	getListServices(){return m_listSocialInterfaces;}
+					vector<userSocialInterface*>&	getListServices		(){return m_listSocialInterfaces;}
+					userSocialInterface*			getService			(string id);
+ 
 
 
 		virtual		void				loadConfiguration	();
@@ -70,11 +76,16 @@ class user : public ofThread
 		// Id
 		string							m_id;
 
+		// Template
+		bool							m_bTemplate;
+
 		// Connected
 		bool							m_bConnected;
 
 		// Thread params
-		bool							m_bUseThread;		// some services may use their own thread (ex : Fabric / Twitter)
+		bool							m_bUseThread;		// some services may use their own thread (ex : Fabric / Twitter), used to call service->doWork()
+
+
  
 		// Ticker to reload data
 		ofxTicker						m_ticker;
@@ -93,7 +104,7 @@ class user : public ofThread
 	
 		// Temp
 		ofxSQLite*						mp_sqlData;
-	
+ 
 
 };
 

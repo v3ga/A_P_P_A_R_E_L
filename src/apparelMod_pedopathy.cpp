@@ -12,10 +12,29 @@
 //--------------------------------------------------------------
 apparelMod_pedopathy::apparelMod_pedopathy() : apparelMod("Pedopathy")
 {
-	m_pointInfluence.set(0.0f,0.0f,-20.0);
 
 	m_displacement.set("Displacement", 30.0f, 0.0f, 50.0f);
 	m_parameters.add(m_displacement);
+	
+	m_dispAxisX.set("DisplacementX",0.0f,-1.0f,1.0f);
+	m_dispAxisY.set("DisplacementY",0.0f,-1.0f,1.0f);
+	m_dispAxisZ.set("DisplacementZ",0.0f,-1.0f,1.0f);
+	
+	m_parameters.add(m_dispAxisX);
+	m_parameters.add(m_dispAxisY);
+	m_parameters.add(m_dispAxisZ);
+}
+
+//--------------------------------------------------------------
+void apparelMod_pedopathy::loadModel()
+{
+	apparelMod::loadModel();
+}
+
+//--------------------------------------------------------------
+void apparelMod_pedopathy::saveModel()
+{
+	apparelMod::saveModel();
 }
 
 //--------------------------------------------------------------
@@ -25,16 +44,14 @@ void apparelMod_pedopathy::onParameterChanged(ofAbstractParameter& parameter)
 	//apparelMod::parameterChanged(parameter);
 
 	int nbVertices = m_indicesVertex.size();
-	ofVec3f v,vo;
+	ofVec3f v,vo,n;
 	
 	for (int i=0; i<nbVertices ; i++)
 	{
 		vo = m_meshInput.getVertex( m_indicesVertex[i] );
-
+		n = m_meshInput.getNormal( m_indicesVertex[i] );
 		v = vo;
-		m_pointInfluence.set(0,vo.y,vo.z);
-		v = vo+(vo-m_pointInfluence).normalized()*m_weight*m_displacement;
-//		v.x = vo.x+m_weight*m_displacement;
+		v = vo+n*m_weight*m_displacement;
 		
 		m_model.mesh.setVertex(m_indicesVertex[i], v);
 	}

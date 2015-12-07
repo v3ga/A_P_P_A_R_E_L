@@ -14,17 +14,21 @@
 	#include "oscSender.h"
 #endif
 
+#define APPAREL_MOD_DEBUG_LOG 1
+
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
-apparelMod::apparelMod(string id)
+apparelMod::apparelMod(string id, int id2)
 {
 	m_id 					= id;
+	m_id2					= id2;
 	mp_oscSender 			= 0;
 	m_isChanged				= true;
 	m_isMeshChanged			= false;
 	m_isMood				= false;
 	m_weight				= 0.25f;
+	m_bForceWeightAutomatic	= false;
 
 
 //	m_weight.set("Weight", 0.5f, 0.0f, 1.0f);
@@ -50,7 +54,7 @@ void apparelMod::createParameters()
 //--------------------------------------------------------------
 void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)
 {
-  OFAPPLOG->begin("apparelMod["+m_id+"]::onNewWords()");
+ // OFAPPLOG->begin("apparelMod["+m_id+"]::onNewWords()");
   if (pUser && pUser->getSqlData())
   {
 	   // For every word of the wordsList.txt
@@ -72,13 +76,13 @@ void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)
 	  OFAPPLOG->println("- ERROR, user is not set or user sql data base not opened ...");
   }
 
-  OFAPPLOG->end();
+ // OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
 bool apparelMod::isInWordsList(string word)
 {
-	int nbWordsInList = m_words.size();
+/*	int nbWordsInList = m_words.size();
 	for (int i=0;i<nbWordsInList;i++)
 	{
 		if (word == m_words[i])
@@ -87,6 +91,8 @@ bool apparelMod::isInWordsList(string word)
 		}
 	}
 	return false;
+*/
+	return  (find(m_words.begin(), m_words.end(), word) != m_words.end());
 }
 
 //--------------------------------------------------------------
@@ -118,7 +124,7 @@ void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 	  // No ? Insert it with a count of one
 	  else
 	  {
-		int result = pUser->getSqlData()->insert("words").use("name", word).use("count", 1).execute();
+		int result = pUser->getSqlData()->insert("words").use("name", word).use("count", 1).use("mod", m_id2).execute();
 		if (result == 0)
 		{
 			OFAPPLOG->println("- OK inserted word '"+word+"'");
@@ -152,7 +158,7 @@ void apparelMod::resetWordsCountUserDatabase(user* pUser, bool lock)
 			// Found it !
 			if (sel.hasNext())
 			{
-				  int result = pUser->getSqlData()->update("words").where("name",m_words[i]).use("count", 0).execute();
+				int result = pUser->getSqlData()->update("words").where("name",m_words[i]).use("count", 0).execute();
 			  	if (result == 0)
 			  	{
 		  			OFAPPLOG->println("- OK updated word "+m_words[i]+" with count=0");
@@ -184,7 +190,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 {
   if (isMood()) return;
 
-  OFAPPLOG->begin("apparelMod["+m_id+"]::countUserWords()");
+ // OFAPPLOG->begin("apparelMod["+m_id+"]::countUserWords()");
   if (pUser)
   {
 	m_countWords = 0;
@@ -193,6 +199,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 		if (lock)
 			pUser->lock();
 		int nbWordsInList = m_words.size();
+/*
 		for (int i=0;i<nbWordsInList;i++)
 		{
 			ofxSQLiteSelect sel = pUser->getSqlData()->select("count").from("words").where("name", m_words[i]).limit(1).execute().begin();
@@ -203,6 +210,16 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 		  		m_countWords += count;
 			}
 		}
+*/
+		ofxSQLiteSelect sel = pUser->getSqlData()->select("sum(count) AS total_count").from("words").where("mod", m_id2).limit(1).execute().begin();
+		//SELECT sum(count) AS total_count FROM words WHERE mod = 0;
+		if (sel.hasNext())
+		{
+			m_countWords = sel.getInt();
+		  	OFAPPLOG->println("- m_countWords ="+ofToString(m_countWords));
+		}
+
+
 		if (lock)
 			pUser->unlock();
 
@@ -214,8 +231,8 @@ void apparelMod::countUserWords(user* pUser, bool lock)
   			else
 	   			setWeight( 0.0 );
   		}
-		  OFAPPLOG->println("- countWords="+ofToString(m_countWords)+"/m_nbWordsMax="+ofToString(m_nbWordsMax));
-		  OFAPPLOG->println("- weight="+ofToString(m_weight));
+		  //OFAPPLOG->println("- countWords="+ofToString(m_countWords)+"/m_nbWordsMax="+ofToString(m_nbWordsMax));
+		  //OFAPPLOG->println("- weight="+ofToString(m_weight));
   	}
   	else
 	  OFAPPLOG->println("- WARNING pUser->getSqlData() is NULL");
@@ -223,7 +240,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
   	else
 	  OFAPPLOG->println("- WARNING pUser is NULL");
 
-  OFAPPLOG->end();
+//  OFAPPLOG->end();
 }
 
 
@@ -361,7 +378,7 @@ void apparelMod::createWordsList()
 		
 	}
 	else{
-		OFAPPLOG->begin("- cannot find 'wordlist.txt'");
+		OFAPPLOG->println("- cannot find 'wordlist.txt'");
 	}
 
 
@@ -539,6 +556,11 @@ void apparelMod::loadParameters()
 
 	// Custom loading
 	loadParametersCustom();
+	
+	if (m_bForceWeightAutomatic)
+	{
+		m_isWeightManual = false;
+	}
 
 
 	OFAPPLOG->end();
