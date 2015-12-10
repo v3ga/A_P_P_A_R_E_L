@@ -70,6 +70,9 @@ class ofApp : public ofBaseApp
 
 		// EXPORT TO IMAGE
 		bool 				m_bSaveframe;
+ 
+		// For Selfopathy purpose
+		ofImage				m_imageSelfopathy;
 
 	private:
 		toolManager			toolManager;

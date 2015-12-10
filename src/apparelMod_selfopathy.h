@@ -26,11 +26,14 @@ class apparelMod_selfopathy : public apparelMod
 		void				drawExtra			();
 		void				onParameterChanged	(ofAbstractParameter& parameter);
 		void				onWeightChanged		();
-		
+ 
+		void				setImage			(ofImage* pImage);
 
 
 	private:
-		ofImage						m_image;
+		ofImage*					mp_image;
+		bool						m_bDoDisplacement;
+		bool						m_bDoSudivision;
 
 	    ofxButterfly 				butterfly;
 		ofMesh 						newMesh;

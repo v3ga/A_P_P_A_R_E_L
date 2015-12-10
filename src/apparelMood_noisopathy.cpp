@@ -41,28 +41,6 @@ void apparelMood_noisopathy::copyModelFrom(const apparelModel& model)
 //--------------------------------------------------------------
 void apparelMood_noisopathy::apply()
 {
-	// OFAPPLOG->begin("apparelMood_noisopathy::apply()");
-	if (isChanged())
-	{
-
-// TODO : À revoir
-// 
-//		m_model.removeMeshFaces( m_indicesFaces );
-/*		OFAPPLOG->println(" - changed ! ");
-
-		int nbFacesSelected = m_indicesFaces.size();
-		for (int i=0; i<nbFacesSelected; i++)
-		{
-			vector<ofMeshFaceIndices>& faceIndices = m_model.meshFacesIndices;
-		
-			m_model.removeMeshFace(m_indicesFaces[i]);
-		}
-
-		m_indicesFaces.clear();
-		m_model.createMeshFaces();
-*/
-	}
-//	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------

@@ -33,6 +33,7 @@ class toolMods : public tool
 		void					createControlsCustomFinalize();
 		void					handleEvents		(ofxUIEventArgs& e);
 		void					mousePressed		(int x, int y, int button);
+		bool					keyPressed			(int key);
 		apparelModUI*			makeInstanceModUI	(apparelMod*);
 		void					selectMod			(string name);
 		void					selectMood			(string name);
@@ -94,6 +95,9 @@ class toolMods : public tool
 	
 		enumSelection			m_selection;
 		void					unselectSelection	();
+ 
+		// Flat shading
+		ofShader				m_shaderFlat;
  
 	private:
 		ofxUILabel*				mp_lblModel;

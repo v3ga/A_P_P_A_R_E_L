@@ -46,6 +46,8 @@ toolMods::toolMods(toolManager* parent, apparelModManager* modManager) : tool("M
 	
 	m_bViewMixed			= false;
 	m_bPostProcess			= false;
+	
+	m_shaderFlat.load("shaders/flat");
 }
 
 //--------------------------------------------------------------
@@ -133,6 +135,7 @@ void toolMods::createControlsCustom()
 	vector<apparelMod*>::iterator it;
 	for (it = mp_modsManager->m_modsChain.begin(); it != mp_modsManager->m_modsChain.end(); ++it)
 	{
+//		OFAPPLOG->println("adding "+(*it)->getId());
 		if ((*it)->isMood() == false)
 			modIds.push_back( (*it)->getId() );
 	}
@@ -247,10 +250,33 @@ void toolMods::draw()
 {
 	apparelModel* pModel = m_bViewMixed ? mp_modsManager->getModelLastInChain() : mp_apparelModel;
 	apparelMod*	  pMod = m_bViewMixed ? mp_modsManager->getModLastInChain() : mp_apparelModCurrent;
+	
+	ofMesh m;
+	m.enableIndices();
+	m.enableNormals();
+	m.setMode(OF_PRIMITIVE_TRIANGLES);
+	
+		 vector<ofMeshFaceApparel*>& meshFacesRef = pModel->getMeshFacesRef();
+	
+		ofMeshFaceApparel* pFace;
+ 
+	 	for (int i=0; i<meshFacesRef.size();i++)
+	 	{
+			pFace 		= meshFacesRef[i];
+	
+			m.addVertex( pFace->getVertex(0) );
+			m.addVertex( pFace->getVertex(1) );
+			m.addVertex( pFace->getVertex(2) );
 
+			m.addNormal( pFace->getFaceNormal() );
+			m.addNormal( pFace->getFaceNormal() );
+			m.addNormal( pFace->getFaceNormal() );
+	
+		}
+ 
 	if (pMod)
 	{
-		ofDrawAxis(100);
+		//ofDrawAxis(100);
 
 	   // MODEL
 		if (m_bEnableBackFaceCulling)
@@ -260,30 +286,15 @@ void toolMods::draw()
 		
 		if (m_bDrawWireFrameOnly == false)
 		{
-/* 		    ofSetColor(0,255);
-			ofLight light;
-			ofColor color;
-		    color.setBrightness(150);
-    		light.setDiffuseColor(color);
-    		light.enable();
-			pModel->getMeshRef().enableNormals();
-		 // enableNormals();
-
-			
-			ofEnableLighting();
-			glShadeModel(GL_FLAT);
-*/
 		   ofSetColor(0,255);
-		   pMod->drawFaces();
-
-//			ofDisableLighting();
-		}
-
-	   if (m_bDrawWireFrameOnly == false)
-	   {
-	   	glEnable(GL_POLYGON_OFFSET_LINE);
-	   	glPolygonOffset(-1,-1);
+		   m_shaderFlat.begin();
+//			pMod->drawFaces();
+			m.draw();
+		   glEnable(GL_POLYGON_OFFSET_LINE);
+		   glPolygonOffset(-1,-1);
+		   m_shaderFlat.end();
 	   }
+	 
 	 
 	   ofSetColor(255,255);
 	   pMod->drawWireframe();
@@ -519,6 +530,17 @@ void toolMods::handleEvents(ofxUIEventArgs& e)
         ofxUISlider* slider = (ofxUISlider *) e.widget;
 		GLOBALS->getApp()->cam.setDistance( slider->getScaledValue() );
 	}
+}
+
+//--------------------------------------------------------------
+bool toolMods::keyPressed(int key)
+{
+	if (key == ' ')
+	{
+		m_shaderFlat.load("shaders/flat");
+		return true;
+	}
+	return false;
 }
 
 //--------------------------------------------------------------

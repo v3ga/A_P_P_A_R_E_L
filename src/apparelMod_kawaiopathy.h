@@ -49,4 +49,5 @@ class apparelMod_kawaiopathy : public apparelMod
 		ofxAssimpModelLoader 	models[4];
 		vector<kawai*>			m_kawais;
 
+
 };

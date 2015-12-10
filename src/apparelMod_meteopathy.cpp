@@ -63,6 +63,7 @@ void apparelMod_meteopathy::apply()
 			mRot.rotate(ofRandom(360.0f), ofRandom(1.0f), ofRandom(1.0f), ofRandom(1.0f));
 
 			ofIcoSpherePrimitive* pPrimitive = new ofIcoSpherePrimitive( m_weight * ofRandom(m_size.getFloat("low"),m_size.getFloat("high")), 0 );
+			pPrimitive->enableNormals();
 			m_particles.push_back( pPrimitive );
 	 
 			int nbVertices = pPrimitive->getMesh().getVertices().size();
@@ -82,6 +83,9 @@ void apparelMod_meteopathy::apply()
 			}
 			m_model.mesh.append( m_particles[i]->getMesh() );
 		}
+		
+		//m_model.createMeshFaces();
+
 	}
 }
 

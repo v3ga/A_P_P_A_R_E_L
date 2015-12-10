@@ -57,6 +57,8 @@ void ofApp::setup()
 
 	if (USER_LOAD_CONFIGURATION)
 		user.loadConfiguration();
+ 
+	 m_imageSelfopathy.loadImage("images/testTexture.png");
 	
 	// MODEL
 	apparelModel.load(modelObjName);
@@ -111,6 +113,7 @@ void ofApp::setup()
 	OFAPPLOG->println("- loading tools data");
 	toolManager.loadData();
 	
+	GLOBALS->mp_modSelfopathy->setImage(&m_imageSelfopathy);
 	
 	apparelModManager.applyModChain();
 

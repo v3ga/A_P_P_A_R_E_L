@@ -63,8 +63,6 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	addMood	( new apparelMood_noisopathy() );
 	addMood	( new apparelMood_sad() );
 
-//	selectMood( "noisopathy" );
-
 	GLOBALS->mp_modSelfopathy = (apparelMod_selfopathy*)getMod("Selfopathy");
 
 	copyModelToMods(*pModel);

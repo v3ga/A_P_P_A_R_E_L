@@ -84,6 +84,7 @@ void apparelMood_porcupinopathy::apply()
 		}
 
 		m_model.mesh.append( m_meshSpikes );
+		m_model.createMeshFaces();
 	}
 
 

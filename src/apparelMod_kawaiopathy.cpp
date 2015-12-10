@@ -185,6 +185,7 @@ void apparelMod_kawaiopathy::apply()
 			}
 		
 		}
+		m_model.createMeshFaces();
 	
 	}
 }

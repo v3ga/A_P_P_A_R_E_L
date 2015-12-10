@@ -13,16 +13,18 @@
 //--------------------------------------------------------------
 apparelMod_selfopathy::apparelMod_selfopathy() : apparelMod("Selfopathy")
 {
-	OFAPPLOG->begin("apparelMod_selfopathy::apparelMod_selfopathy()");
-	bool ok = m_image.loadImage("images/testTexture.png");
-	OFAPPLOG->println("- loaded images/testTexture.png "+ofToString(ok ? "OK":"NO..."));
-	OFAPPLOG->end();
+	mp_image = 0;
+	m_bDoSudivision = true;
+	m_bDoDisplacement = false;
 
 	m_amplitude.set("Amplitude", 30.0f, 0.0f, 50.0f);
 	m_levelSubdiv.set("Subdivision",2, 1,4);
 
 	m_parameters.add(m_amplitude);
-	m_parameters.add(m_levelSubdiv);
+//	m_parameters.add(m_levelSubdiv);
+
+	m_levelSubdiv = 2;
+	setChanged();
 
 //	parameterGroupLowHigh::create(m_amplitudeRndFactor, "AmplitudeRndFactor", 0.0,0.7,1.0,1.0);
 //	m_parameters.add(m_amplitudeRndFactor);
@@ -36,30 +38,32 @@ apparelMod_selfopathy::~apparelMod_selfopathy()
 }
 
 //--------------------------------------------------------------
+void apparelMod_selfopathy::setImage(ofImage* pImage)
+{
+	mp_image = pImage;
+	setChanged();
+	m_bDoSudivision = false;
+	m_bDoDisplacement = true;
+}
+
+//--------------------------------------------------------------
 void apparelMod_selfopathy::apply()
 {
 	if (isChanged())
 	{
-		// OFAPPLOG->begin("apparelMood_porcupinopathy::apply()");
-	
-		newMesh.clear();
-		
 		m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
 	
-		int nbFacesSelected = m_indicesFaces.size();
-		
-		int indexVerticesStart = m_model.mesh.getVertices().size();
-		//if (nbFacesSelected>0)
+		if (m_bDoSudivision)
 		{
+			newMesh.clear();
 		
 			int nbFaces = m_model.getMeshFacesRef().size();
 			
 			// Go through all faces
-			for (int i=0; i<nbFaces/*nbFacesSelected*/; i++)
+			for (int i=0; i<nbFaces; i++)
 			{
 			
 				// Select face to subdivide
-			 	//ofMeshFaceApparel* pFace = m_model.getMeshFacesRef()[ m_indicesFaces[i] ];
 			 	ofMeshFaceApparel* pFace = m_model.getMeshFacesRef()[ i ];
 				ofVec3f faceNormal = pFace->getFaceNormal();
 
@@ -140,70 +144,55 @@ void apparelMod_selfopathy::apply()
 					 newMesh.addIndex(indexB);
 					 newMesh.addIndex(indexC);
 
-					 // Compute "middle" point of triangle
-/*					 ofVec3f faceMiddle = (faceAdd.getVertex(0) + faceAdd.getVertex(1) + faceAdd.getVertex(2))/3.0f;
-
-
-					 // Extrude
-					 ofVec3f M = faceMiddle;// + faceNormal*m_weight*m_amplitude;
-
-					 // Add to model
-					 ofIndexType indexM = newMesh.getNumVertices();
-					 newMesh.addVertex(M);
-					 newMesh.addNormal(faceNormal);
-
-					 // Add indices of extruded faces now
-
-
-					  newMesh.addIndex(indexA);
-					  newMesh.addIndex(indexB);
-					  newMesh.addIndex(indexM);
-
-					  newMesh.addIndex(indexB);
-					  newMesh.addIndex(indexC);
-					  newMesh.addIndex(indexM);
-
-					  newMesh.addIndex(indexC);
-					  newMesh.addIndex(indexA);
-					  newMesh.addIndex(indexM);
-*/
-					  // Save in our list to retrieve in update without updating model
-					  //m_extrusionData.push_back( new porcuVertexData(indexM,faceNormal,faceMiddle, m_amplitudeRndFactor.getFloat("low"), m_amplitudeRndFactor.getFloat("high") ));
 				 }
 				}
+			
+				newMesh.mergeDuplicateVertices();
+
+				m_model.mesh.clear();
+				m_model.mesh.append(newMesh);
 			}
 			
-			newMesh.mergeDuplicateVertices();
-
-			m_model.mesh.clear();
-			m_model.mesh.append(newMesh);
 		}
 		
-		displaceVertices();
-		m_model.createMeshFaces(); // useful for selection
+		if (m_bDoDisplacement)
+		{
+			displaceVertices();
+		}
 
-//		OFAPPLOG->end();
+		if (m_bDoSudivision || m_bDoDisplacement)
+		{
+			m_model.createMeshFaces();
+		}
+		
+		// Reset flags
+		if (m_bDoSudivision) 	m_bDoSudivision 	= false;
+		if (m_bDoDisplacement) 	m_bDoDisplacement 	= false;
 	}
 }
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::displaceVertices()
 {
+	if (mp_image == 0) return;
+
    vector<ofVec3f>& vertices = m_model.mesh.getVertices();
    vector<ofVec3f>& normals = m_model.mesh.getNormals();
 
    ofVec3f posBounding = m_meshInputBoundingBox.getPosition();
+   ofColor c;
    for (int i=0; i<vertices.size(); i++ )
    {
-	
 	   // Displacement
-	   ofVec3f vNorm(
+	   ofVec3f vNorm
+	   (
 		   0.5f+(vertices[i].x-posBounding.x)/m_meshInputBoundingBox.getSize().x,
 		   0.5f+(vertices[i].y-posBounding.y)/m_meshInputBoundingBox.getSize().y,
-		   0.5f+(vertices[i].z-posBounding.z)/m_meshInputBoundingBox.getSize().z);
+		   0.5f+(vertices[i].z-posBounding.z)/m_meshInputBoundingBox.getSize().z
+	   );
 	
 	   float d = normals[i].dot( ofVec3f(0,1,0) ); // Z-axis
-	   ofColor c = m_image.getColor(vNorm.x*(m_image.getWidth()-1),vNorm.z*(m_image.getHeight()-1));
+	   c = mp_image->getColor(vNorm.x*(mp_image->getWidth()-1),vNorm.z*(mp_image->getHeight()-1));
 
 	   float lightness = c.getLightness() / c.limit();
 	   float amplitude = abs(d)*lightness*m_weight*m_amplitude;
@@ -219,7 +208,7 @@ void apparelMod_selfopathy::displaceVertices()
 //--------------------------------------------------------------
 void apparelMod_selfopathy::drawExtra()
 {
-	//m_meshInput.draw();
+/*
 	ofSetColor(200,0,0,200);
 	m_meshInputBoundingBox.draw();
 	ofPushMatrix();
@@ -229,87 +218,23 @@ void apparelMod_selfopathy::drawExtra()
 	ofSetColor(255);
 	m_image.draw(0, 0, 0, m_meshInputBoundingBox.getSize().x, m_meshInputBoundingBox.getSize().z);
 	ofPopMatrix();
+*/
 }
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
-	// Only recompute Mesh if subdivision is changed
-//	if (parameter.getName() == "Subdivision")
-		setChanged(true);
-//	if (parameter.getName() == "Subdivision")
 }
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::onWeightChanged()
 {
-	//displaceVertices();
+	setChanged();
+	m_bDoDisplacement = true;
 }
-
 
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::update()
 {
-	// Get amplitude of sound
-	//m_weight = GLOBALS->getSoundInputVolume(); // ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.2f, 0.1f,1.0f);
-	
-	//int nbVerticesExtruded = m_extrusionData.size();
-
-	// Compute points
-	float amplitude = m_weight*m_amplitude;
-	//for (int i=0;i<nbVerticesExtruded;i++)
-	{
-//		porcuVertexData* pData = m_extrusionData[i];
-
-		// Update
-		// pData->m_amplitude = m_weight * pData->m_amplitudeMax;
-//		pData->m_amplitude += (pData->m_amplitudeFactor*amplitude-pData->m_amplitude)*pData->m_amplitudeSpeed;
-
-		// Get index of the vertex
-//		ofIndexType indexVertex = pData->m_index;
-
-		// ... and compute new extruded vertex from middl point of face
-		//m_model.mesh.setVertex(indexVertex, pData->m_middleFace+pData->m_normal*pData->m_amplitude);
-	}
-	
-	// compute normals (as vertices moved)
-	//m_model.
-	
 }
-
-
-//--------------------------------------------------------------
-/*
-void apparelMod_selfopathy::drawFaces()
-{
-//	m_model.mesh.enableTextures();
-
-
-	int nbVertices = m_model.mesh.getIndices().size();
-	for (int i=0;i<nbVertices;i++)
-	{
-		//m_model.mesh.setTexCoord(m_model.mesh.getIndices()[i], ofVec2f(ofRandom(0,m_image.getWidth()),ofRandom(0,m_image.getHeight())));
-	}
-	//	m_model.createMeshFaces();
-	
-
-	ofPushMatrix();
-	ofMultMatrix(m_model.getModelMatrix());
-//	m_image.getTextureReference().bind();
-	m_model.getMeshRef().drawFaces();
-//	m_image.getTextureReference().unbind();
-	ofPopMatrix();
-	
-}
-*/
-
-/*
-
-[TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession *session, NSError *error) {
-  [[[Twitter sharedInstance] APIClient] loadUserWithID:session.userID completion:^(TWTRUser *user, NSError *error) {
-       NSLog(@"User image %@", user.profileImageURL);
-  }];
-}];
-
-*/

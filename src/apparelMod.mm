@@ -596,7 +596,6 @@ void apparelMod::copyModelFrom(const apparelModel& model)
 {
 	m_model.copyMeshAndTransformation(model);
 	m_meshInput = model.mesh;
-//	clearSelection();
 	setChanged(true);
 }
 
