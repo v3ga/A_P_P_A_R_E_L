@@ -67,6 +67,36 @@ void user::deconnect()
 	zeroAll();
 }
 
+//--------------------------------------------------------------
+string user::getServicePropertyString(string name)
+{
+	#ifdef TARGET_OSX
+	if (name == "twitter_image")
+	{
+		userTwitterSimple* pUserTwitterSimple = (userTwitterSimple*) getService("twitter");
+		if (pUserTwitterSimple)
+			return pUserTwitterSimple->m_image;
+	}
+	#endif
+
+	return "";
+}
+
+//--------------------------------------------------------------
+float user::getServicePropertyFloat(string name)
+{
+	#ifdef TARGET_OSX
+	if (name == "twitter_followers_following")
+	{
+		userTwitterSimple* pUserTwitterSimple = (userTwitterSimple*) getService("twitter");
+		if (pUserTwitterSimple)
+			return (float)pUserTwitterSimple->m_nbFollowers / (float)pUserTwitterSimple->m_nbFollowing;
+	}
+	#endif
+
+	return 0.0f;
+}
+
 
 //--------------------------------------------------------------
 string user::getPathRelative(string filename)
@@ -247,14 +277,6 @@ void user::loadConfiguration()
 	{
 		m_listSocialInterfaces.push_back(pSocialInterface);
 		pSocialInterface->loadData();
-	}
-
-	if (m_bTemplate == false)
-	{
-	}
-	else
-	{
-		
 	}
 
 /*

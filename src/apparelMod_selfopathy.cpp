@@ -14,21 +14,15 @@
 apparelMod_selfopathy::apparelMod_selfopathy() : apparelMod("Selfopathy")
 {
 	mp_image = 0;
+
 	m_bDoSudivision = true;
 	m_bDoDisplacement = false;
 
 	m_amplitude.set("Amplitude", 30.0f, 0.0f, 50.0f);
-	m_levelSubdiv.set("Subdivision",2, 1,4);
-
 	m_parameters.add(m_amplitude);
-//	m_parameters.add(m_levelSubdiv);
 
 	m_levelSubdiv = 2;
 	setChanged();
-
-//	parameterGroupLowHigh::create(m_amplitudeRndFactor, "AmplitudeRndFactor", 0.0,0.7,1.0,1.0);
-//	m_parameters.add(m_amplitudeRndFactor);
-	
 }
 
 //--------------------------------------------------------------
@@ -49,12 +43,12 @@ void apparelMod_selfopathy::setImage(ofImage* pImage)
 //--------------------------------------------------------------
 void apparelMod_selfopathy::apply()
 {
-	if (isChanged())
-	{
 		m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
 	
 		if (m_bDoSudivision)
 		{
+			m_model.mesh = m_meshInput;
+
 			newMesh.clear();
 		
 			int nbFaces = m_model.getMeshFacesRef().size();
@@ -168,7 +162,6 @@ void apparelMod_selfopathy::apply()
 		// Reset flags
 		if (m_bDoSudivision) 	m_bDoSudivision 	= false;
 		if (m_bDoDisplacement) 	m_bDoDisplacement 	= false;
-	}
 }
 
 //--------------------------------------------------------------
@@ -224,13 +217,17 @@ void apparelMod_selfopathy::drawExtra()
 //--------------------------------------------------------------
 void apparelMod_selfopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
+//	setChanged();
+//	m_bDoDisplacement = true;
+//	m_bDoSudivision = true;
 }
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::onWeightChanged()
 {
-	setChanged();
-	m_bDoDisplacement = true;
+//	setChanged();
+//	m_bDoDisplacement = true;
+//	m_bDoSudivision = true;
 }
 
 

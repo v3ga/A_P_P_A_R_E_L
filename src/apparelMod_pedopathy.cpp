@@ -16,6 +16,7 @@ apparelMod_pedopathy::apparelMod_pedopathy() : apparelMod("Pedopathy")
 	m_displacement.set("Displacement", 30.0f, 0.0f, 50.0f);
 	m_parameters.add(m_displacement);
 	
+/*
 	m_dispAxisX.set("DisplacementX",0.0f,-1.0f,1.0f);
 	m_dispAxisY.set("DisplacementY",0.0f,-1.0f,1.0f);
 	m_dispAxisZ.set("DisplacementZ",0.0f,-1.0f,1.0f);
@@ -23,6 +24,8 @@ apparelMod_pedopathy::apparelMod_pedopathy() : apparelMod("Pedopathy")
 	m_parameters.add(m_dispAxisX);
 	m_parameters.add(m_dispAxisY);
 	m_parameters.add(m_dispAxisZ);
+*/
+
 }
 
 //--------------------------------------------------------------
@@ -43,6 +46,19 @@ void apparelMod_pedopathy::onParameterChanged(ofAbstractParameter& parameter)
 	//OFAPPLOG->begin("apparelMod_authoritopathy::onParameterChanged(\""+parameter.getName()+"\"");
 	//apparelMod::parameterChanged(parameter);
 
+	displaceVertices();
+	//OFAPPLOG->end();
+}
+
+//--------------------------------------------------------------
+void apparelMod_pedopathy::onWeightChanged()
+{
+	displaceVertices();
+}
+
+//--------------------------------------------------------------
+void apparelMod_pedopathy::displaceVertices()
+{
 	int nbVertices = m_indicesVertex.size();
 	ofVec3f v,vo,n;
 	
@@ -59,5 +75,6 @@ void apparelMod_pedopathy::onParameterChanged(ofAbstractParameter& parameter)
 	m_model.createMeshFaces();
 	
 	setChanged(true);
-	//OFAPPLOG->end();
 }
+
+

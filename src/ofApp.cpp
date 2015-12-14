@@ -12,8 +12,6 @@
 
 #include "apparelMod_include.h"
 
-#define USER_LOAD_CONFIGURATION true
-
 //--------------------------------------------------------------
 void ofApp::setup()
 {
@@ -24,7 +22,7 @@ void ofApp::setup()
 	GLOBALS->setUser(&user);
 
 	// SETTINGS
-	ofLog() << "  - loading configuration.xml";
+	OFAPPLOG->println("  - loading configuration.xml");
     if ( settings.loadFile("configuration.xml") == false)
 	{
 		OFAPPLOG->println("- unable to load configuration.xml");
@@ -53,22 +51,24 @@ void ofApp::setup()
 	// USER
 	OFAPPLOG->println("- user is @"+userId);
 	user.setId(userId);
+	user.setTemplate(true);
 	user.setModManager(&apparelModManager);
-
-	if (USER_LOAD_CONFIGURATION)
-		user.loadConfiguration();
+	user.connect();
  
-	 m_imageSelfopathy.loadImage("images/testTexture.png");
-	
 	// MODEL
 	apparelModel.load(modelObjName);
 	
+	// POST PROCESSING
 	sceneBuffer.allocate(ofGetWidth(),ofGetHeight());
 	sceneFxBlur.allocate(ofGetWidth()/10,ofGetHeight()/10);
 
-
 	// MODS
 	apparelModManager.constructMods(&apparelModel);
+
+	user.loadConfiguration();
+	m_imageSelfopathy.loadImage(user.getServicePropertyString("twitter_image"));
+	GLOBALS->mp_modSelfopathy->setImage(&m_imageSelfopathy);
+
 
 	// USER WORDS
 	// this will initialize words count for each mod for this user
@@ -105,16 +105,13 @@ void ofApp::setup()
 
 	toolManager.addTool( pToolSound );
 	
-	
-//	pTool3D->setSceneFbo(&sceneBuffer);
-
+   
 	toolManager.createControls(ofVec2f(400,100));
 
 	OFAPPLOG->println("- loading tools data");
 	toolManager.loadData();
-	
-	GLOBALS->mp_modSelfopathy->setImage(&m_imageSelfopathy);
-	
+
+
 	apparelModManager.applyModChain();
 
 	OFAPPLOG->end();

@@ -1,8 +1,5 @@
 <Pedopathy>
-    <Displacement>26.8229</Displacement>
-    <DisplacementX>0</DisplacementX>
-    <DisplacementY>0</DisplacementY>
-    <DisplacementZ>0</DisplacementZ>
+    <Displacement>31.5104</Displacement>
     <WeightManual>1</WeightManual>
-    <NbWordsMax>5</NbWordsMax>
+    <NbWordsMax>12</NbWordsMax>
 </Pedopathy>

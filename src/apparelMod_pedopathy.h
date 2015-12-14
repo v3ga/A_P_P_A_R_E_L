@@ -17,8 +17,12 @@ class apparelMod_pedopathy : public apparelMod
 		void				loadModel				();
 		void				saveModel				();
 		void				onParameterChanged		(ofAbstractParameter& parameter);
+		void				onWeightChanged			();
 
 	private:
+
+		void				displaceVertices	();
+
  		ofParameter<float>	m_displacement;
  
  		ofParameter<float>	m_dispAxisX;

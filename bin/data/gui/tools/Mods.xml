@@ -6,12 +6,12 @@
 <Widget>
     <Kind>2</Kind>
     <Name>show vertex indices</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>show face normals</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -36,12 +36,12 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Vertex</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Face</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
@@ -66,7 +66,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Selfopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -86,12 +86,12 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Kawaiopathy</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Noisopathy</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -101,10 +101,10 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Sad</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>enable</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>

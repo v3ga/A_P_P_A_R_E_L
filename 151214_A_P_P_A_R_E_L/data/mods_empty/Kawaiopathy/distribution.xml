@@ -1,0 +1,8 @@
+<kawai type="mesh">
+	<mesh>bird.3ds</mesh>
+	<weight>0.4</weight>
+	<scale>0.5</scale>
+	<position x="0" y="-20.0" z="0"></position>
+	<rotation angle="90" x="1" y="0" z="0"></rotation>
+</kawai>
+

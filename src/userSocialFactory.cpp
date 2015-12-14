@@ -14,8 +14,8 @@ userSocialInterface* userSocialFactory::makeInstance( user* pUser, string name )
 {
 	if (name == "twitter")
 	{
-		#ifdef TARGET_OF_OSX
-   		userTwitter* pUserTwitter = new userTwitter(pUser);
+		#ifdef TARGET_OSX
+   		userTwitterSimple* pUserTwitter = new userTwitterSimple(pUser);
 		return (userSocialInterface*) pUserTwitter;
 		#endif
 
@@ -40,7 +40,7 @@ userSocialInterface* userSocialFactory::makeInstance(userConfigurationInfo* pCon
 	if (pConfigInfo->m_name == "twitter")
 	{
    		OFAPPLOG->println("- creating service \""+pConfigInfo->m_name+"\"");
-   		userTwitter* pUserTwitter = new userTwitter(pConfigInfo->mp_user);
+   		userTwitter* pUserTwitter = new userTwitterSimple(pConfigInfo->mp_user);
    		if (pUserTwitter->setup(pConfigInfo->mp_configuration, pConfigInfo->m_configTagIndex))
    		{
 			return (userSocialInterface*) pUserTwitter;

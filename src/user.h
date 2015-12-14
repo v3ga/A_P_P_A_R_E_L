@@ -47,12 +47,15 @@ class user : public ofThread
 					void				connect				();
 					bool				isConnected			(){return m_bConnected;}
  
+ 
 					void				createDirectory		();
 					void				createDocumentDirectory();
 					void				createFileDataSql	();
 
-					vector<userSocialInterface*>&	getListServices		(){return m_listSocialInterfaces;}
-					userSocialInterface*			getService			(string id);
+					vector<userSocialInterface*>&	getListServices				(){return m_listSocialInterfaces;}
+					userSocialInterface*			getService					(string id);
+					string							getServicePropertyString	(string name);
+					float							getServicePropertyFloat		(string name);
  
 
 
