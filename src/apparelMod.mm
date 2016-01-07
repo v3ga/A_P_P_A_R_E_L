@@ -356,6 +356,8 @@ string apparelMod::getPathResources(string filename)
 //--------------------------------------------------------------
 void apparelMod::createWordsList()
 {
+	if (isMood()) return;
+
 	OFAPPLOG->begin("apparelMod::createWordsList() for instance \"" + m_id + "\"");
 	
 	string pathWordsList = getPathResources("wordlist.txt");

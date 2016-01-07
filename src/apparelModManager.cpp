@@ -69,7 +69,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	applyModForceWeightAutomatic();
 	loadModData();
 	loadMoodData();
-	applyModChain();
+	//applyModChain();
 }
 
 //--------------------------------------------------------------
