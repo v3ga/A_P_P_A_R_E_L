@@ -18,10 +18,10 @@ apparelMod_selfopathy::apparelMod_selfopathy() : apparelMod("Selfopathy")
 	m_bDoSudivision = true;
 	m_bDoDisplacement = false;
 
-	m_amplitude.set("Amplitude", 30.0f, 0.0f, 50.0f);
+	m_amplitude.set("Amplitude", 5.0f, 0.0f, 50.0f);
 	m_parameters.add(m_amplitude);
 
-	m_levelSubdiv = 2;
+	m_levelSubdiv = 1;
 	setChanged();
 }
 
@@ -32,11 +32,20 @@ apparelMod_selfopathy::~apparelMod_selfopathy()
 }
 
 //--------------------------------------------------------------
+void apparelMod_selfopathy::createParameters()
+{
+	m_weightUI = false;
+}
+
+//--------------------------------------------------------------
 void apparelMod_selfopathy::setImage(ofImage* pImage)
 {
+	m_bDoSudivision = false;
+	if (mp_image == 0)
+		m_bDoSudivision = true;
+	
 	mp_image = pImage;
 	setChanged();
-	m_bDoSudivision = false;
 	m_bDoDisplacement = true;
 }
 
@@ -145,20 +154,26 @@ void apparelMod_selfopathy::apply()
 
 				m_model.mesh.clear();
 				m_model.mesh.append(newMesh);
+
+				m_meshRefDisplacement = m_model.mesh;
 			}
 			
 		}
-		
+ 
+ 
+ 
 		if (m_bDoDisplacement)
 		{
 			displaceVertices();
 		}
 
+
 		if (m_bDoSudivision || m_bDoDisplacement)
 		{
 			m_model.createMeshFaces();
 		}
-		
+
+
 		// Reset flags
 		if (m_bDoSudivision) 	m_bDoSudivision 	= false;
 		if (m_bDoDisplacement) 	m_bDoDisplacement 	= false;
@@ -168,6 +183,9 @@ void apparelMod_selfopathy::apply()
 void apparelMod_selfopathy::displaceVertices()
 {
 	if (mp_image == 0) return;
+
+
+	vector<ofVec3f>& verticesRef = m_meshRefDisplacement.getVertices();
 
    vector<ofVec3f>& vertices = m_model.mesh.getVertices();
    vector<ofVec3f>& normals = m_model.mesh.getNormals();
@@ -184,14 +202,18 @@ void apparelMod_selfopathy::displaceVertices()
 		   0.5f+(vertices[i].z-posBounding.z)/m_meshInputBoundingBox.getSize().z
 	   );
 	
+		vNorm.x = min(max(vNorm.x,0.0f),1.0f);
+		vNorm.y = min(max(vNorm.y,0.0f),1.0f);
+		vNorm.z = min(max(vNorm.z,0.0f),1.0f);
+	
 	   float d = normals[i].dot( ofVec3f(0,1,0) ); // Z-axis
 	   c = mp_image->getColor(vNorm.x*(mp_image->getWidth()-1),vNorm.z*(mp_image->getHeight()-1));
 
 	   float lightness = c.getLightness() / c.limit();
-	   float amplitude = abs(d)*lightness*m_weight*m_amplitude;
+	   float amplitude = abs(d)*lightness*m_amplitude;
 	   if (abs(d)>0.65f)
 	   {
-		   vertices[i] += amplitude*normals[i];
+		   vertices[i] = verticesRef[i] + amplitude*normals[i];
 	   
 	   }
 	   
@@ -201,35 +223,29 @@ void apparelMod_selfopathy::displaceVertices()
 //--------------------------------------------------------------
 void apparelMod_selfopathy::drawExtra()
 {
-/*
-	ofSetColor(200,0,0,200);
-	m_meshInputBoundingBox.draw();
-	ofPushMatrix();
-	m_image.setAnchorPercent(0.5f,0.5f);
-	ofTranslate(m_meshInputBoundingBox.getPosition().x, m_meshInputBoundingBox.getPosition().y+m_meshInputBoundingBox.getSize().y/2, m_meshInputBoundingBox.getPosition().z);
-	ofRotateX(90);
-	ofSetColor(255);
-	m_image.draw(0, 0, 0, m_meshInputBoundingBox.getSize().x, m_meshInputBoundingBox.getSize().z);
-	ofPopMatrix();
-*/
+	if (mp_image == 0) return;
+	
+	if (m_bDrawDebug)
+	{
+		ofSetColor(200,0,0,200);
+		m_meshInputBoundingBox.draw();
+		ofPushMatrix();
+		mp_image->setAnchorPercent(0.5f,0.5f);
+		ofTranslate(m_meshInputBoundingBox.getPosition().x, m_meshInputBoundingBox.getPosition().y+m_meshInputBoundingBox.getSize().y/2, m_meshInputBoundingBox.getPosition().z);
+		ofRotateX(90);
+		ofSetColor(255);
+		mp_image->draw(0, 0, 0, m_meshInputBoundingBox.getSize().x, m_meshInputBoundingBox.getSize().z);
+		ofPopMatrix();
+	}
 }
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
-//	setChanged();
-//	m_bDoDisplacement = true;
+	setChanged();
+	m_bDoDisplacement = true;
 //	m_bDoSudivision = true;
 }
-
-//--------------------------------------------------------------
-void apparelMod_selfopathy::onWeightChanged()
-{
-//	setChanged();
-//	m_bDoDisplacement = true;
-//	m_bDoSudivision = true;
-}
-
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::update()

@@ -10,16 +10,36 @@
 
 #include "apparelMod.h"
 
+class Poil
+{
+	public:
+		Poil				();
+	
+		void				draw();
+
+
+		ofPolyline			m_line;
+		int					m_indexFace;
+};
+
+
+
 class apparelMod_zoopathy : public apparelMod
 {
 	public:
 		apparelMod_zoopathy	();
 
+		void					createParameters	();
+		void					apply				();
 		void					drawExtra			();
+		void					deletePoils			();
 
 	private:
 	
-		map<int, ofPolyline*>	m_mapPolylines;
+		vector<Poil*>			m_poils;
 		int						m_nbPoints;
-
+ 
+		ofParameter<float>		m_lengthMax;
+		ofParameter<float>		m_density;
+		ofParameter<float>		m_resolution;
 };

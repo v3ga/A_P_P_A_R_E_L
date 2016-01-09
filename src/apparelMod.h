@@ -84,6 +84,10 @@ class apparelMod
 		virtual	void		drawFaces				();
 		virtual	void		drawWireframe			();
 
+		void				drawDebug				(){}
+		void				setDraDebug				(bool is){m_bDrawDebug = is;}
+ 		bool				m_bDrawDebug;
+
 		// OSC NETWORK
 		void				setOscSender			(oscSenderInterface* p){mp_oscSender=p;}
 
@@ -126,6 +130,8 @@ class apparelMod
 
 		float				m_weight;
 		void				setWeight					(float v);
+ 
+		bool				m_weightUI;
 
 
 //		bool				m_isWeightManual;	// if true, user can modify manually the value otherwise it is computed by
@@ -143,6 +149,7 @@ class apparelMod
 		void				updateUserDatabase			(user* pUser, string word, bool lock=false);
 		void				emptyUserDatabase			(user* pUser, bool lock=false);
  		void				resetWordsCountUserDatabase	(user* pUser, bool lock=false);
+		void				injectWordsCountUserDatabase(user* pUser);
  
 		// OSC
 		oscSenderInterface*	mp_oscSender;

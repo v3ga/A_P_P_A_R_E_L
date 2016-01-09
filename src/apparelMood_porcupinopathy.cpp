@@ -24,17 +24,26 @@ apparelMood_porcupinopathy::~apparelMood_porcupinopathy()
 {
 }
 
+//--------------------------------------------------------------
+void apparelMood_porcupinopathy::createParameters()
+{
+	m_amplitude.set("Amplitude", 5.0f, 0.0f, 20.0f);
+
+	m_parameters.add(m_amplitude);
+}
+
 
 //--------------------------------------------------------------
 void apparelMood_porcupinopathy::apply()
 {
-	apparelMod_selfopathy* pModSelfopathy = GLOBALS->mp_modSelfopathy;//(apparelMod_selfopathy*) GLOBALS->getModManager()->getMod("");
+	apparelMod_selfopathy* pModSelfopathy = GLOBALS->mp_modSelfopathy;
 
 	m_model.mesh = m_meshInput;
 
 	if (pModSelfopathy)
 	{
 		m_meshSpikes.clear();
+		deleteVerticesPorcu();
 	
 		apparelModel& model = pModSelfopathy->m_model;
 		
@@ -53,7 +62,7 @@ void apparelMood_porcupinopathy::apply()
 			M = (A+B+C)/3.0f;
 
 			n = (B-A).cross(C-A).normalize();
-			M = M + 5*n;
+//			M = M + 15*n;
 			
 			int nbIndices = m_meshSpikes.getNumVertices();
 
@@ -63,11 +72,13 @@ void apparelMood_porcupinopathy::apply()
 			
 			m_meshSpikes.addVertex( M );
 			
-
+			m_verticesPorcu.push_back( new PorcuVertex(M,n,m_meshSpikes.getNumVertices()-1 ) );
 			
-			m_meshSpikes.addIndex( nbIndices );
+			
+/*			m_meshSpikes.addIndex( nbIndices );
 			m_meshSpikes.addIndex( nbIndices+1 );
 			m_meshSpikes.addIndex( nbIndices+2 );
+*/
 
 			m_meshSpikes.addIndex( nbIndices );
 			m_meshSpikes.addIndex( nbIndices+1 );
@@ -83,8 +94,15 @@ void apparelMood_porcupinopathy::apply()
 
 		}
 
+		int nbMeshVertices = m_model.mesh.getNumVertices();
+
 		m_model.mesh.append( m_meshSpikes );
 		m_model.createMeshFaces();
+
+		for (int i=0; i<m_verticesPorcu.size(); i++ )
+		{
+			 m_verticesPorcu[i]->m_index+=nbMeshVertices;
+		}
 	}
 
 
@@ -97,10 +115,6 @@ void apparelMood_porcupinopathy::apply()
 //--------------------------------------------------------------
 void apparelMood_porcupinopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
-	// Only recompute Mesh if subdivision is changed
-/*	if (parameter.getName() == "Subdivision")
-		setChanged(true);
-*/
 }
 
 
@@ -108,8 +122,27 @@ void apparelMood_porcupinopathy::onParameterChanged(ofAbstractParameter& paramet
 void apparelMood_porcupinopathy::update()
 {
 	// Get amplitude of sound
-	//m_weight = GLOBALS->getSoundInputVolume(); // ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.2f, 0.1f,1.0f);
+	float soundVolume = GLOBALS->getSoundInputVolume(); // ofMap(GLOBALS->getSoundInputVolume(),0.0f,0.2f, 0.1f,1.0f);
 	
 	
+	ofVec3f* pVertex = 0;
+	for (int i=0; i<m_verticesPorcu.size(); i++ )
+	{
+		 pVertex = m_model.mesh.getVerticesPointer() + m_verticesPorcu[i]->m_index;
+	 	 *pVertex = m_verticesPorcu[i]->m_pos + soundVolume * m_amplitude * m_verticesPorcu[i]->m_normal;
+	
+//		m_vertexSpikeIndices[i]+=nbMeshVertices;
+	}
+}
+
+//--------------------------------------------------------------
+void apparelMood_porcupinopathy::deleteVerticesPorcu()
+{
+	vector<PorcuVertex*>::iterator it = m_verticesPorcu.begin();
+	for ( ; it!=m_verticesPorcu.end(); ++it)
+	{
+		delete *it;
+	}
+	m_verticesPorcu.clear();
 }
 

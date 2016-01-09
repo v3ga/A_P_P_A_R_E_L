@@ -35,7 +35,16 @@ void apparelModUI::createControls(const ofVec2f& posCanvas)
 	mp_canvas->addSpacer(300,1);
 
 	if (mp_mod->isMood() == false)
-		mp_canvas->addWidgetDown( new ofxUILabelButton("reset sql", false, 100,16,0,0,OFX_UI_FONT_SMALL) );
+	{
+		if (mp_mod->m_words.size()>0)
+		{
+			mp_canvas->addWidgetDown( new ofxUILabelButton("reset sql", false, 100,16,0,0,OFX_UI_FONT_SMALL) );
+			mp_canvas->addWidgetRight( new ofxUILabelButton("inject sql", false, 100,16,0,0,OFX_UI_FONT_SMALL) );
+		}
+	}
+
+	mp_canvas->addWidgetDown( new ofxUIToggle("draw debug", false, 16,16) );
+
 	mp_canvas->addWidgetDown( new ofxUILabel("params","Parameters",OFX_UI_FONT_SMALL) );
     mp_canvas->addSpacer(300,1);
 
@@ -75,7 +84,8 @@ void apparelModUI::createControls(const ofVec2f& posCanvas)
 	}
 
 
-	mp_sliderWeight = mp_canvas->addSlider( "Weight", 0.0f, 1.0f, mp_mod->m_weight );
+	if (mp_mod->isMood() == false && mp_mod->m_weightUI)
+		mp_sliderWeight = mp_canvas->addSlider( "Weight", 0.0f, 1.0f, mp_mod->m_weight );
 
 	mp_canvas->autoSizeToFitWidgets();
 	
@@ -115,6 +125,23 @@ void apparelModUI::handleEvents(ofxUIEventArgs& e)
 			if (mp_mod)
 				mp_mod->resetWordsCountUserDatabase( GLOBALS->getUser() );
 		}
+	}
+	if (name == "inject sql")
+	{
+		ofxUILabelButton* pBtn = (ofxUILabelButton*) e.widget;
+		if (pBtn->getValue())
+		{
+			if (mp_mod)
+				mp_mod->injectWordsCountUserDatabase( GLOBALS->getUser() );
+		}
+	}
+	else
+	if (name == "draw debug")
+	{
+	 	ofxUIToggle* pToggle = e.getToggle();
+	
+		if (mp_mod)
+			mp_mod->setDraDebug(pToggle->getValue());
 	}
 	else
 	if (name == "Weight")

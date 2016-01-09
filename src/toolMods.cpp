@@ -68,7 +68,12 @@ void toolMods::show(bool is)
 //--------------------------------------------------------------
 bool toolMods::isHit(int x, int y)
 {
-	return (tool::isHit(x, y) || ( mp_modUICurrent && mp_modUICurrent->getCanvas() &&  mp_modUICurrent->getCanvas()->isHit(x,y)));
+	return (
+				tool::isHit(x, y) ||
+				( mp_modUICurrent && mp_modUICurrent->getCanvas() &&  mp_modUICurrent->getCanvas()->isHit(x,y)) ||
+				( mp_moodUICurrent && mp_moodUICurrent->getCanvas() &&  mp_moodUICurrent->getCanvas()->isHit(x,y))
+			
+			);
 }
 
 //--------------------------------------------------------------
@@ -172,6 +177,8 @@ void toolMods::createControlsCustomFinalize()
 {
 	if (mp_modsManager == 0) return;
 
+
+	// Mods
 	map<string, apparelMod*>::iterator it;
 	for (it = mp_modsManager->m_mods.begin(); it != mp_modsManager->m_mods.end(); ++it)
 	{
@@ -194,6 +201,7 @@ void toolMods::createControlsCustomFinalize()
 	}
 
 
+	// Moods
 	for (it = mp_modsManager->m_moods.begin(); it != mp_modsManager->m_moods.end(); ++it)
 	{
 		apparelModUI* modUI = makeInstanceModUI(it->second);
@@ -248,31 +256,31 @@ void toolMods::update()
 //--------------------------------------------------------------
 void toolMods::draw()
 {
-	apparelModel* pModel = m_bViewMixed ? mp_modsManager->getModelLastInChain() : mp_apparelModel;
-	apparelMod*	  pMod = m_bViewMixed ? mp_modsManager->getModLastInChain() : mp_apparelModCurrent;
+	apparelModel* pModel 	= m_bViewMixed ? mp_modsManager->getModelLastInChain() : mp_apparelModel;
+	apparelMod*	  pMod 		= m_bViewMixed ? mp_modsManager->getModLastInChain() : mp_apparelModCurrent;
 	
 	ofMesh m;
 	m.enableIndices();
 	m.enableNormals();
 	m.setMode(OF_PRIMITIVE_TRIANGLES);
 	
-		 vector<ofMeshFaceApparel*>& meshFacesRef = pModel->getMeshFacesRef();
-	
-		ofMeshFaceApparel* pFace;
- 
-	 	for (int i=0; i<meshFacesRef.size();i++)
-	 	{
-			pFace 		= meshFacesRef[i];
-	
-			m.addVertex( pFace->getVertex(0) );
-			m.addVertex( pFace->getVertex(1) );
-			m.addVertex( pFace->getVertex(2) );
+	vector<ofMeshFaceApparel*>& meshFacesRef = pModel->getMeshFacesRef();
 
-			m.addNormal( pFace->getFaceNormal() );
-			m.addNormal( pFace->getFaceNormal() );
-			m.addNormal( pFace->getFaceNormal() );
-	
-		}
+   	ofMeshFaceApparel* pFace;
+
+   	for (int i=0; i<meshFacesRef.size();i++)
+   	{
+	   pFace 		= meshFacesRef[i];
+
+	   m.addVertex( pFace->getVertex(0) );
+	   m.addVertex( pFace->getVertex(1) );
+	   m.addVertex( pFace->getVertex(2) );
+
+	   m.addNormal( pFace->getFaceNormal() );
+	   m.addNormal( pFace->getFaceNormal() );
+	   m.addNormal( pFace->getFaceNormal() );
+
+   	}
  
 	if (pMod)
 	{
@@ -287,12 +295,13 @@ void toolMods::draw()
 		if (m_bDrawWireFrameOnly == false)
 		{
 		   ofSetColor(0,255);
-		   m_shaderFlat.begin();
-//			pMod->drawFaces();
-			m.draw();
+//		   m_shaderFlat.begin();
+			pMod->drawFaces();
+//			m.draw();
+//			pMod->draw();
 		   glEnable(GL_POLYGON_OFFSET_LINE);
 		   glPolygonOffset(-1,-1);
-		   m_shaderFlat.end();
+//		   m_shaderFlat.end();
 	   }
 	 
 	 

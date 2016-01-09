@@ -33,7 +33,7 @@ bool kawai::readXml(ofxXmlSettings& settings, int which)
 	OFAPPLOG->println("- meshName="+m_meshName);
 	
 	
-	m_scale = settings.getValue("scale", 0.75f, which);
+	m_scale = settings.getValue("scale", 0.75f);
 	OFAPPLOG->println("- scale="+ofToString(m_scale));
 	
 	m_pos.x = settings.getAttribute("position", "x", 0.0f);

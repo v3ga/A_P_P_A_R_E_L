@@ -1,4 +1,7 @@
 <Zoopathy>
     <WeightManual>1</WeightManual>
-    <NbWordsMax>12</NbWordsMax>
+    <NbWordsMax>5</NbWordsMax>
+    <LengthMax>19.974</LengthMax>
+    <Density>10</Density>
+    <Resolution>22.4167</Resolution>
 </Zoopathy>

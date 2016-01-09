@@ -56,14 +56,14 @@ void apparelMood_noisopathy::update()
     	ofVec3f vert = m_meshInput.getVertex(i);
     	ofVec3f timeOffsets = m_offsets[i];
 
-		//vert.x += (ofSignedNoise(time*timeScale+timeOffsets.x)) * displacementScale;
-    	//vert.y += (ofSignedNoise(time*timeScale+timeOffsets.y)) * displacementScale;
+		vert.x += (ofSignedNoise(time*timeScale+timeOffsets.x)) * displacementScale;
+    	vert.y += (ofSignedNoise(time*timeScale+timeOffsets.y)) * displacementScale;
     	vert.z += (ofSignedNoise(time*timeScale+timeOffsets.z)) * displacementScale;
 
     	m_model.mesh.setVertex(i, vert);
 	}
 
 	
-	setChanged();
+	//setChanged();
 }
 

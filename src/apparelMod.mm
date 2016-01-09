@@ -28,7 +28,10 @@ apparelMod::apparelMod(string id, int id2)
 	m_isMeshChanged			= false;
 	m_isMood				= false;
 	m_weight				= 0.25f;
+	m_weightUI				= true;
 	m_bForceWeightAutomatic	= false;
+	
+	m_bDrawDebug			= false;
 
 
 //	m_weight.set("Weight", 0.5f, 0.0f, 1.0f);
@@ -43,11 +46,14 @@ apparelMod::apparelMod(string id, int id2)
 //--------------------------------------------------------------
 void apparelMod::createParameters()
 {
-   m_isWeightManual.set("WeightManual",false);
-   m_parameters.add(m_isWeightManual);
+   if (m_isMood == false)
+   {
+	   m_isWeightManual.set("WeightManual",false);
+	   m_parameters.add(m_isWeightManual);
 
-   m_nbWordsMax.set("NbWordsMax", 5, 1, 20);
-   m_parameters.add(m_nbWordsMax);
+	   m_nbWordsMax.set("NbWordsMax", 5, 1, 20);
+	   m_parameters.add(m_nbWordsMax);
+	}
 }
 
 
@@ -186,6 +192,22 @@ void apparelMod::resetWordsCountUserDatabase(user* pUser, bool lock)
 }
 
 //--------------------------------------------------------------
+void apparelMod::injectWordsCountUserDatabase(user* pUser)
+{
+	int nbWordsInList = m_words.size();
+ 	if (nbWordsInList>0)
+	{
+		if(pUser && pUser->getSqlData())
+		{
+			// Delete all
+			pUser->getSqlData()->remove("words").where("mod", m_id2).execute();
+			pUser->getSqlData()->insert("words").use("name", m_words[0]).use("count", (int)(m_weight * (float)m_nbWordsMax)).use("mod", m_id2).execute();
+	 	}
+	}
+}
+
+
+//--------------------------------------------------------------
 void apparelMod::countUserWords(user* pUser, bool lock)
 {
   if (isMood()) return;
@@ -199,18 +221,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 		if (lock)
 			pUser->lock();
 		int nbWordsInList = m_words.size();
-/*
-		for (int i=0;i<nbWordsInList;i++)
-		{
-			ofxSQLiteSelect sel = pUser->getSqlData()->select("count").from("words").where("name", m_words[i]).limit(1).execute().begin();
-			if (sel.hasNext())
-			{
-		  		int count = sel.getInt();
-		  		OFAPPLOG->println("- found word "+m_words[i]+" with count="+ofToString(count));
-		  		m_countWords += count;
-			}
-		}
-*/
+
 		ofxSQLiteSelect sel = pUser->getSqlData()->select("sum(count) AS total_count").from("words").where("mod", m_id2).limit(1).execute().begin();
 		//SELECT sum(count) AS total_count FROM words WHERE mod = 0;
 		if (sel.hasNext())

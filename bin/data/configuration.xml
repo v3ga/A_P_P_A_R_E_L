@@ -15,7 +15,7 @@
 
 	<!-- Sound input for mood  -->
 	<soundInput>
-		<id>0</id>
+		<id>1</id>
 		<channels>1</channels>
 	</soundInput>
 

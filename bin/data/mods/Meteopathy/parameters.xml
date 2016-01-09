@@ -24,6 +24,6 @@
         <high>108.594</high>
         <max>150</max>
     </z>
-    <WeightManual>1</WeightManual>
+    <WeightManual>0</WeightManual>
     <NbWordsMax>6</NbWordsMax>
 </Meteopathy>
