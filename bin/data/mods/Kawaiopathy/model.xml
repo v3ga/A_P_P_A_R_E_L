@@ -2,5 +2,8 @@
     <faces>
         <index>436</index>
     </faces>
-    <vertices></vertices>
+    <vertices>
+        <index>142</index>
+        <index>1016</index>
+    </vertices>
 </mod>
