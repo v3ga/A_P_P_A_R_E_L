@@ -7,6 +7,7 @@
 //
 
 #include "apparelMood_noisopathy.h"
+#include "apparelMod_zoopathy.h"
 #include "globals.h"
 
 //--------------------------------------------------------------
@@ -51,10 +52,12 @@ void apparelMood_noisopathy::update()
     float displacementScale = m_weight*m_amplitude;
 	
 	int numVerts = m_meshInput.getNumVertices();
+	ofVec3f vert;
+	ofVec3f timeOffsets;
 	for (int i=0; i<numVerts; ++i)
 	{
-    	ofVec3f vert = m_meshInput.getVertex(i);
-    	ofVec3f timeOffsets = m_offsets[i];
+    	vert = m_meshInput.getVertex(i);
+    	timeOffsets = m_offsets[i];
 
 		vert.x += (ofSignedNoise(time*timeScale+timeOffsets.x)) * displacementScale;
     	vert.y += (ofSignedNoise(time*timeScale+timeOffsets.y)) * displacementScale;
@@ -62,8 +65,34 @@ void apparelMood_noisopathy::update()
 
     	m_model.mesh.setVertex(i, vert);
 	}
+}
 
+//--------------------------------------------------------------
+void apparelMood_noisopathy::updateModZoopathy(apparelMod_zoopathy* pModZoo)
+{
+	if (pModZoo==0) return;
+
+	float time = ofGetElapsedTimef();
+    float timeScale = m_timeScale;
+    float displacementScale = m_weight*m_amplitude;
+
+//	pModZoo->setChanged();
+	pModZoo->m_bDoUpdatePoils = true;
 	
-	//setChanged();
+	vector<Poil*>::iterator it = pModZoo->m_poils.begin();
+	ofVec3f vert;
+	ofVec3f timeOffsets;
+	for ( ; it != pModZoo->m_poils.end(); ++it)
+	{
+		int n = (*it)->m_resolution;
+		for (int i=1;i<n;i++)
+		{
+	    	timeOffsets = m_offsets[i%n];
+
+			(*it)->m_line[i].x += (ofSignedNoise(time*timeScale+timeOffsets.x)) * displacementScale;
+    		(*it)->m_line[i].y += (ofSignedNoise(time*timeScale+timeOffsets.y)) * displacementScale;
+    		(*it)->m_line[i].z += (ofSignedNoise(time*timeScale+timeOffsets.z)) * displacementScale;
+		}
+	}
 }
 

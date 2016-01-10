@@ -26,6 +26,8 @@ class apparelMod_selfopathy : public apparelMod
 		void				update				();
 		void				drawExtra			();
 		void				onParameterChanged	(ofAbstractParameter& parameter);
+		void				onWeightChanged		();
+
  
 		void				setImage			(ofImage* pImage);
 
@@ -41,7 +43,7 @@ class apparelMod_selfopathy : public apparelMod
 
  
 		ofParameter<float>			m_amplitude;
-		ofParameter<float>			m_levelSubdiv;
+		ofParameter<int>			m_levelSubdiv;
  		ofParameterGroup			m_amplitudeRndFactor;
 
 		BoundingBox					m_meshInputBoundingBox;

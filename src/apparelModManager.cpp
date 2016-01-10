@@ -321,6 +321,13 @@ void apparelModManager::applyModChain()
 	  m_modsChain[i]->update();
 	}
 	
+	// Special case
+	if (mp_moodCurrent && mp_moodCurrent->getId() == "Noisopathy")
+	{
+		apparelMood_noisopathy* pNoiso = (apparelMood_noisopathy*) mp_moodCurrent;
+		pNoiso->updateModZoopathy( (apparelMod_zoopathy*) getMod("Zoopathy") );
+	}
+	
 //	OFAPPLOG->end();
 }
 

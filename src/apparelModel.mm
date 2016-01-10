@@ -205,7 +205,6 @@ void apparelModel::createMeshFaces()
 	clearMeshFaces();
 
 	vector<ofIndexType>& 	indices 	= mesh.getIndices();
-	//vector<ofVec3f>&		vertices	= mesh.getVertices();
 
 	for (int i=0; i<indices.size();i+=3)
 	{
@@ -213,6 +212,16 @@ void apparelModel::createMeshFaces()
 	}
 	
 //	OFAPPLOG->end();
+}
+
+//--------------------------------------------------------------
+void apparelModel::computeMeshFacesNormals()
+{
+	vector<ofMeshFaceApparel*>::iterator it = meshFaces.begin();
+	for ( ; it!=meshFaces.end(); ++it)
+	{
+		(*it)->getFaceNormal();
+	}
 }
 
 //--------------------------------------------------------------

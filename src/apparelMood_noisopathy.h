@@ -11,6 +11,7 @@
 #include "apparelMod.h"
 #include "parameterGroupLowHigh.h"
 
+class apparelMod_zoopathy;
 class apparelMood_noisopathy : public apparelMod
 {
 	public:
@@ -22,6 +23,8 @@ class apparelMood_noisopathy : public apparelMod
 		void				update				();
 		void				copyModelFrom		(const apparelModel& model);
 		void				onParameterChanged	(ofAbstractParameter& parameter){}
+		void				updateModZoopathy	(apparelMod_zoopathy*);
+
 
 	private:
 		vector<ofVec3f>			m_offsets;

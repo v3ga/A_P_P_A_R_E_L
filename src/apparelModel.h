@@ -32,6 +32,7 @@ class apparelModel
 		void						copyMeshAndTransformation	(const apparelModel& otherModel);
 		void						copyVerticesPositions		(const apparelModel& otherModel);
 		void						computeFacesNormals			(); // if ofMeshFaceApparel instances were moved/displaced for example
+		void						computeMeshFacesNormals		();
 
 		ofMatrix4x4&				getModelMatrix	(){return modelMatrix;}
 
