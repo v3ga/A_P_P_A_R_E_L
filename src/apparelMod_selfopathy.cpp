@@ -45,40 +45,51 @@ void apparelMod_selfopathy::createParameters()
 //--------------------------------------------------------------
 void apparelMod_selfopathy::setImage(ofImage* pImage)
 {
-	m_bDoSudivision = false;
-	if (mp_image == 0)
+	OFAPPLOG->begin("apparelMod_selfopathy::setImage()");
+//	m_bDoSudivision = false;
+//	if (mp_image == 0)
 		m_bDoSudivision = true;
 	
 	mp_image = pImage;
 	setChanged();
 	m_bDoDisplacement = true;
+	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::apply()
 {
 		m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
-
-/*
-		if (m_bDoSudivision && false)
-		{
-			m_meshInput.mergeDuplicateVertices();
-			ofMesh meshSubdivided1 = butterfly.subdivideLinear(m_meshInput, (int)m_levelSubdiv );
-			m_model.mesh = meshSubdivided1;
-			m_meshRefDisplacement = m_model.mesh;
-		}
-*/
 	
 		if (m_bDoSudivision)
 		{
 			m_model.mesh = m_meshInput;
+			m_newMesh.clear();
 
-			newMesh.clear();
-		
-			int nbFaces = m_model.getMeshFacesRef().size();
+/*
+			vector<ofIndexType>& indices = m_model.getMeshRef().getIndices();
+			ofVec3f A,B,C,M,n;
+			for (int i=0;i<indices.size(); i=i+3)
+			{
+				ofIndexType indexA = indices[i];
+				ofIndexType indexB = indices[i+1];
+				ofIndexType indexC = indices[i+2];
+
+				A = m_model.getMeshRef().getVertex( indexA );
+				B = m_model.getMeshRef().getVertex( indexB );
+				C = m_model.getMeshRef().getVertex( indexC );
+
+				M = (A+B+C) / 3.0f;
+
+				
+
+			}
+*/
+
 			
 			// Go through all faces
 			ofMesh meshSubdivided0;
+			int nbFaces = (int)m_model.getMeshFacesRef().size();
 			for (int i=0; i<nbFaces; i++)
 			{
 			
@@ -86,9 +97,6 @@ void apparelMod_selfopathy::apply()
 			 	ofMeshFaceApparel* pFace = m_model.getMeshFacesRef()[ i ];
 				ofVec3f faceNormal = pFace->getFaceNormal();
 
-				//float d = faceNormal.dot( ofVec3f(0,1,0) );
-				//if (abs(d)<=0.7)
-				{
 			 
 			 
 				 // For this face we create a mesh "meshSubdivived0"
@@ -112,22 +120,22 @@ void apparelMod_selfopathy::apply()
 				 meshSubdivided0.addIndex(2);
 				 
 				 // Subdivide now.
-				 ofMesh meshSubdivided1 = butterfly.subdivideLinear(meshSubdivided0, (int)m_levelSubdiv );
+				 ofMesh meshSubdivided1 = m_butterfly.subdivideLinear(meshSubdivided0, (int)m_levelSubdiv );
 
 				 // Add vertices to current model
 				 // Index of the first vertices we are going to add
 				 //ofIndexType indexVertModel = m_model.mesh.getNumVertices();
-				 ofIndexType indexVertModel = newMesh.getNumVertices();
+				 ofIndexType indexVertModel = m_newMesh.getNumVertices();
 				 
 				 // References to vertices of subdivided mesh
 				 //vector<ofVec3f>& verticesAdd = meshSubdivided1.getVertices();
-				 int nbVerticesAdd = meshSubdivided1.getNumVertices();
+				 int nbVerticesAdd = (int)meshSubdivided1.getNumVertices();
 				 
 				 // Go
 				 for (int v=0; v<nbVerticesAdd; v++)
 				 {
-					 newMesh.addVertex( meshSubdivided1.getVertex(v) );
-					 newMesh.addNormal( faceNormal );
+					 m_newMesh.addVertex( meshSubdivided1.getVertex(v) );
+					 m_newMesh.addNormal( faceNormal );
 				 }
 				 
 				 
@@ -135,7 +143,7 @@ void apparelMod_selfopathy::apply()
 				 vector<ofIndexType>& 		indicesAdd 	= meshSubdivided1.getIndices();
 				 const vector<ofMeshFace>& 	facesAdd 	= meshSubdivided1.getUniqueFaces();
 
-				 int nbFacesAdd = facesAdd.size();
+				 int nbFacesAdd = (int)facesAdd.size();
 				 for (int f=0;f<nbFacesAdd;f++)
 				 {
 					 // Get face
@@ -159,17 +167,20 @@ void apparelMod_selfopathy::apply()
 						 indexC = indexVertModel + indicesAdd[f*3+1];
 					 }
 					 
-					 newMesh.addIndex(indexA);
-					 newMesh.addIndex(indexB);
-					 newMesh.addIndex(indexC);
+					 m_newMesh.addIndex(indexA);
+					 m_newMesh.addIndex(indexB);
+					 m_newMesh.addIndex(indexC);
 
-				 }
 				}
+
+
 			
-				newMesh.mergeDuplicateVertices();
+				m_newMesh.mergeDuplicateVertices();
+
+
 
 				m_model.mesh.clear();
-				m_model.mesh.append(newMesh);
+				m_model.mesh.append(m_newMesh);
 
 				m_meshRefDisplacement = m_model.mesh;
 			}
@@ -219,7 +230,7 @@ void apparelMod_selfopathy::displaceVertices()
 	
 		vNorm.x = min(max(vNorm.x,0.0f),1.0f);
 		vNorm.y = min(max(vNorm.y,0.0f),1.0f);
-		vNorm.z = min(max(vNorm.z,0.0f),1.0f);
+		vNorm.z = 1.0f-min(max(vNorm.z,0.0f),1.0f); // invert here
 	
 	   float d = normals[i].dot( ofVec3f(0,1,0) ); // Z-axis
 	   c = mp_image->getColor(vNorm.x*(mp_image->getWidth()-1),vNorm.z*(mp_image->getHeight()-1));

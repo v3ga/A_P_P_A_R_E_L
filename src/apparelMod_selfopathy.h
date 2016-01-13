@@ -37,8 +37,8 @@ class apparelMod_selfopathy : public apparelMod
 		bool						m_bDoDisplacement;
 		bool						m_bDoSudivision;
 
-	    ofxButterfly 				butterfly;
-		ofMesh 						newMesh;
+	    ofxButterfly 				m_butterfly;
+		ofMesh 						m_newMesh;
 		ofMesh						m_meshRefDisplacement;
 
  

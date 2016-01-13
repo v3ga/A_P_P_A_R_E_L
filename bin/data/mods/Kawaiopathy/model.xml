@@ -1,9 +1,6 @@
 <mod>
-    <faces>
-        <index>436</index>
-    </faces>
+    <faces></faces>
     <vertices>
-        <index>142</index>
-        <index>1016</index>
+        <index>160</index>
     </vertices>
 </mod>

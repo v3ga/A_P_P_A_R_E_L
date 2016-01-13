@@ -78,6 +78,14 @@ string user::getServicePropertyString(string name)
 			return pUserTwitterSimple->m_image;
 	}
 	#endif
+	#ifdef TARGET_OF_IOS
+	if (name == "twitter_image")
+	{
+		userTwitterGuestIOS* pUserTwitter = (userTwitterGuestIOS*) getService("twitter");
+		if (pUserTwitter)
+			return pUserTwitter->getImageMiniUrl();
+	}
+	#endif
 
 	return "";
 }
@@ -95,6 +103,21 @@ float user::getServicePropertyFloat(string name)
 	#endif
 
 	return 0.0f;
+}
+
+//--------------------------------------------------------------
+ofImage* user::getServicePropertyImage(string name)
+{
+	#ifdef TARGET_OF_IOS
+	if (name == "twitter_image_object")
+	{
+		userTwitterGuestIOS* pUserTwitter = (userTwitterGuestIOS*) getService("twitter");
+		if (pUserTwitter)
+			return pUserTwitter->getImageMini();
+	}
+	#endif
+	
+	return 0;
 }
 
 
@@ -324,6 +347,8 @@ void user::loadConfiguration()
 //--------------------------------------------------------------
 string user::getPathSqlData()
 {
+	if(m_bTemplate)
+		return getPathResources("data.sql");
 	return getPathDocument("data.sql");
 }
 

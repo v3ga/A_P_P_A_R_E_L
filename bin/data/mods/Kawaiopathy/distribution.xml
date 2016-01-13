@@ -1,7 +1,7 @@
 <kawai type="mesh">
 	<mesh>hand.3ds</mesh>
 	<weight>0.1</weight>
-	<scale>1</scale>
+	<scale>0.6</scale>
 	<position x="-45" y="17.0" z="-10"></position>
 	<rotation angle="200" x="0" y="1" z="0"></rotation>
 </kawai>
@@ -9,7 +9,7 @@
 <kawai type="mesh">
 	<mesh>hand.3ds</mesh>
 	<weight>0.2</weight>
-	<scale>1</scale>
+	<scale>0.6</scale>
 	<position x="45" y="17.0" z="-10"></position>
 	<rotation angle="90" x="0" y="-1" z="0"></rotation>
 </kawai>
@@ -26,7 +26,7 @@
 	<mesh>bird.3ds</mesh>
 	<weight>0.4</weight>
 	<scale>0.8</scale>
-	<position x="5" y="-8.0" z="18"></position>
+	<position x="5" y="-8.0" z="13"></position>
 	<rotation angle="10" x="0" y="0" z="-1"></rotation>
 </kawai>
 
@@ -34,7 +34,7 @@
 	<mesh>cat.3ds</mesh>
 	<weight>0.5</weight>
 	<scale>0.7</scale>
-	<position x="-20" y="-5.0" z="20"></position>
+	<position x="-20" y="-5.0" z="15"></position>
 	<rotation angle="145" x="0" y="0" z="-1"></rotation>
 </kawai>
 
@@ -42,7 +42,7 @@
 	<mesh>dog.3ds</mesh>
 	<weight>0.55</weight>
 	<scale>0.6</scale>
-	<position x="-8" y="-8.0" z="15"></position>
+	<position x="-8" y="-8.0" z="10"></position>
 	<rotation angle="20" x="-1" y="0" z="1"></rotation>
 </kawai>
 
@@ -50,7 +50,7 @@
 	<mesh>cat.3ds</mesh>
 	<weight>0.85</weight>
 	<scale>0.7</scale>
-	<position x="18" y="8.0" z="18"></position>
+	<position x="18" y="8.0" z="13"></position>
 	<rotation angle="145" x="0" y="0" z="1"></rotation>
 </kawai>
 
@@ -58,7 +58,7 @@
 	<mesh>dog.3ds</mesh>
 	<weight>0.6</weight>
 	<scale>0.8</scale>
-	<position x="25" y="17.0" z="20"></position>
+	<position x="25" y="17.0" z="15"></position>
 	<rotation angle="80" x="0" y="0" z="-1"></rotation>
 </kawai>
 
@@ -66,7 +66,7 @@
 	<mesh>bird.3ds</mesh>
 	<weight>0.7</weight>
 	<scale>0.5</scale>
-	<position x="20" y="28.0" z="10"></position>
+	<position x="20" y="28.0" z="5"></position>
 	<rotation angle="180" x="0" y="0" z="1"></rotation>
 </kawai>
 
@@ -74,7 +74,7 @@
 	<mesh>cat.3ds</mesh>
 	<weight>0.75</weight>
 	<scale>0.8</scale>
-	<position x="12" y="28.0" z="22"></position>
+	<position x="12" y="28.0" z="17"></position>
 	<rotation angle="10" x="0" y="0" z="1"></rotation>
 </kawai>
 
@@ -82,7 +82,7 @@
 	<mesh>dog.3ds</mesh>
 	<weight>0.55</weight>
 	<scale>0.9</scale>
-	<position x="-7" y="32.0" z="20"></position>
+	<position x="-7" y="32.0" z="15"></position>
 	<rotation angle="190" x="0" y="0" z="-1"></rotation>
 </kawai>
 
@@ -90,6 +90,6 @@
 	<mesh>bird.3ds</mesh>
 	<weight>0.9</weight>
 	<scale>0.9</scale>
-	<position x="-25" y="18.0" z="29"></position>
+	<position x="-25" y="18.0" z="24"></position>
 	<rotation angle="90" x="0" y="0" z="1"></rotation>
 </kawai>

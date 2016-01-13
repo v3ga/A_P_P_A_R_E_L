@@ -70,5 +70,7 @@
         <index>183</index>
         <index>176</index>
     </faces>
-    <vertices></vertices>
+    <vertices>
+        <index>119</index>
+    </vertices>
 </mod>

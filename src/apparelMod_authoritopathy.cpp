@@ -46,7 +46,7 @@ void apparelMod_authoritopathy::displaceVertices()
 	//OFAPPLOG->begin("apparelMod_authoritopathy::onParameterChanged(\""+parameter.getName()+"\"");
 	//apparelMod::parameterChanged(parameter);
 
-	int nbVertices = m_indicesVertex.size();
+	int nbVertices = (int)m_indicesVertex.size();
 	ofVec3f v,vo;
 	
 	for (int i=0; i<nbVertices ; i++)

@@ -63,8 +63,11 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	addMood	( new apparelMood_noisopathy() );
 	addMood	( new apparelMood_sad() );
 
+	// Save to globals
 	GLOBALS->mp_modSelfopathy = (apparelMod_selfopathy*)getMod("Selfopathy");
+	GLOBALS->mp_modSelfopathy->setDrawDebug(false);
 
+	// Load data
 	copyModelToMods(*pModel);
 	applyModForceWeightAutomatic();
 	loadModData();
@@ -140,7 +143,7 @@ void apparelModManager::copyModelToMods(const apparelModel& model)
 //--------------------------------------------------------------
 apparelMod*	apparelModManager::getModLastInChain()
 {
-	int nb = m_modsChain.size();
+	int nb = (int)m_modsChain.size();
 	if (nb>0)
 		return m_modsChain[nb-1];
 	return 0;
@@ -149,7 +152,7 @@ apparelMod*	apparelModManager::getModLastInChain()
 //--------------------------------------------------------------
 apparelModel* apparelModManager::getModelLastInChain()
 {
-	int nb = m_modsChain.size();
+	int nb = (int)m_modsChain.size();
 	if (nb>0)
 		return &m_modsChain[nb-1]->m_model;
 	return 0;
@@ -264,7 +267,7 @@ void apparelModManager::deleteMods()
 //--------------------------------------------------------------
 void apparelModManager::draw()
 {
-	int nbMods = m_modsChain.size();
+	int nbMods = (int)m_modsChain.size();
 	if (nbMods>=1)
 	{
 		m_modsChain[nbMods-1]->draw();
@@ -274,7 +277,7 @@ void apparelModManager::draw()
 //--------------------------------------------------------------
 void apparelModManager::drawModsExtra()
 {
-	int nbModsChains = m_modsChain.size();
+	int nbModsChains = (int)m_modsChain.size();
 	for (int i=0;i<nbModsChains;i++)
 	{
 //		m_modsChain[nbModsChains-1]->drawExtra();
@@ -286,7 +289,7 @@ void apparelModManager::drawModsExtra()
 void apparelModManager::applyModChain()
 {
 //	OFAPPLOG->begin("apparelModManager::applyModChain");
-	int nbMods = m_modsChain.size();
+	int nbMods = (int)m_modsChain.size();
 	
 	// Copy if something changed at some point
 	for (int i=0; i<nbMods; i++)
@@ -334,7 +337,7 @@ void apparelModManager::applyModChain()
 //--------------------------------------------------------------
 void apparelModManager::countUserWords(user* pUser, bool lock)
 {
-	int nbMods = m_modsChain.size();
+	int nbMods =(int)m_modsChain.size();
 	
 	// Copy if something changed at some point
 	for (int i=0; i<nbMods; i++)

@@ -11,7 +11,6 @@
 #include "apparelMod_authoritopathy.h"
 #include "apparelMod_sportopathy.h"
 #include "apparelMod_pedopathy.h"
-#include "apparelMod_vulgaropathy.h"
 #include "apparelMod_pretentiopathy.h"
 #include "apparelMod_meteopathy.h"
 #include "apparelMod_selfopathy.h"

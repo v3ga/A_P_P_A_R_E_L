@@ -11,7 +11,7 @@
 	
 	<!-- User which is used for data retrieval  -->
 	<!-- Folder : data/users/[user] -->
-	<user>template01</user>
+	<user>template03</user>
 
 	<!-- Sound input for mood  -->
 	<soundInput>

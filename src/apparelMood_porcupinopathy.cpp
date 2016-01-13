@@ -64,7 +64,7 @@ void apparelMood_porcupinopathy::apply()
 			n = (B-A).cross(C-A).normalize();
 //			M = M + 15*n;
 			
-			int nbIndices = m_meshSpikes.getNumVertices();
+			int nbIndices = (int)m_meshSpikes.getNumVertices();
 
 			m_meshSpikes.addVertex( A );
 			m_meshSpikes.addVertex( B );
@@ -72,7 +72,7 @@ void apparelMood_porcupinopathy::apply()
 			
 			m_meshSpikes.addVertex( M );
 			
-			m_verticesPorcu.push_back( new PorcuVertex(M,n,m_meshSpikes.getNumVertices()-1 ) );
+			m_verticesPorcu.push_back( new PorcuVertex(M,n,(int)m_meshSpikes.getNumVertices()-1 ) );
 			
 			
 /*			m_meshSpikes.addIndex( nbIndices );
@@ -94,7 +94,7 @@ void apparelMood_porcupinopathy::apply()
 
 		}
 
-		int nbMeshVertices = m_model.mesh.getNumVertices();
+		int nbMeshVertices = (int)m_model.mesh.getNumVertices();
 
 		m_model.mesh.append( m_meshSpikes );
 		m_model.createMeshFaces();
@@ -133,6 +133,7 @@ void apparelMood_porcupinopathy::update()
 	
 //		m_vertexSpikeIndices[i]+=nbMeshVertices;
 	}
+//		m_model.createMeshFaces();
 }
 
 //--------------------------------------------------------------

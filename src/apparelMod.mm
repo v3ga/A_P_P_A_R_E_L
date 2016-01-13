@@ -220,7 +220,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
   	{
 		if (lock)
 			pUser->lock();
-		int nbWordsInList = m_words.size();
+	//	int nbWordsInList = m_words.size();
 
 		ofxSQLiteSelect sel = pUser->getSqlData()->select("sum(count) AS total_count").from("words").where("mod", m_id2).limit(1).execute().begin();
 		//SELECT sum(count) AS total_count FROM words WHERE mod = 0;

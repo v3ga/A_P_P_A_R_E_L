@@ -85,7 +85,7 @@ class apparelMod
 		virtual	void		drawWireframe			();
 
 		void				drawDebug				(){}
-		void				setDraDebug				(bool is){m_bDrawDebug = is;}
+		void				setDrawDebug			(bool is){m_bDrawDebug = is;}
  		bool				m_bDrawDebug;
 
 		// OSC NETWORK

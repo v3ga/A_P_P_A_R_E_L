@@ -75,6 +75,8 @@ void SoundInput::loadParameters()
 //--------------------------------------------------------------
 void SoundInput::audioIn(float * input, int bufferSize, int nChannels)
 {
+	if (input == NULL || bufferSize == 0) return;
+
 	float curVol = 0.0;
     int numCounted = 0;
 

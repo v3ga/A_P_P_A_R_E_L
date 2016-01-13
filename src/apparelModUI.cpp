@@ -141,7 +141,7 @@ void apparelModUI::handleEvents(ofxUIEventArgs& e)
 	 	ofxUIToggle* pToggle = e.getToggle();
 	
 		if (mp_mod)
-			mp_mod->setDraDebug(pToggle->getValue());
+			mp_mod->setDrawDebug(pToggle->getValue());
 	}
 	else
 	if (name == "Weight")

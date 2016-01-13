@@ -56,8 +56,8 @@ class user : public ofThread
 					userSocialInterface*			getService					(string id);
 					string							getServicePropertyString	(string name);
 					float							getServicePropertyFloat		(string name);
+ 					ofImage*						getServicePropertyImage		(string name);
  
-
 
 		virtual		void				loadConfiguration	();
 					string				getPathSqlData		();

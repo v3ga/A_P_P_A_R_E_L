@@ -3,27 +3,27 @@
     <size>
         <min>1</min>
         <low>1</low>
-        <high>10.0052</high>
+        <high>18.1198</high>
         <max>20</max>
     </size>
     <x>
         <min>-50</min>
         <low>-29.1667</low>
-        <high>28.125</high>
+        <high>36.9792</high>
         <max>50</max>
     </x>
     <y>
         <min>-50</min>
-        <low>-30.2083</low>
-        <high>32.8125</high>
+        <low>-20.8333</low>
+        <high>50</high>
         <max>50</max>
     </y>
     <z>
         <min>0</min>
-        <low>42.9688</low>
-        <high>108.594</high>
+        <low>2.3438</low>
+        <high>41.4062</high>
         <max>150</max>
     </z>
     <WeightManual>0</WeightManual>
-    <NbWordsMax>6</NbWordsMax>
+    <NbWordsMax>5</NbWordsMax>
 </Meteopathy>

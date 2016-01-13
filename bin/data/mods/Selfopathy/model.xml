@@ -18,5 +18,8 @@
         <index>185</index>
         <index>2951</index>
     </faces>
-    <vertices></vertices>
+    <vertices>
+        <index>183</index>
+        <index>163</index>
+    </vertices>
 </mod>

@@ -46,7 +46,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>Distance</Name>
-    <Value>92.500000000</Value>
+    <Value>112.800003052</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -66,12 +66,12 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Selfopathy</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Zoopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>

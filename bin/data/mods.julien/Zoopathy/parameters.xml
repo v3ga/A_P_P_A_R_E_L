@@ -1,0 +1,13 @@
+<Zoopathy>
+    <WeightManual>1</WeightManual>
+    <NbWordsMax>5</NbWordsMax>
+    <LengthMax>60</LengthMax>
+    <Resolution>24</Resolution>
+    <zPoils>
+        <min>-60</min>
+        <low>13.75</low>
+        <high>42.5</high>
+        <max>60</max>
+    </zPoils>
+    <Random>1</Random>
+</Zoopathy>
