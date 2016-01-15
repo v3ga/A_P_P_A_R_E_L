@@ -20,7 +20,7 @@ apparelMod_sportopathy::apparelMod_sportopathy() : apparelMod("Sportopathy")
 //--------------------------------------------------------------
 void apparelMod_sportopathy::apply()
 {
-	if (isChanged())
+	//if (isChanged())
 	{
 		m_model.mesh = m_meshInput;
 		m_model.createMeshFaces();

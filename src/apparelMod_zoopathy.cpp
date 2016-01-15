@@ -66,6 +66,7 @@ void apparelMod_zoopathy::createParameters()
 //--------------------------------------------------------------
 void apparelMod_zoopathy::apply()
 {
+	m_bDoCreatePoils = true;
 }
 
 //--------------------------------------------------------------

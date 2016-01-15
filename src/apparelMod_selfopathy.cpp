@@ -10,6 +10,7 @@
 #include "parameterGroupLowHigh.h"
 #include "ofAppLog.h"
 
+#define USE_BUTTERFLY 1
 //--------------------------------------------------------------
 apparelMod_selfopathy::apparelMod_selfopathy() : apparelMod("Selfopathy")
 {
@@ -20,6 +21,9 @@ apparelMod_selfopathy::apparelMod_selfopathy() : apparelMod("Selfopathy")
 
 	m_levelSubdiv = 2;
 	setChanged();
+
+	m_isBusy = false;
+	m_bRefresh = false;
 }
 
 //--------------------------------------------------------------
@@ -59,42 +63,68 @@ void apparelMod_selfopathy::setImage(ofImage* pImage)
 //--------------------------------------------------------------
 void apparelMod_selfopathy::apply()
 {
+	if (m_isBusy) return;
+
+	OFAPPLOG->begin("apparelMod_selfopathy::apply()");
+	
+	if (m_bRefresh == false)
+	{
+		// Bounding box for image
 		m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
 	
-		if (m_bDoSudivision)
+		// model from input
+		m_model.mesh.clear();
+		m_model.mesh = m_meshInput;
+		m_model.createMeshFaces();
+
+		m_modelThread.copyMeshAndTransformation(m_model);
+
+		// Subdivide in thread
+		startThread();
+		//subdivide();
+	}
+	else
+	{
+		m_bRefresh = false;
+	}
+	
+	
+	OFAPPLOG->end();
+}
+
+//--------------------------------------------------------------
+void apparelMod_selfopathy::threadedFunction()
+{
+	m_isBusy = true;
+	subdivide();
+	m_isBusy = false;
+	m_bRefresh = true;
+}
+
+
+//--------------------------------------------------------------
+void apparelMod_selfopathy::subdivide()
+{
+		m_bDoDisplacement = true;
+ 
+
+		OFAPPLOG->println(" - m_meshInput / nb vertices="+ofToString(m_meshInput.getVertices().size()));
+
+		if (true)
 		{
-			m_model.mesh = m_meshInput;
 			m_newMesh.clear();
 
-/*
-			vector<ofIndexType>& indices = m_model.getMeshRef().getIndices();
-			ofVec3f A,B,C,M,n;
-			for (int i=0;i<indices.size(); i=i+3)
-			{
-				ofIndexType indexA = indices[i];
-				ofIndexType indexB = indices[i+1];
-				ofIndexType indexC = indices[i+2];
 
-				A = m_model.getMeshRef().getVertex( indexA );
-				B = m_model.getMeshRef().getVertex( indexB );
-				C = m_model.getMeshRef().getVertex( indexC );
-
-				M = (A+B+C) / 3.0f;
-
-				
-
-			}
-*/
-
+			#if USE_BUTTERFLY
 			
 			// Go through all faces
 			ofMesh meshSubdivided0;
-			int nbFaces = (int)m_model.getMeshFacesRef().size();
+			int nbFaces = (int)/*m_model*/m_modelThread.getMeshFacesRef().size();
 			for (int i=0; i<nbFaces; i++)
 			{
 			
 				// Select face to subdivide
-			 	ofMeshFaceApparel* pFace = m_model.getMeshFacesRef()[ i ];
+			 	ofMeshFaceApparel* pFace = /*m_model*/m_modelThread.getMeshFacesRef()[ i ];
 				ofVec3f faceNormal = pFace->getFaceNormal();
 
 			 
@@ -177,14 +207,76 @@ void apparelMod_selfopathy::apply()
 			
 				m_newMesh.mergeDuplicateVertices();
 
+//				m_model.mesh.clear();
+//				m_model.mesh.append(m_newMesh);
 
-
-				m_model.mesh.clear();
-				m_model.mesh.append(m_newMesh);
-
-				m_meshRefDisplacement = m_model.mesh;
 			}
 			
+			#else
+			
+			for (int k=0;k<1;k++)
+			{
+			int nbFaces = (int)m_model.getMeshFacesRef().size();
+
+			ofVec3f *pA,*pB,*pC;
+			ofIndexType indexA,indexB,indexC;
+			ofVec3f M;
+			ofMeshFaceApparel* pFace;
+
+//			vector<ofVec3f> 	newVertices;
+//			vector<ofIndexType> newIndices;
+
+			int iii = -1;
+			ofLog() << "iii=" << ofToString(iii);
+			for (int i=0; i<nbFaces; i++)
+			{
+			 	pFace = m_model.getMeshFacesRef()[ i ];
+				
+				pA = pFace->getVertexPointer(0);
+				pB = pFace->getVertexPointer(1);
+				pC = pFace->getVertexPointer(2);
+
+				indexA = pFace->getVertexIndex(0);
+				indexB = pFace->getVertexIndex(1);
+				indexC = pFace->getVertexIndex(2);
+				
+				M = (*pA + *pB + *pC) / 3.0f;
+
+				
+				int indexM = m_model.mesh.getNumVertices();
+				if (iii<0){
+					iii = indexM;
+				}
+				m_model.mesh.addVertex(M);
+
+
+				m_model.mesh.addIndex( indexM );
+				m_model.mesh.addIndex( indexA );
+				m_model.mesh.addIndex( indexB );
+
+				m_model.mesh.addIndex( indexM );
+				m_model.mesh.addIndex( indexB );
+				m_model.mesh.addIndex( indexC );
+
+				m_model.mesh.addIndex( indexM );
+				m_model.mesh.addIndex( indexC );
+				m_model.mesh.addIndex( indexA );
+				
+			}
+			m_model.createMeshFaces();
+			}
+//			int indexEnd = m_model.mesh.getNumVertices()-1;
+			
+//			m_newMesh.clear();
+//			m_newMesh = m_model.mesh.getMeshForIndices(iii, indexEnd);
+			
+			//m_model.mesh = m_newMesh;
+		
+			#endif
+
+
+
+			m_meshRefDisplacement = m_model.mesh;
 		}
 
 		if (m_bDoDisplacement)
@@ -203,6 +295,7 @@ void apparelMod_selfopathy::apply()
 		// Reset flags
 		if (m_bDoSudivision) 	m_bDoSudivision 	= false;
 		if (m_bDoDisplacement) 	m_bDoDisplacement 	= false;
+
 }
 
 //--------------------------------------------------------------
@@ -218,10 +311,12 @@ void apparelMod_selfopathy::displaceVertices()
 
    ofVec3f posBounding = m_meshInputBoundingBox.getPosition();
    ofColor c;
-   for (int i=0; i<vertices.size(); i++ )
+   ofVec3f vNorm;
+   int nbVertices = vertices.size();
+   for (int i=0; i<nbVertices; i++ )
    {
 	   // Displacement
-	   ofVec3f vNorm
+	   vNorm.set
 	   (
 		   0.5f+(vertices[i].x-posBounding.x)/m_meshInputBoundingBox.getSize().x,
 		   0.5f+(vertices[i].y-posBounding.y)/m_meshInputBoundingBox.getSize().y,
@@ -239,8 +334,8 @@ void apparelMod_selfopathy::displaceVertices()
 	   float amplitude = abs(d)*lightness*m_amplitude;
 	   if (abs(d)>0.65f)
 	   {
-		   vertices[i] = verticesRef[i] + m_weight*amplitude*normals[i];
-	   
+		   // vertices[i] = verticesRef[i] + m_weight*amplitude*normals[i];
+			m_model.mesh.setVertex(i, verticesRef[i] + m_weight*amplitude*normals[i]);
 	   }
 	   
    }
@@ -250,7 +345,7 @@ void apparelMod_selfopathy::displaceVertices()
 void apparelMod_selfopathy::drawExtra()
 {
 	if (mp_image == 0) return;
-	
+		
 	if (m_bDrawDebug)
 	{
 		ofSetColor(200,0,0,200);
@@ -262,6 +357,13 @@ void apparelMod_selfopathy::drawExtra()
 		ofSetColor(255);
 		mp_image->draw(0, 0, 0, m_meshInputBoundingBox.getSize().x, m_meshInputBoundingBox.getSize().z);
 		ofPopMatrix();
+/*
+		ofPushMatrix();
+		ofScale(1.1f,1.1f);
+		m_newMesh.draw();
+
+		ofPopMatrix();
+*/
 	}
 }
 
@@ -272,7 +374,7 @@ void apparelMod_selfopathy::onParameterChanged(ofAbstractParameter& parameter)
 	{
 		m_bDoDisplacement = true;
 		//m_bDoSudivision = true;
-		ofLog() << m_levelSubdiv;
+//		ofLog() << m_levelSubdiv;
 	}
 	else
 	{
@@ -291,4 +393,13 @@ void apparelMod_selfopathy::onWeightChanged()
 //--------------------------------------------------------------
 void apparelMod_selfopathy::update()
 {
+	if (m_bRefresh)
+	{
+		m_model.mesh.clear();
+		m_model.mesh.append(m_newMesh);
+		m_model.createMeshFaces();
+		m_meshRefDisplacement = m_model.mesh;
+		displaceVertices();
+		setChanged();
+	}
 }

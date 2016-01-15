@@ -12,7 +12,7 @@
 #include "ofxButterfly.h"
 #include "BoundingBox.h"
 
-class apparelMod_selfopathy : public apparelMod
+class apparelMod_selfopathy : public apparelMod, public ofThread
 {
 	public:
 		apparelMod_selfopathy	();
@@ -30,7 +30,7 @@ class apparelMod_selfopathy : public apparelMod
 
  
 		void				setImage			(ofImage* pImage);
-
+		void 				threadedFunction	();
 
 	private:
 		ofImage*					mp_image;
@@ -48,5 +48,12 @@ class apparelMod_selfopathy : public apparelMod
 
 		BoundingBox					m_meshInputBoundingBox;
  
-		void						displaceVertices();
+ 		void						subdivide			();
+		void						displaceVertices	();
+ 
+		ofThread					m_threadSubdivision;
+		bool						m_isBusy;
+		bool						m_bRefresh;
+ 
+		apparelModel				m_modelThread;
 };

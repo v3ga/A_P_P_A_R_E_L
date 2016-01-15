@@ -65,7 +65,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 
 	// Save to globals
 	GLOBALS->mp_modSelfopathy = (apparelMod_selfopathy*)getMod("Selfopathy");
-	GLOBALS->mp_modSelfopathy->setDrawDebug(false);
+	GLOBALS->mp_modSelfopathy->setDrawDebug(true);
 
 	// Load data
 	copyModelToMods(*pModel);
@@ -171,7 +171,7 @@ void apparelModManager::selectMood(string name)
 
 	if (name !="")
 	{
-		int nbModsChain = m_modsChain.size();
+		int nbModsChain = (int)m_modsChain.size();
 
 		if (nbModsChain>0)
 		{
@@ -307,6 +307,7 @@ void apparelModManager::applyModChain()
 			{
 				m_modsChain[i+1]->copyModelFrom( m_modsChain[i]->m_model );
 			}
+
 		}
 	}
 

@@ -30,7 +30,8 @@ ofIndexType ofMeshFaceApparel::getVertexIndex(int index)
 	int offset = m_offsetIndices + index;
 	if (offset<mp_mesh->getIndices().size())
 	{
-		return mp_mesh->getIndices()[offset];
+		return mp_mesh->getIndex(offset);
+//		return mp_mesh->getIndices()[offset];
 	}
 	else
 	{

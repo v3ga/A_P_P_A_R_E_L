@@ -11,7 +11,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>show face normals</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -46,7 +46,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>Distance</Name>
-    <Value>112.800003052</Value>
+    <Value>119.099998474</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -96,12 +96,12 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Porcupinopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Sad</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
