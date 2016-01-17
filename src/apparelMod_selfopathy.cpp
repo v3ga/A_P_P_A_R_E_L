@@ -265,13 +265,6 @@ void apparelMod_selfopathy::subdivide()
 			}
 			m_model.createMeshFaces();
 			}
-//			int indexEnd = m_model.mesh.getNumVertices()-1;
-			
-//			m_newMesh.clear();
-//			m_newMesh = m_model.mesh.getMeshForIndices(iii, indexEnd);
-			
-			//m_model.mesh = m_newMesh;
-		
 			#endif
 
 
@@ -357,13 +350,6 @@ void apparelMod_selfopathy::drawExtra()
 		ofSetColor(255);
 		mp_image->draw(0, 0, 0, m_meshInputBoundingBox.getSize().x, m_meshInputBoundingBox.getSize().z);
 		ofPopMatrix();
-/*
-		ofPushMatrix();
-		ofScale(1.1f,1.1f);
-		m_newMesh.draw();
-
-		ofPopMatrix();
-*/
 	}
 }
 
@@ -403,3 +389,5 @@ void apparelMod_selfopathy::update()
 		setChanged();
 	}
 }
+
+

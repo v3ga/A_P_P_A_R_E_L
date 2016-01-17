@@ -170,7 +170,7 @@ string user::getPathResourcesForUserId(string userId, string filename)
 //--------------------------------------------------------------
 userSocialInterface* user::getService(string id)
 {
-	int nbServices = m_listSocialInterfaces.size();
+	int nbServices = (int) m_listSocialInterfaces.size();
 	for (int i=0;i<nbServices;i++)
 	{
 		if (m_listSocialInterfaces[i]->getId() == id)

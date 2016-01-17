@@ -288,37 +288,41 @@ void apparelModManager::drawModsExtra()
 //--------------------------------------------------------------
 void apparelModManager::applyModChain()
 {
-//	OFAPPLOG->begin("apparelModManager::applyModChain");
+
 	int nbMods = (int)m_modsChain.size();
 	
-	// Copy if something changed at some point
-	for (int i=0; i<nbMods; i++)
+	if (!isBusy())
 	{
-//		OFAPPLOG->println("["+ofToString(i)+"] "+m_modsChain[i]->getId());
-		// Something changed in the model (faces/vertices selection)
-		if (m_modsChain[i]->isChanged())
+	//	OFAPPLOG->begin("apparelModManager::applyModChain");
+	
+		// Copy if something changed at some point
+		for (int i=0; i<nbMods; i++)
 		{
-			// Recompute mod's parameters
-			// May be vertices / faces were added, proper flag should be set
-			m_modsChain[i]->apply();
-
-			// Copy the «new» model to the next mod in the chain
-			if (i<nbMods-1/* && m_modsChain[i]->isMeshChanged()*/)
+	//		OFAPPLOG->println("["+ofToString(i)+"] "+m_modsChain[i]->getId());
+			// Something changed in the model (faces/vertices selection)
+			if (m_modsChain[i]->isChanged())
 			{
-				m_modsChain[i+1]->copyModelFrom( m_modsChain[i]->m_model );
-			}
+				// Recompute mod's parameters
+				// May be vertices / faces were added, proper flag should be set
+				m_modsChain[i]->apply();
 
+				// Copy the «new» model to the next mod in the chain
+				if (i<nbMods-1/* && m_modsChain[i]->isMeshChanged()*/)
+				{
+					m_modsChain[i+1]->copyModelFrom( m_modsChain[i]->m_model );
+				}
+
+			}
+		}
+
+
+		// Reset flags
+		for (int i=0; i<nbMods; i++)
+		{
+			m_modsChain[i]->setChanged(false);
+			m_modsChain[i]->setMeshChanged(false);
 		}
 	}
-
-
-	// Reset flags
-	for (int i=0; i<nbMods; i++)
-	{
-		m_modsChain[i]->setChanged(false);
-		m_modsChain[i]->setMeshChanged(false);
-	}
-
 	// perform update
 	for (int i=0; i<nbMods; i++)
 	{
@@ -366,6 +370,18 @@ void apparelModManager::onNewWords(user* pUser, vector<string>& words)
 		it->second->onNewWords(pUser, words);
 	}
 }
+
+//--------------------------------------------------------------
+bool apparelModManager::isBusy()
+{
+	map<string, apparelMod*>::iterator it;
+	for (it = m_mods.begin(); it != m_mods.end(); ++it){
+		if (it->second->isBusy())
+			return true;
+	}
+	return false;
+}
+
 
 //--------------------------------------------------------------
 void apparelModManager::makeModsChain()

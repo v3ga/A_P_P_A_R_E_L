@@ -64,7 +64,7 @@ void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)
   if (pUser && pUser->getSqlData())
   {
 	   // For every word of the wordsList.txt
-		int nbWordsInMessage = wordsMessage.size();
+		int nbWordsInMessage = (int)wordsMessage.size();
 		for (int i=0;i<nbWordsInMessage;i++)
 		{
 			if (isInWordsList(wordsMessage[i]))
@@ -194,7 +194,7 @@ void apparelMod::resetWordsCountUserDatabase(user* pUser, bool lock)
 //--------------------------------------------------------------
 void apparelMod::injectWordsCountUserDatabase(user* pUser)
 {
-	int nbWordsInList = m_words.size();
+	int nbWordsInList = (int)m_words.size();
  	if (nbWordsInList>0)
 	{
 		if(pUser && pUser->getSqlData())

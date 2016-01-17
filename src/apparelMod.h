@@ -72,6 +72,9 @@ class apparelMod
  		bool				m_isChanged;			// tells if mesh itself or selection (vertices, faces) changed
  		bool				m_isMeshChanged;		// tells if mesh itself or selection (vertices, faces) changed
 		int					m_flagChanged;
+ 
+		virtual bool		isBusy					(){return false;}
+
 
 
 		// MOOD

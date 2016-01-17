@@ -63,6 +63,9 @@ class apparelModManager
 		void						onNewText			(user* pUser, string text);
 		void						onNewWords			(user* pUser, vector<string>& words);
 
+		// Busy state, tells if a mod is busy computing some stuff (in a thread for ex)
+		bool						isBusy				();
+
 		// Chain of mods
 		map<string, apparelMod*>	m_mods;
  		vector<apparelMod*>			m_modsChain;
@@ -71,6 +74,7 @@ class apparelModManager
 		// List of moods
 		map<string, apparelMod*>	m_moods;
 		apparelMod*					mp_moodCurrent;
+ 
  
  		// User associated with this manager
 		user*						mp_user;
