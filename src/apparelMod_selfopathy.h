@@ -28,6 +28,8 @@ class apparelMod_selfopathy : public apparelMod, public ofThread
 		void				onParameterChanged	(ofAbstractParameter& parameter);
 		void				onWeightChanged		();
 		bool				isBusy				(){return m_isBusy;}
+ 
+		BoundingBox&		getBoundingBox		(){return m_meshInputBoundingBox;}
 
  
 		void				setImage			(ofImage* pImage);

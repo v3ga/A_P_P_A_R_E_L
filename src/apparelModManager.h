@@ -8,6 +8,7 @@
 
 #pragma once
 #include "ofMain.h"
+#include "apparelModLoader.h"
 
 class apparelMod;
 class apparelModel;
@@ -45,6 +46,7 @@ class apparelModManager
 	
 		void						draw				();
 		void						drawModsExtra		();
+		void						drawLoader			();
  
  
 		// Modifiers to apply, order important
@@ -65,6 +67,7 @@ class apparelModManager
 
 		// Busy state, tells if a mod is busy computing some stuff (in a thread for ex)
 		bool						isBusy				();
+		apparelModLoader			m_loaderBusy;
 
 		// Chain of mods
 		map<string, apparelMod*>	m_mods;

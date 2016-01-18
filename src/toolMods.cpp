@@ -337,6 +337,8 @@ void toolMods::draw()
 	{
 		mp_modsManager->drawModsExtra();
 	}
+	
+	mp_modsManager->drawLoader();
 }
 
 //--------------------------------------------------------------

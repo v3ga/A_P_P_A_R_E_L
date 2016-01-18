@@ -63,9 +63,15 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	addMood	( new apparelMood_noisopathy() );
 	addMood	( new apparelMood_sad() );
 
+	// ——————————————————————————————————————————————————————
+	// LOADER
+	m_loaderBusy.load();
+	m_loaderBusy.setPosition(0.0f,-50.0f,0.0f);
+
+
 	// Save to globals
 	GLOBALS->mp_modSelfopathy = (apparelMod_selfopathy*)getMod("Selfopathy");
-	GLOBALS->mp_modSelfopathy->setDrawDebug(true);
+	//GLOBALS->mp_modSelfopathy->setDrawDebug(true);
 
 	// Load data
 	copyModelToMods(*pModel);
@@ -284,6 +290,31 @@ void apparelModManager::drawModsExtra()
 		m_modsChain[i]->drawExtra();
 	}
 }
+
+//--------------------------------------------------------------
+void apparelModManager::drawLoader()
+{
+	float dt = (float) ofGetLastFrameTime();
+	if (GLOBALS->mp_modSelfopathy)
+	{
+		BoundingBox& bb = GLOBALS->mp_modSelfopathy->getBoundingBox();
+		if (bb.getSize().x > 0)
+		{
+			m_loaderBusy.setPosition(0.0f, bb.getPosition().y - bb.getSize().y/2.0f-15.0f, 0.0f);
+			m_loaderBusy.setWidth( 0.66f *  bb.getSize().x);
+		}
+	}
+	else
+	{
+		m_loaderBusy.setWidth( 20.0f );
+		m_loaderBusy.setPosition(0.0f, -5.0f, 0.0f);
+	}
+
+	m_loaderBusy.setVisible( isBusy() );
+	m_loaderBusy.update(dt);
+	m_loaderBusy.draw();
+}
+
 
 //--------------------------------------------------------------
 void apparelModManager::applyModChain()
