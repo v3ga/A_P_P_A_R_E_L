@@ -50,13 +50,23 @@ void apparelMod_selfopathy::createParameters()
 void apparelMod_selfopathy::setImage(ofImage* pImage)
 {
 	OFAPPLOG->begin("apparelMod_selfopathy::setImage()");
-//	m_bDoSudivision = false;
-//	if (mp_image == 0)
-		m_bDoSudivision = true;
+	if (m_isBusy)
+	{
+		m_isBusy = false;
+		stopThread();
+	}
+	
 	
 	mp_image = pImage;
+	if (mp_image)
+	{
+		OFAPPLOG->println("- image = ("+ofToString(mp_image->getWidth())+","+ofToString(mp_image->getHeight())+")");
+		m_bDoSudivision = true;
+		m_bDoDisplacement = true;
+	}
+
 	setChanged();
-	m_bDoDisplacement = true;
+	
 	OFAPPLOG->end();
 }
 
@@ -69,19 +79,26 @@ void apparelMod_selfopathy::apply()
 	
 	if (m_bRefresh == false)
 	{
-		// Bounding box for image
-		m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
+		if (mp_image)
+		{
+			OFAPPLOG->println("- image = ("+ofToString(mp_image->getWidth())+","+ofToString(mp_image->getHeight())+")");
+
+			// Bounding box for image
+			m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
 	
-		// model from input
-		m_model.mesh.clear();
-		m_model.mesh = m_meshInput;
-		m_model.createMeshFaces();
+			// model from input
+			m_model.mesh.clear();
+			m_model.mesh = m_meshInput;
+			m_model.createMeshFaces();
 
-		m_modelThread.copyMeshAndTransformation(m_model);
+			m_modelThread.copyMeshAndTransformation(m_model);
 
-		// Subdivide in thread
-		startThread();
+			// Subdivide in thread
+			OFAPPLOG->begin("- starting subdivision");
+			m_isBusy = true;
+			startThread();
 		//subdivide();
+	   }
 	}
 	else
 	{
@@ -95,7 +112,6 @@ void apparelMod_selfopathy::apply()
 //--------------------------------------------------------------
 void apparelMod_selfopathy::threadedFunction()
 {
-	m_isBusy = true;
 	subdivide();
 	m_isBusy = false;
 	m_bRefresh = true;
@@ -107,6 +123,7 @@ void apparelMod_selfopathy::subdivide()
 {
 		m_bDoDisplacement = true;
  
+		//OFAPPLOG->begin("apparelMod_selfopathy::subdivide()");
 
 		OFAPPLOG->println(" - m_meshInput / nb vertices="+ofToString(m_meshInput.getVertices().size()));
 
@@ -227,7 +244,7 @@ void apparelMod_selfopathy::subdivide()
 //			vector<ofIndexType> newIndices;
 
 			int iii = -1;
-			ofLog() << "iii=" << ofToString(iii);
+			//ofLog() << "iii=" << ofToString(iii);
 			for (int i=0; i<nbFaces; i++)
 			{
 			 	pFace = m_model.getMeshFacesRef()[ i ];
@@ -305,7 +322,7 @@ void apparelMod_selfopathy::displaceVertices()
    ofVec3f posBounding = m_meshInputBoundingBox.getPosition();
    ofColor c;
    ofVec3f vNorm;
-   int nbVertices = vertices.size();
+   int nbVertices = (int)vertices.size();
    for (int i=0; i<nbVertices; i++ )
    {
 	   // Displacement
@@ -377,6 +394,7 @@ void apparelMod_selfopathy::onWeightChanged()
 
 
 //--------------------------------------------------------------
+// called after apply()
 void apparelMod_selfopathy::update()
 {
 	if (m_bRefresh)

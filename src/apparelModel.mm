@@ -52,7 +52,7 @@ bool apparelModel::load(string modelName, bool optimize)
 		mesh.enableIndices();
 		mesh.disableColors();
 //		mesh.disableTextures();
-		mesh.enableTextures();
+//		mesh.enableTextures();
 
 		createMeshFaces();
 

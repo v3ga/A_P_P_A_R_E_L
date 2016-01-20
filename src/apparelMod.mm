@@ -60,7 +60,7 @@ void apparelMod::createParameters()
 //--------------------------------------------------------------
 void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)
 {
- // OFAPPLOG->begin("apparelMod["+m_id+"]::onNewWords()");
+  OFAPPLOG->begin("apparelMod["+m_id+"]::onNewWords()");
   if (pUser && pUser->getSqlData())
   {
 	   // For every word of the wordsList.txt
@@ -82,58 +82,53 @@ void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)
 	  OFAPPLOG->println("- ERROR, user is not set or user sql data base not opened ...");
   }
 
- // OFAPPLOG->end();
+  OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
 bool apparelMod::isInWordsList(string word)
 {
-/*	int nbWordsInList = m_words.size();
-	for (int i=0;i<nbWordsInList;i++)
-	{
-		if (word == m_words[i])
-		{
-			return true;
-		}
-	}
-	return false;
-*/
 	return  (find(m_words.begin(), m_words.end(), word) != m_words.end());
 }
 
 //--------------------------------------------------------------
 void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 {
-	OFAPPLOG->begin("apparelMod::resetWordsCountUserDatabase()");
+	OFAPPLOG->begin("apparelMod["+m_id+"]::updateUserDatabase()");
 
 	if(pUser && pUser->getSqlData())
 	{
 	  if (lock)
 		  pUser->lock();
-	
-	  ofxSQLiteSelect sel = pUser->getSqlData()->select("count").from("words").where("name", word).limit(1).execute().begin();
+	 
+//		  word = "toto";
+//	  ofxSQLiteSelect sel = pUser->getSqlData()->select("count").from("words").where("name", word).andWhere("mod", m_id2).limit(1).execute().begin();
+
+	  ofxSQLiteSelect sel = pUser->getSqlData()->select("count").from("words").where("mod", m_id2).limit(1).execute().begin();
 
 	  // Found it !
 	  if (sel.hasNext())
 	  {
 		int count = sel.getInt();
-		OFAPPLOG->println("- found word '"+word+"' with count="+ofToString(count));
+//		OFAPPLOG->println("- found word '"+word+"' with count="+ofToString(count));
+		OFAPPLOG->println("- found count = '"+ofToString(count)+"' with mod="+ofToString(m_id2));
 
 		// update count
 		count = count+1;
-		int result = pUser->getSqlData()->update("words").where("name",word).use("count", count).execute();
+		int result = pUser->getSqlData()->update("words")/*.where("name",toto).andWhere("mod", m_id2)*/.where("mod", m_id2).use("count", count).execute();
 		if (result == 0)
 		{
-			OFAPPLOG->println("- OK updated word '"+word+"' with count="+ofToString(count));
+			//OFAPPLOG->println("- OK updated word '"+word+"' with count="+ofToString(count));
+			OFAPPLOG->println("- OK updated count= '"+ofToString(count)+"' for mod="+ofToString(m_id2));
 		}
 	  }
 	  // No ? Insert it with a count of one
 	  else
 	  {
-		int result = pUser->getSqlData()->insert("words").use("name", word).use("count", 1).use("mod", m_id2).execute();
+		int result = pUser->getSqlData()->insert("words").use("name", "").use("count", 1).use("mod", m_id2).execute();
 		if (result == 0)
 		{
-			OFAPPLOG->println("- OK inserted word '"+word+"'");
+			OFAPPLOG->println("- OK inserted count=1 for mod='"+ofToString(m_id2)+"'");
 		}
 	  }
 	 
@@ -157,7 +152,7 @@ void apparelMod::resetWordsCountUserDatabase(user* pUser, bool lock)
 	{
 		if (lock)
 			pUser->lock();
-		int nbWords = m_words.size();
+/*		int nbWords = (int)m_words.size();
 		for (int i=0;i<nbWords;i++)
 		{
 			ofxSQLiteSelect sel = pUser->getSqlData()->select("count").from("words").where("name", m_words[i]).limit(1).execute().begin();
@@ -171,6 +166,18 @@ void apparelMod::resetWordsCountUserDatabase(user* pUser, bool lock)
 			  	}
 			}
 		}
+*/
+
+		ofxSQLiteSelect sel = pUser->getSqlData()->select("count").from("words").where("mod", m_id2).limit(1).execute().begin();
+		if (sel.hasNext())
+		{
+			int result = pUser->getSqlData()->update("words").where("mod",m_id2).use("count", 0).execute();
+			if (result == 0)
+			{
+				OFAPPLOG->println("- OK updated mod "+ofToString(m_id2)+" with count=0");
+			}
+		}
+
 
 		countUserWords(pUser);
 		if (lock)
@@ -201,7 +208,7 @@ void apparelMod::injectWordsCountUserDatabase(user* pUser)
 		{
 			// Delete all
 			pUser->getSqlData()->remove("words").where("mod", m_id2).execute();
-			pUser->getSqlData()->insert("words").use("name", m_words[0]).use("count", (int)(m_weight * (float)m_nbWordsMax)).use("mod", m_id2).execute();
+			pUser->getSqlData()->insert("words")./*use("name", m_words[0]).*/use("count", (int)(m_weight * (float)m_nbWordsMax)).use("mod", m_id2).execute();
 	 	}
 	}
 }
@@ -212,7 +219,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 {
   if (isMood()) return;
 
- // OFAPPLOG->begin("apparelMod["+m_id+"]::countUserWords()");
+  OFAPPLOG->begin("apparelMod["+m_id+"]::countUserWords()");
   if (pUser)
   {
 	m_countWords = 0;
@@ -227,7 +234,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 		if (sel.hasNext())
 		{
 			m_countWords = sel.getInt();
-		  	OFAPPLOG->println("- m_countWords ="+ofToString(m_countWords));
+		  	OFAPPLOG->println("- m_countWords ["+this->getId()+"] = "+ofToString(m_countWords));
 		}
 
 
@@ -243,7 +250,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 	   			setWeight( 0.0 );
   		}
 		  //OFAPPLOG->println("- countWords="+ofToString(m_countWords)+"/m_nbWordsMax="+ofToString(m_nbWordsMax));
-		  //OFAPPLOG->println("- weight="+ofToString(m_weight));
+		  OFAPPLOG->println("- weight ["+this->getId()+"] ="+ofToString(m_weight));
   	}
   	else
 	  OFAPPLOG->println("- WARNING pUser->getSqlData() is NULL");
@@ -251,7 +258,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
   	else
 	  OFAPPLOG->println("- WARNING pUser is NULL");
 
-//  OFAPPLOG->end();
+  OFAPPLOG->end();
 }
 
 

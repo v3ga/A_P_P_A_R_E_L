@@ -153,13 +153,6 @@ void apparelMod_kawaiopathy::readModel()
 		OFAPPLOG->println(" - ERROR loading 'distribution.xml'");
 	}
 	
-/*
-	models[0].loadModel( getPathResources("bird.3ds") );
-	models[1].loadModel( getPathResources("cat.3ds") );
-	models[2].loadModel( getPathResources("dog.3ds") );
-	models[3].loadModel( getPathResources("ears.3ds") );
-*/
-
 	OFAPPLOG->end();
 }
 /*
