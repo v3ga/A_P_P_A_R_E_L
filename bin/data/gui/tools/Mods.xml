@@ -51,7 +51,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Authoritopathy</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -66,7 +66,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Selfopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -96,12 +96,12 @@
 <Widget>
     <Kind>2</Kind>
     <Name>Porcupinopathy</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>Sad</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>

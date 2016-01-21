@@ -13,6 +13,7 @@
 #include "ofxIOSExtras.h"
 #endif
 
+#define APPARELMODEL_TOSTRING_LISTS 	1
 
 //--------------------------------------------------------------
 apparelModel::apparelModel()
@@ -38,7 +39,9 @@ apparelModel::~apparelModel()
 //--------------------------------------------------------------
 bool apparelModel::load(string modelName, bool optimize)
 {
- 	bool bLoaded = assimpModel.loadModel(getPathRelative(modelName), optimize);
+	bool bLoaded = false;
+	#ifdef TARGET_OSX
+ 	bLoaded = assimpModel.loadModel(getPathRelative(modelName), optimize);
 
    	OFAPPLOG->println("- loading "+getPathRelative(modelName));
 
@@ -46,11 +49,58 @@ bool apparelModel::load(string modelName, bool optimize)
 	{
 		id = modelName;
 		mesh = assimpModel.getMesh(0);
-		mesh.mergeDuplicateVertices();
-		
+
+
 		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
 		mesh.enableIndices();
 		mesh.disableColors();
+
+		mesh.mergeDuplicateVertices();
+		
+		ofxXmlSettings modelXml;
+
+		int nbVertices = mesh.getNumVertices();
+		modelXml.addTag("vertices");
+		modelXml.pushTag("vertices");
+		for (int i=0;i<nbVertices;i++)
+		{
+			 modelXml.addTag("v");
+			 modelXml.pushTag("v",i);
+			 modelXml.addValue("x", mesh.getVertex(i).x);
+			 modelXml.addValue("y", mesh.getVertex(i).y);
+			 modelXml.addValue("z", mesh.getVertex(i).z);
+			 modelXml.popTag();
+		}
+		modelXml.popTag();
+
+		int nbNormals = mesh.getNumNormals();
+		modelXml.addTag("normals");
+		modelXml.pushTag("normals");
+		for (int i=0;i<nbNormals;i++)
+		{
+			 modelXml.addTag("n");
+			 modelXml.pushTag("n",i);
+			 modelXml.addValue("x", mesh.getNormal(i).x);
+			 modelXml.addValue("y", mesh.getNormal(i).y);
+			 modelXml.addValue("z", mesh.getNormal(i).z);
+			 modelXml.popTag();
+		}
+		modelXml.popTag();
+		
+
+		modelXml.addTag("indices");
+		modelXml.pushTag("indices");
+		int nbIndices = mesh.getNumIndices();
+		for (int i=0;i<nbIndices;i++)
+		{
+			 modelXml.addValue("i", (int)mesh.getIndex(i));
+		}
+		modelXml.popTag();
+		
+		modelXml.saveFile("3d/AR_model_23p.xml");
+
+
+		
 //		mesh.disableTextures();
 //		mesh.enableTextures();
 
@@ -58,6 +108,58 @@ bool apparelModel::load(string modelName, bool optimize)
 
 		OFAPPLOG->println( toString() );
 	}
+	#endif
+
+//	#ifdef TARGET_IOS
+		ofxXmlSettings modelXml;
+
+		bLoaded = modelXml.load("3d/AR_model_23p.xml");
+		if (bLoaded)
+		{
+			mesh.clear();
+			mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+			mesh.enableIndices();
+			mesh.disableColors();
+
+			modelXml.pushTag("vertices");
+			int nbVertices = modelXml.getNumTags("v");
+			for (int i=0; i<nbVertices; i++)
+			{
+				modelXml.pushTag("v",i);
+				mesh.addVertex( ofVec3f( modelXml.getValue("x", 0.0f), modelXml.getValue("y", 0.0f), modelXml.getValue("z", 0.0f)  ) );
+				modelXml.popTag();
+			}
+			modelXml.popTag();
+
+			modelXml.pushTag("normals");
+			int nbNormals = modelXml.getNumTags("n");
+			for (int i=0; i<nbNormals; i++)
+			{
+				modelXml.pushTag("n",i);
+				mesh.addNormal( ofVec3f( modelXml.getValue("x", 0.0f), modelXml.getValue("y", 0.0f), modelXml.getValue("z", 0.0f)  ) );
+				modelXml.popTag();
+			}
+			modelXml.popTag();
+		
+		
+			modelXml.pushTag("indices");
+			int nbIndices = modelXml.getNumTags("i");
+			for (int i=0; i<nbIndices; i++)
+			{
+				mesh.addIndex( modelXml.getValue("i",0,i) );
+			}
+			modelXml.popTag();
+
+			createMeshFaces();
+
+		OFAPPLOG->println( toString() );
+		}
+
+
+
+//	#endif
+
+
 	return bLoaded;
 }
 
@@ -195,6 +297,18 @@ string apparelModel::toString()
 	s += "\tnb mesh vertices = "+ofToString(mesh.getVertices().size())+"\n";
 	s += "\tnb mesh indices = "+ofToString(mesh.getIndices().size())+"\n";
 	s += "\tnb mesh face = "+ofToString(meshFaces.size())+"\n";
+	
+	#if APPARELMODEL_TOSTRING_LISTS
+	int nbVertices = (int) mesh.getVertices().size();
+	for (int i=0; i<nbVertices; i++ )
+	{
+		ofVec3f v = mesh.getVertices()[i];
+		s += "\t["+ofToString(i)+"] ("+ofToString(v.x)+";"+ofToString(v.y)+";"+ofToString(v.y)+")\n";
+		
+	}
+
+	#endif
+	
 	return s;
 }
 

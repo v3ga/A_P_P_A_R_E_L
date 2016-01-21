@@ -39,6 +39,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	// ——————————————————————————————————————————————————————
 	// MODS
 	addMod( new apparelMod_authoritopathy() );
+
 	addMod( new apparelMod_pedopathy() );
 	addMod( new apparelMod_sportopathy() );
 	addMod( new apparelMod_selfopathy() );
@@ -46,7 +47,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	addMod( new apparelMod_pretentiopathy() );
 	addMod( new apparelMod_meteopathy() );
 	addMod( new apparelMod_kawaiopathy() );
-	
+
 	// used for requests in sql database : DO NOT CHANGE
 	getMod("Authoritopathy")	->setId(0);
 	getMod("Pedopathy")			->setId(1);
@@ -56,6 +57,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 	getMod("Pretentiopathy")	->setId(5);
 	getMod("Meteopathy")		->setId(6);
 	getMod("Kawaiopathy")		->setId(7);
+
 	
 	// ——————————————————————————————————————————————————————
 	// MOODS

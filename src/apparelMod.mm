@@ -65,9 +65,13 @@ void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)
   {
 	   // For every word of the wordsList.txt
 		int nbWordsInMessage = (int)wordsMessage.size();
+		string wordLower;
 		for (int i=0;i<nbWordsInMessage;i++)
 		{
-			if (isInWordsList(wordsMessage[i]))
+			wordLower = wordsMessage[i];
+			std::transform(wordLower.begin(), wordLower.end(), wordLower.begin(), ::tolower);
+		
+			if (isInWordsList(wordLower))
 			{
 				updateUserDatabase(pUser,wordsMessage[i]);
 			}
@@ -440,7 +444,9 @@ void apparelMod::readModel()
 	   int nbVertices = m_settingsModel.getNumTags("index");
 	   for (int i=0; i<nbVertices; i++)
 	   {
-		   m_indicesVertex.push_back( m_settingsModel.getValue("index",0,i) );
+		  int vindex = m_settingsModel.getValue("index",0,i);
+		  m_indicesVertex.push_back( vindex );
+		  OFAPPLOG->println("- vindex="+ofToString( vindex ));
 	   }
 	   m_settingsModel.popTag();
    

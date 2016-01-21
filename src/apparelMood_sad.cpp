@@ -81,7 +81,7 @@ void apparelMood_sad::apply()
 		apparelModel& model = pModSelfopathy->m_model;
 		
 		ofVec3f* pVertices = model.getMeshRef().getVerticesPointer();
-		int nbVertices = model.getMeshRef().getNumVertices();
+		int nbVertices = (int) model.getMeshRef().getNumVertices();
 		
 		ofVec3f* pVertex=0;
 		for (int i=0;i<nbVertices;i++)

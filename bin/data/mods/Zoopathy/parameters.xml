@@ -1,6 +1,6 @@
 <Zoopathy>
     <WeightManual>1</WeightManual>
-    <NbWordsMax>5</NbWordsMax>
+    <NbWordsMax>4</NbWordsMax>
     <LengthMax>60</LengthMax>
     <Resolution>10</Resolution>
     <zPoils>
@@ -9,5 +9,5 @@
         <high>11.25</high>
         <max>60</max>
     </zPoils>
-    <Random>1</Random>
+    <Random>0.619792</Random>
 </Zoopathy>

@@ -67,7 +67,8 @@ void ofApp::setup()
 
 	user.loadConfiguration();
 	m_imageSelfopathy.loadImage(user.getServicePropertyString("twitter_image"));
-	GLOBALS->mp_modSelfopathy->setImage(&m_imageSelfopathy);
+	if (GLOBALS->mp_modSelfopathy)
+		GLOBALS->mp_modSelfopathy->setImage(&m_imageSelfopathy);
 
 
 	// USER WORDS
@@ -112,7 +113,7 @@ void ofApp::setup()
 	toolManager.loadData();
 
 
-	apparelModManager.applyModChain();
+//	apparelModManager.applyModChain();
 
 	OFAPPLOG->end();
 

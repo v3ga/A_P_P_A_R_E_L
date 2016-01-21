@@ -56,7 +56,6 @@ void apparelMod_selfopathy::setImage(ofImage* pImage)
 		stopThread();
 	}
 	
-	
 	mp_image = pImage;
 	if (mp_image)
 	{
@@ -76,20 +75,21 @@ void apparelMod_selfopathy::apply()
 	if (m_isBusy) return;
 
 	OFAPPLOG->begin("apparelMod_selfopathy::apply()");
+
+	// model from input
+	m_model.mesh.clear();
+	m_model.mesh = m_meshInput;
+	m_model.createMeshFaces();
 	
 	if (m_bRefresh == false)
 	{
-		if (mp_image)
+		if (mp_image && mp_image->getWidth()>0)
 		{
 			OFAPPLOG->println("- image = ("+ofToString(mp_image->getWidth())+","+ofToString(mp_image->getHeight())+")");
 
 			// Bounding box for image
 			m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
 	
-			// model from input
-			m_model.mesh.clear();
-			m_model.mesh = m_meshInput;
-			m_model.createMeshFaces();
 
 			m_modelThread.copyMeshAndTransformation(m_model);
 
@@ -404,7 +404,7 @@ void apparelMod_selfopathy::update()
 		m_model.createMeshFaces();
 		m_meshRefDisplacement = m_model.mesh;
 		displaceVertices();
-		setChanged();
+		//setChanged();
 	}
 }
 
