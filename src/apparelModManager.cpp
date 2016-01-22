@@ -73,7 +73,7 @@ void apparelModManager::constructMods(apparelModel* pModel)
 
 	// Save to globals
 	GLOBALS->mp_modSelfopathy = (apparelMod_selfopathy*)getMod("Selfopathy");
-	//GLOBALS->mp_modSelfopathy->setDrawDebug(true);
+	// GLOBALS->mp_modSelfopathy->setDrawDebug(true);
 
 	// Load data
 	copyModelToMods(*pModel);

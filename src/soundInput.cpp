@@ -13,7 +13,7 @@
 SoundInput::SoundInput()
 {
 	m_soundBufferSize = 0;
-	m_volMaxInput = 0.1f; // not zero otherwise ofMap causes warnings
+	m_volMaxInput = 0.03f; // not zero otherwise ofMap causes warnings
 }
 
 //--------------------------------------------------------------

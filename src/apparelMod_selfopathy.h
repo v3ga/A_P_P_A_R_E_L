@@ -21,6 +21,7 @@ class apparelMod_selfopathy : public apparelMod, public ofThread
 
 /*		void					drawFaces			();
 */
+		void				setChanged			(bool is=true);
 		void				createParameters	();
 		void				apply				();
 		void				update				();
@@ -56,7 +57,7 @@ class apparelMod_selfopathy : public apparelMod, public ofThread
  
 		ofThread					m_threadSubdivision;
 		bool						m_isBusy;
-		bool						m_bRefresh;
+		bool						m_bNewMeshAvailable;
  
 		apparelModel				m_modelThread;
 };

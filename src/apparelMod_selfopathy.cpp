@@ -16,14 +16,15 @@ apparelMod_selfopathy::apparelMod_selfopathy() : apparelMod("Selfopathy")
 {
 	mp_image = 0;
 
-	m_bDoSudivision = true;
-	m_bDoDisplacement = false;
+	m_bDoSudivision 	= false;
+	m_bDoDisplacement 	= false;
+	
+	m_bNewMeshAvailable	= false;
 
-	m_levelSubdiv = 2;
+	m_levelSubdiv 		= 2;
 	setChanged();
 
 	m_isBusy = false;
-	m_bRefresh = false;
 }
 
 //--------------------------------------------------------------
@@ -50,21 +51,24 @@ void apparelMod_selfopathy::createParameters()
 void apparelMod_selfopathy::setImage(ofImage* pImage)
 {
 	OFAPPLOG->begin("apparelMod_selfopathy::setImage()");
+/*
 	if (m_isBusy)
 	{
 		m_isBusy = false;
 		stopThread();
 	}
+*/
 	
 	mp_image = pImage;
 	if (mp_image)
 	{
 		OFAPPLOG->println("- image = ("+ofToString(mp_image->getWidth())+","+ofToString(mp_image->getHeight())+")");
 		m_bDoSudivision = true;
-		m_bDoDisplacement = true;
+		m_bDoDisplacement = false; // will be done after subdivision
+
+		setChanged();
 	}
 
-	setChanged();
 	
 	OFAPPLOG->end();
 }
@@ -75,35 +79,35 @@ void apparelMod_selfopathy::apply()
 	if (m_isBusy) return;
 
 	OFAPPLOG->begin("apparelMod_selfopathy::apply()");
-
-	// model from input
-	m_model.mesh.clear();
-	m_model.mesh = m_meshInput;
-	m_model.createMeshFaces();
 	
-	if (m_bRefresh == false)
+	if (m_bDoDisplacement && m_meshRefDisplacement.getNumVertices() == m_model.mesh.getNumVertices())
 	{
-		if (mp_image && mp_image->getWidth()>0)
-		{
-			OFAPPLOG->println("- image = ("+ofToString(mp_image->getWidth())+","+ofToString(mp_image->getHeight())+")");
-
-			// Bounding box for image
-			m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
+		displaceVertices();
+		m_bDoDisplacement = false;
+	}
 	
-
-			m_modelThread.copyMeshAndTransformation(m_model);
-
-			// Subdivide in thread
-			OFAPPLOG->begin("- starting subdivision");
-			m_isBusy = true;
-			startThread();
-		//subdivide();
-	   }
-	}
-	else
+	
+	if (m_bDoSudivision && mp_image && mp_image->getWidth()>0)
 	{
-		m_bRefresh = false;
-	}
+		OFAPPLOG->println("- image = ("+ofToString(mp_image->getWidth())+","+ofToString(mp_image->getHeight())+")");
+
+		// model from input
+		// if we are here it means the previous model changed
+		m_model.mesh.clear();
+		m_model.mesh = m_meshInput;
+		m_model.createMeshFaces();
+
+		// Bounding box for image
+		m_meshInputBoundingBox.calculateAABoundingBox( m_meshInput.getVertices() );
+
+		// Copy model to be manipulated in thread
+		m_modelThread.copyMeshAndTransformation(m_model);
+
+		// Subdivide in thread
+		OFAPPLOG->println("- starting subdivision & displaceVertices");
+		m_isBusy = true;
+		startThread();
+   }
 	
 	
 	OFAPPLOG->end();
@@ -112,22 +116,20 @@ void apparelMod_selfopathy::apply()
 //--------------------------------------------------------------
 void apparelMod_selfopathy::threadedFunction()
 {
-	subdivide();
-	m_isBusy = false;
-	m_bRefresh = true;
+	subdivide(); // ->  m_newMesh from m_modelThread.mesh
+	
+	m_isBusy 			= false;
 }
 
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::subdivide()
 {
-		m_bDoDisplacement = true;
- 
 		//OFAPPLOG->begin("apparelMod_selfopathy::subdivide()");
 
-		OFAPPLOG->println(" - m_meshInput / nb vertices="+ofToString(m_meshInput.getVertices().size()));
+		OFAPPLOG->println(" - subdividing : m_meshInput / nb vertices="+ofToString(m_meshInput.getVertices().size()));
 
-		if (true)
+		if (m_bDoSudivision)
 		{
 			m_newMesh.clear();
 
@@ -222,76 +224,22 @@ void apparelMod_selfopathy::subdivide()
 
 
 			
-				m_newMesh.mergeDuplicateVertices();
-
-//				m_model.mesh.clear();
-//				m_model.mesh.append(m_newMesh);
 
 			}
-			
-			#else
-			
-			for (int k=0;k<1;k++)
-			{
-			int nbFaces = (int)m_model.getMeshFacesRef().size();
-
-			ofVec3f *pA,*pB,*pC;
-			ofIndexType indexA,indexB,indexC;
-			ofVec3f M;
-			ofMeshFaceApparel* pFace;
-
-//			vector<ofVec3f> 	newVertices;
-//			vector<ofIndexType> newIndices;
-
-			int iii = -1;
-			//ofLog() << "iii=" << ofToString(iii);
-			for (int i=0; i<nbFaces; i++)
-			{
-			 	pFace = m_model.getMeshFacesRef()[ i ];
-				
-				pA = pFace->getVertexPointer(0);
-				pB = pFace->getVertexPointer(1);
-				pC = pFace->getVertexPointer(2);
-
-				indexA = pFace->getVertexIndex(0);
-				indexB = pFace->getVertexIndex(1);
-				indexC = pFace->getVertexIndex(2);
-				
-				M = (*pA + *pB + *pC) / 3.0f;
-
-				
-				int indexM = m_model.mesh.getNumVertices();
-				if (iii<0){
-					iii = indexM;
-				}
-				m_model.mesh.addVertex(M);
 
 
-				m_model.mesh.addIndex( indexM );
-				m_model.mesh.addIndex( indexA );
-				m_model.mesh.addIndex( indexB );
+			m_newMesh.mergeDuplicateVertices();
 
-				m_model.mesh.addIndex( indexM );
-				m_model.mesh.addIndex( indexB );
-				m_model.mesh.addIndex( indexC );
+			m_bNewMeshAvailable = true;
 
-				m_model.mesh.addIndex( indexM );
-				m_model.mesh.addIndex( indexC );
-				m_model.mesh.addIndex( indexA );
-				
-			}
-			m_model.createMeshFaces();
-			}
 			#endif
 
-
-
-			m_meshRefDisplacement = m_model.mesh;
+//			m_meshRefDisplacement = m_newMesh/*m_model.mesh*/;
 		}
+/*
 
 		if (m_bDoDisplacement)
 		{
-//			m_model.computeMeshFacesNormals();
 			displaceVertices();
 		}
 
@@ -305,6 +253,7 @@ void apparelMod_selfopathy::subdivide()
 		// Reset flags
 		if (m_bDoSudivision) 	m_bDoSudivision 	= false;
 		if (m_bDoDisplacement) 	m_bDoDisplacement 	= false;
+*/
 
 }
 
@@ -356,7 +305,7 @@ void apparelMod_selfopathy::drawExtra()
 {
 	if (mp_image == 0) return;
 		
-	if (m_bDrawDebug)
+	if (m_bDrawDebug && mp_image->getWidth()>0)
 	{
 		ofSetColor(200,0,0,200);
 		m_meshInputBoundingBox.draw();
@@ -370,26 +319,36 @@ void apparelMod_selfopathy::drawExtra()
 	}
 }
 
+
+//--------------------------------------------------------------
+void apparelMod_selfopathy::setChanged(bool is)
+{
+	m_isChanged = is;
+	m_bDoSudivision = true;
+	m_bDoDisplacement = true;
+}
+
 //--------------------------------------------------------------
 void apparelMod_selfopathy::onParameterChanged(ofAbstractParameter& parameter)
 {
+	if (m_isBusy) return;
+
 	if (parameter.getName() == "Subdivision")
 	{
-		m_bDoDisplacement = true;
-		//m_bDoSudivision = true;
-//		ofLog() << m_levelSubdiv;
 	}
 	else
+	if (parameter.getName() == "Amplitude")
 	{
-		m_bDoDisplacement = true;
+		setChanged();
+		m_bDoSudivision = false;
 	}
-	setChanged();
 }
 
 //--------------------------------------------------------------
 void apparelMod_selfopathy::onWeightChanged()
 {
-	m_bDoDisplacement = true;
+	setChanged();
+	m_bDoSudivision = false;
 }
 
 
@@ -397,6 +356,28 @@ void apparelMod_selfopathy::onWeightChanged()
 // called after apply()
 void apparelMod_selfopathy::update()
 {
+	if (m_bNewMeshAvailable) // after subdivision
+	{
+		OFAPPLOG->begin("apparelMod_selfopathy::update(), m_bNewMeshAvailable = true");
+	
+		m_bDoSudivision = false;
+		m_bNewMeshAvailable = false;
+
+		m_model.mesh.clear();
+		m_model.mesh.append(m_newMesh);
+		m_model.createMeshFaces();
+		m_meshRefDisplacement = m_model.mesh;
+		
+		setChanged();
+		m_bDoSudivision = false;
+
+		OFAPPLOG->end();
+	}
+
+//	if (m_bDoDisplacement = true;
+
+
+/*
 	if (m_bRefresh)
 	{
 		m_model.mesh.clear();
@@ -406,6 +387,8 @@ void apparelMod_selfopathy::update()
 		displaceVertices();
 		//setChanged();
 	}
+*/
+
 }
 
 

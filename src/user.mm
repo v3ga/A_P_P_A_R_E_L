@@ -37,7 +37,6 @@ void user::zeroAll()
 	m_bUseTick		= true;
 	m_bConnected	= false;
 	m_bTemplate		= false;
-
 }
 
 //--------------------------------------------------------------
@@ -389,7 +388,7 @@ void user::update(float dt)
 	{
 		m_newTick = false;
 
-		if (!m_bUseThread && areServicesSetup())
+		if (!m_bUseThread && areServicesSetup() && !mp_modManager->isBusy())
 		{
 			vector<userSocialInterface*>::iterator it;
 			for (it = m_listSocialInterfaces.begin() ; it != m_listSocialInterfaces.end(); ++it){

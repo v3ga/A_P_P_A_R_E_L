@@ -29,7 +29,7 @@ void apparelModLoader::setWidth(float w)
 //--------------------------------------------------------------
 void apparelModLoader::load()
 {
-	m_image.loadImage("images/loader.png");
+	m_image.load("images/loader2.png");
 	m_image.setAnchorPercent(0.5,0.5);
 }
 

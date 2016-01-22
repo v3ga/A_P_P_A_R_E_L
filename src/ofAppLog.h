@@ -21,6 +21,7 @@ class ofAppLog
 				void		end			();
 				void		println		(ofLogLevel level, const string & message);
 				void		println		(const string & message);
+				void		disable		(){m_disabled = true;}
 	
 				template <class T>
 				ofAppLog* operator<<(const T& value)
@@ -32,6 +33,7 @@ class ofAppLog
 	private:
 	   	static ofAppLog* 	smp_instance;
 		int					m_level;
+		bool				m_disabled;
 
 		string				space		(int nb);
 };

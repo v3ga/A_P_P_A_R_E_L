@@ -20,29 +20,37 @@ void ofAppLog::destroy()
 //--------------------------------------------------------------
 void ofAppLog::begin(string s)
 {
-	println(s);
-	println("{");
-	m_level++;
+	if (!m_disabled)
+	{
+		println(s);
+		println("{");
+		m_level++;
+	}
 }
 
 //--------------------------------------------------------------
 void ofAppLog::end()
 {
-	m_level--;
-	println("}");
-	println("");
+	if (!m_disabled)
+	{
+		m_level--;
+		println("}");
+		println("");
+	}
 }
 
 //--------------------------------------------------------------
 void ofAppLog::println(ofLogLevel level, const string & message)
 {
-	ofLog(level) << message;
+	if (!m_disabled)
+		ofLog(level) << message;
 }
 
 //--------------------------------------------------------------
 void ofAppLog::println(const string & message)
 {
-	ofLog() << space(m_level) << message;
+	if (!m_disabled)
+		ofLog() << space(m_level) << message;
 }
 
 

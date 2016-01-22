@@ -51,7 +51,7 @@ void apparelMood_noisopathy::update()
     float timeScale = m_timeScale;
     float displacementScale = m_weight*m_amplitude;
 	
-	int numVerts = m_meshInput.getNumVertices();
+	int numVerts = (int)m_meshInput.getNumVertices();
 	ofVec3f vert;
 	ofVec3f timeOffsets;
 	for (int i=0; i<numVerts; ++i)

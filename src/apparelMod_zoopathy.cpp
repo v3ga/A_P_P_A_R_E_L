@@ -77,7 +77,7 @@ void apparelMod_zoopathy::update()
 	if (pModSelfopathy)
 	{
 		vector<ofMeshFaceApparel*>& faces = pModSelfopathy->m_model.getMeshFacesRef();
-		int nbFaces = faces.size();
+		int nbFaces = (int)faces.size();
 
 		if (m_bDoCreatePoils)
 		{

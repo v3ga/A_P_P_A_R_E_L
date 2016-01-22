@@ -14,7 +14,11 @@
 	#include "oscSender.h"
 #endif
 
-#define APPAREL_MOD_DEBUG_LOG 1
+/*
+#define APPAREL_MOD_LOG_BEGIN(s) 	OFAPPLOG->begin(s)
+#define APPAREL_MOD_LOG_END 		OFAPPLOG->end()
+#define APPAREL_MOD_PRINTLN(s) 		OFAPPLOG->println(s)
+*/
 
 //--------------------------------------------------------------
 
@@ -24,7 +28,7 @@ apparelMod::apparelMod(string id, int id2)
 	m_id 					= id;
 	m_id2					= id2;
 	mp_oscSender 			= 0;
-	m_isChanged				= true;
+	m_isChanged				= false;//true;
 	m_isMeshChanged			= false;
 	m_isMood				= false;
 	m_weight				= 0.25f;
@@ -60,7 +64,7 @@ void apparelMod::createParameters()
 //--------------------------------------------------------------
 void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)
 {
-  OFAPPLOG->begin("apparelMod["+m_id+"]::onNewWords()");
+  // OFAPPLOG->begin("apparelMod["+m_id+"]::onNewWords()");
   if (pUser && pUser->getSqlData())
   {
 	   // For every word of the wordsList.txt
@@ -86,7 +90,7 @@ void apparelMod::onNewWords(user* pUser, vector<string>& wordsMessage)
 	  OFAPPLOG->println("- ERROR, user is not set or user sql data base not opened ...");
   }
 
-  OFAPPLOG->end();
+  // OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
@@ -98,7 +102,7 @@ bool apparelMod::isInWordsList(string word)
 //--------------------------------------------------------------
 void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 {
-	OFAPPLOG->begin("apparelMod["+m_id+"]::updateUserDatabase()");
+	//OFAPPLOG->begin("apparelMod["+m_id+"]::updateUserDatabase()");
 
 	if(pUser && pUser->getSqlData())
 	{
@@ -114,7 +118,6 @@ void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 	  if (sel.hasNext())
 	  {
 		int count = sel.getInt();
-//		OFAPPLOG->println("- found word '"+word+"' with count="+ofToString(count));
 		OFAPPLOG->println("- found count = '"+ofToString(count)+"' with mod="+ofToString(m_id2));
 
 		// update count
@@ -122,8 +125,7 @@ void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 		int result = pUser->getSqlData()->update("words")/*.where("name",toto).andWhere("mod", m_id2)*/.where("mod", m_id2).use("count", count).execute();
 		if (result == 0)
 		{
-			//OFAPPLOG->println("- OK updated word '"+word+"' with count="+ofToString(count));
-			OFAPPLOG->println("- OK updated count= '"+ofToString(count)+"' for mod="+ofToString(m_id2));
+//			OFAPPLOG->println("- OK updated count= '"+ofToString(count)+"' for mod="+ofToString(m_id2));
 		}
 	  }
 	  // No ? Insert it with a count of one
@@ -132,7 +134,7 @@ void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 		int result = pUser->getSqlData()->insert("words").use("name", "").use("count", 1).use("mod", m_id2).execute();
 		if (result == 0)
 		{
-			OFAPPLOG->println("- OK inserted count=1 for mod='"+ofToString(m_id2)+"'");
+//			OFAPPLOG->println("- OK inserted count=1 for mod='"+ofToString(m_id2)+"'");
 		}
 	  }
 	 
@@ -145,13 +147,13 @@ void apparelMod::updateUserDatabase(user* pUser, string word, bool lock)
 	 	OFAPPLOG->println("- ERROR, user is not set or user sql data base not opened ...");
 	}
 
-	OFAPPLOG->end();
+//	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
 void apparelMod::resetWordsCountUserDatabase(user* pUser, bool lock)
 {
-	OFAPPLOG->begin("apparelMod::resetWordsCountUserDatabase()");
+//	OFAPPLOG->begin("apparelMod::resetWordsCountUserDatabase()");
 	if (pUser && pUser->getSqlData())
 	{
 		if (lock)
@@ -199,7 +201,7 @@ void apparelMod::resetWordsCountUserDatabase(user* pUser, bool lock)
 	 {
 	 	OFAPPLOG->println("- ERROR, user is not set or user sql data base not opened ...");
 	 }
-	OFAPPLOG->end();
+//	OFAPPLOG->end();
 }
 
 //--------------------------------------------------------------
@@ -223,7 +225,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 {
   if (isMood()) return;
 
-  OFAPPLOG->begin("apparelMod["+m_id+"]::countUserWords()");
+//  OFAPPLOG->begin("apparelMod["+m_id+"]::countUserWords()");
   if (pUser)
   {
 	m_countWords = 0;
@@ -238,7 +240,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
 		if (sel.hasNext())
 		{
 			m_countWords = sel.getInt();
-		  	OFAPPLOG->println("- m_countWords ["+this->getId()+"] = "+ofToString(m_countWords));
+//		  	OFAPPLOG->println("- m_countWords ["+this->getId()+"] = "+ofToString(m_countWords));
 		}
 
 
@@ -253,8 +255,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
   			else
 	   			setWeight( 0.0 );
   		}
-		  //OFAPPLOG->println("- countWords="+ofToString(m_countWords)+"/m_nbWordsMax="+ofToString(m_nbWordsMax));
-		  OFAPPLOG->println("- weight ["+this->getId()+"] ="+ofToString(m_weight));
+//		  OFAPPLOG->println("- weight ["+this->getId()+"] ="+ofToString(m_weight));
   	}
   	else
 	  OFAPPLOG->println("- WARNING pUser->getSqlData() is NULL");
@@ -262,7 +263,7 @@ void apparelMod::countUserWords(user* pUser, bool lock)
   	else
 	  OFAPPLOG->println("- WARNING pUser is NULL");
 
-  OFAPPLOG->end();
+//  OFAPPLOG->end();
 }
 
 

@@ -63,7 +63,7 @@ class apparelMod
 		ofMesh				m_meshInput;
 
 
-		void				setChanged				(bool is=true){m_isChanged = is;}
+		virtual void		setChanged				(bool is=true){m_isChanged = is;}
 		void				setMeshChanged			(bool is=true){m_isMeshChanged = is;}
 
 		bool				isChanged				(){return m_isChanged;}

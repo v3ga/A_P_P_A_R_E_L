@@ -28,6 +28,7 @@ void ofxTicker::reset()
 void ofxTicker::play()
 {
 	m_isPlaying = true;
+	m_timePeriod = m_period;
 }
 
 //--------------------------------------------------------------
