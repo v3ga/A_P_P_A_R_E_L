@@ -303,7 +303,7 @@ void apparelModManager::drawLoader()
 		if (bb.getSize().x > 0)
 		{
 			m_loaderBusy.setPosition(0.0f, bb.getPosition().y - bb.getSize().y/2.0f-15.0f, 0.0f);
-			m_loaderBusy.setWidth( 0.66f *  bb.getSize().x);
+			m_loaderBusy.setWidth( 0.5f * 0.66f *  bb.getSize().x);
 		}
 	}
 	else
