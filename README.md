@@ -1,6 +1,9 @@
 A P P A R E L 
 ======
 
+## Project page
+http://apparel.normalfutu.re/
+
 ## Dependencies
 * ofxUI : https://github.com/rezaali/ofxUI 
 * ofxToolManager : https://github.com/v3ga/ofxToolManager
